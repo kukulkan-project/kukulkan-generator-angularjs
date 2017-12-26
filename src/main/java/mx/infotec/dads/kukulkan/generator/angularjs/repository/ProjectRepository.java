@@ -1,4 +1,4 @@
-package mx.infotec.dads.kukulkan.engine.repository;
+package mx.infotec.dads.kukulkan.generator.angularjs.repository;
 
 import org.springframework.stereotype.Repository;
 

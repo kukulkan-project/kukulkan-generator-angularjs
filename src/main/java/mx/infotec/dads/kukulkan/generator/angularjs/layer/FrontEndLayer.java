@@ -21,27 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.generator.angularspring.layer;
+package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_HTML;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_DETAIL_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_DETAIL_HTML;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_DIALOG_HTML;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_HTML;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_SERVICE_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.ENTITY_STATE_JS;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.FRONT_END_ENTITIES_LOCATION;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.FRONT_END_I18N_LOCATION_EN;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.FRONT_END_I18N_LOCATION_ES;
-import static mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants.IDIOMA_JS;
+import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_HTML;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DETAIL_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DETAIL_HTML;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DIALOG_HTML;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_HTML;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_SERVICE_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_STATE_JS;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.FRONT_END_ENTITIES_LOCATION;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.FRONT_END_I18N_LOCATION_EN;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.FRONT_END_I18N_LOCATION_ES;
+import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.IDIOMA_JS;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVASCRIPT;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JSON;
-import static mx.infotec.dads.kukulkan.metamodel.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_ENTITIES;
 import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_I18N;
 import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_NAV_BAR;
@@ -55,10 +55,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import mx.infotec.dads.kukulkan.engine.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants;
-import mx.infotec.dads.kukulkan.engine.service.layers.util.TemplateFormatter;
+
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.TemplateFormatter;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;

@@ -21,13 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.generator.angularspring.layer;
+package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
+import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
-import static mx.infotec.dads.kukulkan.metamodel.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
-import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_IMPL_PROPERTY;
+import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceDotBySlash;
+import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceSlashByDot;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
+import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_SIMPLE_FORMAT_PROPERTY;
 
 import java.util.Collection;
 import java.util.Map;
@@ -37,9 +39,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.infotec.dads.kukulkan.engine.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
@@ -51,47 +53,32 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  * @author Daniel Cortes Pichardo
  *
  */
-@Component(LayerNameConstants.Business.SpringService.SERVICE_NAME)
-public class BusinessLayer extends AngularJsSpringLayer {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BusinessLayer.class);
-
+@Component(LayerNameConstants.Web.SpringRest.SERVICE_NAME)
+public class WebLayer extends AngularJsSpringLayer {
+    private static final String LAYER_NAME = LayerNameConstants.Web.SpringRest.SERVICE_NAME;
     @Autowired
     private TemplateService templateService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebLayer.class);
 
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
-        LOGGER.debug("visitDomainModelElement: {} ", basePackage);
-        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, pConf.getServiceLayerName()));
-        propertiesMap.put(PACKAGE_IMPL_PROPERTY,
-                formatToPackageStatement(basePackage, pConf.getServiceLayerName(), "impl"));
-        fillServiceModel(pConf, propertiesMap, dmgName, dmElement, basePackage);
-        fillServiceImplModel(pConf, propertiesMap, dmgName, dmElement, basePackage);
-    }
-
-    private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
-            DomainModelElement dmElement, String basePackage) {
+        LOGGER.debug("visitDomainModelElement {} ", basePackage);
+        String webLayerDotFormat = replaceSlashByDot(pConf.getWebLayerName());
+        String webLayerSlashFormat = replaceDotBySlash(pConf.getWebLayerName());
+        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, webLayerDotFormat));
+        propertiesMap.put(PACKAGE_SIMPLE_FORMAT_PROPERTY,
+                formatToPackageStatement(true, basePackage, webLayerDotFormat));
         templateService.fillModel(dmElement, pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/serviceImpl.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA,
-                basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/impl/"
-                        + dmElement.getName() + NameConventions.SERVICE_IMPLEMENTS + ".java",
-                createDefaultAceEditor(JAVA));
-    }
-
-    private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
-            DomainModelElement dmElement, String basePackage) {
-        templateService.fillModel(dmElement, pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/service.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
-                        + pConf.getServiceLayerName() + "/" + dmElement.getName() + NameConventions.SERVICE + ".java",
+                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/restResource.ftl", propertiesMap,
+                BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/" + webLayerSlashFormat
+                        + "/" + dmElement.getName() + NameConventions.REST_CONTROLLER + ".java",
                 createDefaultAceEditor(JAVA));
     }
 
     @Override
     public String getName() {
-        return LayerNameConstants.Business.SpringService.SERVICE_NAME;
+        return LAYER_NAME;
     }
 }

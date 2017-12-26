@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.repository;
+package mx.infotec.dads.kukulkan.generator.angularjs.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import mx.infotec.dads.kukulkan.engine.domain.DataStoreType;
+import mx.infotec.dads.kukulkan.engine.domain.RuleType;
 
 /**
- * DataStoreTypeRepository
+ * InflectorRepository
  * 
  * @author Daniel Cortes Pichardo
  *
  */
-public interface DataStoreTypeRepository extends MongoRepository<DataStoreType, Integer> {
+public interface RuleTypeRepository extends MongoRepository<RuleType, String> {
 
 }

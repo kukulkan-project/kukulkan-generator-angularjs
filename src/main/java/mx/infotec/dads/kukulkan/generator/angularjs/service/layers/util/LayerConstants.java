@@ -1,4 +1,4 @@
-package mx.infotec.dads.kukulkan.engine.service.layers.util;
+package mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util;
 
 /**
  * Layer Constants

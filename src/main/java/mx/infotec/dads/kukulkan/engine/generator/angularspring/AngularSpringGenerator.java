@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import mx.infotec.dads.kukulkan.engine.generator.angularspring.layer.AngularJsSpringLayer;
+import mx.infotec.dads.kukulkan.generator.angularjs.layer.AngularJsSpringLayer;
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
 import mx.infotec.dads.kukulkan.metamodel.generator.Layer;

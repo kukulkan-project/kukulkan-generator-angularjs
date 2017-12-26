@@ -1,14 +1,14 @@
-package mx.infotec.dads.kukulkan.engine.dbmigrations;
+package mx.infotec.dads.kukulkan.generator.angularjs.dbmigrations;
 
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createAtlasDataStore;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createDefaultDataStoreType;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createDefaultPluralRuleType;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createDefaultSingularRuleType;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createEsRule;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createGrammarDataStore;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createGrammarDataStoreType;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createOsRule;
-import static mx.infotec.dads.kukulkan.engine.util.EntitiesFactory.createTestDataStore;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createAtlasDataStore;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createDefaultDataStoreType;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createDefaultPluralRuleType;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createDefaultSingularRuleType;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createEsRule;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createGrammarDataStore;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createGrammarDataStoreType;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createOsRule;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createTestDataStore;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 

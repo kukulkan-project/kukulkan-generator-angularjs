@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import mx.infotec.dads.kukulkan.metamodel.translator.dsl.KukulkanVisitor;
+import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
 
 /**
  * Test for GeneratorService

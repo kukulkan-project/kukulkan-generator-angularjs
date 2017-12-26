@@ -21,15 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.generator.angularspring.layer;
+package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
+import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
-import static mx.infotec.dads.kukulkan.metamodel.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
-import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceDotBySlash;
-import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceSlashByDot;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
-import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_SIMPLE_FORMAT_PROPERTY;
 
 import java.util.Collection;
 import java.util.Map;
@@ -39,13 +36,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.infotec.dads.kukulkan.engine.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.engine.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
-import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
  * Service Layer Task
@@ -53,32 +48,49 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  * @author Daniel Cortes Pichardo
  *
  */
-@Component(LayerNameConstants.Web.SpringRest.SERVICE_NAME)
-public class WebLayer extends AngularJsSpringLayer {
-    private static final String LAYER_NAME = LayerNameConstants.Web.SpringRest.SERVICE_NAME;
+@Component(LayerNameConstants.Domain.Core.SERVICE_NAME)
+public class DomainLayer extends AngularJsSpringLayer {
+
     @Autowired
     private TemplateService templateService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebLayer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DomainLayer.class);
 
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
+    public void visitDomainModelElement(ProjectConfiguration confg, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
-        LOGGER.debug("visitDomainModelElement {} ", basePackage);
-        String webLayerDotFormat = replaceSlashByDot(pConf.getWebLayerName());
-        String webLayerSlashFormat = replaceDotBySlash(pConf.getWebLayerName());
-        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, webLayerDotFormat));
-        propertiesMap.put(PACKAGE_SIMPLE_FORMAT_PROPERTY,
-                formatToPackageStatement(true, basePackage, webLayerDotFormat));
-        templateService.fillModel(dmElement, pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/restResource.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/" + webLayerSlashFormat
-                        + "/" + dmElement.getName() + NameConventions.REST_CONTROLLER + ".java",
+        LOGGER.debug("visitDomainModelElement for {}", basePackage);
+        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(false, basePackage, confg.getDomainLayerName()));
+        fillModel(confg, propertiesMap, dmgName, basePackage, dmElement);
+        fillPrimaryKey(confg, propertiesMap, dmgName, basePackage, dmElement);
+    }
+
+    private void fillModel(ProjectConfiguration pConf, Map<String, Object> model, String dmgName, String basePackage,
+            DomainModelElement dmElement) {
+        String template = null;
+        if (pConf.isMongoDb()) {
+            template = "common/model-mongo.ftl";
+        } else {
+            template = "common/model.ftl";
+        }
+        templateService.fillModel(dmElement, pConf.getId(), template, model,
+                BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
+                        + pConf.getDomainLayerName() + "/" + dmElement.getName() + ".java",
                 createDefaultAceEditor(JAVA));
+    }
+
+    private void fillPrimaryKey(ProjectConfiguration pConf, Map<String, Object> model, String dmgName,
+            String basePackage, DomainModelElement dmElement) {
+        if (dmElement.getPrimaryKey().isComposed()) {
+            templateService.fillModel(dmElement, pConf.getId(), "common/primaryKey.ftl", model,
+                    BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
+                            + pConf.getDomainLayerName() + "/" + dmElement.getPrimaryKey().getType() + ".java",
+                    createDefaultAceEditor(JAVA));
+        }
     }
 
     @Override
     public String getName() {
-        return LAYER_NAME;
+        return LayerNameConstants.Domain.Core.SERVICE_NAME;
     }
 }

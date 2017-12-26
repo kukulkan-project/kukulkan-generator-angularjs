@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.util;
+package mx.infotec.dads.kukulkan.generator.angularjs.util;
 
 import mx.infotec.dads.kukulkan.engine.domain.DataStore;
 import mx.infotec.dads.kukulkan.engine.domain.DataStoreType;
