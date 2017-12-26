@@ -28,7 +28,6 @@ import mx.infotec.dads.kukulkan.engine.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.engine.domain.Rule;
 import mx.infotec.dads.kukulkan.engine.domain.RuleType;
 import mx.infotec.dads.kukulkan.metamodel.context.KukulkanContext;
-import mx.infotec.dads.kukulkan.metamodel.foundation.PrimaryKey;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
@@ -39,10 +38,6 @@ import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
  * @author Daniel Cortes Pichardo
  */
 public class EntitiesFactory {
-
-    private static final String STRING_TYPE = "String";
-    private static final String STRING_QUALIFIED_NAME = "java.lang.String";
-    private static final String ID_DEFAULT_NAME = "id";
 
     private EntitiesFactory() {
 
