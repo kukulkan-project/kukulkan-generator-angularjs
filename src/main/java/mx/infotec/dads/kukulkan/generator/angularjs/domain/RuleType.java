@@ -21,28 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.domain;
+package mx.infotec.dads.kukulkan.generator.angularjs.domain;
+
+import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 
+import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
+
 /**
- * Base class for document classes.
+ * Supported dataSourceConnectionType
  * 
- * @author Oliver Gierke, Daniel Cortes Pichardo
- * @since 1.0.0
- * @version 1.0.0
+ * @author Daniel Cortes Pichardo
+ *
  */
 
-public abstract class AbstractDocument {
+public class RuleType extends AbstractDescription implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     private String id;
 
-    /**
-     * Returns the identifier of the document.
-     * 
-     * @return the id
-     */
     public String getId() {
         return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

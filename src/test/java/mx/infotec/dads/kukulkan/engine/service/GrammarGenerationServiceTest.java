@@ -34,10 +34,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.engine.KukulkanEngineApp;
-import mx.infotec.dads.kukulkan.engine.domain.Rule;
-import mx.infotec.dads.kukulkan.engine.domain.RuleType;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 import mx.infotec.dads.kukulkan.generator.angularjs.repository.RuleRepository;
 import mx.infotec.dads.kukulkan.generator.angularjs.repository.RuleTypeRepository;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;

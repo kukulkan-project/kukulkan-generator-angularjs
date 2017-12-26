@@ -23,10 +23,10 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.util;
 
-import mx.infotec.dads.kukulkan.engine.domain.DataStore;
-import mx.infotec.dads.kukulkan.engine.domain.DataStoreType;
-import mx.infotec.dads.kukulkan.engine.domain.Rule;
-import mx.infotec.dads.kukulkan.engine.domain.RuleType;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 import mx.infotec.dads.kukulkan.metamodel.context.KukulkanContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;

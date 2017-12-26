@@ -1,4 +1,4 @@
-package mx.infotec.dads.kukulkan.engine.domain;
+package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
 import java.io.Serializable;
 import java.util.Objects;

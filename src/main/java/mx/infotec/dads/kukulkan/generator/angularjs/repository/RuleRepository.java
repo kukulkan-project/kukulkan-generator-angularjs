@@ -25,7 +25,7 @@ package mx.infotec.dads.kukulkan.generator.angularjs.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import mx.infotec.dads.kukulkan.engine.domain.Rule;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 
 /**
  * InflectorRepository

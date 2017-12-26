@@ -15,9 +15,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
 
-import mx.infotec.dads.kukulkan.engine.domain.DataStore;
-import mx.infotec.dads.kukulkan.engine.domain.DataStoreType;
-import mx.infotec.dads.kukulkan.engine.domain.RuleType;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 
 /**
  * Creates the initial database setup

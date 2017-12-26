@@ -1,4 +1,4 @@
-package mx.infotec.dads.kukulkan.engine.domain;
+package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import mx.infotec.dads.kukulkan.engine.domain.DataStoreType;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 
 /**

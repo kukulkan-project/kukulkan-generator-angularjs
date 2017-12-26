@@ -1,4 +1,4 @@
-package mx.infotec.dads.kukulkan.engine.generator.angularspring;
+package mx.infotec.dads.kukulkan.generator.angularjs;
 
 import java.util.List;
 

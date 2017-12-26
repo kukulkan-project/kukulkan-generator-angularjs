@@ -21,34 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.domain;
+package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
-
-import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
- * Supported dataSourceConnectionType
+ * The Rule Class
  * 
  * @author Daniel Cortes Pichardo
  *
  */
+public class Rule implements Serializable {
 
-public class DataStoreType extends AbstractDescription implements Serializable {
-
-    private static final long serialVersionUID = 6702727854037559008L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
+    private String expression;
+    private String replacement;
+    @DBRef
+    private RuleType ruleType;
 
-    /**
-     * Returns the identifier of the document.
-     * 
-     * @return the id
-     */
+    public String getExpression() {
+        return expression;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
+
+    public String getReplacement() {
+        return replacement;
+    }
+
+    public void setReplacement(String replacement) {
+        this.replacement = replacement;
+    }
+
+    public RuleType getRuleType() {
+        return ruleType;
+    }
+
+    public void setRuleType(RuleType ruleType) {
+        this.ruleType = ruleType;
+    }
+
     public String getId() {
         return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

@@ -2,7 +2,7 @@ package mx.infotec.dads.kukulkan.generator.angularjs.repository;
 
 import org.springframework.stereotype.Repository;
 
-import mx.infotec.dads.kukulkan.engine.domain.Project;
+import mx.infotec.dads.kukulkan.generator.angularjs.domain.Project;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
