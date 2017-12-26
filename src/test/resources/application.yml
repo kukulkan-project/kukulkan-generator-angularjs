@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: kukulkancraftsman
+  messages:
+    basename: i18n/messages
+  data:
+    mongodb:
+      host: localhost
+      port: 27117
+      database: kukulkancraftsman
+  jmx:
+    enabled: false
+kukulkan:
+  config:
+    inputdir: /home/daniel/git/
+    outputdir: /home/daniel/git/
+    documenturl: http://localhost/
+    external-apps:
+      modeler: http://localhost/dsl-core/
+      presentation: http://localhost/kukulkan-presentation
+      slides: http://localhost/data/slides.pdf
+  data:
+    mysql:
+      uri: jdbc:mysql://kukulkancraftsman-mysql:3306
+logging:
+  level:
+    root: info
+    org.springframework.web: false
+    org.hibernate: false
+    org.hibernate.SQL: false
+    file: kukulkan.log
