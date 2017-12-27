@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.engine.service;
+package mx.infotec.dads.kukulkan.generator.angularjs.service;
 
 import java.util.List;
 
@@ -33,7 +33,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import mx.infotec.dads.kukulkan.engine.KukulkanEngineApp;
+import mx.infotec.dads.kukulkan.KukulkanEngineApp;
+import mx.infotec.dads.kukulkan.engine.service.GenerationService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;

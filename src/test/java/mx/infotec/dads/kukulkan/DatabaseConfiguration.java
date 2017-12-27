@@ -1,4 +1,4 @@
-package mx.infotec.dads.kukulkan.engine;
+package mx.infotec.dads.kukulkan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import com.mongodb.MongoClient;
 import mx.infotec.dads.kukulkan.metamodel.util.JSR310DateConverters;
 
 @Configuration
-@EnableMongoRepositories(basePackages = { "mx.infotec.dads.kukulkan.engine.repository" })
+@EnableMongoRepositories(basePackages = { "mx.infotec.dads.kukulkan.repository" })
 @Import(value = MongoAutoConfiguration.class)
 public class DatabaseConfiguration {
 
@@ -54,7 +54,7 @@ public class DatabaseConfiguration {
         mongobee.setDbName(mongoProperties.getDatabase());
         mongobee.setMongoTemplate(mongoTemplate);
         // package to scan for migrations
-        mongobee.setChangeLogsScanPackage("mx.infotec.dads.kukulkan.engine.dbmigrations");
+        mongobee.setChangeLogsScanPackage("mx.infotec.dads.kukulkan.generator.angularjs.dbmigrations");
         mongobee.setEnabled(true);
         return mongobee;
     }
