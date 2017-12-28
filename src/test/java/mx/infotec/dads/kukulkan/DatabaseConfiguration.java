@@ -23,7 +23,7 @@ import com.mongodb.MongoClient;
 import mx.infotec.dads.kukulkan.metamodel.util.JSR310DateConverters;
 
 @Configuration
-@EnableMongoRepositories(basePackages = { "mx.infotec.dads.kukulkan.repository" })
+@EnableMongoRepositories(basePackages = { "mx.infotec.dads.kukulkan.generator.angularjs.repository" })
 @Import(value = MongoAutoConfiguration.class)
 public class DatabaseConfiguration {
 

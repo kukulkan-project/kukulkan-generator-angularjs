@@ -1,7 +1,7 @@
 /*
  *  
  * The MIT License (MIT)
- * Copyright (c) ${year} ${author}
+ * Copyright (c) ${project.year} ${project.author}
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,8 @@ ${project.groupId}
 ${project.packaging}
 ${project.year}
 ${project.author}
-
 ${project.webLayerName}
 ${project.serviceLayerName}
 ${project.daoLayerName}
 ${project.domainLayerName}
-${project.mongoDb}
+${project.mongoDb?string('yes', 'no')}

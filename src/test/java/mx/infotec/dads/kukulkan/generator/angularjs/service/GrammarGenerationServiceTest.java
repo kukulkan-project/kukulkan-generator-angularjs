@@ -68,9 +68,6 @@ public class GrammarGenerationServiceTest {
     @Autowired
     private RuleTypeRepository ruleTypeRepository;
 
-    @Autowired
-    Generator generator;
-
     @BeforeClass
     public static void runOnceBeforeClass() {
 
@@ -116,6 +113,7 @@ public class GrammarGenerationServiceTest {
         // generationService.process(genCtx,
         // layerTaskFactory.getLayerTaskSet(ArchetypeType.ANGULAR_SPRING));
         generationService.findGeneratorByName("angularJs-spring").ifPresent(generator -> {
+        	
             generationService.process(genCtx, generator);
         });
 

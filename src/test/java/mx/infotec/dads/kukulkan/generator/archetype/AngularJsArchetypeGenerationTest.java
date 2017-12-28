@@ -57,7 +57,7 @@ public class AngularJsArchetypeGenerationTest {
 	@Test
 	public void generationService() {
 		ProjectConfiguration pConf = new ProjectConfiguration();
-		pConf.setId("kukulkanmongo");
+		pConf.setId("archetype");
 		pConf.setGroupId("mx.infotec.dads.mongo");
 		pConf.setVersion("1.0.0");
 		pConf.setPackaging("mx.infotec.dads.mongo");
@@ -70,10 +70,17 @@ public class AngularJsArchetypeGenerationTest {
 		pConf.setMongoDb(true);
 
 		GeneratorContext genCtx = new GeneratorContext(pConf);
-		generationService.findGeneratorByName("angularJs-archetype").ifPresent(generator -> {
+		generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
+			System.out.println("template found");
+			System.out.println("***************************");
+			System.out.println("***************************");
+			System.out.println("***************************");
+			System.out.println("***************************");
+			System.out.println("***************************");
+			System.out.println("***************************");
+			System.out.println("***************************");
+			System.out.println("***************************");
 			generationService.process(genCtx, generator);
 		});
-
-		FileUtil.saveToFile(genCtx);
 	}
 }

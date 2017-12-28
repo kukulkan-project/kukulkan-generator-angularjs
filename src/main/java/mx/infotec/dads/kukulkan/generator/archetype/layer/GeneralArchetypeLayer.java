@@ -23,6 +23,8 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -33,6 +35,8 @@ import org.springframework.stereotype.Component;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
+import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
 
 /**
  * Service Layer Task
@@ -48,6 +52,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
 	@Autowired
 	private TemplateService templateService;
 
+	@Autowired
+	private KukulkanConfigurationProperties prop;
+
 	@Override
 	public String getName() {
 		return LayerNameConstants.Archetype.AngularJs.LAYER_NAME;
@@ -55,6 +62,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
 
 	@Override
 	public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
-		templateService.fillModel(dme, proyectoId, templateName, model, basePath, filePath);
+		String content = templateService.fillAbstractTemplate("archetypes/angularjs-rest/test.ftl", propertiesMap);
+		Path path = Paths.get(prop.getConfig().getOutputdir(), context.getProjectConfiguration().getId(), "rest.txt");
+		FileUtil.saveToFile(path, content);
 	}
+
 }
