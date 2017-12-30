@@ -23,12 +23,4 @@
  */
 
 ${project.id}
-${project.groupId}
 ${project.packaging}
-${project.year}
-${project.author}
-${project.webLayerName}
-${project.serviceLayerName}
-${project.daoLayerName}
-${project.domainLayerName}
-${project.mongoDb?string('yes', 'no')}

@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
@@ -47,24 +48,47 @@ import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
 @Component(LayerNameConstants.Archetype.AngularJs.LAYER_NAME)
 public class GeneralArchetypeLayer extends ArchetypeLayer {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GeneralArchetypeLayer.class);
+    @Autowired
+    private TemplateService templateService;
 
-	@Autowired
-	private TemplateService templateService;
+    @Autowired
+    private KukulkanConfigurationProperties prop;
 
-	@Autowired
-	private KukulkanConfigurationProperties prop;
+    @Override
+    public String getName() {
+        return LayerNameConstants.Archetype.AngularJs.LAYER_NAME;
+    }
 
-	@Override
-	public String getName() {
-		return LayerNameConstants.Archetype.AngularJs.LAYER_NAME;
-	}
+    @Override
+    public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
+        for (String template : TemplateFactory.TEMPLATE_LIST) {
+            if (isFtl(template)) {
+                String content = templateService.fillAbstractTemplate(template, propertiesMap);
+                Path toSave = createPath(template, context.getProjectConfiguration().getPackaging());
+                FileUtil.saveToFile(toSave, content);
+            } else {
 
-	@Override
-	public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
-		String content = templateService.fillAbstractTemplate("archetypes/angularjs-rest/test.ftl", propertiesMap);
-		Path path = Paths.get(prop.getConfig().getOutputdir(), context.getProjectConfiguration().getId(), "rest.txt");
-		FileUtil.saveToFile(path, content);
-	}
+            }
+        }
+    }
 
+    private Path createPath(String template, String packaging) {
+        String newPackaging = packaging.replaceAll("\\.", "/");
+        String newTemplate = template.replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir())
+                .replaceAll(".ftl", "").replaceAll("package", newPackaging);
+        return Paths.get(newTemplate);
+    }
+
+    private boolean isFtl(String template) {
+        return template.contains(".ftl");
+    }
+
+    public static void main(String[] args) {
+        String packaging = "mx.dads.infotec";
+        String template = "archetypes/angularjs-spring-mongo/src/main/java/package/service/mapper/package-info.java.ftl";
+        String newPackaging = packaging.replaceAll("\\.", "/");
+        String newTemplate = template.replaceFirst("archetypes/angularjs-spring-mongo", "/home/danel/archetype")
+                .replaceAll(".ftl", "").replaceFirst("package", newPackaging);
+        System.out.println(Paths.get(newTemplate));
+    }
 }

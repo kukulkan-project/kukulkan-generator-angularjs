@@ -46,41 +46,41 @@ import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 @SpringBootTest(classes = KukulkanEngineApp.class)
 public class AngularJsArchetypeGenerationTest {
 
-	@Autowired
-	private GenerationService generationService;
+    @Autowired
+    private GenerationService generationService;
 
-	@BeforeClass
-	public static void runOnceBeforeClass() {
+    @BeforeClass
+    public static void runOnceBeforeClass() {
 
-	}
+    }
 
-	@Test
-	public void generationService() {
-		ProjectConfiguration pConf = new ProjectConfiguration();
-		pConf.setId("archetype");
-		pConf.setGroupId("mx.infotec.dads.mongo");
-		pConf.setVersion("1.0.0");
-		pConf.setPackaging("mx.infotec.dads.mongo");
-		pConf.setYear("2017");
-		pConf.setAuthor("KUKULKAN");
-		pConf.setWebLayerName("web.rest");
-		pConf.setServiceLayerName("service");
-		pConf.setDaoLayerName("repository");
-		pConf.setDomainLayerName("domain");
-		pConf.setMongoDb(true);
+    @Test
+    public void generationService() {
+        ProjectConfiguration pConf = new ProjectConfiguration();
+        pConf.setId("archetype");
+        pConf.setGroupId("mx.infotec.dads.mongo");
+        pConf.setVersion("1.0.0");
+        pConf.setPackaging("mx.infotec.dads.mongo");
+        pConf.setYear("2017");
+        pConf.setAuthor("KUKULKAN");
+        pConf.setWebLayerName("web.rest");
+        pConf.setServiceLayerName("service");
+        pConf.setDaoLayerName("repository");
+        pConf.setDomainLayerName("domain");
+        pConf.setMongoDb(true);
 
-		GeneratorContext genCtx = new GeneratorContext(pConf);
-		generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
-			System.out.println("template found");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			System.out.println("***************************");
-			generationService.process(genCtx, generator);
-		});
-	}
+        GeneratorContext genCtx = new GeneratorContext(pConf);
+        generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
+            System.out.println("template found");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            System.out.println("***************************");
+            generationService.process(genCtx, generator);
+        });
+    }
 }
