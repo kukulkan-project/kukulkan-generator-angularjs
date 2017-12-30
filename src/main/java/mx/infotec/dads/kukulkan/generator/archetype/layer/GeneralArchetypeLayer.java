@@ -32,7 +32,6 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.ReadFileFromResource;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
@@ -65,10 +64,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
                     context.getProjectConfiguration().getId());
             if (isFtl(template)) {
                 String content = templateService.fillAbstractTemplate(template, propertiesMap);
-
                 FileUtil.saveToFile(toSave, content);
             } else {
-                ReadFileFromResource.saveFile(template, toSave);
+                FileUtil.copyFromJar("templates/" + template, toSave);
             }
         }
     }
