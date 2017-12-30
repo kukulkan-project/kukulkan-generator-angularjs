@@ -175,7 +175,7 @@ gulp.task('default', ['serve']);
 gulp.task('bundle-sw', () => {
   return wbBuild.generateSW({
     globDirectory: config.dist,
-    swDest: `${config.dist}/sw.js`,
+    swDest: `${r"${config.dist}"}/sw.js`,
     globPatterns: ['**\/*.{html,js,css,png,svg,jpg,gif,json}'],
   })
   .then(() => {

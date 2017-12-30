@@ -17,10 +17,10 @@
         <yarn.version>v1.3.2</yarn.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
+        <project.testresult.directory>${r"${project.build.directory}"}/test-results</project.testresult.directory>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${r"${java.version}"}</maven.compiler.source>
+        <maven.compiler.target>${r"${java.version}"}</maven.compiler.target>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
@@ -30,8 +30,6 @@
 
         <!-- Dependency versions -->
         <jhipster-dependencies.version>0.1.5</jhipster-dependencies.version>
-        <!-- The spring-boot version should match the one managed by
-        https://mvnrepository.com/artifact/io.github.jhipster/jhipster-dependencies/${jhipster-dependencies.version} -->
         <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
 
@@ -61,17 +59,17 @@
         <!-- Rule http://sonarqube.com/coding_rules#rule_key=squid%3AUndocumentedApi is ignored, as we want to follow "clean code" guidelines and classes, methods and arguments names should be self-explanatory -->
         <sonar.issue.ignore.multicriteria.UndocumentedApi.resourceKey>src/main/java/**/*</sonar.issue.ignore.multicriteria.UndocumentedApi.resourceKey>
         <sonar.issue.ignore.multicriteria.UndocumentedApi.ruleKey>squid:UndocumentedApi</sonar.issue.ignore.multicriteria.UndocumentedApi.ruleKey>
-        <sonar.jacoco.itReportPath>${project.testresult.directory}/coverage/jacoco/jacoco-it.exec</sonar.jacoco.itReportPath>
-        <sonar.jacoco.reportPath>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.jacoco.itReportPath>${r"${project.testresult.directory}"}/coverage/jacoco/jacoco-it.exec</sonar.jacoco.itReportPath>
+        <sonar.jacoco.reportPath>${r"${project.testresult.directory}"}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
-        <sonar.javascript.jstestdriver.reportsPath>${project.testresult.directory}/karma</sonar.javascript.jstestdriver.reportsPath>
+        <sonar.javascript.jstestdriver.reportsPath>${r"${project.testresult.directory}"}/karma</sonar.javascript.jstestdriver.reportsPath>
         <!-- For Sonar < 6.2 -->
-        <sonar.javascript.lcov.reportPath>${project.testresult.directory}/coverage/report-lcov/lcov.info</sonar.javascript.lcov.reportPath>
+        <sonar.javascript.lcov.reportPath>${r"${project.testresult.directory}"}/coverage/report-lcov/lcov.info</sonar.javascript.lcov.reportPath>
         <!-- For Sonar >= 6.2 -->
-        <sonar.javascript.lcov.reportPaths>${project.testresult.directory}/coverage/report-lcov/lcov.info</sonar.javascript.lcov.reportPaths>
-        <sonar.sources>${project.basedir}/src/main/</sonar.sources>
-        <sonar.surefire.reportsPath>${project.testresult.directory}/surefire-reports</sonar.surefire.reportsPath>
-        <sonar.tests>${project.basedir}/src/test/</sonar.tests>
+        <sonar.javascript.lcov.reportPaths>${r"${project.testresult.directory}"}/coverage/report-lcov/lcov.info</sonar.javascript.lcov.reportPaths>
+        <sonar.sources>${r"${project.basedir}"}/src/main/</sonar.sources>
+        <sonar.surefire.reportsPath>${r"${project.testresult.directory}"}/surefire-reports</sonar.surefire.reportsPath>
+        <sonar.tests>${r"${project.basedir}"}/src/test/</sonar.tests>
 
         <!-- jhipster-needle-maven-property -->
     </properties>
@@ -81,7 +79,7 @@
             <dependency>
                 <groupId>io.github.jhipster</groupId>
                 <artifactId>jhipster-dependencies</artifactId>
-                <version>${jhipster-dependencies.version}</version>
+                <version>${r"${jhipster-dependencies.version}"}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -206,7 +204,7 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId>
-            <version>${mapstruct.version}</version>
+            <version>${r"${mapstruct.version}"}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -318,13 +316,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>${r"${maven-compiler-plugin.version}"}</version>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
+                            <version>${r"${mapstruct.version}"}</version>
                         </path>
 
                     </annotationProcessorPaths>
@@ -333,7 +331,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
-                <version>${maven-eclipse-plugin.version}</version>
+                <version>${r"${maven-eclipse-plugin.version}"}</version>
                 <configuration>
                     <downloadSources>true</downloadSources>
                     <downloadJavadocs>true</downloadJavadocs>
@@ -342,7 +340,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${maven-enforcer-plugin.version}</version>
+                <version>${r"${maven-enforcer-plugin.version}"}</version>
                 <executions>
                     <execution>
                         <id>enforce-versions</id>
@@ -354,12 +352,12 @@
                 <configuration>
                     <rules>
                         <requireMavenVersion>
-                            <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
-                            <version>[${maven.version},)</version>
+                            <message>You are running an older version of Maven. JHipster requires at least Maven ${r"${maven.version}"}</message>
+                            <version>[${r"${maven.version}"},)</version>
                         </requireMavenVersion>
                         <requireJavaVersion>
                             <!-- Until JHipster supports JDK 9 -->
-                            <message>You are running an incompatible version of Java. JHipster requires JDK ${java.version}</message>
+                            <message>You are running an incompatible version of Java. JHipster requires JDK ${r"${java.version}"}</message>
                             <version>[1.8,1.9)</version>
                         </requireJavaVersion>
                     </rules>
@@ -368,7 +366,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
+                <version>${r"${maven-resources-plugin.version}"}</version>
                 <executions>
                     <execution>
                         <id>default-resources</id>
@@ -424,7 +422,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
+                <version>${r"${maven-surefire-plugin.version}"}</version>
                 <executions>
                     <execution>
                         <id>default-test</id>
@@ -455,7 +453,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven-plugin.version}</version>
+                <version>${r"${jacoco-maven-plugin.version}"}</version>
                 <executions>
                     <execution>
                         <id>pre-unit-tests</id>
@@ -464,7 +462,7 @@
                         </goals>
                         <configuration>
                             <!-- Sets the path to the file which contains the execution data. -->
-                            <destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
+                            <destFile>${r"${project.testresult.directory}"}/coverage/jacoco/jacoco.exec</destFile>
                         </configuration>
                     </execution>
                     <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run -->
@@ -475,8 +473,8 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <dataFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</dataFile>
-                            <outputDirectory>${project.testresult.directory}/coverage/jacoco</outputDirectory>
+                            <dataFile>${r"${project.testresult.directory}"}/coverage/jacoco/jacoco.exec</dataFile>
+                            <outputDirectory>${r"${project.testresult.directory}"}/coverage/jacoco</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -484,12 +482,12 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar-maven-plugin.version}</version>
+                <version>${r"${sonar-maven-plugin.version}"}</version>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+                <version>${r"${spring-boot.version}"}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -498,7 +496,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>${start-class}</mainClass>
+                    <mainClass>${r"${start-class}"}</mainClass>
                     <executable>true</executable>
                     <fork>true</fork>
                     <!--
@@ -510,7 +508,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-plugin.version}</version>
+                <version>${r"${dockerfile-maven-plugin.version}"}</version>
                 <!--
                 Uncomment the section below to build the docker image with mvn package and and push it with mvn deploy
                 <executions>
@@ -524,9 +522,9 @@
                 </executions>
                 -->
                 <configuration>
-                    <repository>${project.id}</repository>
+                    <repository>${r"${project.id}"}</repository>
                     <tag>latest</tag>
-                    <contextDirectory>${project.build.directory}</contextDirectory>
+                    <contextDirectory>${r"${project.build.directory}"}</contextDirectory>
                 </configuration>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
@@ -552,7 +550,7 @@
                                             jacoco-maven-plugin
                                         </artifactId>
                                         <versionRange>
-                                            ${jacoco-maven-plugin.version}
+                                            ${r"${jacoco-maven-plugin.version}"}
                                         </versionRange>
                                         <goals>
                                             <goal>prepare-agent</goal>
@@ -566,7 +564,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>com.github.eirslett</groupId>
                                         <artifactId>frontend-maven-plugin</artifactId>
-                                        <versionRange>${frontend-maven-plugin.version}</versionRange>
+                                        <versionRange>${r"${frontend-maven-plugin.version}"}</versionRange>
                                         <goals>
                                             <goal>install-node-and-yarn</goal>
                                             <goal>yarn</goal>
@@ -619,7 +617,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>${maven-war-plugin.version}</version>
+                        <version>${r"${maven-war-plugin.version}"}</version>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
                             <warSourceDirectory>src/main/webapp/</warSourceDirectory>
@@ -637,7 +635,7 @@
             </build>
             <properties>
                 <!-- default Spring profiles -->
-                <spring.profiles.active>dev${profile.no-liquibase}</spring.profiles.active>
+                <spring.profiles.active>dev${r"${profile.no-liquibase}"}</spring.profiles.active>
             </properties>
         </profile>
         <profile>
@@ -652,7 +650,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-clean-plugin</artifactId>
-                        <version>${maven-clean-plugin.version}</version>
+                        <version>${r"${maven-clean-plugin.version}"}</version>
                         <configuration>
                             <filesets>
                                 <fileset>
@@ -664,7 +662,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>${maven-war-plugin.version}</version>
+                        <version>${r"${maven-war-plugin.version}"}</version>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
                             <warSourceDirectory>target/www/</warSourceDirectory>
@@ -681,9 +679,9 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>${spring-boot.version}</version>
+                        <version>${r"${spring-boot.version}"}</version>
                         <configuration>
-                            <mainClass>${start-class}</mainClass>
+                            <mainClass>${r"${start-class}"}</mainClass>
                             <executable>true</executable>
                         </configuration>
                         <executions>
@@ -697,7 +695,7 @@
                     <plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
-                        <version>${frontend-maven-plugin.version}</version>
+                        <version>${r"${frontend-maven-plugin.version}"}</version>
                         <executions>
                             <execution>
                                 <id>install node and yarn</id>
@@ -705,8 +703,8 @@
                                     <goal>install-node-and-yarn</goal>
                                 </goals>
                                 <configuration>
-                                    <nodeVersion>${node.version}</nodeVersion>
-                                    <yarnVersion>${yarn.version}</yarnVersion>
+                                    <nodeVersion>${r"${node.version}"}</nodeVersion>
+                                    <yarnVersion>${r"${yarn.version}"}</yarnVersion>
                                 </configuration>
                             </execution>
                             <execution>
@@ -752,7 +750,7 @@
             </build>
             <properties>
                 <!-- default Spring profiles -->
-                <spring.profiles.active>prod${profile.swagger}${profile.no-liquibase}</spring.profiles.active>
+                <spring.profiles.active>prod${r"${profile.swagger}"}${r"${profile.no-liquibase}"}</spring.profiles.active>
             </properties>
         </profile>
         <profile>
@@ -782,7 +780,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>${maven-war-plugin.version}</version>
+                        <version>${r"${maven-war-plugin.version}"}</version>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
                             <warSourceDirectory>src/main/webapp/</warSourceDirectory>
@@ -791,9 +789,9 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>${spring-boot.version}</version>
+                        <version>${r"${spring-boot.version}"}</version>
                         <configuration>
-                            <mainClass>${start-class}</mainClass>
+                            <mainClass>${r"${start-class}"}</mainClass>
                             <executable>true</executable>
                             <fork>true</fork>
                             <addResources>true</addResources>
@@ -806,7 +804,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven-compiler-plugin.version}</version>
+                        <version>${r"${maven-compiler-plugin.version}"}</version>
                         <executions>
                             <execution>
                                 <id>default-compile</id>
@@ -821,7 +819,7 @@
                     <plugin>
                         <groupId>net.alchim31.maven</groupId>
                         <artifactId>scala-maven-plugin</artifactId>
-                        <version>${scala-maven-plugin.version}</version>
+                        <version>${r"${scala-maven-plugin.version}"}</version>
                         <executions>
                             <execution>
                                 <id>compile</id>
@@ -843,7 +841,7 @@
                         <configuration>
                             <recompileMode>incremental</recompileMode>
                             <verbose>true</verbose>
-                            <scalaVersion>${scala.version}</scalaVersion>
+                            <scalaVersion>${r"${scala.version}"}</scalaVersion>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -896,7 +894,7 @@
                 <dependency>
                     <groupId>org.mapstruct</groupId>
                     <artifactId>mapstruct-processor</artifactId>
-                    <version>${mapstruct.version}</version>
+                    <version>${r"${mapstruct.version}"}</version>
                 </dependency>
             </dependencies>
         </profile>

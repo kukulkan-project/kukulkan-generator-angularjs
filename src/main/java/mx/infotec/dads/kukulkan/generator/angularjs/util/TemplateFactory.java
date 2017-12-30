@@ -15,11 +15,11 @@ public class TemplateFactory {
 
     private static List<String> getTemplates() {
         List<String> templates = new ArrayList<>();
-        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/banner.txt.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/mails/creationEmail.html.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/mails/activationEmail.html.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/mails/passwordResetEmail.html.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/templates/error.html.ftl");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/banner.txt");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/mails/creationEmail.html");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/mails/activationEmail.html");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/mails/passwordResetEmail.html");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/resources/templates/error.html");
         templates.add("archetypes/angularjs-spring-mongo/src/main/resources/config/application.yml.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/resources/config/application-prod.yml.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/resources/config/application-dev.yml.ftl");
@@ -27,7 +27,7 @@ public class TemplateFactory {
         templates.add("archetypes/angularjs-spring-mongo/src/main/resources/i18n/messages.properties.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/resources/i18n/messages_en.properties.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/resources/logback-spring.xml.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/docker/Dockerfile.ftl");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/docker/Dockerfile");
         templates.add("archetypes/angularjs-spring-mongo/src/main/docker/.dockerignore.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/docker/mongodb/MongoDB.Dockerfile.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/docker/mongodb/scripts/init_replicaset.js.ftl");
@@ -351,15 +351,15 @@ public class TemplateFactory {
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/i18n/en/login.json.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/i18n/angular-locale_en.js.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/index.html.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/hipster.png.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/hipster2x.png.ftl");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/hipster.png");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/hipster2x.png");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/logo-jhipster.png");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/css/documentation.css.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/css/main.css.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/manifest.webapp.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/test/features/.gitkeep.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/test/features/user/user.feature.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/test/resources/mails/testEmail.html.ftl");
+        templates.add("archetypes/angularjs-spring-mongo/src/test/resources/mails/testEmail.html");
         templates.add("archetypes/angularjs-spring-mongo/src/test/resources/logback.xml.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/test/resources/config/application.yml.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/test/resources/i18n/messages_en.properties.ftl");
@@ -427,8 +427,8 @@ public class TemplateFactory {
         templates.add("archetypes/angularjs-spring-mongo/gulp/build.js.ftl");
         templates.add("archetypes/angularjs-spring-mongo/gulp/serve.js.ftl");
         templates.add("archetypes/angularjs-spring-mongo/gulp/config.js.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/mvnw.cmd.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/mvnw.ftl");
+        templates.add("archetypes/angularjs-spring-mongo/mvnw.cmd");
+        templates.add("archetypes/angularjs-spring-mongo/mvnw");
         templates.add("archetypes/angularjs-spring-mongo/.eslintrc.json.ftl");
         templates.add("archetypes/angularjs-spring-mongo/.yo-rc.json.ftl");
         templates.add("archetypes/angularjs-spring-mongo/.eslintignore.ftl");

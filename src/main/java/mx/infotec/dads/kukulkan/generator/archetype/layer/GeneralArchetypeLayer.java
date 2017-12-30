@@ -62,19 +62,19 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         for (String template : TemplateFactory.TEMPLATE_LIST) {
+            Path toSave = createPath(template, context.getProjectConfiguration().getPackaging(), context.getProjectConfiguration().getId());
             if (isFtl(template)) {
                 String content = templateService.fillAbstractTemplate(template, propertiesMap);
-                Path toSave = createPath(template, context.getProjectConfiguration().getPackaging());
-                FileUtil.saveToFile(toSave, content);
+                 FileUtil.saveToFile(toSave, content);
             } else {
-
+                System.out.println(toSave.toString());
             }
         }
     }
 
-    private Path createPath(String template, String packaging) {
+    private Path createPath(String template, String packaging, String projectid) {
         String newPackaging = packaging.replaceAll("\\.", "/");
-        String newTemplate = template.replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir())
+        String newTemplate = template.replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir()+"/"+projectid)
                 .replaceAll(".ftl", "").replaceAll("package", newPackaging);
         return Paths.get(newTemplate);
     }
