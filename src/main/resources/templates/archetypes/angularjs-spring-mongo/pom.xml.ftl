@@ -30,6 +30,8 @@
 
         <!-- Dependency versions -->
         <jhipster-dependencies.version>0.1.5</jhipster-dependencies.version>
+        <!-- The spring-boot version should match the one managed by
+        https://mvnrepository.com/artifact/io.github.jhipster/jhipster-dependencies/${r"${jhipster-dependencies.version}"} -->
         <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
 
@@ -522,7 +524,7 @@
                 </executions>
                 -->
                 <configuration>
-                    <repository>${r"${project.id}"}</repository>
+                    <repository>${project.id}</repository>
                     <tag>latest</tag>
                     <contextDirectory>${r"${project.build.directory}"}</contextDirectory>
                 </configuration>
@@ -750,7 +752,7 @@
             </build>
             <properties>
                 <!-- default Spring profiles -->
-                <spring.profiles.active>prod${r"${profile.swagger}"}${r"${profile.no-liquibase}"}</spring.profiles.active>
+                <spring.profiles.active>prod${r"${profile.swagger}${profile.no-liquibase}"}</spring.profiles.active>
             </properties>
         </profile>
         <profile>
