@@ -752,7 +752,7 @@
             </build>
             <properties>
                 <!-- default Spring profiles -->
-                <spring.profiles.active>prod${r"${profile.swagger}${profile.no-liquibase}"}</spring.profiles.active>
+                <spring.profiles.active>prod${r"${profile.swagger}"}${r"${profile.no-liquibase}"}</spring.profiles.active>
             </properties>
         </profile>
         <profile>

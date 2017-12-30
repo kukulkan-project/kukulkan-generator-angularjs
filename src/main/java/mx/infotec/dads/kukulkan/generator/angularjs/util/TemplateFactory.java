@@ -188,7 +188,7 @@ public class TemplateFactory {
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/app/app.module.js.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/app/layouts/error/error.state.js.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/app/layouts/error/accessdenied.html.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/app/layouts/error/error.html.ftl");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/app/layouts/error/error.html");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/app/layouts/navbar/navbar.html.ftl");
         templates.add(
                 "archetypes/angularjs-spring-mongo/src/main/webapp/app/layouts/navbar/active-menu.directive.js.ftl");
