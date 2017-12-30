@@ -32,6 +32,7 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.ReadFileFromResource;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
@@ -64,19 +65,28 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
                     context.getProjectConfiguration().getId());
             if (isFtl(template)) {
                 String content = templateService.fillAbstractTemplate(template, propertiesMap);
+
                 FileUtil.saveToFile(toSave, content);
             } else {
-                System.out.println(toSave.toString());
+                ReadFileFromResource.saveFile(template, toSave);
             }
         }
     }
 
     private Path createPath(String template, String packaging, String projectid) {
         String newPackaging = packaging.replaceAll("\\.", "/");
-        String newTemplate = template
+        Path temp = Paths.get(template);
+        Path parent = temp.getParent();
+        String newTemplate = parent.toString()
                 .replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir() + "/" + projectid)
-                .replaceAll(".ftl", "").replaceAll("package", newPackaging);
-        return Paths.get(newTemplate);
+                .replaceAll("package", newPackaging);
+        Path targetPath = Paths.get(newTemplate, temp.getFileName().toString().replaceAll(".ftl", ""));
+        if (targetPath.getFileName().toString().contains("Kukulkan")) {
+            String output = projectid.substring(0, 1).toUpperCase() + projectid.substring(1);
+            return Paths.get(targetPath.getParent().toString(), output + "App.java");
+        } else {
+            return targetPath;
+        }
     }
 
     private boolean isFtl(String template) {
