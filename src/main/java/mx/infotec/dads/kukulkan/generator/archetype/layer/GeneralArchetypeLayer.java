@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
+import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
@@ -52,6 +53,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Autowired
     private KukulkanConfigurationProperties prop;
 
+    @Autowired
+    private BannerService bannerService;
+
     @Override
     public String getName() {
         return LayerNameConstants.Archetype.AngularJs.LAYER_NAME;
@@ -65,8 +69,10 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
             if (isFtl(template)) {
                 String content = templateService.fillAbstractTemplate(template, propertiesMap);
                 FileUtil.saveToFile(toSave, content);
+            } else if (template.contains("banner.txt")) {
+                String content = bannerService.generateBanner(context.getProjectConfiguration().getId());
+                FileUtil.saveToFile(toSave, content);
             } else {
-                System.out.println(template);
                 FileUtil.copyFromJar("templates/" + template, toSave);
             }
         }

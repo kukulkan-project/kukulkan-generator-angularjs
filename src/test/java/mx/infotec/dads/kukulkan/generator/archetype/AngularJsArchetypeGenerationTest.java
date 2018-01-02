@@ -32,6 +32,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
+import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 
@@ -48,6 +49,9 @@ public class AngularJsArchetypeGenerationTest {
     @Autowired
     private GenerationService generationService;
 
+    @Autowired
+    private BannerService bannerService;
+
     @BeforeClass
     public static void runOnceBeforeClass() {
 
@@ -56,7 +60,7 @@ public class AngularJsArchetypeGenerationTest {
     @Test
     public void generationService() {
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("bot");
+        pConf.setId("amor");
         pConf.setGroupId("mx.infotec.dads.mongo");
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.mongo");
@@ -74,15 +78,16 @@ public class AngularJsArchetypeGenerationTest {
         });
     }
 
-//    @Test
-//    public void readFile() throws IOException {
-//        File file = ResourceUtils.getFile("classpath:templates/error.html");
-//
-//        // File is found
-//        System.out.println("File Found : " + file.exists());
-//
-//        // Read File Content
-//        String content = new String(Files.readAllBytes(file.toPath()));
-//        System.out.println(content);
-//    }
+    // @Test
+    public void bannerGenerator() {
+        // File file = ResourceUtils.getFile("classpath:templates/error.html");
+        //
+        // // File is found
+        // System.out.println("File Found : " + file.exists());
+        //
+        // // Read File Content
+        // String content = new String(Files.readAllBytes(file.toPath()));
+        // System.out.println(content);
+        System.out.println(bannerService.generateBanner("kukulkan"));
+    }
 }

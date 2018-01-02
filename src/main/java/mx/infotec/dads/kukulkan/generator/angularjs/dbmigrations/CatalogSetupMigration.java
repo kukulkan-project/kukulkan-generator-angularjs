@@ -25,22 +25,22 @@ import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 @ChangeLog(order = "002")
 public class CatalogSetupMigration {
 
-	@ChangeSet(order = "01", author = "dcp", id = "02-kukulkan")
-	public void addDataStoreType(MongoTemplate mongoTemplate) {
-		DataStoreType dst = createDefaultDataStoreType();
-		mongoTemplate.save(dst);
-		DataStoreType dstGrammar = createGrammarDataStoreType();
-		mongoTemplate.save(dstGrammar);
-		DataStore testDs = createTestDataStore(dst);
-		mongoTemplate.save(testDs);
-		DataStore atlasDs = createAtlasDataStore(dst);
-		mongoTemplate.save(atlasDs);
-		DataStore grammar = createGrammarDataStore(dstGrammar);
-		mongoTemplate.save(grammar);
-		RuleType singularRuleType = createDefaultSingularRuleType();
-		mongoTemplate.save(singularRuleType);
-		mongoTemplate.save(createDefaultPluralRuleType());
-		mongoTemplate.save(createOsRule(singularRuleType));
-		mongoTemplate.save(createEsRule(singularRuleType));
-	}
+    @ChangeSet(order = "01", author = "dcp", id = "02-kukulkan")
+    public void addDataStoreType(MongoTemplate mongoTemplate) {
+        DataStoreType dst = createDefaultDataStoreType();
+        mongoTemplate.save(dst);
+        DataStoreType dstGrammar = createGrammarDataStoreType();
+        mongoTemplate.save(dstGrammar);
+        DataStore testDs = createTestDataStore(dst);
+        mongoTemplate.save(testDs);
+        DataStore atlasDs = createAtlasDataStore(dst);
+        mongoTemplate.save(atlasDs);
+        DataStore grammar = createGrammarDataStore(dstGrammar);
+        mongoTemplate.save(grammar);
+        RuleType singularRuleType = createDefaultSingularRuleType();
+        mongoTemplate.save(singularRuleType);
+        mongoTemplate.save(createDefaultPluralRuleType());
+        mongoTemplate.save(createOsRule(singularRuleType));
+        mongoTemplate.save(createEsRule(singularRuleType));
+    }
 }
