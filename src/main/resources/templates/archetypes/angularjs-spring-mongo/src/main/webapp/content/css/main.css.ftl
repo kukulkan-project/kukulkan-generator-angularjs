@@ -108,7 +108,7 @@ Main page styles
     display: inline-block;
     width: 347px;
     height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
+    background: url("../images/app.png") no-repeat center top;
     background-size: contain;
 }
 

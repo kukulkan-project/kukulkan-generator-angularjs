@@ -3,22 +3,22 @@
   "short_name": "${project.id}App",
   "icons": [
       {
-          "src": "/content/images/logo-jhipster.png",
+          "src": "/content/images/logo-app.png",
           "sizes": "192x192",
           "type": "image/png"
       },
       {
-          "src": "/content/images/logo-jhipster.png",
+          "src": "/content/images/logo-app.png",
           "sizes": "256x256",
           "type": "image/png"
       },
       {
-          "src": "/content/images/logo-jhipster.png",
+          "src": "/content/images/logo-app.png",
           "sizes": "384x384",
           "type": "image/png"
       },
       {
-          "src": "/content/images/logo-jhipster.png",
+          "src": "/content/images/logo-app.png",
           "sizes": "512x512",
           "type": "image/png"
       }

@@ -5,4 +5,4 @@ services:
         ports:
             - "27017:27017"
         # volumes:
-        #     - ~/volumes/jhipster/${project.id}/mongodb/:/data/db/
+        #     - ~/volumes/apps/${project.id}/mongodb/:/data/db/

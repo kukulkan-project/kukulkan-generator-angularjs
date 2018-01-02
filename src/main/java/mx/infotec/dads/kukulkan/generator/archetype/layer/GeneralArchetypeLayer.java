@@ -66,6 +66,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
                 String content = templateService.fillAbstractTemplate(template, propertiesMap);
                 FileUtil.saveToFile(toSave, content);
             } else {
+                System.out.println(template);
                 FileUtil.copyFromJar("templates/" + template, toSave);
             }
         }

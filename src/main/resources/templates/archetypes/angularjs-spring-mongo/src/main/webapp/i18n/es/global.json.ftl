@@ -4,10 +4,10 @@
         "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
         "menu": {
             "home": "Inicio",
-            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "jhipster-needle-menu-add-element": "Generator will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entidades",
-                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+                "jhipster-needle-menu-add-entry": "Generator will add additional entities here (do not translate!)"
             },
             "account": {
                 "main": "Cuenta",
@@ -29,7 +29,7 @@
                 "audits": "Auditorías",
                 "apidocs": "API",
                 "database": "Base de datos",
-                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+                "jhipster-needle-menu-add-admin-element": "Generator will add additional menu entries here (do not translate!)"
             },
             "language": "Idioma"
         },

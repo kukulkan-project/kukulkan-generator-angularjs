@@ -351,9 +351,9 @@ public class TemplateFactory {
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/i18n/en/login.json.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/i18n/angular-locale_en.js.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/index.html.ftl");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/hipster.png");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/hipster2x.png");
-        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/logo-jhipster.png");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/app.png");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/app2x.png");
+        templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/images/logo-app.png");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/css/documentation.css.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/content/css/main.css.ftl");
         templates.add("archetypes/angularjs-spring-mongo/src/main/webapp/manifest.webapp.ftl");
