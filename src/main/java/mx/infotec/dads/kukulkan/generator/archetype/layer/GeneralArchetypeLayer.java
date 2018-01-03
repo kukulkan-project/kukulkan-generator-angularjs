@@ -26,6 +26,7 @@ package mx.infotec.dads.kukulkan.generator.archetype.layer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -64,17 +65,34 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         for (String template : TemplateFactory.TEMPLATE_LIST) {
-            Path toSave = createPath(template, context.getProjectConfiguration().getPackaging(),
-                    context.getProjectConfiguration().getId());
-            if (isFtl(template)) {
-                String content = templateService.fillAbstractTemplate(template, propertiesMap);
-                FileUtil.saveToFile(toSave, content);
-            } else if (template.contains("banner.txt")) {
-                String content = bannerService.generateBanner(context.getProjectConfiguration().getId());
-                FileUtil.saveToFile(toSave, content);
-            } else {
-                FileUtil.copyFromJar("templates/" + template, toSave);
-            }
+            Path toSave = createToSavePath(context, template);
+            processTemplate(context, propertiesMap, template, toSave);
+        }
+    }
+
+    private Path createToSavePath(GeneratorContext context, String template) {
+        return createPath(template, context.getProjectConfiguration().getPackaging(),
+                context.getProjectConfiguration().getId());
+    }
+
+    private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, String template,
+            Path toSave) {
+        if (isFtlFile(template)) {
+            String content = templateService.fillAbstractTemplate(template, propertiesMap);
+            FileUtil.saveToFile(toSave, content);
+        } else if (template.contains("banner.txt")) {
+            createBanner(context, template, toSave);
+        } else {
+            FileUtil.copyFromJar("templates/" + template, toSave);
+        }
+    }
+
+    private void createBanner(GeneratorContext context, String template, Path toSave) {
+        Optional<String> generateBanner = bannerService.generateBanner(context.getProjectConfiguration().getId());
+        if (generateBanner.isPresent()) {
+            FileUtil.saveToFile(toSave, generateBanner.get());
+        } else {
+            FileUtil.copyFromJar("templates/" + template, toSave);
         }
     }
 
@@ -82,10 +100,12 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         String newPackaging = packaging.replaceAll("\\.", "/");
         Path temp = Paths.get(template);
         Path parent = temp.getParent();
-        String newTemplate = parent.toString()
-                .replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir() + "/" + projectid)
-                .replaceAll("package", newPackaging);
+        String newTemplate = createTemplatePath(projectid, newPackaging, parent);
         Path targetPath = Paths.get(newTemplate, temp.getFileName().toString().replaceAll(".ftl", ""));
+        return createOutputPath(projectid, targetPath);
+    }
+
+    private Path createOutputPath(String projectid, Path targetPath) {
         if (targetPath.getFileName().toString().contains("Kukulkan")) {
             String output = projectid.substring(0, 1).toUpperCase() + projectid.substring(1);
             return Paths.get(targetPath.getParent().toString(), output + "App.java");
@@ -94,16 +114,13 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
-    private boolean isFtl(String template) {
-        return template.contains(".ftl");
+    private String createTemplatePath(String projectid, String newPackaging, Path parent) {
+        return parent.toString()
+                .replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir() + "/" + projectid)
+                .replaceAll("package", newPackaging);
     }
 
-    public static void main(String[] args) {
-        String packaging = "mx.dads.infotec";
-        String template = "archetypes/angularjs-spring-mongo/src/main/java/package/service/mapper/package-info.java.ftl";
-        String newPackaging = packaging.replaceAll("\\.", "/");
-        String newTemplate = template.replaceFirst("archetypes/angularjs-spring-mongo", "/home/danel/archetype")
-                .replaceAll(".ftl", "").replaceFirst("package", newPackaging);
-        System.out.println(Paths.get(newTemplate));
+    private boolean isFtlFile(String template) {
+        return template.contains(".ftl");
     }
 }

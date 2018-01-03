@@ -1,5 +1,7 @@
 package mx.infotec.dads.kukulkan.generator.integration;
 
+import java.util.Optional;
+
 /**
  * Banner Generator Service
  * 
@@ -14,5 +16,5 @@ public interface BannerService {
      * @param appName
      * @return Banner Text
      */
-    String generateBanner(String appName);
+    Optional<String> generateBanner(String appName);
 }
