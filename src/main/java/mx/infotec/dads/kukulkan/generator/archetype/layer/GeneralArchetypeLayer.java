@@ -37,7 +37,6 @@ import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
-import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
 
 /**
  * Service Layer Task
@@ -52,9 +51,6 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     private TemplateService templateService;
 
     @Autowired
-    private KukulkanConfigurationProperties prop;
-
-    @Autowired
     private BannerService bannerService;
 
     @Override
@@ -65,14 +61,14 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         for (String template : TemplateFactory.TEMPLATE_LIST) {
-            Path toSave = createToSavePath(context, template);
+            Path toSave = createToSavePath(context, template, context.getProjectConfiguration().getOutputDir());
             processTemplate(context, propertiesMap, template, toSave);
         }
     }
 
-    private Path createToSavePath(GeneratorContext context, String template) {
+    private Path createToSavePath(GeneratorContext context, String template, Path outputPath) {
         return createPath(template, context.getProjectConfiguration().getPackaging(),
-                context.getProjectConfiguration().getId());
+                context.getProjectConfiguration().getId(), outputPath);
     }
 
     private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, String template,
@@ -96,11 +92,11 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
-    private Path createPath(String template, String packaging, String projectid) {
+    private Path createPath(String template, String packaging, String projectid, Path outputPath) {
         String newPackaging = packaging.replaceAll("\\.", "/");
         Path temp = Paths.get(template);
         Path parent = temp.getParent();
-        String newTemplate = createTemplatePath(projectid, newPackaging, parent);
+        String newTemplate = createTemplatePath(projectid, newPackaging, parent, outputPath);
         Path targetPath = Paths.get(newTemplate, temp.getFileName().toString().replaceAll(".ftl", ""));
         return createOutputPath(projectid, targetPath);
     }
@@ -114,9 +110,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
-    private String createTemplatePath(String projectid, String newPackaging, Path parent) {
-        return parent.toString()
-                .replaceAll("archetypes/angularjs-spring-mongo", prop.getConfig().getOutputdir() + "/" + projectid)
+    private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath) {
+        return parent.toString().replaceAll("archetypes/angularjs-spring-mongo", outputPath + "/" + projectid)
                 .replaceAll("package", newPackaging);
     }
 
