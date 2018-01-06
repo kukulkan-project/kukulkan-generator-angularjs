@@ -48,19 +48,26 @@ import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
- * Service Layer Task
- * 
- * @author Daniel Cortes Pichardo
+ * Service Layer Task.
  *
+ * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.Web.SpringRest.SERVICE_NAME)
 public class WebLayer extends AngularJsSpringLayer {
+    
+    /** The Constant LAYER_NAME. */
     private static final String LAYER_NAME = LayerNameConstants.Web.SpringRest.SERVICE_NAME;
+    
+    /** The template service. */
     @Autowired
     private TemplateService templateService;
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLayer.class);
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+     */
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
@@ -78,6 +85,9 @@ public class WebLayer extends AngularJsSpringLayer {
                 createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
+     */
     @Override
     public String getName() {
         return LAYER_NAME;

@@ -39,25 +39,32 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 
 /**
- * Service Layer Task
- * 
- * @author Daniel Cortes Pichardo
+ * Service Layer Task.
  *
+ * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.Archetype.AngularJs.LAYER_NAME)
 public class GeneralArchetypeLayer extends ArchetypeLayer {
 
+    /** The template service. */
     @Autowired
     private TemplateService templateService;
 
+    /** The banner service. */
     @Autowired
     private BannerService bannerService;
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
+     */
     @Override
     public String getName() {
         return LayerNameConstants.Archetype.AngularJs.LAYER_NAME;
     }
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer#processLayer(mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext, java.util.Map)
+     */
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         for (String template : TemplateFactory.TEMPLATE_LIST) {
@@ -66,11 +73,27 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
+    /**
+     * Creates the to save path.
+     *
+     * @param context the context
+     * @param template the template
+     * @param outputPath the output path
+     * @return the path
+     */
     private Path createToSavePath(GeneratorContext context, String template, Path outputPath) {
         return createPath(template, context.getProjectConfiguration().getPackaging(),
                 context.getProjectConfiguration().getId(), outputPath);
     }
 
+    /**
+     * Process template.
+     *
+     * @param context the context
+     * @param propertiesMap the properties map
+     * @param template the template
+     * @param toSave the to save
+     */
     private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, String template,
             Path toSave) {
         if (isFtlFile(template)) {
@@ -83,6 +106,13 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
+    /**
+     * Creates the banner.
+     *
+     * @param context the context
+     * @param template the template
+     * @param toSave the to save
+     */
     private void createBanner(GeneratorContext context, String template, Path toSave) {
         Optional<String> generateBanner = bannerService.generateBanner(context.getProjectConfiguration().getId());
         if (generateBanner.isPresent()) {
@@ -92,6 +122,15 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
+    /**
+     * Creates the path.
+     *
+     * @param template the template
+     * @param packaging the packaging
+     * @param projectid the projectid
+     * @param outputPath the output path
+     * @return the path
+     */
     private Path createPath(String template, String packaging, String projectid, Path outputPath) {
         String newPackaging = packaging.replaceAll("\\.", "/");
         Path temp = Paths.get(template);
@@ -101,6 +140,13 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         return createOutputPath(projectid, targetPath);
     }
 
+    /**
+     * Creates the output path.
+     *
+     * @param projectid the projectid
+     * @param targetPath the target path
+     * @return the path
+     */
     private Path createOutputPath(String projectid, Path targetPath) {
         if (targetPath.getFileName().toString().contains("Kukulkan")) {
             String output = projectid.substring(0, 1).toUpperCase() + projectid.substring(1);
@@ -110,11 +156,26 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
     }
 
+    /**
+     * Creates the template path.
+     *
+     * @param projectid the projectid
+     * @param newPackaging the new packaging
+     * @param parent the parent
+     * @param outputPath the output path
+     * @return the string
+     */
     private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath) {
         return parent.toString().replaceAll("archetypes/angularjs-spring-mongo", outputPath + "/" + projectid)
                 .replaceAll("package", newPackaging);
     }
 
+    /**
+     * Checks if is ftl file.
+     *
+     * @param template the template
+     * @return true, if is ftl file
+     */
     private boolean isFtlFile(String template) {
         return template.contains(".ftl");
     }

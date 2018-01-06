@@ -27,13 +27,15 @@ import org.springframework.data.annotation.Id;
 
 /**
  * Base class for document classes.
- * 
+ *
  * @author Oliver Gierke, Daniel Cortes Pichardo
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 
 public abstract class AbstractDocument {
+    
+    /** The id. */
     @Id
     private String id;
 

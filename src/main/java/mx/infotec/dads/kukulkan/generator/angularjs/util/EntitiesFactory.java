@@ -33,16 +33,24 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
 
 /**
- * EntitiesFactory provide common entities with a properly initialization
- * 
+ * EntitiesFactory provide common entities with a properly initialization.
+ *
  * @author Daniel Cortes Pichardo
  */
 public class EntitiesFactory {
 
+    /**
+     * Instantiates a new entities factory.
+     */
     private EntitiesFactory() {
 
     }
     
+    /**
+     * Creates a new Entities object.
+     *
+     * @return the data store
+     */
     public static DataStore createDataStore() {
         DataStore ds = new DataStore();
         ds.setDataStoreType(new DataStoreType());
@@ -55,6 +63,11 @@ public class EntitiesFactory {
         return ds;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @return the kukulkan context
+     */
     public static KukulkanContext createDefaultKukulkanContext() {
         ProjectConfiguration pConf = new ProjectConfiguration();
         pConf.setId("conacyt");
@@ -72,6 +85,12 @@ public class EntitiesFactory {
         return new KukulkanContext(pConf, "");
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @param dst the dst
+     * @return the data store
+     */
     public static DataStore createTestDataStore(DataStoreType dst) {
         DataStore testDataStore = new DataStore();
         testDataStore.setDataStoreType(dst);
@@ -85,6 +104,12 @@ public class EntitiesFactory {
         return testDataStore;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @param dst the dst
+     * @return the data store
+     */
     public static DataStore createAtlasDataStore(DataStoreType dst) {
         DataStore atlasDataStore = new DataStore();
         atlasDataStore.setDataStoreType(dst);
@@ -98,6 +123,12 @@ public class EntitiesFactory {
         return atlasDataStore;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @param dst the dst
+     * @return the data store
+     */
     public static DataStore createMysqlTestDataStore(DataStoreType dst) {
         DataStore mysqlDataStore = new DataStore();
         mysqlDataStore.setDataStoreType(dst);
@@ -111,6 +142,12 @@ public class EntitiesFactory {
         return mysqlDataStore;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @param dst the dst
+     * @return the data store
+     */
     public static DataStore createGrammarDataStore(DataStoreType dst) {
         DataStore atlasDataStore = new DataStore();
         atlasDataStore.setDataStoreType(dst);
@@ -124,6 +161,11 @@ public class EntitiesFactory {
         return atlasDataStore;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @return the data store type
+     */
     public static DataStoreType createDefaultDataStoreType() {
         DataStoreType dst = new DataStoreType();
         dst.setDescription("Data Store for JDBC connector");
@@ -131,6 +173,11 @@ public class EntitiesFactory {
         return dst;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @return the data store type
+     */
     public static DataStoreType createGrammarDataStoreType() {
         DataStoreType dst = new DataStoreType();
         dst.setDescription("Kukulan DataStore Type");
@@ -138,6 +185,11 @@ public class EntitiesFactory {
         return dst;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @return the rule type
+     */
     public static RuleType createDefaultSingularRuleType() {
         RuleType singularRuleType = new RuleType();
         singularRuleType.setDescription("regla que aplica para palabras convertir palabras de plural a singular");
@@ -145,6 +197,11 @@ public class EntitiesFactory {
         return singularRuleType;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @return the rule type
+     */
     public static RuleType createDefaultPluralRuleType() {
         RuleType plurarlRuleType = new RuleType();
         plurarlRuleType.setDescription("regla que aplica para palabras convertir palabras de singular a plural");
@@ -152,6 +209,12 @@ public class EntitiesFactory {
         return plurarlRuleType;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @param ruleType the rule type
+     * @return the rule
+     */
     public static Rule createOsRule(RuleType ruleType) {
         Rule osRule = new Rule();
         osRule.setExpression("os$");
@@ -160,6 +223,12 @@ public class EntitiesFactory {
         return osRule;
     }
 
+    /**
+     * Creates a new Entities object.
+     *
+     * @param ruleType the rule type
+     * @return the rule
+     */
     public static Rule createEsRule(RuleType ruleType) {
         Rule esRule = new Rule();
         esRule.setExpression("es$");

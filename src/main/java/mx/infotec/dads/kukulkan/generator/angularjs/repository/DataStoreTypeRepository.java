@@ -28,10 +28,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 
 /**
- * DataStoreTypeRepository
- * 
- * @author Daniel Cortes Pichardo
+ * DataStoreTypeRepository.
  *
+ * @author Daniel Cortes Pichardo
  */
 public interface DataStoreTypeRepository extends MongoRepository<DataStoreType, Integer> {
 

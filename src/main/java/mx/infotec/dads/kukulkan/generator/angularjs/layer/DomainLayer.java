@@ -43,19 +43,23 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 
 /**
- * Service Layer Task
- * 
- * @author Daniel Cortes Pichardo
+ * Service Layer Task.
  *
+ * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.Domain.Core.SERVICE_NAME)
 public class DomainLayer extends AngularJsSpringLayer {
 
+    /** The template service. */
     @Autowired
     private TemplateService templateService;
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DomainLayer.class);
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+     */
     @Override
     public void visitDomainModelElement(ProjectConfiguration confg, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
@@ -65,6 +69,15 @@ public class DomainLayer extends AngularJsSpringLayer {
         fillPrimaryKey(confg, propertiesMap, dmgName, basePackage, dmElement);
     }
 
+    /**
+     * Fill model.
+     *
+     * @param pConf the conf
+     * @param model the model
+     * @param dmgName the dmg name
+     * @param basePackage the base package
+     * @param dmElement the dm element
+     */
     private void fillModel(ProjectConfiguration pConf, Map<String, Object> model, String dmgName, String basePackage,
             DomainModelElement dmElement) {
         String template = null;
@@ -79,6 +92,15 @@ public class DomainLayer extends AngularJsSpringLayer {
                 createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
+    /**
+     * Fill primary key.
+     *
+     * @param pConf the conf
+     * @param model the model
+     * @param dmgName the dmg name
+     * @param basePackage the base package
+     * @param dmElement the dm element
+     */
     private void fillPrimaryKey(ProjectConfiguration pConf, Map<String, Object> model, String dmgName,
             String basePackage, DomainModelElement dmElement) {
         if (dmElement.getPrimaryKey().isComposed()) {
@@ -90,6 +112,9 @@ public class DomainLayer extends AngularJsSpringLayer {
         }
     }
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
+     */
     @Override
     public String getName() {
         return LayerNameConstants.Domain.Core.SERVICE_NAME;

@@ -28,10 +28,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 
 /**
- * InflectorRepository
- * 
- * @author Daniel Cortes Pichardo
+ * InflectorRepository.
  *
+ * @author Daniel Cortes Pichardo
  */
 public interface RuleTypeRepository extends MongoRepository<RuleType, String> {
 

@@ -30,16 +30,17 @@ import org.springframework.data.annotation.Id;
 import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
 
 /**
- * Supported dataSourceConnectionType
- * 
- * @author Daniel Cortes Pichardo
+ * Supported dataSourceConnectionType.
  *
+ * @author Daniel Cortes Pichardo
  */
 
 public class DataStoreType extends AbstractDescription implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6702727854037559008L;
 
+    /** The id. */
     @Id
     private String id;
 

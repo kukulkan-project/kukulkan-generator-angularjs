@@ -46,19 +46,23 @@ import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
- * Service Layer Task
- * 
- * @author Daniel Cortes Pichardo
+ * Service Layer Task.
  *
+ * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.Business.SpringService.SERVICE_NAME)
 public class BusinessLayer extends AngularJsSpringLayer {
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(BusinessLayer.class);
 
+    /** The template service. */
     @Autowired
     private TemplateService templateService;
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+     */
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
@@ -70,6 +74,15 @@ public class BusinessLayer extends AngularJsSpringLayer {
         fillServiceImplModel(pConf, propertiesMap, dmgName, dmElement, basePackage);
     }
 
+    /**
+     * Fill service impl model.
+     *
+     * @param pConf the conf
+     * @param propertiesMap the properties map
+     * @param dmgName the dmg name
+     * @param dmElement the dm element
+     * @param basePackage the base package
+     */
     private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
             DomainModelElement dmElement, String basePackage) {
         templateService.fillModel(dmElement, pConf.getId(),
@@ -80,6 +93,15 @@ public class BusinessLayer extends AngularJsSpringLayer {
                 createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
+    /**
+     * Fill service model.
+     *
+     * @param pConf the conf
+     * @param propertiesMap the properties map
+     * @param dmgName the dmg name
+     * @param dmElement the dm element
+     * @param basePackage the base package
+     */
     private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
             DomainModelElement dmElement, String basePackage) {
         templateService.fillModel(dmElement, pConf.getId(),
@@ -89,6 +111,9 @@ public class BusinessLayer extends AngularJsSpringLayer {
                 createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
+    /* (non-Javadoc)
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
+     */
     @Override
     public String getName() {
         return LayerNameConstants.Business.SpringService.SERVICE_NAME;

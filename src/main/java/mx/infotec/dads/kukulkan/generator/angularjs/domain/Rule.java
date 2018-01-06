@@ -29,50 +29,97 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
- * The Rule Class
- * 
- * @author Daniel Cortes Pichardo
+ * The Rule Class.
  *
+ * @author Daniel Cortes Pichardo
  */
 public class Rule implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The id. */
     @Id
     private String id;
+    
+    /** The expression. */
     private String expression;
+    
+    /** The replacement. */
     private String replacement;
+    
+    /** The rule type. */
     @DBRef
     private RuleType ruleType;
 
+    /**
+     * Gets the expression.
+     *
+     * @return the expression
+     */
     public String getExpression() {
         return expression;
     }
 
+    /**
+     * Sets the expression.
+     *
+     * @param expression the new expression
+     */
     public void setExpression(String expression) {
         this.expression = expression;
     }
 
+    /**
+     * Gets the replacement.
+     *
+     * @return the replacement
+     */
     public String getReplacement() {
         return replacement;
     }
 
+    /**
+     * Sets the replacement.
+     *
+     * @param replacement the new replacement
+     */
     public void setReplacement(String replacement) {
         this.replacement = replacement;
     }
 
+    /**
+     * Gets the rule type.
+     *
+     * @return the rule type
+     */
     public RuleType getRuleType() {
         return ruleType;
     }
 
+    /**
+     * Sets the rule type.
+     *
+     * @param ruleType the new rule type
+     */
     public void setRuleType(RuleType ruleType) {
         this.ruleType = ruleType;
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
     public void setId(String id) {
         this.id = id;
     }
