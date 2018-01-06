@@ -23,14 +23,25 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.util;
 
+import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
+import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import freemarker.cache.TemplateLoader;
+import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
+import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.metamodel.context.KukulkanContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
+import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
+import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
  * EntitiesFactory provide common entities with a properly initialization.
@@ -235,6 +246,24 @@ public class EntitiesFactory {
         esRule.setReplacement("");
         esRule.setRuleType(ruleType);
         return esRule;
+    }
+    
+    public static ModelContext createModelContext(String layerConstant, String templateName){
+        Path relativeTemplatePath = Paths.get(layerConstant, templateName);
+        Path packagePath = convertPackageToPath(basePackage);
+        pConf.getId(), LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/serviceImpl.ftl",
+        propertiesMap, BasePathEnum.SRC_MAIN_JAVA,
+        basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/impl/"
+                + dmElement.getName() + NameConventions.SERVICE_IMPLEMENTS + ".java",
+        createDefaultAceEditor(JAVA), pConf.getOutputDir()
+        ModelContext.Builder builder = new ModelContext.Builder();
+        
+        return builder.build();
+        
+    }
+    
+    private static String convertPackageToPath(String basePackage){
+        
     }
 
 }

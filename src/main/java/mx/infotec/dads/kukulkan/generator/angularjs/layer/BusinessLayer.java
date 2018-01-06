@@ -31,6 +31,7 @@ import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERT
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,9 @@ import org.springframework.stereotype.Component;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
+import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratedElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
@@ -60,8 +63,15 @@ public class BusinessLayer extends AngularJsSpringLayer {
     @Autowired
     private TemplateService templateService;
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
+     * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
+     * ProjectConfiguration, java.util.Collection, java.util.Map,
+     * java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * java.lang.String)
      */
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
@@ -77,41 +87,55 @@ public class BusinessLayer extends AngularJsSpringLayer {
     /**
      * Fill service impl model.
      *
-     * @param pConf the conf
-     * @param propertiesMap the properties map
-     * @param dmgName the dmg name
-     * @param dmElement the dm element
-     * @param basePackage the base package
+     * @param pConf
+     *            the conf
+     * @param propertiesMap
+     *            the properties map
+     * @param dmgName
+     *            the dmg name
+     * @param dmElement
+     *            the dm element
+     * @param basePackage
+     *            the base package
      */
     private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
             DomainModelElement dmElement, String basePackage) {
-        templateService.fillModel(dmElement, pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/serviceImpl.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA,
-                basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/impl/"
-                        + dmElement.getName() + NameConventions.SERVICE_IMPLEMENTS + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir());
+        
+        
+        EntitiesFactory.createModelContext(LayerConstants.REST_SPRING_JPA_BACK_END_URL);
+        
+        templateService
+                .createGeneratedElement()
+                .ifPresent(dmElement::addGeneratedElement);
     }
 
     /**
      * Fill service model.
      *
-     * @param pConf the conf
-     * @param propertiesMap the properties map
-     * @param dmgName the dmg name
-     * @param dmElement the dm element
-     * @param basePackage the base package
+     * @param pConf
+     *            the conf
+     * @param propertiesMap
+     *            the properties map
+     * @param dmgName
+     *            the dmg name
+     * @param dmElement
+     *            the dm element
+     * @param basePackage
+     *            the base package
      */
     private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
             DomainModelElement dmElement, String basePackage) {
-        templateService.fillModel(dmElement, pConf.getId(),
+        templateService.createGeneratedElement(pConf.getId(),
                 LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/service.ftl", propertiesMap, BasePathEnum.SRC_MAIN_JAVA,
                 basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/"
                         + dmElement.getName() + NameConventions.SERVICE + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir());
+                createDefaultAceEditor(JAVA), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
+        ;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
      */
     @Override

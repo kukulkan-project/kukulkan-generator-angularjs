@@ -54,10 +54,10 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  */
 @Component(LayerNameConstants.Web.SpringRest.SERVICE_NAME)
 public class WebLayer extends AngularJsSpringLayer {
-    
+
     /** The Constant LAYER_NAME. */
     private static final String LAYER_NAME = LayerNameConstants.Web.SpringRest.SERVICE_NAME;
-    
+
     /** The template service. */
     @Autowired
     private TemplateService templateService;
@@ -65,8 +65,15 @@ public class WebLayer extends AngularJsSpringLayer {
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLayer.class);
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
+     * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
+     * ProjectConfiguration, java.util.Collection, java.util.Map,
+     * java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * java.lang.String)
      */
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
@@ -77,15 +84,17 @@ public class WebLayer extends AngularJsSpringLayer {
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, webLayerDotFormat));
         propertiesMap.put(PACKAGE_SIMPLE_FORMAT_PROPERTY,
                 formatToPackageStatement(true, basePackage, webLayerDotFormat));
-        templateService.fillModel(dmElement, pConf.getId(),
+        templateService.createGeneratedElement(pConf.getId(),
                 LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/restResource.ftl", propertiesMap,
                 BasePathEnum.SRC_MAIN_JAVA,
                 basePackage.replace('.', '/') + "/" + dmgName + "/" + webLayerSlashFormat + "/" + dmElement.getName()
                         + NameConventions.REST_CONTROLLER + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir());
+                createDefaultAceEditor(JAVA), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
      */
     @Override

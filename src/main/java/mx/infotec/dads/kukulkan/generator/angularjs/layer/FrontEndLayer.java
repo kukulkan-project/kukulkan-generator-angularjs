@@ -81,8 +81,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FrontEndLayer.class);
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer#doBeforeProcessDataModelGroup(mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext, java.util.Map)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer#
+     * doBeforeProcessDataModelGroup(mx.infotec.dads.kukulkan.metamodel.
+     * foundation.GeneratorContext, java.util.Map)
      */
     @Override
     public void doBeforeProcessDataModelGroup(GeneratorContext context, Map<String, Object> model) {
@@ -92,8 +96,15 @@ public class FrontEndLayer extends AngularJsSpringLayer {
         fillIndex(context.getProjectConfiguration(), model, context.getDomainModel());
     }
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
+     * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
+     * ProjectConfiguration, java.util.Collection, java.util.Map,
+     * java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * java.lang.String)
      */
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
@@ -116,57 +127,78 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill nav bar.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param domainModel the domain model
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param domainModel
+     *            the domain model
      */
     private void fillNavBar(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService.fillModel(domainModel, pConf.getId(), "rest-spring-jpa/frontEnd/navbar.html.ftl", model,
-                WEB_APP_NAV_BAR, "/navbar.html", createDefaultAceEditor(HTML), pConf.getOutputDir());
+        templateService
+                .createGeneratedElement(pConf.getId(), "rest-spring-jpa/frontEnd/navbar.html.ftl", model,
+                        WEB_APP_NAV_BAR, "/navbar.html", createDefaultAceEditor(HTML), pConf.getOutputDir())
+                .ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
      * Fill idioma global en js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param domainModel the domain model
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param domainModel
+     *            the domain model
      */
     private void fillIdiomaGlobalEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService.fillModel(domainModel, pConf.getId(), "rest-spring-jpa/frontEnd/i18n/en/global.json.ftl", model,
-                WEB_APP_I18N, "/en/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir());
+        templateService
+                .createGeneratedElement(pConf.getId(), "rest-spring-jpa/frontEnd/i18n/en/global.json.ftl", model,
+                        WEB_APP_I18N, "/en/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir())
+                .ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
      * Fill idioma global es js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param domainModel the domain model
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param domainModel
+     *            the domain model
      */
     private void fillIdiomaGlobalEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService.fillModel(domainModel, pConf.getId(), "rest-spring-jpa/frontEnd/i18n/es/global.json.ftl", model,
-                WEB_APP_I18N, "/es/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir());
+        templateService
+                .createGeneratedElement(pConf.getId(), "rest-spring-jpa/frontEnd/i18n/es/global.json.ftl", model,
+                        WEB_APP_I18N, "/es/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir())
+                .ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
      * Fill index.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param domainModel the domain model
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param domainModel
+     *            the domain model
      */
     private void fillIndex(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService.fillModel(domainModel, pConf.getId(), "common/index.html.ftl", model, WEB_INDEX, "/index.html",
-                createDefaultAceEditor(HTML), pConf.getOutputDir());
+        templateService.createGeneratedElement(pConf.getId(), "common/index.html.ftl", model, WEB_INDEX, "/index.html",
+                createDefaultAceEditor(HTML), pConf.getOutputDir()).ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
      * Fill entity controller js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -178,9 +210,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill idioma es js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillIdiomaEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
         LOGGER.info("fillIdiomaEsJs {}", IDIOMA_JS);
@@ -190,9 +225,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill idioma en js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillIdiomaEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
         LOGGER.info("fillIdiomaEnJs {}", IDIOMA_JS);
@@ -202,9 +240,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity state js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -215,9 +256,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity service js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -228,9 +272,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity search service js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -241,9 +288,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity html.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
         LOGGER.info("fillEntityHtml {}", ENTITY_HTML);
@@ -253,9 +303,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity dialog html.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -266,9 +319,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity dialog controller js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -279,9 +335,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity detail controller js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -292,9 +351,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity detail html.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -305,9 +367,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity delete dialog html.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -319,9 +384,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Fill entity delete dialog controller js.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
      */
     private void fillEntityDeleteDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
@@ -333,12 +401,18 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Save front end template.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
-     * @param templateLocation the template location
-     * @param templateName the template name
-     * @param isPlural the is plural
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
+     * @param templateLocation
+     *            the template location
+     * @param templateName
+     *            the template name
+     * @param isPlural
+     *            the is plural
      */
     private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement, String templateLocation, String templateName, boolean isPlural) {
@@ -348,13 +422,20 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     /**
      * Save front end template.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
-     * @param templateLocation the template location
-     * @param templateName the template name
-     * @param isPlural the is plural
-     * @param languageType the language type
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
+     * @param templateLocation
+     *            the template location
+     * @param templateName
+     *            the template name
+     * @param isPlural
+     *            the is plural
+     * @param languageType
+     *            the language type
      */
     private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement, String templateLocation, String templateName, boolean isPlural,
@@ -364,30 +445,40 @@ public class FrontEndLayer extends AngularJsSpringLayer {
         if (isPlural) {
             entityName = camelCaseToHyphens(dmElement.getCamelCasePluralFormat());
         }
-        templateService.fillModel(dmElement, pConf.getId(), templateLocation + templateName, model, WEB_APP_ENTITIES,
-                fileNamingConvention + "/" + entityName + TemplateFormatter.formatNameTemplate(templateName),
-                createDefaultAceEditor(languageType), pConf.getOutputDir());
+        templateService
+                .createGeneratedElement(pConf.getId(), templateLocation + templateName, model, WEB_APP_ENTITIES,
+                        fileNamingConvention + "/" + entityName + TemplateFormatter.formatNameTemplate(templateName),
+                        createDefaultAceEditor(languageType), pConf.getOutputDir())
+                .ifPresent(dmElement::addGeneratedElement);
     }
 
     /**
      * Save internationalization template.
      *
-     * @param pConf the conf
-     * @param model the model
-     * @param dmElement the dm element
-     * @param templateLocation the template location
-     * @param templateName the template name
-     * @param idiomaKey the idioma key
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
+     * @param templateLocation
+     *            the template location
+     * @param templateName
+     *            the template name
+     * @param idiomaKey
+     *            the idioma key
      */
     private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement, String templateLocation, String templateName, String idiomaKey) {
         String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
-        templateService.fillModel(dmElement, pConf.getId(), templateLocation + templateName, model, WEB_APP_I18N,
+        templateService.createGeneratedElement(pConf.getId(), templateLocation + templateName, model, WEB_APP_I18N,
                 idiomaKey + "/" + fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName),
-                createDefaultAceEditor(JSON), pConf.getOutputDir());
+                createDefaultAceEditor(JSON), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
      */
     @Override

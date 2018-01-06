@@ -59,21 +59,31 @@ public class DataAccessLayer extends AngularJsSpringLayer {
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DataAccessLayer.class);
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
+     * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
+     * ProjectConfiguration, java.util.Collection, java.util.Map,
+     * java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * java.lang.String)
      */
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("repositoryLayerTask for dommain");
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, pConf.getDaoLayerName()));
-        templateService.fillModel(dmElement, pConf.getId(), REST_SPRING_JPA_BACK_END_URL + "/repository.ftl",
-                propertiesMap, SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
-                        + pConf.getDaoLayerName() + "/" + dmElement.getName() + NameConventions.DAO + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir());
+        templateService.createGeneratedElement(pConf.getId(), REST_SPRING_JPA_BACK_END_URL + "/repository.ftl",
+                propertiesMap, SRC_MAIN_JAVA,
+                basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getDaoLayerName() + "/"
+                        + dmElement.getName() + NameConventions.DAO + ".java",
+                createDefaultAceEditor(JAVA), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
      */
     @Override
