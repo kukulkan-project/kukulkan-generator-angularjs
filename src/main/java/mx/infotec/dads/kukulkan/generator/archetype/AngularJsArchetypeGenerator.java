@@ -19,32 +19,32 @@ import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 @GeneratorComponent
 public class AngularJsArchetypeGenerator implements Generator {
 
-	@Autowired
-	List<ArchetypeLayer> layers;
+    @Autowired
+    List<ArchetypeLayer> layers;
 
-	@Override
-	public String getName() {
-		return LayerNameConstants.Archetype.AngularJs.GENERATOR_NAME;
-	}
+    @Override
+    public String getName() {
+        return LayerNameConstants.Archetype.AngularJs.GENERATOR_NAME;
+    }
 
-	@Override
-	public String getVersion() {
-		return "1.0.0";
-	}
+    @Override
+    public String getVersion() {
+        return "1.0.0";
+    }
 
-	@Override
-	public String getDescription() {
-		return "Angular 1.5.8 and Spring boot application";
-	}
+    @Override
+    public String getDescription() {
+        return "Angular 1.5.8 and Spring boot application";
+    }
 
-	@Override
-	public String getKeywords() {
-		return null;
-	}
+    @Override
+    public String getKeywords() {
+        return null;
+    }
 
-	@Override
-	public List<? extends Layer> getLayers() {
-		return layers;
-	}
+    @Override
+    public List<? extends Layer> getLayers() {
+        return layers;
+    }
 
 }

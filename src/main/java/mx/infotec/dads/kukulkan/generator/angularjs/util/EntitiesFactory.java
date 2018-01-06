@@ -23,9 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;

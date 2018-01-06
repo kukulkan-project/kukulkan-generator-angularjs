@@ -108,22 +108,22 @@ public class FrontEndLayer extends AngularJsSpringLayer {
 
     private void fillNavBar(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         templateService.fillModel(domainModel, pConf.getId(), "rest-spring-jpa/frontEnd/navbar.html.ftl", model,
-                WEB_APP_NAV_BAR, "/navbar.html", createDefaultAceEditor(HTML));
+                WEB_APP_NAV_BAR, "/navbar.html", createDefaultAceEditor(HTML), pConf.getOutputDir());
     }
 
     private void fillIdiomaGlobalEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         templateService.fillModel(domainModel, pConf.getId(), "rest-spring-jpa/frontEnd/i18n/en/global.json.ftl", model,
-                WEB_APP_I18N, "/en/global.json", createDefaultAceEditor(JSON));
+                WEB_APP_I18N, "/en/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir());
     }
 
     private void fillIdiomaGlobalEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         templateService.fillModel(domainModel, pConf.getId(), "rest-spring-jpa/frontEnd/i18n/es/global.json.ftl", model,
-                WEB_APP_I18N, "/es/global.json", createDefaultAceEditor(JSON));
+                WEB_APP_I18N, "/es/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir());
     }
 
     private void fillIndex(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         templateService.fillModel(domainModel, pConf.getId(), "common/index.html.ftl", model, WEB_INDEX, "/index.html",
-                createDefaultAceEditor(HTML));
+                createDefaultAceEditor(HTML), pConf.getOutputDir());
     }
 
     private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
@@ -219,7 +219,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
         }
         templateService.fillModel(dmElement, pConf.getId(), templateLocation + templateName, model, WEB_APP_ENTITIES,
                 fileNamingConvention + "/" + entityName + TemplateFormatter.formatNameTemplate(templateName),
-                createDefaultAceEditor(languageType));
+                createDefaultAceEditor(languageType), pConf.getOutputDir());
     }
 
     private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
@@ -227,7 +227,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
         String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
         templateService.fillModel(dmElement, pConf.getId(), templateLocation + templateName, model, WEB_APP_I18N,
                 idiomaKey + "/" + fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName),
-                createDefaultAceEditor(JSON));
+                createDefaultAceEditor(JSON), pConf.getOutputDir());
     }
 
     @Override

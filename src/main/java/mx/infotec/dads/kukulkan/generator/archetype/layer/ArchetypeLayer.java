@@ -15,17 +15,17 @@ import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
  */
 public abstract class ArchetypeLayer implements Layer {
 
-	@Override
-	public void process(GeneratorContext context) {
-		processLayer(context, addProjectData(context));
+    @Override
+    public void process(GeneratorContext context) {
+        processLayer(context, addProjectData(context));
 
-	}
+    }
 
-	/**
-	 * ProcessLayer method: Do generation functionalities
-	 * 
-	 * @param context
-	 * @param propertiesMap
-	 */
-	public abstract void processLayer(GeneratorContext context, Map<String, Object> propertiesMap);
+    /**
+     * ProcessLayer method: Do generation functionalities
+     * 
+     * @param context
+     * @param propertiesMap
+     */
+    public abstract void processLayer(GeneratorContext context, Map<String, Object> propertiesMap);
 }

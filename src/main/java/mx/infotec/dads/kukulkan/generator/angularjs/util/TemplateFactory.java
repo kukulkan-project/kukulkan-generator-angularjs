@@ -3,11 +3,19 @@ package mx.infotec.dads.kukulkan.generator.angularjs.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
+/**
+ * TemplateFactory for Immutable template list
+ * 
+ * @author Daniel Cortes Pichardo
+ *
+ */
 public class TemplateFactory {
 
     public static final List<String> TEMPLATE_LIST;
     static {
-        TEMPLATE_LIST = getTemplates();
+        TEMPLATE_LIST = ImmutableList.copyOf(getTemplates());
     }
 
     private TemplateFactory() {

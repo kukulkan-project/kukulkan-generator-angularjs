@@ -66,7 +66,7 @@ public class DataAccessLayer extends AngularJsSpringLayer {
         templateService.fillModel(dmElement, pConf.getId(), REST_SPRING_JPA_BACK_END_URL + "/repository.ftl",
                 propertiesMap, SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
                         + pConf.getDaoLayerName() + "/" + dmElement.getName() + NameConventions.DAO + ".java",
-                createDefaultAceEditor(JAVA));
+                createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
     @Override

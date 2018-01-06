@@ -59,7 +59,6 @@ public class BusinessLayer extends AngularJsSpringLayer {
     @Autowired
     private TemplateService templateService;
 
-
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
@@ -78,16 +77,16 @@ public class BusinessLayer extends AngularJsSpringLayer {
                 BasePathEnum.SRC_MAIN_JAVA,
                 basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/impl/"
                         + dmElement.getName() + NameConventions.SERVICE_IMPLEMENTS + ".java",
-                createDefaultAceEditor(JAVA));
+                createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
     private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
             DomainModelElement dmElement, String basePackage) {
         templateService.fillModel(dmElement, pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/service.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
-                        + pConf.getServiceLayerName() + "/" + dmElement.getName() + NameConventions.SERVICE + ".java",
-                createDefaultAceEditor(JAVA));
+                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/service.ftl", propertiesMap, BasePathEnum.SRC_MAIN_JAVA,
+                basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/"
+                        + dmElement.getName() + NameConventions.SERVICE + ".java",
+                createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
     @Override

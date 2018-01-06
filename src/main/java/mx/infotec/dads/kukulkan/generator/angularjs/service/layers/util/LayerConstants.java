@@ -1,7 +1,7 @@
 package mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util;
 
 /**
- * Layer Constants
+ * Layer Character
  * 
  * @author Daniel Cortes Pichardo
  *

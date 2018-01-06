@@ -72,9 +72,10 @@ public class WebLayer extends AngularJsSpringLayer {
                 formatToPackageStatement(true, basePackage, webLayerDotFormat));
         templateService.fillModel(dmElement, pConf.getId(),
                 LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/restResource.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/" + webLayerSlashFormat
-                        + "/" + dmElement.getName() + NameConventions.REST_CONTROLLER + ".java",
-                createDefaultAceEditor(JAVA));
+                BasePathEnum.SRC_MAIN_JAVA,
+                basePackage.replace('.', '/') + "/" + dmgName + "/" + webLayerSlashFormat + "/" + dmElement.getName()
+                        + NameConventions.REST_CONTROLLER + ".java",
+                createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
     @Override

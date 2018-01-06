@@ -76,16 +76,17 @@ public class DomainLayer extends AngularJsSpringLayer {
         templateService.fillModel(dmElement, pConf.getId(), template, model,
                 BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
                         + pConf.getDomainLayerName() + "/" + dmElement.getName() + ".java",
-                createDefaultAceEditor(JAVA));
+                createDefaultAceEditor(JAVA), pConf.getOutputDir());
     }
 
     private void fillPrimaryKey(ProjectConfiguration pConf, Map<String, Object> model, String dmgName,
             String basePackage, DomainModelElement dmElement) {
         if (dmElement.getPrimaryKey().isComposed()) {
             templateService.fillModel(dmElement, pConf.getId(), "common/primaryKey.ftl", model,
-                    BasePathEnum.SRC_MAIN_JAVA, basePackage.replace('.', '/') + "/" + dmgName + "/"
-                            + pConf.getDomainLayerName() + "/" + dmElement.getPrimaryKey().getType() + ".java",
-                    createDefaultAceEditor(JAVA));
+                    BasePathEnum.SRC_MAIN_JAVA,
+                    basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getDomainLayerName() + "/"
+                            + dmElement.getPrimaryKey().getType() + ".java",
+                    createDefaultAceEditor(JAVA), pConf.getOutputDir());
         }
     }
 
