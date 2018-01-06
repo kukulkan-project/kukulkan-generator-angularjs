@@ -9,8 +9,10 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * RestTemplate Configuration for use along with the banner generator
+ * RestTemplate Configuration for use along with the BannerServiceImpl
+ * {@link mx.infotec.dads.kukulkan.generator.integration.BannerServiceImpl#generateBanner(String)}
  * 
+ * @see mx.infotec.dads.kukulkan.generator.integration.BannerServiceImpl#generateBanner(String)
  * @author Daniel Cortes Pichardo
  *
  */
