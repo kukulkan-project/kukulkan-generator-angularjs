@@ -28,6 +28,8 @@ import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_IMPL_PROPERTY;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
+import static mx.infotec.dads.kukulkan.metamodel.util.NameConventions.SERVICE_IMPLEMENTS_LAYER_NAME;
+import static mx.infotec.dads.kukulkan.metamodel.util.NameConventions.SERVICE_LAYER_NAME;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,9 +82,9 @@ public class BusinessLayer extends AngularJsSpringLayer {
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement: {} ", basePackage);
-        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.SERVICE_LAYER_NAME));
-        propertiesMap.put(PACKAGE_IMPL_PROPERTY, formatToPackageStatement(basePackage,
-                NameConventions.SERVICE_LAYER_NAME, NameConventions.SERVICE_IMPLEMENTS_LAYER_NAME));
+        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, SERVICE_LAYER_NAME));
+        propertiesMap.put(PACKAGE_IMPL_PROPERTY,
+                formatToPackageStatement(basePackage, SERVICE_LAYER_NAME, SERVICE_IMPLEMENTS_LAYER_NAME));
         fillServiceModel(pConf, propertiesMap, dmElement, basePackage);
         fillServiceImplModel(pConf, propertiesMap, dmElement, basePackage);
     }
@@ -105,9 +107,9 @@ public class BusinessLayer extends AngularJsSpringLayer {
             DomainModelElement dmElement, String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("serviceImpl.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        String serviceImplPath = Paths.get(SERVICE_LAYER_NAME, SERVICE_IMPLEMENTS_LAYER_NAME).toString();
         Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
-                basePackage, NameConventions.SERVICE_LAYER_NAME + "/" + NameConventions.SERVICE_IMPLEMENTS_LAYER_NAME,
-                createServiceImplName(dmElement.getName()));
+                basePackage, serviceImplPath, createServiceImplName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
