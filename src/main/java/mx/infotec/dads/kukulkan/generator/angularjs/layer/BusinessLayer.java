@@ -81,8 +81,8 @@ public class BusinessLayer extends AngularJsSpringLayer {
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement: {} ", basePackage);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.SERVICE_LAYER_NAME));
-        propertiesMap.put(PACKAGE_IMPL_PROPERTY,
-                formatToPackageStatement(basePackage, NameConventions.SERVICE_LAYER_NAME, "impl"));
+        propertiesMap.put(PACKAGE_IMPL_PROPERTY, formatToPackageStatement(basePackage,
+                NameConventions.SERVICE_LAYER_NAME, NameConventions.SERVICE_IMPLEMENTS_LAYER_NAME));
         fillServiceModel(pConf, propertiesMap, dmElement, basePackage);
         fillServiceImplModel(pConf, propertiesMap, dmElement, basePackage);
     }
@@ -106,7 +106,8 @@ public class BusinessLayer extends AngularJsSpringLayer {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("serviceImpl.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
-                basePackage, NameConventions.SERVICE_LAYER_NAME + "/impl", createServiceImplName(dmElement.getName()));
+                basePackage, NameConventions.SERVICE_LAYER_NAME + "/" + NameConventions.SERVICE_IMPLEMENTS_LAYER_NAME,
+                createServiceImplName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
