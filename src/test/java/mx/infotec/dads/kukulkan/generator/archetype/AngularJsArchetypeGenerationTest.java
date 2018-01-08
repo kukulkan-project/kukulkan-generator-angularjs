@@ -23,6 +23,8 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
+import java.nio.file.Paths;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,16 +62,12 @@ public class AngularJsArchetypeGenerationTest {
     @Test
     public void generationService() {
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("amor");
+        pConf.setId("refac");
         pConf.setGroupId("mx.infotec.dads.mongo");
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.mongo");
         pConf.setYear("2017");
-        pConf.setAuthor("KUKULKAN");
-        pConf.setWebLayerName("web.rest");
-        pConf.setServiceLayerName("service");
-        pConf.setDaoLayerName("repository");
-        pConf.setDomainLayerName("domain");
+        pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
         pConf.setMongoDb(true);
 
         GeneratorContext genCtx = new GeneratorContext(pConf);

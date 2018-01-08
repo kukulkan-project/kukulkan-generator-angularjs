@@ -23,14 +23,15 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
-import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
-import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceName;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceDotBySlash;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceSlashByDot;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_SIMPLE_FORMAT_PROPERTY;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 
@@ -39,12 +40,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
+import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
@@ -79,17 +84,18 @@ public class WebLayer extends AngularJsSpringLayer {
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement {} ", basePackage);
-        String webLayerDotFormat = replaceSlashByDot(pConf.getWebLayerName());
-        String webLayerSlashFormat = replaceDotBySlash(pConf.getWebLayerName());
+        String webLayerDotFormat = replaceSlashByDot(NameConventions.REST_LAYER_NAME);
+        String webLayerSlashFormat = replaceDotBySlash(NameConventions.REST_LAYER_NAME);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, webLayerDotFormat));
         propertiesMap.put(PACKAGE_SIMPLE_FORMAT_PROPERTY,
                 formatToPackageStatement(true, basePackage, webLayerDotFormat));
-        templateService.createGeneratedElement(pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/restResource.ftl", propertiesMap,
-                BasePathEnum.SRC_MAIN_JAVA,
-                basePackage.replace('.', '/') + "/" + dmgName + "/" + webLayerSlashFormat + "/" + dmElement.getName()
-                        + NameConventions.REST_CONTROLLER + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
+        Path templateFilePath = TemplateEnum.BACK_END.getLocation("restResource.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+                basePackage, webLayerSlashFormat, createServiceName(dmElement.getName()));
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.JAVA);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /*

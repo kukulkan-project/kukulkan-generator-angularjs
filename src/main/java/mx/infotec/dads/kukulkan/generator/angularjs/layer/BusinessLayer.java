@@ -23,29 +23,32 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
-import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
-import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceImplName;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceName;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_IMPL_PROPERTY;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
-import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratedElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
+import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
@@ -77,11 +80,11 @@ public class BusinessLayer extends AngularJsSpringLayer {
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement: {} ", basePackage);
-        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, pConf.getServiceLayerName()));
+        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.SERVICE_LAYER_NAME));
         propertiesMap.put(PACKAGE_IMPL_PROPERTY,
-                formatToPackageStatement(basePackage, pConf.getServiceLayerName(), "impl"));
-        fillServiceModel(pConf, propertiesMap, dmgName, dmElement, basePackage);
-        fillServiceImplModel(pConf, propertiesMap, dmgName, dmElement, basePackage);
+                formatToPackageStatement(basePackage, NameConventions.SERVICE_LAYER_NAME, "impl"));
+        fillServiceModel(pConf, propertiesMap, dmElement, basePackage);
+        fillServiceImplModel(pConf, propertiesMap, dmElement, basePackage);
     }
 
     /**
@@ -98,15 +101,15 @@ public class BusinessLayer extends AngularJsSpringLayer {
      * @param basePackage
      *            the base package
      */
-    private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
+    private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap,
             DomainModelElement dmElement, String basePackage) {
-        
-        
-        EntitiesFactory.createModelContext(LayerConstants.REST_SPRING_JPA_BACK_END_URL);
-        
-        templateService
-                .createGeneratedElement()
-                .ifPresent(dmElement::addGeneratedElement);
+        Path templateFilePath = TemplateEnum.BACK_END.getLocation("serviceImpl.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+                basePackage, NameConventions.SERVICE_LAYER_NAME + "/impl", createServiceImplName(dmElement.getName()));
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.JAVA);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /**
@@ -123,14 +126,15 @@ public class BusinessLayer extends AngularJsSpringLayer {
      * @param basePackage
      *            the base package
      */
-    private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, String dmgName,
+    private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap,
             DomainModelElement dmElement, String basePackage) {
-        templateService.createGeneratedElement(pConf.getId(),
-                LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/service.ftl", propertiesMap, BasePathEnum.SRC_MAIN_JAVA,
-                basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/"
-                        + dmElement.getName() + NameConventions.SERVICE + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
-        ;
+        Path templateFilePath = TemplateEnum.BACK_END.getLocation("service.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+                basePackage, NameConventions.SERVICE_LAYER_NAME, createServiceName(dmElement.getName()));
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.JAVA);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /*

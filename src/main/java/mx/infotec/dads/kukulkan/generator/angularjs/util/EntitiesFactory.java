@@ -24,22 +24,19 @@
 package mx.infotec.dads.kukulkan.generator.angularjs.util;
 
 import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
-import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Map;
 
-import freemarker.cache.TemplateLoader;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.metamodel.context.KukulkanContext;
+import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
-import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
@@ -56,7 +53,7 @@ public class EntitiesFactory {
     private EntitiesFactory() {
 
     }
-    
+
     /**
      * Creates a new Entities object.
      *
@@ -99,7 +96,8 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @param dst the dst
+     * @param dst
+     *            the dst
      * @return the data store
      */
     public static DataStore createTestDataStore(DataStoreType dst) {
@@ -118,7 +116,8 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @param dst the dst
+     * @param dst
+     *            the dst
      * @return the data store
      */
     public static DataStore createAtlasDataStore(DataStoreType dst) {
@@ -137,7 +136,8 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @param dst the dst
+     * @param dst
+     *            the dst
      * @return the data store
      */
     public static DataStore createMysqlTestDataStore(DataStoreType dst) {
@@ -156,7 +156,8 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @param dst the dst
+     * @param dst
+     *            the dst
      * @return the data store
      */
     public static DataStore createGrammarDataStore(DataStoreType dst) {
@@ -223,7 +224,8 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @param ruleType the rule type
+     * @param ruleType
+     *            the rule type
      * @return the rule
      */
     public static Rule createOsRule(RuleType ruleType) {
@@ -237,7 +239,8 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @param ruleType the rule type
+     * @param ruleType
+     *            the rule type
      * @return the rule
      */
     public static Rule createEsRule(RuleType ruleType) {
@@ -247,23 +250,42 @@ public class EntitiesFactory {
         esRule.setRuleType(ruleType);
         return esRule;
     }
-    
-    public static ModelContext createModelContext(String layerConstant, String templateName){
-        Path relativeTemplatePath = Paths.get(layerConstant, templateName);
-        Path packagePath = convertPackageToPath(basePackage);
-        pConf.getId(), LayerConstants.REST_SPRING_JPA_BACK_END_URL + "/serviceImpl.ftl",
-        propertiesMap, BasePathEnum.SRC_MAIN_JAVA,
-        basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getServiceLayerName() + "/impl/"
-                + dmElement.getName() + NameConventions.SERVICE_IMPLEMENTS + ".java",
-        createDefaultAceEditor(JAVA), pConf.getOutputDir()
+
+    public static ModelContext createModelContext(Map<String, Object> propertiesMap, Path realFilePath,
+            Path relativeFilePath, Path templatePath, LanguageType laguageType) {
         ModelContext.Builder builder = new ModelContext.Builder();
-        
+        builder.editor(createDefaultAceEditor(laguageType));
+        builder.model(propertiesMap);
+        builder.realFilePath(realFilePath);
+        builder.relativeFilePath(relativeFilePath);
+        builder.templatePath(templatePath);
         return builder.build();
-        
+
+    }
+
+
+    public static String createRestResourceName(String name) {
+        return name + NameConventions.REST_CONTROLLER + NameConventions.JAVA_EXTENSION;
     }
     
-    private static String convertPackageToPath(String basePackage){
-        
+    public static String createServiceName(String name) {
+        return name + NameConventions.SERVICE + NameConventions.JAVA_EXTENSION;
+    }
+
+    public static String createRepositoryName(String name) {
+        return name + NameConventions.DAO + NameConventions.JAVA_EXTENSION;
+    }
+    
+    public static String createPrimaryKeyName(String name) {
+        return name + NameConventions.DAO + NameConventions.JAVA_EXTENSION;
+    }
+
+    public static String createDomainName(String name) {
+        return name + NameConventions.JAVA_EXTENSION;
+    }
+
+    public static String createServiceImplName(String name) {
+        return name + NameConventions.SERVICE_IMPLEMENTS + NameConventions.JAVA_EXTENSION;
     }
 
 }

@@ -23,6 +23,7 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.service;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -46,7 +47,6 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.InflectorProcessor;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
@@ -86,16 +86,13 @@ public class GrammarGenerationServiceTest {
         }
         // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("kukulkanmongo");
+        pConf.setId("refactor");
         pConf.setGroupId("mx.infotec.dads.mongo");
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.mongo");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setWebLayerName("web.rest");
-        pConf.setServiceLayerName("service");
-        pConf.setDaoLayerName("repository");
-        pConf.setDomainLayerName("domain");
+        pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
         pConf.setMongoDb(true);
         pConf.setGlobalGenerationType(PKGenerationStrategy.SEQUENCE);
         // Create DataStore

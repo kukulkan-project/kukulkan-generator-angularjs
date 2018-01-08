@@ -28,6 +28,8 @@ import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 
@@ -36,11 +38,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
+import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
+import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
  * Service Layer Task.
@@ -71,9 +79,10 @@ public class DomainLayer extends AngularJsSpringLayer {
     public void visitDomainModelElement(ProjectConfiguration confg, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement for {}", basePackage);
-        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(false, basePackage, confg.getDomainLayerName()));
+        propertiesMap.put(PACKAGE_PROPERTY,
+                formatToPackageStatement(false, basePackage, NameConventions.DOMAIN_LAYER_NAME));
         fillModel(confg, propertiesMap, dmgName, basePackage, dmElement);
-        fillPrimaryKey(confg, propertiesMap, dmgName, basePackage, dmElement);
+        fillPrimaryKey(confg, propertiesMap, basePackage, dmElement);
     }
 
     /**
@@ -94,16 +103,17 @@ public class DomainLayer extends AngularJsSpringLayer {
             DomainModelElement dmElement) {
         String template = null;
         if (pConf.isMongoDb()) {
-            template = "common/model-mongo.ftl";
+            template = "model-mongo.ftl";
         } else {
-            template = "common/model.ftl";
+            template = "model.ftl";
         }
-        templateService
-                .createGeneratedElement(pConf.getId(), template, model, BasePathEnum.SRC_MAIN_JAVA,
-                        basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getDomainLayerName() + "/"
-                                + dmElement.getName() + ".java",
-                        createDefaultAceEditor(JAVA), pConf.getOutputDir())
-                .ifPresent(dmElement::addGeneratedElement);
+        Path templateFilePath = TemplateEnum.COMMON.getLocation(template);
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+                basePackage, NameConventions.DOMAIN_LAYER_NAME, EntitiesFactory.createDomainName(dmElement.getName()));
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.JAVA);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /**
@@ -120,15 +130,17 @@ public class DomainLayer extends AngularJsSpringLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillPrimaryKey(ProjectConfiguration pConf, Map<String, Object> model, String dmgName,
-            String basePackage, DomainModelElement dmElement) {
+    private void fillPrimaryKey(ProjectConfiguration pConf, Map<String, Object> model, String basePackage,
+            DomainModelElement dmElement) {
         if (dmElement.getPrimaryKey().isComposed()) {
-            templateService
-                    .createGeneratedElement(pConf.getId(), "common/primaryKey.ftl", model, BasePathEnum.SRC_MAIN_JAVA,
-                            basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getDomainLayerName() + "/"
-                                    + dmElement.getPrimaryKey().getType() + ".java",
-                            createDefaultAceEditor(JAVA), pConf.getOutputDir())
-                    .ifPresent(dmElement::addGeneratedElement);
+            Path templateFilePath = TemplateEnum.COMMON.getLocation("primaryKey.ftl");
+            Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+            Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(),
+                    BasePathEnum.SRC_MAIN_JAVA, basePackage, NameConventions.DOMAIN_LAYER_NAME,
+                    EntitiesFactory.createPrimaryKeyName(dmElement.getPrimaryKey().getType()));
+            ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                    templateFilePath, LanguageType.JAVA);
+            templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
         }
     }
 

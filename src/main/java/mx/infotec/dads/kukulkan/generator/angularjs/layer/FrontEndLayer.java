@@ -44,27 +44,32 @@ import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVASCRIPT;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JSON;
 import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_ENTITIES;
 import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_I18N;
-import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_NAV_BAR;
-import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_INDEX;
 import static mx.infotec.dads.kukulkan.metamodel.util.NameConventionFormatter.camelCaseToHyphens;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.template.TemplateLocation;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.TemplateFormatter;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 
 /**
  * Service Layer Task.
@@ -135,10 +140,13 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the domain model
      */
     private void fillNavBar(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService
-                .createGeneratedElement(pConf.getId(), "rest-spring-jpa/frontEnd/navbar.html.ftl", model,
-                        WEB_APP_NAV_BAR, "/navbar.html", createDefaultAceEditor(HTML), pConf.getOutputDir())
-                .ifPresent(domainModel::addGeneratedElement);
+        Path templateFilePath = TemplateEnum.FRONT_END.getLocation("navbar.html.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                BasePathEnum.WEB_APP_NAV_BAR.getPath(), "navbar.html");
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.HTML);
+        templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
@@ -152,10 +160,14 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the domain model
      */
     private void fillIdiomaGlobalEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService
-                .createGeneratedElement(pConf.getId(), "rest-spring-jpa/frontEnd/i18n/en/global.json.ftl", model,
-                        WEB_APP_I18N, "/en/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir())
-                .ifPresent(domainModel::addGeneratedElement);
+
+        Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_EN.getLocation("global.json.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.JSON);
+        templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
@@ -169,10 +181,13 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the domain model
      */
     private void fillIdiomaGlobalEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService
-                .createGeneratedElement(pConf.getId(), "rest-spring-jpa/frontEnd/i18n/es/global.json.ftl", model,
-                        WEB_APP_I18N, "/es/global.json", createDefaultAceEditor(JSON), pConf.getOutputDir())
-                .ifPresent(domainModel::addGeneratedElement);
+        Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_ES.getLocation("global.json.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.HTML);
+        templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
@@ -186,8 +201,13 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the domain model
      */
     private void fillIndex(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        templateService.createGeneratedElement(pConf.getId(), "common/index.html.ftl", model, WEB_INDEX, "/index.html",
-                createDefaultAceEditor(HTML), pConf.getOutputDir()).ifPresent(domainModel::addGeneratedElement);
+        Path templateFilePath = TemplateEnum.COMMON.getLocation("index.html.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(), BasePathEnum.WEB_INDEX.getPath(),
+                "index.html");
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.HTML);
+        templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
     }
 
     /**
@@ -203,7 +223,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS, false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS,
+                false);
 
     }
 
@@ -219,7 +240,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillIdiomaEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
         LOGGER.info("fillIdiomaEsJs {}", IDIOMA_JS);
-        saveInternationalizationTemplate(pConf, model, dmElement, FRONT_END_I18N_LOCATION_ES, IDIOMA_JS, "es");
+        saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_ES, IDIOMA_JS,
+                "es");
     }
 
     /**
@@ -234,7 +256,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillIdiomaEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
         LOGGER.info("fillIdiomaEnJs {}", IDIOMA_JS);
-        saveInternationalizationTemplate(pConf, model, dmElement, FRONT_END_I18N_LOCATION_EN, IDIOMA_JS, "en");
+        saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_EN, IDIOMA_JS,
+                "en");
     }
 
     /**
@@ -250,7 +273,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityStateJs {}", ENTITY_STATE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS, false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS, false);
     }
 
     /**
@@ -266,7 +289,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS, false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
+                false);
     }
 
     /**
@@ -282,7 +306,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntitySearchServiceJs {}", ENTITY_SEARCH_SERVICE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_SEARCH_SERVICE_JS, false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                ENTITY_SEARCH_SERVICE_JS, false);
     }
 
     /**
@@ -297,7 +322,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
         LOGGER.info("fillEntityHtml {}", ENTITY_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_HTML, true, HTML);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML),
+                ENTITY_HTML, true, HTML);
     }
 
     /**
@@ -313,7 +339,9 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_DIALOG_HTML, false, HTML);
+        saveFrontEndTemplate(pConf, model, dmElement,
+                TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
+                HTML);
     }
 
     /**
@@ -329,7 +357,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_DIALOG_CONTROLLER_JS, false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                ENTITY_DIALOG_CONTROLLER_JS, false);
     }
 
     /**
@@ -345,7 +374,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityDetailControllerJs {}", ENTITY_DETAIL_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_DETAIL_CONTROLLER_JS, false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                ENTITY_DETAIL_CONTROLLER_JS, false);
     }
 
     /**
@@ -361,7 +391,9 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityDetailHtml {}", LayerConstants.ENTITY_DETAIL_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_DETAIL_HTML, false, HTML);
+        saveFrontEndTemplate(pConf, model, dmElement,
+                TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DETAIL_HTML), ENTITY_DETAIL_HTML, false,
+                HTML);
     }
 
     /**
@@ -377,8 +409,9 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityDeleteDialogHtml {}", ENTITY_DELETE_DIALOG_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_DELETE_DIALOG_HTML, false,
-                HTML);
+        saveFrontEndTemplate(pConf, model, dmElement,
+                TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DELETE_DIALOG_HTML),
+                ENTITY_DELETE_DIALOG_HTML, false, HTML);
     }
 
     /**
@@ -394,8 +427,8 @@ public class FrontEndLayer extends AngularJsSpringLayer {
     private void fillEntityDeleteDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             DomainModelElement dmElement) {
         LOGGER.info("fillEntityDeleteDialogControllerJs {}", ENTITY_DELETE_DIALOG_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, FRONT_END_ENTITIES_LOCATION, ENTITY_DELETE_DIALOG_CONTROLLER_JS,
-                false);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                ENTITY_DELETE_DIALOG_CONTROLLER_JS, false);
     }
 
     /**
@@ -415,8 +448,9 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the is plural
      */
     private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement, String templateLocation, String templateName, boolean isPlural) {
-        saveFrontEndTemplate(pConf, model, dmElement, templateLocation, templateName, isPlural, JAVASCRIPT);
+            DomainModelElement dmElement, TemplateEnum templateLocation, String templateName, boolean isPlural) {
+        saveFrontEndTemplate(pConf, model, dmElement, templateLocation.getLocation(templateName), templateName,
+                isPlural, JAVASCRIPT);
     }
 
     /**
@@ -438,18 +472,20 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the language type
      */
     private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement, String templateLocation, String templateName, boolean isPlural,
+            DomainModelElement dmElement, Path templateFilePath, String templateName, boolean isPlural,
             LanguageType languageType) {
         String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
         String entityName = fileNamingConvention;
         if (isPlural) {
             entityName = camelCaseToHyphens(dmElement.getCamelCasePluralFormat());
         }
-        templateService
-                .createGeneratedElement(pConf.getId(), templateLocation + templateName, model, WEB_APP_ENTITIES,
-                        fileNamingConvention + "/" + entityName + TemplateFormatter.formatNameTemplate(templateName),
-                        createDefaultAceEditor(languageType), pConf.getOutputDir())
-                .ifPresent(dmElement::addGeneratedElement);
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                BasePathEnum.WEB_APP_ENTITIES.getPath(), fileNamingConvention,
+                entityName + TemplateFormatter.formatNameTemplate(templateName));
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateFilePath, languageType);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /**
@@ -469,11 +505,15 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the idioma key
      */
     private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement, String templateLocation, String templateName, String idiomaKey) {
+            DomainModelElement dmElement, TemplateEnum templateLocation, String templateName, String idiomaKey) {
         String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
-        templateService.createGeneratedElement(pConf.getId(), templateLocation + templateName, model, WEB_APP_I18N,
-                idiomaKey + "/" + fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName),
-                createDefaultAceEditor(JSON), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
+                fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
+                templateLocation.getLocation(templateName), LanguageType.JSON);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /*

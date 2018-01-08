@@ -25,11 +25,14 @@ package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
 import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.REST_SPRING_JPA_BACK_END_URL;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceName;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
 import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.SRC_MAIN_JAVA;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 
@@ -38,10 +41,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
+import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**
@@ -73,12 +82,14 @@ public class DataAccessLayer extends AngularJsSpringLayer {
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
         LOGGER.debug("repositoryLayerTask for dommain");
-        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, pConf.getDaoLayerName()));
-        templateService.createGeneratedElement(pConf.getId(), REST_SPRING_JPA_BACK_END_URL + "/repository.ftl",
-                propertiesMap, SRC_MAIN_JAVA,
-                basePackage.replace('.', '/') + "/" + dmgName + "/" + pConf.getDaoLayerName() + "/"
-                        + dmElement.getName() + NameConventions.DAO + ".java",
-                createDefaultAceEditor(JAVA), pConf.getOutputDir()).ifPresent(dmElement::addGeneratedElement);
+        propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.DAO_LAYER_NAME));
+        Path templateFilePath = TemplateEnum.BACK_END.getLocation("repository.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+                basePackage, NameConventions.DAO_LAYER_NAME, EntitiesFactory.createRepositoryName(dmElement.getName()));
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.JAVA);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /*
