@@ -84,10 +84,6 @@ public class EntitiesFactory {
         pConf.setPackaging("");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setWebLayerName("rest");
-        pConf.setServiceLayerName("service");
-        pConf.setDaoLayerName("repository");
-        pConf.setDomainLayerName("model");
         pConf.setGroupId("mx.infotec.dads");
         pConf.setPackaging("mx.infotec.dads.conacyt");
         return new KukulkanContext(pConf, "");

@@ -23,7 +23,7 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceName;
+import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createRestResourceName;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceDotBySlash;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceSlashByDot;
@@ -92,7 +92,7 @@ public class WebLayer extends AngularJsSpringLayer {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("restResource.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
-                basePackage, webLayerSlashFormat, createServiceName(dmElement.getName()));
+                basePackage, webLayerSlashFormat, createRestResourceName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
