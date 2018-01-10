@@ -26,6 +26,7 @@ package mx.infotec.dads.kukulkan.generator.archetype.layer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Autowired
     private BannerService bannerService;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#getName()
      */
     @Override
@@ -62,8 +65,12 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         return LayerNameConstants.Archetype.AngularJs.LAYER_NAME;
     }
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer#processLayer(mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext, java.util.Map)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer#
+     * processLayer(mx.infotec.dads.kukulkan.metamodel.foundation.
+     * GeneratorContext, java.util.Map)
      */
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
@@ -76,9 +83,12 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Creates the to save path.
      *
-     * @param context the context
-     * @param template the template
-     * @param outputPath the output path
+     * @param context
+     *            the context
+     * @param template
+     *            the template
+     * @param outputPath
+     *            the output path
      * @return the path
      */
     private Path createToSavePath(GeneratorContext context, String template, Path outputPath) {
@@ -89,10 +99,14 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Process template.
      *
-     * @param context the context
-     * @param propertiesMap the properties map
-     * @param template the template
-     * @param toSave the to save
+     * @param context
+     *            the context
+     * @param propertiesMap
+     *            the properties map
+     * @param template
+     *            the template
+     * @param toSave
+     *            the to save
      */
     private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, String template,
             Path toSave) {
@@ -109,9 +123,12 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Creates the banner.
      *
-     * @param context the context
-     * @param template the template
-     * @param toSave the to save
+     * @param context
+     *            the context
+     * @param template
+     *            the template
+     * @param toSave
+     *            the to save
      */
     private void createBanner(GeneratorContext context, String template, Path toSave) {
         Optional<String> generateBanner = bannerService.generateBanner(context.getProjectConfiguration().getId());
@@ -125,10 +142,14 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Creates the path.
      *
-     * @param template the template
-     * @param packaging the packaging
-     * @param projectid the projectid
-     * @param outputPath the output path
+     * @param template
+     *            the template
+     * @param packaging
+     *            the packaging
+     * @param projectid
+     *            the projectid
+     * @param outputPath
+     *            the output path
      * @return the path
      */
     private Path createPath(String template, String packaging, String projectid, Path outputPath) {
@@ -143,11 +164,15 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Creates the output path.
      *
-     * @param projectid the projectid
-     * @param targetPath the target path
+     * @param projectid
+     *            the projectid
+     * @param targetPath
+     *            the target path
      * @return the path
      */
     private Path createOutputPath(String projectid, Path targetPath) {
+        Objects.requireNonNull(projectid, "project id cannot be null");
+        Objects.requireNonNull(targetPath, "targetPath cannot be null");
         if (targetPath.getFileName().toString().contains("Kukulkan")) {
             String output = projectid.substring(0, 1).toUpperCase() + projectid.substring(1);
             return Paths.get(targetPath.getParent().toString(), output + "App.java");
@@ -159,10 +184,14 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Creates the template path.
      *
-     * @param projectid the projectid
-     * @param newPackaging the new packaging
-     * @param parent the parent
-     * @param outputPath the output path
+     * @param projectid
+     *            the projectid
+     * @param newPackaging
+     *            the new packaging
+     * @param parent
+     *            the parent
+     * @param outputPath
+     *            the output path
      * @return the string
      */
     private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath) {
@@ -173,7 +202,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     /**
      * Checks if is ftl file.
      *
-     * @param template the template
+     * @param template
+     *            the template
      * @return true, if is ftl file
      */
     private boolean isFtlFile(String template) {
