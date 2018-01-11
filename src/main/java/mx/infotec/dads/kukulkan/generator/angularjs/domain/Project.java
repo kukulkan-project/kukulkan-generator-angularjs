@@ -30,115 +30,91 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import mx.infotec.dads.kukulkan.metamodel.foundation.ArchetypeType;
-
 
 /**
  * A Project.
  */
 
-@Document(collection = "project")
 public class Project implements Serializable {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** The id. */
-    @Id
     private String id;
 
     /** The project id. */
     @NotNull
     @Size(min = 3)
-    @Field("project_id")
     private String projectId;
 
     /** The app name. */
     @NotNull
     @Size(min = 3)
-    @Field("app_name")
     private String appName;
 
     /** The author. */
     @NotNull
     @Size(min = 3)
-    @Field("author")
     private String author;
 
     /** The version. */
     @NotNull
     @Size(min = 3)
-    @Field("version")
     private String version;
 
     /** The year. */
     @NotNull
     @Size(min = 3)
     @Pattern(regexp = "^[0-9]+")
-    @Field("year")
     private String year;
 
     /** The group id. */
     @NotNull
-    @Field("group_id")
     private String groupId;
 
     /** The packaging. */
     @NotNull
-    @Field("packaging")
     private String packaging;
 
     /** The data store. */
     @NotNull
-    @Field("data_store")
-    @DBRef
     private DataStore dataStore;
 
     /** The dao layer name. */
     @NotNull
     @Size(min = 3)
-    @Field("dao_layer_name")
     private String daoLayerName;
 
     /** The domain layer name. */
     @NotNull
     @Size(min = 3)
-    @Field("domain_layer_name")
     private String domainLayerName;
 
     /** The service layer name. */
     @NotNull
     @Size(min = 3)
-    @Field("service_layer_name")
     private String serviceLayerName;
 
     /** The exception layer name. */
     @NotNull
     @Size(min = 3)
-    @Field("exception_layer_name")
     private String exceptionLayerName;
 
     /** The web layer name. */
     @NotNull
-    @Field("web_layer_name")
     private String webLayerName;
 
     /** The file. */
-    @Field("file")
     private byte[] file;
 
     /** The file content type. */
-    @Field("content_type")
     private String fileContentType;
 
     /** The archetype. */
     @NotNull
-    @Field("archetype")
     private ArchetypeType archetype;
 
     /**
@@ -153,7 +129,8 @@ public class Project implements Serializable {
     /**
      * Sets the id.
      *
-     * @param id the new id
+     * @param id
+     *            the new id
      */
     public void setId(String id) {
         this.id = id;
@@ -171,7 +148,8 @@ public class Project implements Serializable {
     /**
      * Project id.
      *
-     * @param projectId the project id
+     * @param projectId
+     *            the project id
      * @return the project
      */
     public Project projectId(String projectId) {
@@ -182,7 +160,8 @@ public class Project implements Serializable {
     /**
      * Sets the project id.
      *
-     * @param projectId the new project id
+     * @param projectId
+     *            the new project id
      */
     public void setProjectId(String projectId) {
         this.projectId = projectId;
@@ -200,7 +179,8 @@ public class Project implements Serializable {
     /**
      * App name.
      *
-     * @param appName the app name
+     * @param appName
+     *            the app name
      * @return the project
      */
     public Project appName(String appName) {
@@ -211,7 +191,8 @@ public class Project implements Serializable {
     /**
      * Sets the app name.
      *
-     * @param appName the new app name
+     * @param appName
+     *            the new app name
      */
     public void setAppName(String appName) {
         this.appName = appName;
@@ -229,7 +210,8 @@ public class Project implements Serializable {
     /**
      * Author.
      *
-     * @param author the author
+     * @param author
+     *            the author
      * @return the project
      */
     public Project author(String author) {
@@ -240,7 +222,8 @@ public class Project implements Serializable {
     /**
      * Sets the author.
      *
-     * @param author the new author
+     * @param author
+     *            the new author
      */
     public void setAuthor(String author) {
         this.author = author;
@@ -258,7 +241,8 @@ public class Project implements Serializable {
     /**
      * Version.
      *
-     * @param version the version
+     * @param version
+     *            the version
      * @return the project
      */
     public Project version(String version) {
@@ -269,7 +253,8 @@ public class Project implements Serializable {
     /**
      * Sets the version.
      *
-     * @param version the new version
+     * @param version
+     *            the new version
      */
     public void setVersion(String version) {
         this.version = version;
@@ -287,7 +272,8 @@ public class Project implements Serializable {
     /**
      * Year.
      *
-     * @param year the year
+     * @param year
+     *            the year
      * @return the project
      */
     public Project year(String year) {
@@ -298,7 +284,8 @@ public class Project implements Serializable {
     /**
      * Sets the year.
      *
-     * @param year the new year
+     * @param year
+     *            the new year
      */
     public void setYear(String year) {
         this.year = year;
@@ -316,7 +303,8 @@ public class Project implements Serializable {
     /**
      * Group id.
      *
-     * @param groupId the group id
+     * @param groupId
+     *            the group id
      * @return the project
      */
     public Project groupId(String groupId) {
@@ -327,7 +315,8 @@ public class Project implements Serializable {
     /**
      * Sets the group id.
      *
-     * @param groupId the new group id
+     * @param groupId
+     *            the new group id
      */
     public void setGroupId(String groupId) {
         this.groupId = groupId;
@@ -345,7 +334,8 @@ public class Project implements Serializable {
     /**
      * Packaging.
      *
-     * @param packaging the packaging
+     * @param packaging
+     *            the packaging
      * @return the project
      */
     public Project packaging(String packaging) {
@@ -356,7 +346,8 @@ public class Project implements Serializable {
     /**
      * Sets the packaging.
      *
-     * @param packaging the new packaging
+     * @param packaging
+     *            the new packaging
      */
     public void setPackaging(String packaging) {
         this.packaging = packaging;
@@ -374,7 +365,8 @@ public class Project implements Serializable {
     /**
      * Data store.
      *
-     * @param dataStore the data store
+     * @param dataStore
+     *            the data store
      * @return the project
      */
     public Project dataStore(DataStore dataStore) {
@@ -385,7 +377,8 @@ public class Project implements Serializable {
     /**
      * Sets the data stor.
      *
-     * @param dataStore the new data stor
+     * @param dataStore
+     *            the new data stor
      */
     public void setDataStor(DataStore dataStore) {
         this.dataStore = dataStore;
@@ -403,7 +396,8 @@ public class Project implements Serializable {
     /**
      * Dao layer name.
      *
-     * @param daoLayerName the dao layer name
+     * @param daoLayerName
+     *            the dao layer name
      * @return the project
      */
     public Project daoLayerName(String daoLayerName) {
@@ -414,7 +408,8 @@ public class Project implements Serializable {
     /**
      * Sets the dao layer name.
      *
-     * @param daoLayerName the new dao layer name
+     * @param daoLayerName
+     *            the new dao layer name
      */
     public void setDaoLayerName(String daoLayerName) {
         this.daoLayerName = daoLayerName;
@@ -432,7 +427,8 @@ public class Project implements Serializable {
     /**
      * Domain layer name.
      *
-     * @param domainLayerName the domain layer name
+     * @param domainLayerName
+     *            the domain layer name
      * @return the project
      */
     public Project domainLayerName(String domainLayerName) {
@@ -443,7 +439,8 @@ public class Project implements Serializable {
     /**
      * Sets the domain layer name.
      *
-     * @param domainLayerName the new domain layer name
+     * @param domainLayerName
+     *            the new domain layer name
      */
     public void setDomainLayerName(String domainLayerName) {
         this.domainLayerName = domainLayerName;
@@ -461,7 +458,8 @@ public class Project implements Serializable {
     /**
      * Service layer name.
      *
-     * @param serviceLayerName the service layer name
+     * @param serviceLayerName
+     *            the service layer name
      * @return the project
      */
     public Project serviceLayerName(String serviceLayerName) {
@@ -472,7 +470,8 @@ public class Project implements Serializable {
     /**
      * Sets the service layer name.
      *
-     * @param serviceLayerName the new service layer name
+     * @param serviceLayerName
+     *            the new service layer name
      */
     public void setServiceLayerName(String serviceLayerName) {
         this.serviceLayerName = serviceLayerName;
@@ -490,7 +489,8 @@ public class Project implements Serializable {
     /**
      * Exception layer name.
      *
-     * @param exceptionLayerName the exception layer name
+     * @param exceptionLayerName
+     *            the exception layer name
      * @return the project
      */
     public Project exceptionLayerName(String exceptionLayerName) {
@@ -501,7 +501,8 @@ public class Project implements Serializable {
     /**
      * Sets the exception layer name.
      *
-     * @param exceptionLayerName the new exception layer name
+     * @param exceptionLayerName
+     *            the new exception layer name
      */
     public void setExceptionLayerName(String exceptionLayerName) {
         this.exceptionLayerName = exceptionLayerName;
@@ -519,7 +520,8 @@ public class Project implements Serializable {
     /**
      * Web layer name.
      *
-     * @param webLayerName the web layer name
+     * @param webLayerName
+     *            the web layer name
      * @return the project
      */
     public Project webLayerName(String webLayerName) {
@@ -530,7 +532,8 @@ public class Project implements Serializable {
     /**
      * Sets the web layer name.
      *
-     * @param webLayerName the new web layer name
+     * @param webLayerName
+     *            the new web layer name
      */
     public void setWebLayerName(String webLayerName) {
         this.webLayerName = webLayerName;
@@ -548,7 +551,8 @@ public class Project implements Serializable {
     /**
      * Archetype type.
      *
-     * @param archetype the archetype
+     * @param archetype
+     *            the archetype
      * @return the project
      */
     public Project archetypeType(ArchetypeType archetype) {
@@ -559,13 +563,16 @@ public class Project implements Serializable {
     /**
      * Sets the archetype type.
      *
-     * @param archetype the new archetype type
+     * @param archetype
+     *            the new archetype type
      */
     public void setArchetypeType(ArchetypeType archetype) {
         this.archetype = archetype;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -595,7 +602,8 @@ public class Project implements Serializable {
     /**
      * Sets the file.
      *
-     * @param file the new file
+     * @param file
+     *            the new file
      */
     public void setFile(byte[] file) {
         this.file = file;
@@ -613,13 +621,16 @@ public class Project implements Serializable {
     /**
      * Sets the file content type.
      *
-     * @param fileContentType the new file content type
+     * @param fileContentType
+     *            the new file content type
      */
     public void setFileContentType(String fileContentType) {
         this.fileContentType = fileContentType;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -627,7 +638,9 @@ public class Project implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

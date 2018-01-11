@@ -28,12 +28,6 @@ import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 
 /**
@@ -43,54 +37,43 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
  * @author Daniel Cortes Pichardo
  */
 
-@Document(collection = "dataStores")
 public class DataStore implements Serializable {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** The id. */
-    @Id
     private String id;
 
     /** The data store type. */
-    @DBRef
     private DataStoreType dataStoreType;
 
     /** The name. */
-    @Field("name")
     private String name;
 
     // @Pattern(regexp =
     /** The url. */
     // "(?i)^(?:(?:https?|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?)(?::\\d{2,5})?(?:[/?#]\\S*)?$")
-    @Field("url")
     private String url;
-    
+
     /** The schema. */
-    @Field("schema")
     private String schema;
 
     /** The driver class. */
     @NotNull
     // @Pattern(regexp = ".*\"[[a-z]*\\.]+[A-Z][a-z]*\".*")
-    @Field("driver_class")
     private String driverClass;
 
     /** The username. */
-    @Field("username")
     private String username;
 
     /** The password. */
-    @Field("password")
     private String password;
 
     /** The table types. */
-    @Field("table_types")
     private TableTypes tableTypes;
 
     /** The script. */
-    @Field("script")
     private String script;
 
     /**
@@ -105,7 +88,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the id.
      *
-     * @param id the new id
+     * @param id
+     *            the new id
      */
     public void setId(String id) {
         this.id = id;
@@ -123,7 +107,8 @@ public class DataStore implements Serializable {
     /**
      * Name.
      *
-     * @param name the name
+     * @param name
+     *            the name
      * @return the data store
      */
     public DataStore name(String name) {
@@ -134,7 +119,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the name.
      *
-     * @param name the new name
+     * @param name
+     *            the new name
      */
     public void setName(String name) {
         this.name = name;
@@ -152,7 +138,8 @@ public class DataStore implements Serializable {
     /**
      * Url.
      *
-     * @param url the url
+     * @param url
+     *            the url
      * @return the data store
      */
     public DataStore url(String url) {
@@ -163,7 +150,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the url.
      *
-     * @param url the new url
+     * @param url
+     *            the new url
      */
     public void setUrl(String url) {
         this.url = url;
@@ -181,7 +169,8 @@ public class DataStore implements Serializable {
     /**
      * Driver class.
      *
-     * @param driverClass the driver class
+     * @param driverClass
+     *            the driver class
      * @return the data store
      */
     public DataStore driverClass(String driverClass) {
@@ -192,7 +181,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the driver class.
      *
-     * @param driverClass the new driver class
+     * @param driverClass
+     *            the new driver class
      */
     public void setDriverClass(String driverClass) {
         this.driverClass = driverClass;
@@ -210,7 +200,8 @@ public class DataStore implements Serializable {
     /**
      * Username.
      *
-     * @param username the username
+     * @param username
+     *            the username
      * @return the data store
      */
     public DataStore username(String username) {
@@ -221,7 +212,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the username.
      *
-     * @param username the new username
+     * @param username
+     *            the new username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -239,7 +231,8 @@ public class DataStore implements Serializable {
     /**
      * Password.
      *
-     * @param password the password
+     * @param password
+     *            the password
      * @return the data store
      */
     public DataStore password(String password) {
@@ -250,7 +243,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the password.
      *
-     * @param password the new password
+     * @param password
+     *            the new password
      */
     public void setPassword(String password) {
         this.password = password;
@@ -268,7 +262,8 @@ public class DataStore implements Serializable {
     /**
      * Table types.
      *
-     * @param tableTypes the table types
+     * @param tableTypes
+     *            the table types
      * @return the data store
      */
     public DataStore tableTypes(TableTypes tableTypes) {
@@ -279,7 +274,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the table types.
      *
-     * @param tableTypes the new table types
+     * @param tableTypes
+     *            the new table types
      */
     public void setTableTypes(TableTypes tableTypes) {
         this.tableTypes = tableTypes;
@@ -297,13 +293,16 @@ public class DataStore implements Serializable {
     /**
      * Sets the data store type.
      *
-     * @param dataStoreType the new data store type
+     * @param dataStoreType
+     *            the new data store type
      */
     public void setDataStoreType(DataStoreType dataStoreType) {
         this.dataStoreType = dataStoreType;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -321,7 +320,9 @@ public class DataStore implements Serializable {
         return Objects.equals(getId(), dataStore.getId());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -329,7 +330,9 @@ public class DataStore implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -351,7 +354,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the script.
      *
-     * @param script the new script
+     * @param script
+     *            the new script
      */
     public void setScript(String script) {
         this.script = script;
@@ -369,7 +373,8 @@ public class DataStore implements Serializable {
     /**
      * Sets the schema.
      *
-     * @param schema the new schema
+     * @param schema
+     *            the new schema
      */
     public void setSchema(String schema) {
         this.schema = schema;

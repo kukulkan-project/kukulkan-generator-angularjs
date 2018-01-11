@@ -1,13 +1,13 @@
 package mx.infotec.dads.kukulkan;
 
 import javax.annotation.PostConstruct;
+
 //
 //import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
 //import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
 
@@ -16,7 +16,6 @@ import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
 // MetricRepositoryAutoConfiguration.class })
 @EnableAutoConfiguration
 @EnableConfigurationProperties({ KukulkanConfigurationProperties.class })
-@EnableMongoRepositories
 public class KukulkanEngineApp {
 
     /**

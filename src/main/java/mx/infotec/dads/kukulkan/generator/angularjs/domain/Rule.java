@@ -25,9 +25,6 @@ package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 /**
  * The Rule Class.
  *
@@ -38,18 +35,13 @@ public class Rule implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The id. */
-    @Id
-    private String id;
-    
     /** The expression. */
     private String expression;
-    
+
     /** The replacement. */
     private String replacement;
-    
+
     /** The rule type. */
-    @DBRef
     private RuleType ruleType;
 
     /**
@@ -64,7 +56,8 @@ public class Rule implements Serializable {
     /**
      * Sets the expression.
      *
-     * @param expression the new expression
+     * @param expression
+     *            the new expression
      */
     public void setExpression(String expression) {
         this.expression = expression;
@@ -82,7 +75,8 @@ public class Rule implements Serializable {
     /**
      * Sets the replacement.
      *
-     * @param replacement the new replacement
+     * @param replacement
+     *            the new replacement
      */
     public void setReplacement(String replacement) {
         this.replacement = replacement;
@@ -100,28 +94,11 @@ public class Rule implements Serializable {
     /**
      * Sets the rule type.
      *
-     * @param ruleType the new rule type
+     * @param ruleType
+     *            the new rule type
      */
     public void setRuleType(RuleType ruleType) {
         this.ruleType = ruleType;
-    }
-
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets the id.
-     *
-     * @param id the new id
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
 }

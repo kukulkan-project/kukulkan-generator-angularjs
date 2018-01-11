@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
@@ -40,8 +39,7 @@ import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
-import mx.infotec.dads.kukulkan.generator.angularjs.repository.RuleRepository;
-import mx.infotec.dads.kukulkan.generator.angularjs.repository.RuleTypeRepository;
+import mx.infotec.dads.kukulkan.generator.angularjs.util.RuleContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
@@ -63,10 +61,9 @@ public class GrammarGenerationServiceTest {
 
     @Autowired
     private GenerationService generationService;
+
     @Autowired
-    private RuleRepository ruleRepository;
-    @Autowired
-    private RuleTypeRepository ruleTypeRepository;
+    private RuleContext ruleContext;
 
     @BeforeClass
     public static void runOnceBeforeClass() {
@@ -75,13 +72,7 @@ public class GrammarGenerationServiceTest {
 
     @Test
     public void generationService() {
-        Rule rule = new Rule();
-        RuleType ruleType = ruleTypeRepository.findAll().get(0);
-        ruleType.setName("singular");
-        rule.setRuleType(ruleType);
-        Example<Rule> ruleExample = Example.of(rule);
-        List<Rule> rulesList = ruleRepository.findAll(ruleExample);
-        for (Rule item : rulesList) {
+        for (Rule item : ruleContext.getAllSingularRules()) {
             InflectorProcessor.getInstance().addSingularize(item.getExpression(), item.getReplacement());
         }
         // Create ProjectConfiguration
@@ -110,7 +101,7 @@ public class GrammarGenerationServiceTest {
         // generationService.process(genCtx,
         // layerTaskFactory.getLayerTaskSet(ArchetypeType.ANGULAR_SPRING));
         generationService.findGeneratorByName("angularJs-spring").ifPresent(generator -> {
-        	
+
             generationService.process(genCtx, generator);
         });
 

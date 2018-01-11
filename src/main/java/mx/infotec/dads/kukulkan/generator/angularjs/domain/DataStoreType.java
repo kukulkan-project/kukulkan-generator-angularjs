@@ -25,8 +25,6 @@ package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
-
 import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
 
 /**
@@ -40,16 +38,4 @@ public class DataStoreType extends AbstractDescription implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6702727854037559008L;
 
-    /** The id. */
-    @Id
-    private String id;
-
-    /**
-     * Returns the identifier of the document.
-     * 
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
 }

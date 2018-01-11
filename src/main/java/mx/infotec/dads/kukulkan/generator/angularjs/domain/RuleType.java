@@ -25,8 +25,6 @@ package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
-
 import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
 
 /**
@@ -34,32 +32,9 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
  *
  * @author Daniel Cortes Pichardo
  */
-
 public class RuleType extends AbstractDescription implements Serializable {
-    
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
-    
-    /** The id. */
-    @Id
-    private String id;
-
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets the id.
-     *
-     * @param id the new id
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
 
 }

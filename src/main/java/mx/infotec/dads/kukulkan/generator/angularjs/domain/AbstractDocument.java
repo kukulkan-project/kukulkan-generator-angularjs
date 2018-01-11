@@ -23,8 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.domain;
 
-import org.springframework.data.annotation.Id;
-
 /**
  * Base class for document classes.
  *
@@ -36,7 +34,6 @@ import org.springframework.data.annotation.Id;
 public abstract class AbstractDocument {
     
     /** The id. */
-    @Id
     private String id;
 
     /**
