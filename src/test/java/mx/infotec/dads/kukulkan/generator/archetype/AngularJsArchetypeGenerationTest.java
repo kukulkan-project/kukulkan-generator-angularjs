@@ -35,7 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
-import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 
 /**

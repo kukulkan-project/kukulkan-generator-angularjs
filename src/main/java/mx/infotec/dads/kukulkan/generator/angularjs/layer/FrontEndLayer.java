@@ -57,10 +57,10 @@ import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerCon
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.TemplateFormatter;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
-import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 

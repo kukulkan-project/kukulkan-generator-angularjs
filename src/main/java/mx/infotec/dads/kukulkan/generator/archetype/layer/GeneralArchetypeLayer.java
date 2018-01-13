@@ -38,7 +38,7 @@ import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
-import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 

@@ -33,9 +33,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
-import mx.infotec.dads.kukulkan.metamodel.context.KukulkanContext;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
-import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
@@ -69,24 +67,6 @@ public class EntitiesFactory {
         ds.setTableTypes(TableTypes.TABLE_VIEW);
         ds.setUsername("");
         return ds;
-    }
-
-    /**
-     * Creates a new Entities object.
-     *
-     * @return the kukulkan context
-     */
-    public static KukulkanContext createDefaultKukulkanContext() {
-        ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("conacyt");
-        pConf.setGroupId("");
-        pConf.setVersion("1.0.0");
-        pConf.setPackaging("");
-        pConf.setYear("2017");
-        pConf.setAuthor("KUKULKAN");
-        pConf.setGroupId("mx.infotec.dads");
-        pConf.setPackaging("mx.infotec.dads.conacyt");
-        return new KukulkanContext(pConf, "");
     }
 
     /**

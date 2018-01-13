@@ -27,7 +27,7 @@ import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.addProjectData;
 
 import java.util.Map;
 
-import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 
 /**
