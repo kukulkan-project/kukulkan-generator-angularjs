@@ -89,14 +89,16 @@ public class GrammarGenerationServiceTest {
         // Create DataStore
 
         // Create DataModel
-        DomainModel dataModel = new JavaDomainModel();
+        DomainModel domainModel = new JavaDomainModel();
         KukulkanVisitor semanticAnalyzer = new KukulkanVisitor();
 
         // Mapping DataContext into DataModel
         List<DomainModelGroup> dmgList = GrammarMapping.createSingleTestDataModelGroupList(semanticAnalyzer);
-        dataModel.setDomainModelGroup(dmgList);
+        domainModel.setDomainModelGroup(dmgList);
         // Create GeneratorContext
-        GeneratorContext genCtx = new GeneratorContext(dataModel, pConf);
+        GeneratorContext genCtx = new GeneratorContext();
+        genCtx.put(ProjectConfiguration.class, pConf);
+        genCtx.put(DomainModel.class, domainModel);
         // Process Activities
         // generationService.process(genCtx,
         // layerTaskFactory.getLayerTaskSet(ArchetypeType.ANGULAR_SPRING));

@@ -23,7 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
-import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_HTML;
@@ -35,16 +34,11 @@ import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.L
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_SERVICE_JS;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_STATE_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.FRONT_END_ENTITIES_LOCATION;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.FRONT_END_I18N_LOCATION_EN;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.FRONT_END_I18N_LOCATION_ES;
 import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.IDIOMA_JS;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVASCRIPT;
-import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JSON;
-import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_ENTITIES;
-import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.WEB_APP_I18N;
 import static mx.infotec.dads.kukulkan.metamodel.util.NameConventionFormatter.camelCaseToHyphens;
+import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,7 +48,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.template.TemplateLocation;
 import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
@@ -95,10 +88,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     @Override
     public void doBeforeProcessDataModelGroup(GeneratorContext context, Map<String, Object> model) {
-        fillNavBar(context.getProjectConfiguration(), model, context.getDomainModel());
-        fillIdiomaGlobalEsJs(context.getProjectConfiguration(), model, context.getDomainModel());
-        fillIdiomaGlobalEnJs(context.getProjectConfiguration(), model, context.getDomainModel());
-        fillIndex(context.getProjectConfiguration(), model, context.getDomainModel());
+        ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
+        DomainModel domainModel = requiredNotEmpty(context.get(DomainModel.class));
+        fillNavBar(pConf, model, domainModel);
+        fillIdiomaGlobalEsJs(pConf, model, domainModel);
+        fillIdiomaGlobalEnJs(pConf, model, domainModel);
+        fillIndex(pConf, model, domainModel);
     }
 
     /*

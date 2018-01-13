@@ -69,8 +69,8 @@ public class AngularJsArchetypeGenerationTest {
         pConf.setYear("2017");
         pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
         pConf.setMongoDb(true);
-
-        GeneratorContext genCtx = new GeneratorContext(pConf);
+        GeneratorContext genCtx = new GeneratorContext();
+        genCtx.put(ProjectConfiguration.class, pConf);
         generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
             generationService.process(genCtx, generator);
         });

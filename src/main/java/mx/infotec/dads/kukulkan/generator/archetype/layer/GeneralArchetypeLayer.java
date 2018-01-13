@@ -23,6 +23,8 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
+import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -37,6 +39,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameCons
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 
 /**
@@ -74,8 +77,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
+        ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
         for (String template : TemplateFactory.TEMPLATE_LIST) {
-            Path toSave = createToSavePath(context, template, context.getProjectConfiguration().getOutputDir());
+            Path toSave = createToSavePath(context, template, pConf.getOutputDir());
             processTemplate(context, propertiesMap, template, toSave);
         }
     }
@@ -92,8 +96,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      * @return the path
      */
     private Path createToSavePath(GeneratorContext context, String template, Path outputPath) {
-        return createPath(template, context.getProjectConfiguration().getPackaging(),
-                context.getProjectConfiguration().getId(), outputPath);
+        ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
+        return createPath(template, pConf.getPackaging(), pConf.getId(), outputPath);
     }
 
     /**
@@ -131,7 +135,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      *            the to save
      */
     private void createBanner(GeneratorContext context, String template, Path toSave) {
-        Optional<String> generateBanner = bannerService.generateBanner(context.getProjectConfiguration().getId());
+        ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
+        Optional<String> generateBanner = bannerService.generateBanner(pConf.getId());
         if (generateBanner.isPresent()) {
             FileUtil.saveToFile(toSave, generateBanner.get());
         } else {
