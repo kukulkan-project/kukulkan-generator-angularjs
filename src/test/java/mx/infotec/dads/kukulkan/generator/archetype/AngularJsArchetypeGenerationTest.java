@@ -51,9 +51,6 @@ public class AngularJsArchetypeGenerationTest {
     @Autowired
     private GenerationService generationService;
 
-    @Autowired
-    private BannerService bannerService;
-
     @BeforeClass
     public static void runOnceBeforeClass() {
 
@@ -62,30 +59,17 @@ public class AngularJsArchetypeGenerationTest {
     @Test
     public void generationService() {
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("refac");
-        pConf.setGroupId("mx.infotec.dads.mongo");
+        pConf.setId("jpa");
+        pConf.setGroupId("mx.infotec.dads.jpa");
         pConf.setVersion("1.0.0");
-        pConf.setPackaging("mx.infotec.dads.mongo");
+        pConf.setPackaging("mx.infotec.dads.jpa");
         pConf.setYear("2017");
         pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
-        pConf.setMongoDb(true);
+        pConf.setMongoDb(false);
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);
         generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
             generationService.process(genCtx, generator);
         });
-    }
-
-    // @Test
-    public void bannerGenerator() {
-        // File file = ResourceUtils.getFile("classpath:templates/error.html");
-        //
-        // // File is found
-        // System.out.println("File Found : " + file.exists());
-        //
-        // // Read File Content
-        // String content = new String(Files.readAllBytes(file.toPath()));
-        // System.out.println(content);
-        System.out.println(bannerService.generateBanner("kukulkan"));
     }
 }

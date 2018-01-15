@@ -27,6 +27,7 @@ import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,7 +79,13 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        for (String template : TemplateFactory.TEMPLATE_LIST) {
+        List<String> templateList = null;
+        if (pConf.isMongoDb()) {
+            templateList = TemplateFactory.MONGO_TEMPLATE_LIST;
+        } else {
+            templateList = TemplateFactory.JPA_TEMPLATE_LIST;
+        }
+        for (String template : templateList) {
             Path toSave = createToSavePath(context, template, pConf.getOutputDir());
             processTemplate(context, propertiesMap, template, toSave);
         }
@@ -97,7 +104,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     private Path createToSavePath(GeneratorContext context, String template, Path outputPath) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        return createPath(template, pConf.getPackaging(), pConf.getId(), outputPath);
+        return createPath(template, pConf.getPackaging(), pConf.getId(), outputPath, pConf.isMongoDb());
     }
 
     /**
@@ -155,13 +162,14 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      *            the projectid
      * @param outputPath
      *            the output path
+     * @param isMongodb
      * @return the path
      */
-    private Path createPath(String template, String packaging, String projectid, Path outputPath) {
+    private Path createPath(String template, String packaging, String projectid, Path outputPath, boolean isMongodb) {
         String newPackaging = packaging.replaceAll("\\.", "/");
         Path temp = Paths.get(template);
         Path parent = temp.getParent();
-        String newTemplate = createTemplatePath(projectid, newPackaging, parent, outputPath);
+        String newTemplate = createTemplatePath(projectid, newPackaging, parent, outputPath, isMongodb);
         Path targetPath = Paths.get(newTemplate, temp.getFileName().toString().replaceAll(".ftl", ""));
         return createOutputPath(projectid, targetPath);
     }
@@ -197,11 +205,19 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      *            the parent
      * @param outputPath
      *            the output path
+     * @param isMongodb
      * @return the string
      */
-    private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath) {
-        return parent.toString().replaceAll("archetypes/angularjs-spring-mongo", outputPath + "/" + projectid)
-                .replaceAll("package", newPackaging);
+    private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath,
+            boolean isMongodb) {
+        String templateName = null;
+        if (isMongodb) {
+            templateName = TemplateFactory.ANGULAR_SPRING_MONGO_TEMPLATE;
+        } else {
+            templateName = TemplateFactory.ANGULAR_SPRING_JPA_TEMPLATE;
+        }
+        return parent.toString().replaceAll(templateName, outputPath + "/" + projectid).replaceAll("package",
+                newPackaging);
     }
 
     /**

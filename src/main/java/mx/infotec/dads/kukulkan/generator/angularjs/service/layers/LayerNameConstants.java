@@ -197,6 +197,9 @@ public class LayerNameConstants {
             /** The Constant GENERATOR_NAME. */
             public static final String GENERATOR_NAME = "angular-js-archetype-generator";
             
+            /** The Constant GENERATOR_NAME. */
+            public static final String JPA_GENERATOR = "angular-js-jpa-archetype-generator";
+            
             /** The Constant LAYER_NAME. */
             public static final String LAYER_NAME = "angular-js-archetype-layer";
 
