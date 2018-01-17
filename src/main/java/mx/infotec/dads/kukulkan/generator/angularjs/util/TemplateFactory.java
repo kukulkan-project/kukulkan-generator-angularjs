@@ -260,6 +260,7 @@ public class TemplateFactory {
         templates.add(ANGULAR_JS_TEMPLATE + "/package.json.ftl");
         templates.add(ANGULAR_JS_TEMPLATE + "/bower.json.ftl");
         templates.add(ANGULAR_JS_TEMPLATE + "/.gitattributes.ftl");
+        templates.add(ANGULAR_JS_TEMPLATE + "/yarn.lock.ftl");
         templates.add(ANGULAR_JS_TEMPLATE + "/.editorconfig.ftl");
         templates.add(ANGULAR_JS_TEMPLATE + "/.bowerrc.ftl");
         return templates;
