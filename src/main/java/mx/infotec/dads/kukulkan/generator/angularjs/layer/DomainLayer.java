@@ -42,6 +42,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameCons
 import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
@@ -100,7 +101,7 @@ public class DomainLayer extends AngularJsSpringLayer {
     private void fillModel(ProjectConfiguration pConf, Map<String, Object> model, String dmgName, String basePackage,
             DomainModelElement dmElement) {
         String template = null;
-        if (pConf.isMongoDb()) {
+        if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
             template = "model-mongo.ftl";
         } else {
             template = "model.ftl";

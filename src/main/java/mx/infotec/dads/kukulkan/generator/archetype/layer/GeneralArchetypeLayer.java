@@ -43,6 +43,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameCons
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 
@@ -90,7 +91,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
 
     private List<Template> getTemplatesToProcess(ProjectConfiguration pConf) {
         List<Template> templateList = new ArrayList<>();
-        if (pConf.isMongoDb()) {
+        if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
             templateList.addAll(convertTemplate(TemplateType.JAVA_SPRING_MONGO, TemplateFactory.MONGO_TEMPLATE_LIST));
         } else {
             templateList.addAll(convertTemplate(TemplateType.JAVA_SPRING_JPA, TemplateFactory.JPA_TEMPLATE_LIST));

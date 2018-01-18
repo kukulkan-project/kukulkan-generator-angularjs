@@ -41,6 +41,8 @@ import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.RuleContext;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
 import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
@@ -78,14 +80,12 @@ public class GrammarGenerationServiceTest {
         // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
         pConf.setId("refactor");
-        pConf.setGroupId("mx.infotec.dads.mongo");
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.mongo");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
-        pConf.setMongoDb(true);
-        pConf.setGlobalGenerationType(PKGenerationStrategy.SEQUENCE);
+        pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         // Create DataStore
 
         // Create DataModel

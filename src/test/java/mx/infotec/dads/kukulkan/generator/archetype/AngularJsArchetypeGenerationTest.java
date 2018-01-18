@@ -36,7 +36,10 @@ import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
 
 /**
  * Test for GeneratorService
@@ -60,12 +63,11 @@ public class AngularJsArchetypeGenerationTest {
     public void generationService() {
         ProjectConfiguration pConf = new ProjectConfiguration();
         pConf.setId("jpa");
-        pConf.setGroupId("mx.infotec.dads.jpa");
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.jpa");
         pConf.setYear("2017");
         pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
-        pConf.setMongoDb(false);
+        pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);
         generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
