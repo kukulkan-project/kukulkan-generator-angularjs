@@ -37,8 +37,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.Template;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.TemplateType;
+import mx.infotec.dads.kukulkan.metamodel.template.Template;
+import mx.infotec.dads.kukulkan.metamodel.template.TemplateType;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
@@ -139,7 +139,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, Template template,
             Path toSave) {
         if (isFtlFile(template.getName())) {
-            String content = templateService.fillAbstractTemplate(template.getName(), propertiesMap);
+            String content = templateService.fillTemplate(template.getName(), propertiesMap);
             FileUtil.saveToFile(toSave, content);
         } else if (template.getName().contains("banner.txt")) {
             createBanner(context, template, toSave);

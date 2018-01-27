@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer;
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
+import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
 import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 
@@ -84,6 +85,12 @@ public class AngularJsArchetypeGenerator implements Generator {
     @Override
     public List<? extends Layer> getLayers() {
         return layers;
+    }
+
+    @Override
+    public void process(GeneratorContext context) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
