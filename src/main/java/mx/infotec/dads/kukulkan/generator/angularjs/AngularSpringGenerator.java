@@ -71,14 +71,6 @@ public class AngularSpringGenerator implements Generator {
     }
 
     /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getKeywords()
-     */
-    @Override
-    public String getKeywords() {
-        return null;
-    }
-
-    /* (non-Javadoc)
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getLayers()
      */
     @Override
