@@ -32,7 +32,6 @@ import mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer;
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
-import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 
 /**
  * Generator for Angular 1.5.8, Spring boot and Spring Data
@@ -47,7 +46,9 @@ public class AngularJsArchetypeGenerator implements Generator {
     @Autowired
     List<ArchetypeLayer> layers;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getName()
      */
     @Override
@@ -55,34 +56,11 @@ public class AngularJsArchetypeGenerator implements Generator {
         return LayerNameConstants.Archetype.AngularJs.GENERATOR_NAME;
     }
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getVersion()
-     */
-    @Override
-    public String getVersion() {
-        return "1.0.0";
-    }
-
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getDescription()
-     */
-    @Override
-    public String getDescription() {
-        return "Angular 1.5.8 and Spring boot application";
-    }
-
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getLayers()
-     */
-    @Override
-    public List<? extends Layer> getLayers() {
-        return layers;
-    }
-
     @Override
     public void process(GeneratorContext context) {
-        // TODO Auto-generated method stub
-        
+        layers.forEach(layer -> {
+            layer.process(context);
+        });
     }
 
 }

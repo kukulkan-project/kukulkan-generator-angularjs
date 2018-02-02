@@ -46,7 +46,9 @@ public class AngularSpringGenerator implements Generator {
     @Autowired
     List<AngularJsSpringLayer> layers;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getName()
      */
     @Override
@@ -54,34 +56,11 @@ public class AngularSpringGenerator implements Generator {
         return "angularJs-spring";
     }
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getVersion()
-     */
-    @Override
-    public String getVersion() {
-        return "1.0.0";
-    }
-
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getDescription()
-     */
-    @Override
-    public String getDescription() {
-        return "Angular 1.5.8 and Spring boot application";
-    }
-
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Generator#getLayers()
-     */
-    @Override
-    public List<? extends Layer> getLayers() {
-        return layers;
-    }
-
     @Override
     public void process(GeneratorContext context) {
-        // TODO Auto-generated method stub
-        
+        layers.forEach(layer -> {
+            layer.process(context);
+        });
     }
 
 }
