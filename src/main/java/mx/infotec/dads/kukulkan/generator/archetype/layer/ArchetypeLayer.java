@@ -43,7 +43,6 @@ public abstract class ArchetypeLayer implements Layer {
     @Override
     public void process(GeneratorContext context) {
         processLayer(context, addProjectData(context));
-
     }
 
     /**
