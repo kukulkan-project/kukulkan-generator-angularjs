@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/10b1d1565f8744b09ef04f01669db293)](https://www.codacy.com/app/erik-valdivieso/kukulkan-generator-angularjs?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kukulkan-project/kukulkan-generator-angularjs&amp;utm_campaign=Badge_Grade)
+
 # Kukulkán Meta-Model
  
 ## Template key-params
