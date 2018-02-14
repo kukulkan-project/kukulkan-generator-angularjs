@@ -34,6 +34,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
+import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
@@ -65,7 +66,7 @@ public class AngularJsArchetypeGenerationTest {
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.jpa");
         pConf.setYear("2017");
-        pConf.setOutputDir(Paths.get("/home/daniel/refactoring"));
+        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);

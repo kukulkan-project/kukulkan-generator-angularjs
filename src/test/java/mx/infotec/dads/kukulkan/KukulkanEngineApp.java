@@ -1,6 +1,8 @@
 package mx.infotec.dads.kukulkan;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 //
 //import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
@@ -45,4 +47,9 @@ public class KukulkanEngineApp {
     // SpringApplication app = new SpringApplication(MetaModelApp.class);
     // }
 
+    @PreDestroy
+    public void destroy() {
+        TemporalDirectoryUtil.deleteTemporalDir();
+    }
+    
 }
