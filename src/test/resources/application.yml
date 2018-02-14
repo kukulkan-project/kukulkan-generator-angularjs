@@ -1,4 +1,6 @@
 spring:
+  main:
+    banner-mode: "off"
   application:
     name: kukulkancraftsman
   messages:
@@ -24,8 +26,7 @@ kukulkan:
       uri: jdbc:mysql://kukulkancraftsman-mysql:3306
 logging:
   level:
-    root: info
-    org.springframework.web: false
-    org.hibernate: false
-    org.hibernate.SQL: false
-    file: kukulkan.log
+    root: INFO
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+    org.hibernate.SQL: ERROR
