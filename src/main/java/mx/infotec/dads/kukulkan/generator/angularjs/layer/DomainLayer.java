@@ -100,7 +100,8 @@ public class DomainLayer extends AngularJsSpringLayer {
      */
     private void fillModel(ProjectConfiguration pConf, Map<String, Object> model, String dmgName, String basePackage,
             DomainModelElement dmElement) {
-        String template = null;
+        LOGGER.debug("Domain {}", dmgName);
+        String template;
         if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
             template = "model-mongo.ftl";
         } else {

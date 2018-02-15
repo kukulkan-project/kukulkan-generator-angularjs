@@ -35,14 +35,16 @@ import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
 
 /**
  * Generator for Angular 1.5.8, Spring boot and Spring Data
- * 
+ *
  * @author Daniel Cortes Pichardo
  *
  */
 @GeneratorComponent
 public class AngularJsArchetypeGenerator implements Generator {
 
-    /** The layers. */
+    /**
+     * The layers.
+     */
     @Autowired
     List<ArchetypeLayer> layers;
 
@@ -58,9 +60,7 @@ public class AngularJsArchetypeGenerator implements Generator {
 
     @Override
     public void process(GeneratorContext context) {
-        layers.forEach(layer -> {
-            layer.process(context);
-        });
+        layers.forEach(layer -> layer.process(context));
     }
 
 }
