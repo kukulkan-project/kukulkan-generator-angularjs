@@ -23,11 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.angularjs.layer;
 
-import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.REST_SPRING_JPA_BACK_END_URL;
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceName;
-import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVA;
-import static mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum.SRC_MAIN_JAVA;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
 
@@ -61,11 +56,15 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 @Component(LayerNameConstants.DataAccess.Repository.SERVICE_NAME)
 public class DataAccessLayer extends AngularJsSpringLayer {
 
-    /** The template service. */
+    /**
+     * The template service.
+     */
     @Autowired
     private TemplateService templateService;
 
-    /** The Constant LOGGER. */
+    /**
+     * The Constant LOGGER.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(DataAccessLayer.class);
 
     /*
@@ -81,7 +80,7 @@ public class DataAccessLayer extends AngularJsSpringLayer {
     @Override
     public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
-        LOGGER.debug("repositoryLayerTask for dommain");
+        LOGGER.debug("repositoryLayerTask for dommain {}", dmgName);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.DAO_LAYER_NAME));
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("repository.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());

@@ -44,6 +44,8 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  * @author Daniel Cortes Pichardo
  */
 public class EntitiesFactory {
+    
+    private static final String NOY_APPLY = "NO APLICA";
 
     /**
      * Instantiates a new entities factory.
@@ -139,13 +141,13 @@ public class EntitiesFactory {
     public static DataStore createGrammarDataStore(DataStoreType dst) {
         DataStore atlasDataStore = new DataStore();
         atlasDataStore.setDataStoreType(dst);
-        atlasDataStore.setDriverClass("NO APLICA");
+        atlasDataStore.setDriverClass(NOY_APPLY);
         atlasDataStore.setName(DataStoreConstants.DATA_STORE_TYPE_GRAMMAR);
-        atlasDataStore.setPassword("NO APLICA");
+        atlasDataStore.setPassword(NOY_APPLY);
         atlasDataStore.setTableTypes(TableTypes.TABLE_VIEW);
-        atlasDataStore.setUrl("NO APLICA");
-        atlasDataStore.setSchema("NO APLICA");
-        atlasDataStore.setUsername("NO APLICA");
+        atlasDataStore.setUrl(NOY_APPLY);
+        atlasDataStore.setSchema(NOY_APPLY);
+        atlasDataStore.setUsername(NOY_APPLY);
         return atlasDataStore;
     }
 

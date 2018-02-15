@@ -31,18 +31,19 @@ import mx.infotec.dads.kukulkan.generator.angularjs.layer.AngularJsSpringLayer;
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
-import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 
 /**
  * Generator for Angular 1.5.8, Spring boot and Spring Data
- * 
+ *
  * @author Daniel Cortes Pichardo
  *
  */
 @GeneratorComponent
 public class AngularSpringGenerator implements Generator {
 
-    /** The layers. */
+    /**
+     * The layers.
+     */
     @Autowired
     List<AngularJsSpringLayer> layers;
 
@@ -58,9 +59,7 @@ public class AngularSpringGenerator implements Generator {
 
     @Override
     public void process(GeneratorContext context) {
-        layers.forEach(layer -> {
-            layer.process(context);
-        });
+        layers.forEach(layer -> layer.process(context));
     }
 
 }
