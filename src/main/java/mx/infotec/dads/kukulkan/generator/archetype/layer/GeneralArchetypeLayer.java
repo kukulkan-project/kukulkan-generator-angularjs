@@ -138,13 +138,13 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, TemplateInfo template,
             Path toSave) {
-        if (isFtlFile(template.getName())) {
-            String content = templateService.fillTemplate(template.getName(), propertiesMap);
+        if (isFtlFile(template.getStringPath())) {
+            String content = templateService.fillTemplate(template.getStringPath(), propertiesMap);
             FileUtil.saveToFile(toSave, content);
-        } else if (template.getName().contains("banner.txt")) {
+        } else if (template.getStringPath().contains("banner.txt")) {
             createBanner(context, template, toSave);
         } else {
-            FileUtil.copyFromJar("templates/" + template.getName(), toSave);
+            FileUtil.copyFromJar("templates/" + template.getStringPath(), toSave);
         }
     }
 
@@ -164,7 +164,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         if (generateBanner.isPresent()) {
             FileUtil.saveToFile(toSave, generateBanner.get());
         } else {
-            FileUtil.copyFromJar("templates/" + template.getName(), toSave);
+            FileUtil.copyFromJar("templates/" + template.getStringPath(), toSave);
         }
     }
 
@@ -184,7 +184,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     private Path createPath(TemplateInfo template, String packaging, String projectid, Path outputPath) {
         String newPackaging = packaging.replaceAll("\\.", "/");
-        Path temp = Paths.get(template.getName());
+        Path temp = Paths.get(template.getStringPath());
         Path parent = temp.getParent();
         String newTemplate = createTemplatePath(projectid, newPackaging, parent, outputPath, template);
         Path targetPath = Paths.get(newTemplate, temp.getFileName().toString().replaceAll(".ftl", ""));
