@@ -25,6 +25,7 @@ package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -227,7 +228,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath,
             TemplateInfo template) {
-        return parent.toString().replaceAll(template.getType().getTemplatePath(), outputPath + "/" + projectid)
+        return parent.toString()
+                .replaceAll(template.getType().getTemplatePath(), outputPath + File.separator + projectid)
                 .replaceAll("package", newPackaging);
     }
 
