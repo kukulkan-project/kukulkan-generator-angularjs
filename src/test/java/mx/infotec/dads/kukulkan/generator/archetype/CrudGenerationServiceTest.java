@@ -36,7 +36,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
-import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
+import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
 import mx.infotec.dads.kukulkan.generator.angularjs.AngularSpringGenerator;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.RuleContext;
@@ -89,7 +89,7 @@ public class CrudGenerationServiceTest {
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         // Create DataModel
         DomainModel domainModel = new JavaDomainModel();
-        KukulkanVisitor semanticAnalyzer = new KukulkanVisitor();
+        GrammarSemanticAnalyzer semanticAnalyzer = new GrammarSemanticAnalyzer();
         // Mapping DataContext into DataModel
         List<DomainModelGroup> dmgList = GrammarMapping.createSingleTestDataModelGroupList(semanticAnalyzer);
         domainModel.setDomainModelGroup(dmgList);
