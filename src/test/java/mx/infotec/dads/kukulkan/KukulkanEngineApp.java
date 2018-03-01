@@ -14,8 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
 import mx.infotec.dads.kukulkan.metamodel.util.KukulkanConfigurationProperties;
 
 @ComponentScan
-// @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class,
-// MetricRepositoryAutoConfiguration.class })
 @EnableAutoConfiguration
 @EnableConfigurationProperties({ KukulkanConfigurationProperties.class })
 public class KukulkanEngineApp {
@@ -43,13 +41,9 @@ public class KukulkanEngineApp {
      * @throws UnknownHostException
      *             if the local host name could not be resolved into an address
      */
-    // public static void main(String[] args) throws UnknownHostException {
-    // SpringApplication app = new SpringApplication(MetaModelApp.class);
-    // }
-
     @PreDestroy
     public void destroy() {
         TemporalDirectoryUtil.deleteTemporalDir();
     }
-    
+
 }

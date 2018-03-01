@@ -21,10 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.service;
+package mx.infotec.dads.kukulkan.generator.archetype;
 
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,21 +34,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
-import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
-import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
 import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.RuleContext;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
-import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
-import mx.infotec.dads.kukulkan.metamodel.util.InflectorProcessor;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
 
 /**
@@ -60,13 +49,10 @@ import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = KukulkanEngineApp.class)
-public class GrammarGenerationServiceTest {
+public class ArchetypeAngularJsGenerationTest {
 
     @Autowired
     private GenerationService generationService;
-
-    @Autowired
-    private RuleContext ruleContext;
 
     @BeforeClass
     public static void runOnceBeforeClass() {
@@ -75,40 +61,17 @@ public class GrammarGenerationServiceTest {
 
     @Test
     public void generationService() {
-        for (Rule item : ruleContext.getAllSingularRules()) {
-            InflectorProcessor.getInstance().addSingularize(item.getExpression(), item.getReplacement());
-        }
-        // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("refactor");
+        pConf.setId("jpa");
         pConf.setVersion("1.0.0");
-        pConf.setPackaging("mx.infotec.dads.mongo");
+        pConf.setPackaging("mx.infotec.dads.jpa");
         pConf.setYear("2017");
-        pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
-        // Create DataStore
-
-        // Create DataModel
-        DomainModel domainModel = new JavaDomainModel();
-        KukulkanVisitor semanticAnalyzer = new KukulkanVisitor();
-
-        // Mapping DataContext into DataModel
-        List<DomainModelGroup> dmgList = GrammarMapping.createSingleTestDataModelGroupList(semanticAnalyzer);
-        domainModel.setDomainModelGroup(dmgList);
-        // Create GeneratorContext
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);
-        genCtx.put(DomainModel.class, domainModel);
-        // Process Activities
-        // generationService.process(genCtx,
-        // layerTaskFactory.getLayerTaskSet(ArchetypeType.ANGULAR_SPRING));
-        generationService.findGeneratorByName("angularJs-spring").ifPresent(generator -> {
-
+        generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
             generationService.process(genCtx, generator);
         });
-
-        FileUtil.saveToFile(genCtx);
-        // FileUtil.createZip(Paths.get(prop.getConfig().getOutputdir() + "/" +
     }
 }
