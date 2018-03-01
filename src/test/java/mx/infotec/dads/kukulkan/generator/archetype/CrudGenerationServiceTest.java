@@ -37,6 +37,7 @@ import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.KukulkanVisitor;
+import mx.infotec.dads.kukulkan.generator.angularjs.AngularSpringGenerator;
 import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.RuleContext;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
@@ -62,7 +63,7 @@ import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 public class CrudGenerationServiceTest {
 
     @Autowired
-    private GenerationService generationService;
+    private AngularSpringGenerator generationService;
 
     @Autowired
     private RuleContext ruleContext;
@@ -79,19 +80,16 @@ public class CrudGenerationServiceTest {
         }
         // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("refactor");
+        pConf.setId("test");
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.mongo");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
-        // Create DataStore
-
         // Create DataModel
         DomainModel domainModel = new JavaDomainModel();
         KukulkanVisitor semanticAnalyzer = new KukulkanVisitor();
-
         // Mapping DataContext into DataModel
         List<DomainModelGroup> dmgList = GrammarMapping.createSingleTestDataModelGroupList(semanticAnalyzer);
         domainModel.setDomainModelGroup(dmgList);
@@ -100,11 +98,7 @@ public class CrudGenerationServiceTest {
         genCtx.put(ProjectConfiguration.class, pConf);
         genCtx.put(DomainModel.class, domainModel);
         // Process Activities
-        // generationService.process(genCtx,
-        // layerTaskFactory.getLayerTaskSet(ArchetypeType.ANGULAR_SPRING));
-        generationService.findGeneratorByName("angularJs-spring").ifPresent(generator -> {
-            generationService.process(genCtx, generator);
-        });
+        generationService.process(genCtx);
         FileUtil.saveToFile(genCtx);
     }
 }
