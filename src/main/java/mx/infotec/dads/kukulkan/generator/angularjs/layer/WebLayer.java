@@ -46,7 +46,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameCons
 import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
@@ -77,12 +77,12 @@ public class WebLayer extends AngularJsSpringLayer {
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
      * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
-            Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
+    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+            Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement {} ", basePackage);
         String webLayerDotFormat = replaceSlashByDot(NameConventions.REST_LAYER_NAME);
         String webLayerSlashFormat = replaceDotBySlash(NameConventions.REST_LAYER_NAME);

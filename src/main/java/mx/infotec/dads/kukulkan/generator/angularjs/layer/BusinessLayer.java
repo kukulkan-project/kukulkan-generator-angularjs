@@ -47,7 +47,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameCons
 import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
@@ -75,12 +75,12 @@ public class BusinessLayer extends AngularJsSpringLayer {
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
      * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
-            Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
+    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+            Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement: {} ", basePackage);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, SERVICE_LAYER_NAME));
         propertiesMap.put(PACKAGE_IMPL_PROPERTY,
@@ -104,7 +104,7 @@ public class BusinessLayer extends AngularJsSpringLayer {
      *            the base package
      */
     private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap,
-            DomainModelElement dmElement, String basePackage) {
+            Entity dmElement, String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("serviceImpl.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         String serviceImplPath = Paths.get(SERVICE_LAYER_NAME, SERVICE_IMPLEMENTS_LAYER_NAME).toString();
@@ -130,7 +130,7 @@ public class BusinessLayer extends AngularJsSpringLayer {
      *            the base package
      */
     private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap,
-            DomainModelElement dmElement, String basePackage) {
+            Entity dmElement, String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("service.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,

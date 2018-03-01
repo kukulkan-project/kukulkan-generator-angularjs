@@ -8,8 +8,8 @@
             "entities": {
                 "main": "Entities",
                 <#list dataModelGroup as dmg>
-					<#list dmg.domainModelElements as dme>
-					"${dme.camelCaseFormat}": "${dme.name}",
+					<#list dmg.entities as entity>
+					"${entity.camelCaseFormat}": "${entity.name}",
 					</#list>    
 				</#list>
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"

@@ -60,7 +60,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 
@@ -103,12 +103,12 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
      * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<DomainModelElement> dmElementCollection,
-            Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
+    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+            Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         fillEntityControllerJs(pConf, propertiesMap, dmElement);
         fillEntityDeleteDialogControllerJs(pConf, propertiesMap, dmElement);
         fillEntityDeleteDialogHtml(pConf, propertiesMap, dmElement);
@@ -216,7 +216,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS,
                 false);
@@ -233,7 +233,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillIdiomaEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
+    private void fillIdiomaEsJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.info("fillIdiomaEsJs {}", IDIOMA_JS);
         saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_ES, IDIOMA_JS,
                 "es");
@@ -249,7 +249,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillIdiomaEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
+    private void fillIdiomaEnJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.info("fillIdiomaEnJs {}", IDIOMA_JS);
         saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_EN, IDIOMA_JS,
                 "en");
@@ -266,7 +266,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityStateJs {}", ENTITY_STATE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS, false);
     }
@@ -282,7 +282,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
                 false);
@@ -299,7 +299,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntitySearchServiceJs {}", ENTITY_SEARCH_SERVICE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_SEARCH_SERVICE_JS, false);
@@ -315,7 +315,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, DomainModelElement dmElement) {
+    private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.info("fillEntityHtml {}", ENTITY_HTML);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML),
                 ENTITY_HTML, true, HTML);
@@ -332,7 +332,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
@@ -350,7 +350,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DIALOG_CONTROLLER_JS, false);
@@ -367,7 +367,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityDetailControllerJs {}", ENTITY_DETAIL_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DETAIL_CONTROLLER_JS, false);
@@ -384,7 +384,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityDetailHtml {}", LayerConstants.ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DETAIL_HTML), ENTITY_DETAIL_HTML, false,
@@ -402,7 +402,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityDeleteDialogHtml {}", ENTITY_DELETE_DIALOG_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DELETE_DIALOG_HTML),
@@ -420,7 +420,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityDeleteDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.info("fillEntityDeleteDialogControllerJs {}", ENTITY_DELETE_DIALOG_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DELETE_DIALOG_CONTROLLER_JS, false);
@@ -443,7 +443,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the is plural
      */
     private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement, TemplateEnum templateLocation, String templateName, boolean isPlural) {
+            Entity dmElement, TemplateEnum templateLocation, String templateName, boolean isPlural) {
         saveFrontEndTemplate(pConf, model, dmElement, templateLocation.getLocation(templateName), templateName,
                 isPlural, JAVASCRIPT);
     }
@@ -467,7 +467,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the language type
      */
     private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement, Path templateFilePath, String templateName, boolean isPlural,
+            Entity dmElement, Path templateFilePath, String templateName, boolean isPlural,
             LanguageType languageType) {
         String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
         String entityName = fileNamingConvention;
@@ -500,7 +500,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the idioma key
      */
     private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            DomainModelElement dmElement, TemplateEnum templateLocation, String templateName, String idiomaKey) {
+            Entity dmElement, TemplateEnum templateLocation, String templateName, String idiomaKey) {
         String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),

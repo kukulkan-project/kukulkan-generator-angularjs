@@ -95,14 +95,14 @@
     <script src="app/home/home.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
 	<#list dataModelGroup as dmg>
-		<#list dmg.domainModelElements as dme>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}-dialog.controller.js"></script>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}-detail.controller.js"></script>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}-delete-dialog.controller.js"></script>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}.state.js"></script>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}.service.js"></script>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}.search.service.js"></script>
-    <script src="app/entities/${dme.camelCaseFormat}/${dme.camelCaseFormat}.controller.js"></script>
+		<#list dmg.entities as entity>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}-dialog.controller.js"></script>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}-detail.controller.js"></script>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}-delete-dialog.controller.js"></script>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.state.js"></script>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.service.js"></script>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.search.service.js"></script>
+    <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.controller.js"></script>
 		</#list>    
 	</#list>
     <script src="app/components/util/truncate-words.filter.js"></script>

@@ -43,7 +43,7 @@ import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
@@ -71,12 +71,12 @@ public class DomainLayer extends AngularJsSpringLayer {
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
      * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelElement,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration confg, Collection<DomainModelElement> dmElementCollection,
-            Map<String, Object> propertiesMap, String dmgName, DomainModelElement dmElement, String basePackage) {
+    public void visitDomainModelElement(ProjectConfiguration confg, Collection<Entity> dmElementCollection,
+            Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement for {}", basePackage);
         propertiesMap.put(PACKAGE_PROPERTY,
                 formatToPackageStatement(false, basePackage, NameConventions.DOMAIN_LAYER_NAME));
@@ -99,7 +99,7 @@ public class DomainLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillModel(ProjectConfiguration pConf, Map<String, Object> model, String dmgName, String basePackage,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         LOGGER.debug("Domain {}", dmgName);
         String template;
         if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
@@ -131,7 +131,7 @@ public class DomainLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillPrimaryKey(ProjectConfiguration pConf, Map<String, Object> model, String basePackage,
-            DomainModelElement dmElement) {
+            Entity dmElement) {
         if (dmElement.getPrimaryKey().isComposed()) {
             Path templateFilePath = TemplateEnum.COMMON.getLocation("primaryKey.ftl");
             Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());

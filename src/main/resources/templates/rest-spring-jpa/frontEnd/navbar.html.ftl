@@ -33,11 +33,11 @@
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
 							<#list dataModelGroup as dmg>
-								<#list dmg.domainModelElements as dme>
+								<#list dmg.entities as entity>
 							<li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_LOCAL">
-								<a ui-sref="${dme.camelCaseFormat}" ng-click="vm.collapseNavbar()">
+								<a ui-sref="${entity.camelCaseFormat}" ng-click="vm.collapseNavbar()">
 									<span class="glyphicon glyphicon-book"></span>&nbsp;
-									<span data-translate="global.menu.entities.${dme.camelCaseFormat}">${dme.name}</span>
+									<span data-translate="global.menu.entities.${entity.camelCaseFormat}">${entity.name}</span>
 								</a>
 							</li>    
 								</#list>    
