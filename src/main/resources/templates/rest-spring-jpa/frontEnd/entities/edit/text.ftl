@@ -4,7 +4,7 @@
 				<input type="text" class="form-control" name="${property.name}" id="field_${property.name}"
 					ng-model="vm.${entityCamelCase}.${property.name}" 
 <#if property.constraint.nullable==false>
-					required</#if> <#if property.constraint.minLength??>ng-minlength="${property.constraint.minLength}"</#if> <#if property.constraint.maxLength??>ng-maxlength="${property.constraint.maxLength}"</#if> <#if property.constraint.pattern??>ng-pattern="/${property.constraint.pattern}/"</#if>
+					required</#if> <#if property.constraint.min??>ng-minlength="${property.constraint.min}"</#if> <#if property.constraint.max??>ng-maxlength="${property.constraint.max}"</#if> <#if property.constraint.pattern??>ng-pattern="/${property.constraint.pattern}/"</#if>
 					/>
 			<#if property.hasConstraints==true>				
 				<div ng-show="editForm.${property.name}.$invalid">
@@ -14,16 +14,16 @@
 	                    This field is required.
 	                </p>
 	            </#if>
-				<#if property.constraint.minLength??>
+				<#if property.constraint.min??>
 	                <p class="help-block"
-	                    ng-show="editForm.${property.name}.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="${property.constraint.minLength}">
-	                    This field is required to be at least ${property.constraint.minLength} characters.
+	                    ng-show="editForm.${property.name}.$error.minlength" data-translate="entity.validation.minlength" translate-value-min="${property.constraint.min}">
+	                    This field is required to be at least ${property.constraint.min} characters.
 	                </p>
 				</#if>
-				<#if property.constraint.maxLength??>
+				<#if property.constraint.max??>
 	                <p class="help-block"
-	                    ng-show="editForm.${property.name}.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="${property.constraint.maxLength}">
-	                    This field cannot be longer than ${property.constraint.maxLength} characters.
+	                    ng-show="editForm.${property.name}.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="${property.constraint.max}">
+	                    This field cannot be longer than ${property.constraint.max} characters.
 	                </p>
 				</#if>
 				<#if property.constraint.pattern??>

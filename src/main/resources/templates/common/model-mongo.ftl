@@ -69,9 +69,9 @@ public class ${entity} implements Serializable {
     </#if>
     <#if property.sizeValidation==true>
 	    <#if property.blob==true>
-    @Size(<#if property.constraint.minByte??>min = ${property.constraint.minByte}</#if><#if property.constraint.minByte?? && property.constraint.maxByte??>, </#if><#if property.constraint.maxByte??>max = ${property.constraint.maxByte}</#if>)
+    @Size(<#if property.constraint.min??>min = ${property.constraint.min}</#if><#if property.constraint.min?? && property.constraint.max??>, </#if><#if property.constraint.max??>max = ${property.constraint.max}</#if>)
 	    <#else>
-    @Size(<#if property.constraint.minLength??>min = ${property.constraint.minLength}</#if><#if property.constraint.minLength?? && property.constraint.maxLength??>, </#if><#if property.constraint.maxLength??>max = ${property.constraint.maxLength}</#if>)	    
+    @Size(<#if property.constraint.min??>min = ${property.constraint.min}</#if><#if property.constraint.min?? && property.constraint.max??>, </#if><#if property.constraint.max??>max = ${property.constraint.max}</#if>)	    
 	    </#if>
     </#if>
     <#if property.constraint.pattern??>
@@ -79,18 +79,18 @@ public class ${entity} implements Serializable {
     </#if>
     <#if property.number==true>
     	<#if property.long==true || property.integer==true>
-		    <#if property.constraint.minNumber??>
-    @Min(value = ${property.constraint.minNumber})
+		    <#if property.constraint.min??>
+    @Min(value = ${property.constraint.min})
 		    </#if>
-	    	<#if property.constraint.maxNumber??>
-    @Max(value = ${property.constraint.maxNumber})
+	    	<#if property.constraint.max??>
+    @Max(value = ${property.constraint.max})
     		</#if>
     	<#else>
-    		<#if property.constraint.minNumber??>
-    @DecimalMin(value = "${property.constraint.minNumber}")
+    		<#if property.constraint.min??>
+    @DecimalMin(value = "${property.constraint.min}")
     		</#if>
-    		<#if property.constraint.maxNumber??>
-    @DecimalMax(value = "${property.constraint.maxNumber}")
+    		<#if property.constraint.max??>
+    @DecimalMax(value = "${property.constraint.max}")
     		</#if>
     	</#if>	
     </#if>
