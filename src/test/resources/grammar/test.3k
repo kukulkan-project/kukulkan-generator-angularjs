@@ -31,3 +31,8 @@ entity Direccion (direcciones){
     desc TextBlob required minbytes(3) maxbytes(5000000),
     instante Instant required
 }
+
+relationship OneToMany {
+	Persona{persona} to Direccion{direccion}
+}
+
