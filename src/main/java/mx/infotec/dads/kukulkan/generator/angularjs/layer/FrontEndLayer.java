@@ -217,7 +217,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
+        LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS,
                 false);
 
@@ -234,7 +234,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillIdiomaEsJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.info("fillIdiomaEsJs {}", IDIOMA_JS);
+        LOGGER.debug("fillIdiomaEsJs {}", IDIOMA_JS);
         saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_ES, IDIOMA_JS,
                 "es");
     }
@@ -250,7 +250,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillIdiomaEnJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.info("fillIdiomaEnJs {}", IDIOMA_JS);
+        LOGGER.debug("fillIdiomaEnJs {}", IDIOMA_JS);
         saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_EN, IDIOMA_JS,
                 "en");
     }
@@ -267,7 +267,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityStateJs {}", ENTITY_STATE_JS);
+        LOGGER.debug("fillEntityStateJs {}", ENTITY_STATE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS, false);
     }
 
@@ -283,7 +283,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
+        LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
                 false);
     }
@@ -300,7 +300,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntitySearchServiceJs {}", ENTITY_SEARCH_SERVICE_JS);
+        LOGGER.debug("fillEntitySearchServiceJs {}", ENTITY_SEARCH_SERVICE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_SEARCH_SERVICE_JS, false);
     }
@@ -316,7 +316,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      *            the dm element
      */
     private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.info("fillEntityHtml {}", ENTITY_HTML);
+        LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML),
                 ENTITY_HTML, true, HTML);
     }
@@ -333,7 +333,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
+        LOGGER.debug("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
                 HTML);
@@ -351,7 +351,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
+        LOGGER.debug("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DIALOG_CONTROLLER_JS, false);
     }
@@ -368,7 +368,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityDetailControllerJs {}", ENTITY_DETAIL_CONTROLLER_JS);
+        LOGGER.debug("fillEntityDetailControllerJs {}", ENTITY_DETAIL_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DETAIL_CONTROLLER_JS, false);
     }
@@ -385,7 +385,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityDetailHtml {}", LayerConstants.ENTITY_DETAIL_HTML);
+        LOGGER.debug("fillEntityDetailHtml {}", LayerConstants.ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DETAIL_HTML), ENTITY_DETAIL_HTML, false,
                 HTML);
@@ -403,7 +403,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityDeleteDialogHtml {}", ENTITY_DELETE_DIALOG_HTML);
+        LOGGER.debug("fillEntityDeleteDialogHtml {}", ENTITY_DELETE_DIALOG_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DELETE_DIALOG_HTML),
                 ENTITY_DELETE_DIALOG_HTML, false, HTML);
@@ -421,7 +421,7 @@ public class FrontEndLayer extends AngularJsSpringLayer {
      */
     private void fillEntityDeleteDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        LOGGER.info("fillEntityDeleteDialogControllerJs {}", ENTITY_DELETE_DIALOG_CONTROLLER_JS);
+        LOGGER.debug("fillEntityDeleteDialogControllerJs {}", ENTITY_DELETE_DIALOG_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DELETE_DIALOG_CONTROLLER_JS, false);
     }
