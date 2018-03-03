@@ -1,0 +1,16 @@
+entity Persona {
+    nombre : String required min(3) max(50),
+    edad : Integer required min(12) max(23),
+    numeroCredencial : Long required min(13) max(23),
+    sueldo : BigDecimal required min(15) max(23),
+    impuesto : Float required min(12) max(23),
+    impuestoDetalle : Double required min(11) max(23),
+    activo : Boolean required,
+    fechaLocalDate : LocalDate required,
+    fechaZoneDateTime : ZonedDateTime required,
+    imagen : Blob required min(5) max(5000000),
+    imagenAnyBlob : AnyBlob required min(78) max(5000000),
+    imagenBlob : ImageBlob required min(21) max(5000000),
+    desc : TextBlob required min(3) max(5000000),
+    instante : Instant required
+}
