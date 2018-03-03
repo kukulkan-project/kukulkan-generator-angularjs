@@ -79,9 +79,9 @@ public class CrudGenerationServiceTest {
         }
         // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("test");
+        pConf.setId("kukulkan");
         pConf.setVersion("1.0.0");
-        pConf.setPackaging("mx.infotec.dads.mongo");
+        pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
