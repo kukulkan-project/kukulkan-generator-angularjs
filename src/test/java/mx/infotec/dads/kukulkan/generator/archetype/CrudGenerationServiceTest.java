@@ -49,6 +49,7 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.InflectorProcessor;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
+import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
  * Test for GeneratorService
@@ -83,7 +84,7 @@ public class CrudGenerationServiceTest {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
         // Create DataModel
         DomainModel domainModel = new JavaDomainModel();
