@@ -23,6 +23,8 @@
  */
 package mx.infotec.dads.kukulkan.grammar;
 
+import java.nio.file.Paths;
+
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
@@ -30,6 +32,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
+import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
 
 /**
  * Test for GeneratorService
@@ -54,9 +60,22 @@ public class KukulkanGrammarTest {
 
         kukulkanParser.DomainModelContext tree = parser.domainModel();
 
-        GrammarSemanticAnalyzer visitor = new GrammarSemanticAnalyzer();
+        GrammarSemanticAnalyzer visitor = new GrammarSemanticAnalyzer(getDefaulProjectConfiguration());
         // DataModel dataModel = visitor.visit(tree);
         System.out.println("Interpretation finished");
+    }
+
+    private static ProjectConfiguration getDefaulProjectConfiguration() {
+        // Create ProjectConfiguration
+        ProjectConfiguration pConf = new ProjectConfiguration();
+        pConf.setId("kukulkan");
+        pConf.setVersion("1.0.0");
+        pConf.setPackaging("mx.infotec.dads.archetype");
+        pConf.setYear("2017");
+        pConf.setAuthor("KUKULKAN");
+        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
+        return pConf;
     }
 
 }
