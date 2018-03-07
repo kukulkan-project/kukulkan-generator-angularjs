@@ -80,11 +80,9 @@ public class ${entity} implements Serializable {
     <#if property.constraint.nullable==false>
     @NotNull
     </#if> 
-    <#if property.literal==true>
+    <#if property.literal==true || property.blob==true || property.clob==true>
     	<#if property.sizeValidation==true>
     @Size(<#if property.constraint.min??>min = ${property.constraint.min}</#if><#if property.constraint.min?? && property.constraint.max??>, </#if><#if property.constraint.max??>max = ${property.constraint.max}</#if>)
-	    <#else>
-    @Size(<#if property.constraint.min??>min = ${property.constraint.min}</#if><#if property.constraint.min?? && property.constraint.max??>, </#if><#if property.constraint.max??>max = ${property.constraint.max}</#if>)	    
 	    </#if>
 	<#elseif property.number==true>
     	<#if property.long==true || property.integer==true>
@@ -102,15 +100,12 @@ public class ${entity} implements Serializable {
     @DecimalMax(value = "${property.constraint.max}")
     		</#if>
     	</#if>	
-	<#elseif property.float==true>
-	<#elseif property.double==true>
-	<#elseif property.bigDecimal==true>
+    </#if> 
+    <#if property.blob==true || property.clob==true>
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     </#if> 
     @Column(name = "${property.columnName}"<#if property.literal==true && property.constraint.max??>, length=${property.constraint.max}</#if><#if property.bigDecimal==true>, precision=10, scale=2</#if><#if property.constraint.indexed==true>, unique=true</#if><#if property.constraint.nullable==false>, nullable = false</#if>)
-    <#if property.qualifiedName == "java.sql.Blob" || property.qualifiedName == "java.sql.Clob">
-    @Basic(fetch = FetchType.LAZY)
-    @Lob
-    </#if> 
     private ${property.type} ${property.name};
 	</#list>
 	
