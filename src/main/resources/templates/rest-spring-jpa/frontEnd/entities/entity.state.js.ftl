@@ -126,7 +126,7 @@
                             return {
                             	${primaryKey.name}: null,
                           	    <#list properties as property>
-                                ${property.name}: null<#sep>, </#sep>
+                                ${property.name}: <#if property.boolean ==true>false<#else>null</#if><#sep>,</#sep>
                     			</#list>
                             };
                         }

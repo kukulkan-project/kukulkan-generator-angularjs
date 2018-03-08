@@ -10,7 +10,8 @@
     function ${entityCamelCase?cap_first}Controller($state, DataUtils, ${entityCamelCase?cap_first}, ${entityCamelCase?cap_first}Search, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
-
+        
+        vm.${entityCamelCasePlural} = [];
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
