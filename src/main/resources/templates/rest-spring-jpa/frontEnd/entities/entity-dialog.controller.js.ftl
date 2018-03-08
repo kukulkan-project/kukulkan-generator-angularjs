@@ -61,6 +61,11 @@
         	<#list properties as property>
         	<#if property.blob == true> 
         vm.set${property.name?cap_first} = function ($file, ${entityCamelCase}) {
+        	<#if property.imageBlob == true>
+            if ($file && $file.$error === 'pattern') {
+                return;
+            }
+			</#if>
             if ($file) {
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
