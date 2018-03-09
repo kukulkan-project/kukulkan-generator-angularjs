@@ -17,9 +17,9 @@ public enum TemplateEnum {
     FRONT_END("rest-spring-jpa/frontEnd"), 
     COMMON("common"),
     FRONT_END_I18N_LOCATION_EN("rest-spring-jpa/frontEnd/i18n/en"),
-    FRONT_END_I18N_LOCATION_ES("rest-spring-jpa/frontEnd/i18n/es");
+    FRONT_END_I18N_LOCATION_ES("rest-spring-jpa/frontEnd/i18n/es"),
+    BACK_END_DATABASE_LIQUIBASE_LOCATION("rest-spring-jpa/frontEnd/i18n/es");
 
-    
     private String location;
 
     TemplateEnum(String location) {

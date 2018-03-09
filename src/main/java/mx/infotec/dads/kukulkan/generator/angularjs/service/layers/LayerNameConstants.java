@@ -148,6 +148,22 @@ public class LayerNameConstants {
 
             }
         }
+        
+        /**
+         * The Class Repository.
+         */
+        public static class Liquibase {
+            
+            /** The Constant SERVICE_NAME. */
+            public static final String SERVICE_NAME = "liquibase";
+
+            /**
+             * Instantiates a new repository.
+             */
+            private Liquibase() {
+
+            }
+        }
     }
 
     /**
