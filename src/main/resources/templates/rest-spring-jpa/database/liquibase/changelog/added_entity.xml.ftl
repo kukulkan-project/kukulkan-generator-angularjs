@@ -18,75 +18,38 @@
     <!--
         Added the entity ${entity.name}.
     -->
-    <changeSet id="${timestamp}-${entity?index+1}" author="kukulkan">
-        <createTable tableName="${entity.name}">
+    <changeSet id="${timestamp}-${entity?index+1}" author="${author}">
+        <createTable tableName="${entity.tableName}">
             <column name="id" type="bigint" autoIncrement="${r"${autoIncrement}"}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="nombre" type="varchar(50)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="edad" type="integer">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="numero_credencial" type="bigint">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="sueldo" type="decimal(10,2)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="impuesto" type="${r"${floatType}"}">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="impuesto_detalle" type="double">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="activo" type="bit">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="fecha_local_date" type="date">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="fecha_zone_date_time" type="timestamp">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="imagen" type="longblob">
-                <constraints nullable="false" />
-            </column>
-            <column name="imagen_content_type" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="imagen_any_blob" type="longblob">
-                <constraints nullable="false" />
-            </column>
-            <column name="imagen_any_blob_content_type" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="imagen_blob" type="longblob">
-                <constraints nullable="false" />
-            </column>
-            <column name="imagen_blob_content_type" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="jhi_desc" type="clob">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="instante" type="timestamp">
-                <constraints nullable="false" />
-            </column>
+        <#list properties as property>
+        	<#if property.name?ends_with("ContentType") == false>
+	        	<#if  property.blob == true>
+		    	    <#if  property.clob == true>
+						<#include "./types/textblob.ftl">
+			    	<#else>
+		    	        <#include "./types/blob.ftl">
+		    		</#if>
+		    	<#elseif property.time == true>
+		    		<#if  property.zoneDateTime == true>
+		        		<#include "./types/zonedatetime.ftl">
+			    	<#elseif property.localDate == true>
+			    		<#include "./types/localdate.ftl">
+			    	<#else>
+			    		<#include "./types/instant.ftl">
+		    		</#if>
+				<#elseif property.boolean == true>
+					<#include "./types/boolean.ftl">
+				<#elseif property.literal == true>
+			    		<#include "./types/text.ftl">
+			    <#elseif property.number == true>
+					<#include "./types/number.ftl">
+		        <#else> 
+		        	<#include "./types/text.ftl">
+		    	</#if>
+        	</#if>
+		</#list>
 
         </createTable>
         <dropDefaultValue tableName="persona" columnName="fecha_zone_date_time" columnDataType="datetime"/>

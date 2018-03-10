@@ -1,4 +1,3 @@
-<#assign aDateTime = .now>
 /*
  *  
  * The MIT License (MIT)
@@ -39,7 +38,7 @@ ${importPrimaryKey}
  * ${entity}Repository
  * 
  * @author ${author}
- * @kukulkanGenerated ${aDateTime?iso_utc}
+ * @kukulkanGenerated ${timestamp}
  */
 <#if isMongoDB == true>
 public interface ${entity}Repository extends MongoRepository<${entity}, String> {
