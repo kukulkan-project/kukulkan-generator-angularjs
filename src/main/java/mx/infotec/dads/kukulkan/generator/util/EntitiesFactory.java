@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.util;
+package mx.infotec.dads.kukulkan.generator.util;
 
 import static mx.infotec.dads.kukulkan.engine.editor.ace.EditorFactory.createDefaultAceEditor;
 
@@ -29,10 +29,6 @@ import java.nio.file.Path;
 import java.util.Map;
 
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStore;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.DataStoreType;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;

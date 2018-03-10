@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.service.layers;
+package mx.infotec.dads.kukulkan.generator.util;
 
 /**
  * Character for Layer types in the generator.

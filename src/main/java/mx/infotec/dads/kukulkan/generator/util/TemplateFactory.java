@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.util;
+package mx.infotec.dads.kukulkan.generator.util;
 
 import java.util.ArrayList;
 import java.util.List;

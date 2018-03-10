@@ -21,20 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.layer;
+package mx.infotec.dads.kukulkan.generator.layers.angularjs;
 
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DELETE_DIALOG_HTML;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DETAIL_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DETAIL_HTML;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_DIALOG_HTML;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_HTML;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_SERVICE_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.ENTITY_STATE_JS;
-import static mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants.IDIOMA_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DELETE_DIALOG_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DELETE_DIALOG_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETAIL_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETAIL_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SERVICE_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_STATE_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.IDIOMA_JS;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVASCRIPT;
 import static mx.infotec.dads.kukulkan.metamodel.util.NameConventionFormatter.camelCaseToHyphens;
@@ -52,16 +52,17 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.LayerConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.util.TemplateFormatter;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.util.LayerConstants;
+import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.generator.util.TemplateFormatter;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 
 /**
@@ -70,7 +71,7 @@ import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
  * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.FrontEnd.AngularJs.SERVICE_NAME)
-public class FrontEndLayer extends AngularJsSpringLayer {
+public class FrontEndLayer extends AbstractNavigableLayer {
 
     /** The template service. */
     @Autowired

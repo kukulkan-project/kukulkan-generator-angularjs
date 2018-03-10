@@ -21,21 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.domain;
-
-import java.io.Serializable;
-
-import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
+package mx.infotec.dads.kukulkan.generator.util;
 
 /**
- * Supported dataSourceConnectionType.
+ * Template Formatter.
  *
  * @author Daniel Cortes Pichardo
  */
+public class TemplateFormatter {
+    
+    /**
+     * Instantiates a new template formatter.
+     */
+    private TemplateFormatter() {
+    }
 
-public class DataStoreType extends AbstractDescription implements Serializable {
-
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 6702727854037559008L;
-
+    /**
+     * Format name template.
+     *
+     * @param template the template
+     * @return the string
+     */
+    public static String formatNameTemplate(String template) {
+    	return template.replaceAll("entity|.ftl", "");
+    }
 }

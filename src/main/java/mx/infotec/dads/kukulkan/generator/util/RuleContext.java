@@ -1,10 +1,8 @@
-package mx.infotec.dads.kukulkan.generator.angularjs.util;
+package mx.infotec.dads.kukulkan.generator.util;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
 
 /**
  * Rule Context

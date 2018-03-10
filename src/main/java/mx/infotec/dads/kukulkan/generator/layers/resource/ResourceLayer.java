@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.layer;
+package mx.infotec.dads.kukulkan.generator.layers.resource;
 
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createRestResourceName;
+import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createRestResourceName;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceDotBySlash;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceSlashByDot;
@@ -42,12 +42,13 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
@@ -58,7 +59,7 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.Web.SpringRest.SERVICE_NAME)
-public class WebLayer extends AngularJsSpringLayer {
+public class ResourceLayer extends AbstractNavigableLayer {
 
     /** The Constant LAYER_NAME. */
     private static final String LAYER_NAME = LayerNameConstants.Web.SpringRest.SERVICE_NAME;
@@ -68,7 +69,7 @@ public class WebLayer extends AngularJsSpringLayer {
     private TemplateService templateService;
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebLayer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceLayer.class);
 
     /*
      * (non-Javadoc)

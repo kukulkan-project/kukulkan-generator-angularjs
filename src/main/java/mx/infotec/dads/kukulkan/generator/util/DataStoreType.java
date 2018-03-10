@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.domain;
+package mx.infotec.dads.kukulkan.generator.util;
 
 import java.io.Serializable;
 
@@ -32,9 +32,10 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.AbstractDescription;
  *
  * @author Daniel Cortes Pichardo
  */
-public class RuleType extends AbstractDescription implements Serializable {
+
+public class DataStoreType extends AbstractDescription implements Serializable {
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6702727854037559008L;
 
 }

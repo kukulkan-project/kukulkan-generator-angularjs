@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs.layer;
+package mx.infotec.dads.kukulkan.generator.layers.business;
 
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceImplName;
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createServiceName;
+import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createServiceImplName;
+import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createServiceName;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_IMPL_PROPERTY;
 import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
@@ -43,12 +43,13 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
-import mx.infotec.dads.kukulkan.generator.angularjs.service.layers.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.TemplateEnum;
+import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
+import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
+import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
@@ -59,7 +60,7 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.Business.SpringService.SERVICE_NAME)
-public class BusinessLayer extends AngularJsSpringLayer {
+public class BusinessLayer extends AbstractNavigableLayer {
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(BusinessLayer.class);

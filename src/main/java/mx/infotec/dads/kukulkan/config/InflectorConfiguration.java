@@ -23,9 +23,9 @@
  */
 package mx.infotec.dads.kukulkan.config;
 
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createDefaultSingularRuleType;
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createEsRule;
-import static mx.infotec.dads.kukulkan.generator.angularjs.util.EntitiesFactory.createOsRule;
+import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createDefaultSingularRuleType;
+import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createEsRule;
+import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createOsRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import edu.emory.mathcs.backport.java.util.Collections;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.Rule;
-import mx.infotec.dads.kukulkan.generator.angularjs.domain.RuleType;
-import mx.infotec.dads.kukulkan.generator.angularjs.util.RuleContext;
+import mx.infotec.dads.kukulkan.generator.util.Rule;
+import mx.infotec.dads.kukulkan.generator.util.RuleContext;
+import mx.infotec.dads.kukulkan.generator.util.RuleType;
 import mx.infotec.dads.kukulkan.metamodel.util.InflectorProcessor;
 
 /**

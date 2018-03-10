@@ -21,16 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.angularjs;
+package mx.infotec.dads.kukulkan.generator.engine;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import mx.infotec.dads.kukulkan.generator.angularjs.layer.AngularJsSpringLayer;
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
+import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 
 /**
  * Generator for Angular 1.5.8, Spring boot and Spring Data
@@ -39,13 +40,13 @@ import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
  *
  */
 @GeneratorComponent
-public class AngularSpringGenerator implements Generator {
+public class EngineGenerator implements Generator {
 
     /**
      * The layers.
      */
     @Autowired
-    List<AngularJsSpringLayer> layers;
+    List<Layer> layers;
 
     /*
      * (non-Javadoc)
@@ -59,7 +60,9 @@ public class AngularSpringGenerator implements Generator {
 
     @Override
     public void process(GeneratorContext context) {
-        layers.forEach(layer -> layer.process(context));
+        layers.stream()
+        .filter(layer -> context.containsLayer(layer.getName()))
+        .collect(Collectors.toList())
+        .forEach(layer -> layer.process(context));
     }
-
 }
