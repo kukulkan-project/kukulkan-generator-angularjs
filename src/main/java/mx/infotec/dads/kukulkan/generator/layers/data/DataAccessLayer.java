@@ -79,7 +79,7 @@ public class DataAccessLayer extends AbstractNavigableLayer {
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+    public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         LOGGER.debug("repositoryLayerTask for dommain {}", dmgName);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.DAO_LAYER_NAME));

@@ -27,6 +27,7 @@ import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -42,8 +43,10 @@ import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
+import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
+import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 
 /**
  * Service Layer Task.
@@ -71,17 +74,28 @@ public class LiquibaseLayerImpl extends LiquibaseLayer {
     public void doBeforeProcessDataModelGroup(GeneratorContext context, Map<String, Object> model) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
         DomainModel domainModel = requiredNotEmpty(context.get(DomainModel.class));
-        fillMasterXml(pConf, model, domainModel);
-    }
-
-    private void fillMasterXml(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         Path templateFilePath = TemplateEnum.BACK_END_DATABASE_LIQUIBASE_LOCATION.getLocation("master.xml.ftl");
         Path relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.toString());
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.LIQUIBASE_INDEX.getPath(), "master.xml");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.HTML);
+                templateFilePath, LanguageType.XML);
         templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
+    }
+
+    @Override
+    public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+            Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
+        Path templateFilePath = TemplateEnum.BACK_END_DATABASE_LIQUIBASE_LOCATION.getLocation("changelog",
+                "added_entity.xml.ftl");
+        Path relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.toString());
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
+                FileUtil.formatToDateTimeJournal(pConf.getTimestamp()) + "_added_entity_" + dmElement.getName()
+                        + ".xml");
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
+                templateFilePath, LanguageType.XML);
+        templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
     /*

@@ -37,7 +37,7 @@ import mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer;
  */
 public abstract class LiquibaseLayer extends AbstractNavigableLayer {
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+    public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         // this method could be override
     }

@@ -80,7 +80,7 @@ public class BusinessLayer extends AbstractNavigableLayer {
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
+    public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement: {} ", basePackage);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, SERVICE_LAYER_NAME));

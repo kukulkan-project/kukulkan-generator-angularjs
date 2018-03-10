@@ -30,7 +30,7 @@ public enum TemplateEnum {
         return location;
     }
 
-    public Path getLocation(String fileName) {
+    public Path getLocation(String ...fileName ) {
         return Paths.get(location, fileName);
     }
 }

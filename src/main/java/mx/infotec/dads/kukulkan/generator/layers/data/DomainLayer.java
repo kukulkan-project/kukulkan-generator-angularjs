@@ -76,7 +76,7 @@ public class DomainLayer extends AbstractNavigableLayer {
      * java.lang.String)
      */
     @Override
-    public void visitDomainModelElement(ProjectConfiguration confg, Collection<Entity> dmElementCollection,
+    public void visitEntity(ProjectConfiguration confg, Collection<Entity> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         LOGGER.debug("visitDomainModelElement for {}", basePackage);
         propertiesMap.put(PACKAGE_PROPERTY,
