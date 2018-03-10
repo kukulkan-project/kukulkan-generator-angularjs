@@ -23,23 +23,8 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -47,11 +32,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
@@ -104,7 +84,7 @@ public class CrudGenerationServiceTest {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase", "domain-core");
         // Create DataModel
