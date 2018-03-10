@@ -23,6 +23,8 @@
  */
 package mx.infotec.dads.kukulkan.generator.engine;
 
+import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
 import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
 
@@ -60,9 +63,10 @@ public class EngineGenerator implements Generator {
 
     @Override
     public void process(GeneratorContext context) {
+        ProjectConfiguration configuration = requiredNotEmpty(context.get(ProjectConfiguration.class));
         layers.stream()
-        .filter(layer -> context.containsLayer(layer.getName()))
-        .collect(Collectors.toList())
-        .forEach(layer -> layer.process(context));
+                .filter(layer -> configuration.containsLayer(layer.getName()))
+                .collect(Collectors.toList())
+                .forEach(layer -> layer.process(context));
     }
 }

@@ -41,7 +41,7 @@ public class LayerNameConstants {
      * The Class FrontEnd.
      */
     public static class FrontEnd {
-        
+
         /**
          * Instantiates a new front end.
          */
@@ -52,7 +52,7 @@ public class LayerNameConstants {
          * The Class AngularJs.
          */
         public static class AngularJs {
-            
+
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "angular-js";
 
@@ -62,13 +62,28 @@ public class LayerNameConstants {
             private AngularJs() {
             }
         }
+
+        /**
+         * The Class AngularJs.
+         */
+        public static class Angular {
+
+            /** The Constant SERVICE_NAME. */
+            public static final String SERVICE_NAME = "angular";
+
+            /**
+             * Instantiates a new angular js.
+             */
+            private Angular() {
+            }
+        }
     }
 
     /**
      * The Class Web.
      */
     public static class Web {
-        
+
         /**
          * Instantiates a new web.
          */
@@ -80,7 +95,7 @@ public class LayerNameConstants {
          * The Class SpringRest.
          */
         public static class SpringRest {
-            
+
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "spring-rest";
 
@@ -98,7 +113,7 @@ public class LayerNameConstants {
      * The Class Business.
      */
     public static class Business {
-        
+
         /**
          * Instantiates a new business.
          */
@@ -109,7 +124,7 @@ public class LayerNameConstants {
          * The Class SpringService.
          */
         public static class SpringService {
-            
+
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "spring-service";
 
@@ -126,7 +141,7 @@ public class LayerNameConstants {
      * The Class DataAccess.
      */
     public static class DataAccess {
-        
+
         /**
          * Instantiates a new data access.
          */
@@ -137,7 +152,7 @@ public class LayerNameConstants {
          * The Class Repository.
          */
         public static class Repository {
-            
+
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "spring-repository";
 
@@ -148,12 +163,12 @@ public class LayerNameConstants {
 
             }
         }
-        
+
         /**
          * The Class Repository.
          */
         public static class Liquibase {
-            
+
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "liquibase";
 
@@ -170,7 +185,7 @@ public class LayerNameConstants {
      * The Class Domain.
      */
     public static class Domain {
-        
+
         /**
          * Instantiates a new domain.
          */
@@ -181,7 +196,7 @@ public class LayerNameConstants {
          * The Class Core.
          */
         public static class Core {
-            
+
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "domain-core";
 
@@ -198,7 +213,7 @@ public class LayerNameConstants {
      * The Class Archetype.
      */
     public static class Archetype {
-        
+
         /**
          * Instantiates a new archetype.
          */
@@ -209,13 +224,13 @@ public class LayerNameConstants {
          * The Class AngularJs.
          */
         public static class AngularJs {
-            
+
             /** The Constant GENERATOR_NAME. */
             public static final String GENERATOR_NAME = "angular-js-archetype-generator";
-            
+
             /** The Constant GENERATOR_NAME. */
             public static final String JPA_GENERATOR = "angular-js-jpa-archetype-generator";
-            
+
             /** The Constant LAYER_NAME. */
             public static final String LAYER_NAME = "angular-js-archetype-layer";
 

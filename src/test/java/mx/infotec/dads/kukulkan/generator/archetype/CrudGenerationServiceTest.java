@@ -106,6 +106,7 @@ public class CrudGenerationServiceTest {
         pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
+        pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase", "domain-core");
         // Create DataModel
         DomainModel domainModel = new JavaDomainModel();
         // Mapping DataContext into DataModel
@@ -116,8 +117,6 @@ public class CrudGenerationServiceTest {
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);
         genCtx.put(DomainModel.class, domainModel);
-        genCtx.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase",
-                "domain-core");
         // Process Activities
         generationService.process(genCtx);
         FileUtil.saveToFile(genCtx);

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.layers.angularjs;
+package mx.infotec.dads.kukulkan.generator.layers.frontend;
 
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DELETE_DIALOG_CONTROLLER_JS;
@@ -71,14 +71,14 @@ import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
  * @author Daniel Cortes Pichardo
  */
 @Component(LayerNameConstants.FrontEnd.AngularJs.SERVICE_NAME)
-public class FrontEndLayer extends AbstractNavigableLayer {
+public class AngularJsLayer extends AbstractNavigableLayer {
 
     /** The template service. */
     @Autowired
     private TemplateService templateService;
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FrontEndLayer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AngularJsLayer.class);
 
     /*
      * (non-Javadoc)

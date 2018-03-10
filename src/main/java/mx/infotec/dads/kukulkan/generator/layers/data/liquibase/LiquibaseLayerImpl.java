@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mx.infotec.dads.kukulkan.generator.liquibase;
+package mx.infotec.dads.kukulkan.generator.layers.data.liquibase;
 
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
