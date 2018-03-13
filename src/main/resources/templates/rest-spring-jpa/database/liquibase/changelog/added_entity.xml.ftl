@@ -26,17 +26,17 @@
         <#list properties as property>
         	<#if property.name?ends_with("ContentType") == false>
 	        	<#if  property.blob == true>
-		    	    <#if  property.clob == true>
-						<#include "./types/textblob.ftl">
-			    	<#else>
-		    	        <#include "./types/blob.ftl">
-		    		</#if>
+					<#include "./types/blob.ftl">
 		    	<#elseif property.time == true>
 		        	<#include "./types/datetime.ftl">
 				<#elseif property.boolean == true>
 					<#include "./types/boolean.ftl">
 				<#elseif property.literal == true>
-			    	<#include "./types/text.ftl">
+					<#if  property.clob == true>
+						<#include "./types/textblob.ftl">
+			    	<#else>
+			    		<#include "./types/text.ftl">
+			    	</#if>
 			    <#elseif property.number == true>
 					<#include "./types/number.ftl">
 		    	</#if>
