@@ -85,7 +85,7 @@ public class CrudGenerationServiceTest {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase", "domain-core");
