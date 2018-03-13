@@ -32,21 +32,13 @@
 		    	        <#include "./types/blob.ftl">
 		    		</#if>
 		    	<#elseif property.time == true>
-		    		<#if  property.zoneDateTime == true>
-		        		<#include "./types/zonedatetime.ftl">
-			    	<#elseif property.localDate == true>
-			    		<#include "./types/localdate.ftl">
-			    	<#else>
-			    		<#include "./types/instant.ftl">
-		    		</#if>
+		        	<#include "./types/datetime.ftl">
 				<#elseif property.boolean == true>
 					<#include "./types/boolean.ftl">
 				<#elseif property.literal == true>
-			    		<#include "./types/text.ftl">
+			    	<#include "./types/text.ftl">
 			    <#elseif property.number == true>
 					<#include "./types/number.ftl">
-		        <#else> 
-		        	<#include "./types/text.ftl">
 		    	</#if>
         	</#if>
 		</#list>

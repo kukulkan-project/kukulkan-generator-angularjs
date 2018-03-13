@@ -24,6 +24,7 @@
 package mx.infotec.dads.kukulkan.generator.archetype;
 
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -84,8 +85,9 @@ public class CrudGenerationServiceTest {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
+        pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
+        pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase", "domain-core");
         // Create DataModel
         DomainModel domainModel = new JavaDomainModel();
