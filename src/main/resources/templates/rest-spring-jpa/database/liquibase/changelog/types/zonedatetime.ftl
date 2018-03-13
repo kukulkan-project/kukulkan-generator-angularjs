@@ -1,4 +1,4 @@
 
-            <column name="fecha_zone_date_time" type="timestamp">
+            <column name="${property.columnName}" type="timestamp">
                 <constraints nullable="false" />
             </column>

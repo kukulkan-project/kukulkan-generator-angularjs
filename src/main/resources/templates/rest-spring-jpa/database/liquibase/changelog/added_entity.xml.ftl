@@ -44,9 +44,11 @@
 		</#list>
 
         </createTable>
-        <dropDefaultValue tableName="persona" columnName="fecha_zone_date_time" columnDataType="datetime"/>
-        <dropDefaultValue tableName="persona" columnName="instante" columnDataType="datetime"/>
-        
+        <#list properties as property>
+        	<#if property.zoneDateTime == true || property.instant == true>
+            <dropDefaultValue tableName="${entity.tableName}" columnName="${property.columnName}" columnDataType="datetime"/>
+        	</#if>
+		</#list>
     </changeSet>
 	</#list>    
 </#list>

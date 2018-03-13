@@ -1,4 +1,4 @@
             
-            <column name="activo" type="bit">
+            <column name="${property.columnName}" type="bit">
                 <constraints nullable="false" />
             </column>
