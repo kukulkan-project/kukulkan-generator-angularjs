@@ -23,7 +23,7 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
-import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.addProjectData;
+import static mx.infotec.dads.kukulkan.engine.util.LayerUtils.addProjectData;
 
 import java.util.Map;
 

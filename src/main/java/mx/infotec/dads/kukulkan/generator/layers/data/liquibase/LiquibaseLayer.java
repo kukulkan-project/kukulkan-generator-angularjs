@@ -26,9 +26,9 @@ package mx.infotec.dads.kukulkan.generator.layers.data.liquibase;
 import java.util.Collection;
 import java.util.Map;
 
+import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer;
 
 /**
  * Abstract Navigable Layer.
