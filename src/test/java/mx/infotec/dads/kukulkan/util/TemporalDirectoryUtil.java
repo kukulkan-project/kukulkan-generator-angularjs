@@ -15,14 +15,14 @@ public final class TemporalDirectoryUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TemporalDirectoryUtil.class);
 
-    private static final String TEMPORAL_PATH = buildTemporalPath();
+    private static final Path TEMPORAL_PATH = buildTemporalPath();
 
-    private static String buildTemporalPath() {
-        String tempDir;
+    private static Path buildTemporalPath() {
+        Path tempPath;
 
         try {
-            Path p = Files.createTempDirectory("refactoring");
-            tempDir = p.toString();
+            tempPath = Files.createTempDirectory("refactoring");
+            tempPath.toFile().deleteOnExit();
         } catch (IOException ex) {
             LOGGER.error("Can't create temporal file, create alter directory", ex);
 
@@ -35,21 +35,22 @@ public final class TemporalDirectoryUtil {
                 systemTempDir += File.separatorChar;
             }
             
-            tempDir = systemTempDir + "refactoring";
+            File tempDir =  new File(systemTempDir + "refactoring");
+            tempDir.deleteOnExit();
+            tempPath = tempDir.toPath();
         }
 
-        LOGGER.debug("Temporal dir: {}", tempDir);
-        (new File(tempDir)).deleteOnExit();
-        return tempDir;
+        LOGGER.debug("Temporal dir: {}", tempPath);
+        return tempPath;
     }
 
-    public static String getTemporalPath() {
+    public static Path getTemporalPath() {
         return TEMPORAL_PATH;
     }
 
     public static void deleteTemporalDir() {
         LOGGER.debug("Delete temporal dir: {}", TEMPORAL_PATH);
-        delete(new File(TEMPORAL_PATH));
+        delete(TEMPORAL_PATH.toFile());
     }
 
     private static void delete(File dir) {

@@ -23,8 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
-import java.nio.file.Paths;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +64,7 @@ public class ArchetypeAngularJsGenerationTest {
         pConf.setVersion("1.0.0");
         pConf.setPackaging("mx.infotec.dads.jpa");
         pConf.setYear("2017");
-        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
+        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);

@@ -23,8 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.grammar;
 
-import java.nio.file.Paths;
-
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
@@ -36,6 +34,7 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
+import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
  * Test for GeneratorService
@@ -73,7 +72,7 @@ public class KukulkanGrammarTest {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         return pConf;
     }
