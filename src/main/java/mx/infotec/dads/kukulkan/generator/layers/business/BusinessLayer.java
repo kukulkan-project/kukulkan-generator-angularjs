@@ -23,11 +23,11 @@
  */
 package mx.infotec.dads.kukulkan.generator.layers.business;
 
+import static mx.infotec.dads.kukulkan.engine.util.LayerUtils.PACKAGE_IMPL_PROPERTY;
+import static mx.infotec.dads.kukulkan.engine.util.LayerUtils.PACKAGE_PROPERTY;
 import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createServiceImplName;
 import static mx.infotec.dads.kukulkan.generator.util.EntitiesFactory.createServiceName;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
-import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_IMPL_PROPERTY;
-import static mx.infotec.dads.kukulkan.metamodel.util.LayerUtils.PACKAGE_PROPERTY;
 import static mx.infotec.dads.kukulkan.metamodel.util.NameConventions.SERVICE_IMPLEMENTS_LAYER_NAME;
 import static mx.infotec.dads.kukulkan.metamodel.util.NameConventions.SERVICE_LAYER_NAME;
 
@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
@@ -49,7 +50,6 @@ import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.generator.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
