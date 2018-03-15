@@ -35,9 +35,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
+import mx.infotec.dads.kukulkan.engine.service.EngineGenerator;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
-import mx.infotec.dads.kukulkan.generator.engine.EngineGenerator;
 import mx.infotec.dads.kukulkan.generator.util.Rule;
 import mx.infotec.dads.kukulkan.generator.util.RuleContext;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
@@ -50,7 +50,6 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.InflectorProcessor;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
-import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
  * Test for GeneratorService
@@ -85,7 +84,7 @@ public class CrudGenerationServiceTest {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2017");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(Paths.get(TemporalDirectoryUtil.getTemporalPath()));
+        pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase", "domain-core");

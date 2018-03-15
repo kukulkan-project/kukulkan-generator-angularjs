@@ -84,29 +84,21 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        for (TemplateInfo template : getTemplatesToProcess(pConf)) {
-            Path toSave = createToSavePath(context, template, pConf.getOutputDir());
-            processTemplate(context, propertiesMap, template, toSave);
+        for (TemplateInfo templateInfo : getTemplatesToProcess(pConf)) {
+            Path toSave = createToSavePath(context, templateInfo, pConf.getOutputDir());
+            processTemplate(context, propertiesMap, templateInfo, toSave);
         }
     }
 
     private List<TemplateInfo> getTemplatesToProcess(ProjectConfiguration pConf) {
         List<TemplateInfo> templateList = new ArrayList<>();
         if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
-            templateList.addAll(convertTemplate(TemplateType.JAVA_SPRING_MONGO, TemplateFactory.MONGO_TEMPLATE_LIST));
+            templateList.addAll(TemplateFactory.MONGO_TEMPLATE_LIST);
         } else {
-            templateList.addAll(convertTemplate(TemplateType.JAVA_SPRING_JPA, TemplateFactory.JPA_TEMPLATE_LIST));
+            templateList.addAll(TemplateFactory.JPA_TEMPLATE_LIST);
         }
-        templateList.addAll(convertTemplate(TemplateType.ANGULAR_JS, TemplateFactory.ANGULAR_JS_TEMPLATE_LIST));
+        templateList.addAll(TemplateFactory.ANGULAR_JS_TEMPLATE_LIST);
         return templateList;
-    }
-
-    private static List<TemplateInfo> convertTemplate(TemplateType type, List<String> from) {
-        List<TemplateInfo> to = new ArrayList<>();
-        for (String template : from) {
-            to.add(new TemplateInfo(type, template));
-        }
-        return to;
     }
 
     /**
@@ -139,13 +131,13 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, TemplateInfo template,
             Path toSave) {
-        if (isFtlFile(template.getStringPath())) {
-            String content = templateService.fillTemplate(template.getStringPath(), propertiesMap);
+        if (isFtlFile(template.getFilePath())) {
+            String content = templateService.fillTemplate(template.getTemplatePath(), propertiesMap);
             FileUtil.saveToFile(toSave, content);
-        } else if (template.getStringPath().contains("banner.txt")) {
+        } else if (template.getFilePath().contains("banner.txt")) {
             createBanner(context, template, toSave);
         } else {
-            FileUtil.copyFromJar("templates/" + template.getStringPath(), toSave);
+            FileUtil.copyFromJar("templates/" + template.getTemplatePath(), toSave);
         }
     }
 
@@ -165,7 +157,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         if (generateBanner.isPresent()) {
             FileUtil.saveToFile(toSave, generateBanner.get());
         } else {
-            FileUtil.copyFromJar("templates/" + template.getStringPath(), toSave);
+            FileUtil.copyFromJar("templates/" + template.getBaseFolder() + template.getFilePath(), toSave);
         }
     }
 
@@ -185,10 +177,11 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      */
     private Path createPath(TemplateInfo template, String packaging, String projectid, Path outputPath) {
         String newPackaging = packaging.replaceAll("\\.", "/");
-        Path temp = Paths.get(template.getStringPath());
-        Path parent = temp.getParent();
-        String newTemplate = createTemplatePath(projectid, newPackaging, parent, outputPath, template);
-        Path targetPath = Paths.get(newTemplate, temp.getFileName().toString().replaceAll(".ftl", ""));
+        Path temp = Paths.get(template.getFilePath());
+        Path parent = Optional.ofNullable(temp.getParent()).orElse(Paths.get(""));
+        String newTemplate = createTemplatePath(newPackaging, parent);
+        Path targetPath = Paths.get(outputPath.toString(), projectid, newTemplate,
+                temp.getFileName().toString().replaceAll(".ftl", ""));
         return createOutputPath(projectid, targetPath);
     }
 
@@ -226,11 +219,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      * @param isMongodb
      * @return the string
      */
-    private String createTemplatePath(String projectid, String newPackaging, Path parent, Path outputPath,
-            TemplateInfo template) {
-        return parent.toString()
-                .replaceAll(template.getType().getTemplatePath(), outputPath + File.separator + projectid)
-                .replaceAll("package", newPackaging);
+    private String createTemplatePath(String newPackaging, Path parent) {
+        return parent.toString().replaceAll("package", newPackaging);
     }
 
     /**
