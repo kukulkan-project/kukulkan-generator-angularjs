@@ -83,8 +83,6 @@
         <sonar.sources>${r"${project.basedir}"}/src/main/</sonar.sources>
         <sonar.surefire.reportsPath>${r"${project.testresult.directory}"}/surefire-reports</sonar.surefire.reportsPath>
         <sonar.tests>${r"${project.basedir}"}/src/test/</sonar.tests>
-
-        <!-- jhipster-needle-maven-property -->
     </properties>
 
     <dependencyManagement>
@@ -96,7 +94,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- jhipster-needle-maven-add-dependency-management -->
         </dependencies>
     </dependencyManagement>
 
