@@ -48,7 +48,6 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
-import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
  * Test for GeneratorService

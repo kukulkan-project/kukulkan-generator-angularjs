@@ -13,6 +13,7 @@
 
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
 <#list dataModelGroup as dmg>
 	<#list dmg.entities as entity>
     <!--
@@ -46,9 +47,10 @@
         </createTable>
         <#list properties as property>
         	<#if property.zoneDateTime == true || property.instant == true>
-            <dropDefaultValue tableName="${entity.tableName}" columnName="${property.columnName}" columnDataType="datetime"/>
+        <dropDefaultValue tableName="${entity.tableName}" columnName="${property.columnName}" columnDataType="datetime"/>
         	</#if>
 		</#list>
+
     </changeSet>
 	</#list>    
 </#list>
