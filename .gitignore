@@ -140,3 +140,6 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+.springBeans
+.sts4-cache
