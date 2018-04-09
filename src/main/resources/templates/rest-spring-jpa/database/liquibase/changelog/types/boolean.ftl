@@ -1,4 +1,4 @@
-            
+
             <column name="${property.columnName}" type="bit">
-                <constraints nullable="false" />
+                <constraints nullable="${property.constraint.nullable?c}" />
             </column>

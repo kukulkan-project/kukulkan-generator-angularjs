@@ -4,8 +4,6 @@
 # This configuration will be overridden by the Spring profile you use,
 # for example application-dev.yml if you use the "dev" profile.
 #
-# More information on profiles: http://www.jhipster.tech/profiles/
-# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
 # ===================================================================
@@ -61,11 +59,6 @@ info:
     project:
         version: #project.version#
 
-# ===================================================================
-# JHipster specific properties
-#
-# Full reference is available at: http://www.jhipster.tech/common-application-properties/
-# ===================================================================
 
 jhipster:
     async:
@@ -99,10 +92,8 @@ jhipster:
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
-# to have type-safe configuration, like in the JHipsterProperties above
+# to have type-safe configuration
 #
-# More documentation is available at:
-# http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
 application:

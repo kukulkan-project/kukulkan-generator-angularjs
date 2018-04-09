@@ -23,6 +23,7 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,10 +36,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.EngineGenerator;
+import mx.infotec.dads.kukulkan.engine.service.InflectorService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
-import mx.infotec.dads.kukulkan.generator.util.Rule;
-import mx.infotec.dads.kukulkan.generator.util.RuleContext;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
@@ -47,7 +47,6 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
 import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
-import mx.infotec.dads.kukulkan.metamodel.util.InflectorProcessor;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
 import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
@@ -65,7 +64,7 @@ public class CrudGenerationServiceTest {
     private EngineGenerator generationService;
 
     @Autowired
-    private RuleContext ruleContext;
+    private InflectorService inflectorService;
 
     @BeforeClass
     public static void runOnceBeforeClass() {
@@ -74,9 +73,6 @@ public class CrudGenerationServiceTest {
 
     @Test
     public void generationService() {
-        for (Rule item : ruleContext.getAllSingularRules()) {
-            InflectorProcessor.getInstance().addSingularize(item.getExpression(), item.getReplacement());
-        }
         // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
         pConf.setId("kukulkan");
@@ -92,7 +88,7 @@ public class CrudGenerationServiceTest {
         DomainModel domainModel = new JavaDomainModel();
         // Mapping DataContext into DataModel
         List<DomainModelGroup> dmgList = GrammarMapping
-                .createSingleTestDataModelGroupList(new GrammarSemanticAnalyzer(pConf));
+                .createSingleTestDataModelGroupList(new GrammarSemanticAnalyzer(pConf, inflectorService));
         domainModel.setDomainModelGroup(dmgList);
         // Create GeneratorContext
         GeneratorContext genCtx = new GeneratorContext();

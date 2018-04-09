@@ -22,7 +22,7 @@ import java.time.Instant;
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "core_user")
 
 public class User extends AbstractAuditingEntity implements Serializable {
 
@@ -85,7 +85,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-        name = "jhi_user_authority",
+        name = "core_user_authority",
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
 

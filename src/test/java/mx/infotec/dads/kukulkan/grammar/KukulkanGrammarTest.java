@@ -27,8 +27,12 @@ import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import mx.infotec.dads.kukulkan.KukulkanEngineApp;
+import mx.infotec.dads.kukulkan.engine.service.InflectorService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
@@ -43,9 +47,12 @@ import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
  *
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest(classes = KukulkanEngineApp.class)
 public class KukulkanGrammarTest {
 
     private static final String EXTENSION = "3k";
+    @Autowired
+    private InflectorService inflectorService;
 
     @Test
     public void generationService() throws Exception {
@@ -59,7 +66,8 @@ public class KukulkanGrammarTest {
 
         kukulkanParser.DomainModelContext tree = parser.domainModel();
 
-        GrammarSemanticAnalyzer visitor = new GrammarSemanticAnalyzer(getDefaulProjectConfiguration());
+        GrammarSemanticAnalyzer visitor = new GrammarSemanticAnalyzer(getDefaulProjectConfiguration(),
+                inflectorService);
         // DataModel dataModel = visitor.visit(tree);
         System.out.println("Interpretation finished");
     }

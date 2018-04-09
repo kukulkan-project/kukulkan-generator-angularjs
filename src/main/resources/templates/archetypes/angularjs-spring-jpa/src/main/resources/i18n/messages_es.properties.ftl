@@ -5,7 +5,7 @@ error.status=Estado:
 error.message=Mensaje:
 
 # Activation email
-email.activation.title=Activación de ${project.id}
+email.activation.title=Activaci�n de ${project.id}
 email.activation.greeting=Estimado {0}
 email.activation.text1=Su cuenta de ${project.id} ha sido creada, por favor, haga clic en el enlace de abajo para activarla:
 email.activation.text2=Saludos,
