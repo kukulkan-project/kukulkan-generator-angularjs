@@ -38,6 +38,7 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
+import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
@@ -47,7 +48,6 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
-import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
 
 /**

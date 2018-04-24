@@ -37,6 +37,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.metamodel.template.TemplateInfo;
 import mx.infotec.dads.kukulkan.metamodel.template.TemplateType;
@@ -46,7 +47,6 @@ import mx.infotec.dads.kukulkan.generator.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.util.FileUtil;
 
 /**
  * Service Layer Task.
