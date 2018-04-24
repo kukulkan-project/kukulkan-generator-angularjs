@@ -53,17 +53,31 @@ local.properties
 ######################
 # Intellij
 ######################
-.idea/
+.idea/*
 *.iml
 *.iws
 *.ipr
 *.ids
 *.orig
+rebel.xml
 
 ######################
 # Visual Studio Code
 ######################
-.vscode/
+.vscode/*
+**/.sts4-cache
+
+######################
+# Netbeans artifacts
+######################
+nbactions.xml
+nb-configuration.xml
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
 ######################
 # Maven
