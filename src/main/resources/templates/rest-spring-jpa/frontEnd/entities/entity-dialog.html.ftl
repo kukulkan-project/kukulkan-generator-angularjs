@@ -16,26 +16,26 @@
         	<#if property.name?ends_with("ContentType") == false>
 	        	<#if  property.blob == true>
 		    	    <#if  property.clob == true>
-						<#include "rest-spring-jpa/frontEnd/entities/edit/textblob.ftl">
+						<#include "/rest-spring-jpa/frontEnd/entities/edit/textblob.ftl">
 			    	<#else>
-		    	        <#include "rest-spring-jpa/frontEnd/entities/edit/blob.ftl">
+		    	        <#include "/rest-spring-jpa/frontEnd/entities/edit/blob.ftl">
 		    		</#if>
 		    	<#elseif property.time == true>
 		    		<#if  property.zoneDateTime == true>
-		        		<#include "rest-spring-jpa/frontEnd/entities/edit/zonedatetime.ftl">
+		        		<#include "/rest-spring-jpa/frontEnd/entities/edit/zonedatetime.ftl">
 			    	<#elseif property.localDate == true>
-			    		<#include "rest-spring-jpa/frontEnd/entities/edit/localdate.ftl">
+			    		<#include "/rest-spring-jpa/frontEnd/entities/edit/localdate.ftl">
 			    	<#else>
-			    		<#include "rest-spring-jpa/frontEnd/entities/edit/instant.ftl">
+			    		<#include "/rest-spring-jpa/frontEnd/entities/edit/instant.ftl">
 		    		</#if>
 				<#elseif property.boolean == true>
-					<#include "rest-spring-jpa/frontEnd/entities/edit/boolean.ftl">
+					<#include "/rest-spring-jpa/frontEnd/entities/edit/boolean.ftl">
 				<#elseif property.literal == true>
-			    		<#include "rest-spring-jpa/frontEnd/entities/edit/text.ftl">
+			    		<#include "/rest-spring-jpa/frontEnd/entities/edit/text.ftl">
 			    <#elseif property.number == true>
-					<#include "rest-spring-jpa/frontEnd/entities/edit/number.ftl">
+					<#include "/rest-spring-jpa/frontEnd/entities/edit/number.ftl">
 		        <#else> 
-		        	<#include "rest-spring-jpa/frontEnd/entities/edit/text.ftl">
+		        	<#include "/rest-spring-jpa/frontEnd/entities/edit/text.ftl">
 		    	</#if>
         	</#if>
 		</#list>
