@@ -12,20 +12,20 @@
         	<#if property.name?ends_with("ContentType") == false>
 	        	<#if  property.blob == true>
 	        		<#if property.clob == true>
-	        		<#include "./read/textblob.ftl">
+	        		<#include "rest-spring-jpa/frontEnd/entities/read/textblob.ftl">
 		    	    <#else>
-		    	    <#include "./read/blob.ftl">
+		    	    <#include "rest-spring-jpa/frontEnd/entities/read/blob.ftl">
 	        		</#if>
 		    	<#elseif property.time == true>
 		    		<#if  property.zoneDateTime == true>
-		        		<#include "./read/zonedatetime.ftl">
+		        		<#include "rest-spring-jpa/frontEnd/entities/read/zonedatetime.ftl">
 			    	<#elseif property.localDate == true>
-			    		<#include "./read/localdate.ftl">
+			    		<#include "rest-spring-jpa/frontEnd/entities/read/localdate.ftl">
 		    		<#else>
-		    		    <#include "./read/instant.ftl">
+		    		    <#include "rest-spring-jpa/frontEnd/entities/read/instant.ftl">
 		    		</#if>
 		        <#else> 
-		        	<#include "./read/text.ftl">
+		        	<#include "rest-spring-jpa/frontEnd/entities/read/text.ftl">
 		    	</#if>
         	</#if>
 		</#list>

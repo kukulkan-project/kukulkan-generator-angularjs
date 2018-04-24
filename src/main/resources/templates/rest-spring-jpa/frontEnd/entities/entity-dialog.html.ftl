@@ -16,26 +16,26 @@
         	<#if property.name?ends_with("ContentType") == false>
 	        	<#if  property.blob == true>
 		    	    <#if  property.clob == true>
-						<#include "./edit/textblob.ftl">
+						<#include "rest-spring-jpa/frontEnd/entities/edit/textblob.ftl">
 			    	<#else>
-		    	        <#include "./edit/blob.ftl">
+		    	        <#include "rest-spring-jpa/frontEnd/entities/edit/blob.ftl">
 		    		</#if>
 		    	<#elseif property.time == true>
 		    		<#if  property.zoneDateTime == true>
-		        		<#include "./edit/zonedatetime.ftl">
+		        		<#include "rest-spring-jpa/frontEnd/entities/edit/zonedatetime.ftl">
 			    	<#elseif property.localDate == true>
-			    		<#include "./edit/localdate.ftl">
+			    		<#include "rest-spring-jpa/frontEnd/entities/edit/localdate.ftl">
 			    	<#else>
-			    		<#include "./edit/instant.ftl">
+			    		<#include "rest-spring-jpa/frontEnd/entities/edit/instant.ftl">
 		    		</#if>
 				<#elseif property.boolean == true>
-					<#include "./edit/boolean.ftl">
+					<#include "rest-spring-jpa/frontEnd/entities/edit/boolean.ftl">
 				<#elseif property.literal == true>
-			    		<#include "./edit/text.ftl">
+			    		<#include "rest-spring-jpa/frontEnd/entities/edit/text.ftl">
 			    <#elseif property.number == true>
-					<#include "./edit/number.ftl">
+					<#include "rest-spring-jpa/frontEnd/entities/edit/number.ftl">
 		        <#else> 
-		        	<#include "./edit/text.ftl">
+		        	<#include "rest-spring-jpa/frontEnd/entities/edit/text.ftl">
 		    	</#if>
         	</#if>
 		</#list>

@@ -27,19 +27,19 @@
         <#list properties as property>
         	<#if property.name?ends_with("ContentType") == false>
 	        	<#if  property.blob == true>
-					<#include "./types/blob.ftl">
+					<#include "rest-spring-jpa/database/liquibase/changelog/types/blob.ftl">
 		    	<#elseif property.time == true>
-		        	<#include "./types/datetime.ftl">
+		        	<#include "rest-spring-jpa/database/liquibase/changelog/types/datetime.ftl">
 				<#elseif property.boolean == true>
-					<#include "./types/boolean.ftl">
+					<#include "rest-spring-jpa/database/liquibase/changelog/types/boolean.ftl">
 				<#elseif property.literal == true>
 					<#if  property.clob == true>
-						<#include "./types/textblob.ftl">
+						<#include "rest-spring-jpa/database/liquibase/changelog/types/textblob.ftl">
 			    	<#else>
-			    		<#include "./types/text.ftl">
+			    		<#include "rest-spring-jpa/database/liquibase/changelog/types/text.ftl">
 			    	</#if>
 			    <#elseif property.number == true>
-					<#include "./types/number.ftl">
+					<#include "rest-spring-jpa/database/liquibase/changelog/types/number.ftl">
 		    	</#if>
         	</#if>
 		</#list>
