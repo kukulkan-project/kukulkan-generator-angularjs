@@ -11,7 +11,7 @@
     
     <groupId>mx.infotec.dads.kukulkan</groupId>
     <artifactId>kukulkan-generator-angularjs</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     
     <name>kukulkan-generator-angularjs</name>
     
@@ -75,18 +75,8 @@
         </dependency>
         <dependency>
             <groupId>mx.infotec.dads.kukulkan</groupId>
-            <artifactId>kukulkan-grammar</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>mx.infotec.dads.kukulkan</groupId>
-            <artifactId>kukulkan-metamodel</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>mx.infotec.dads.kukulkan</groupId>
             <artifactId>kukulkan-engine</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
