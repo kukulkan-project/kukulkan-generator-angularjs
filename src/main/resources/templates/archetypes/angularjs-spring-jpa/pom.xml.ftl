@@ -592,7 +592,7 @@
                 </executions>
                 -->
                 <configuration>
-                    <repository>${project.id}</repository>
+                    <repository>${r"${project.artifactId}"}</repository>
                     <tag>latest</tag>
                     <contextDirectory>${r"${project.build.directory}"}</contextDirectory>
                 </configuration>
