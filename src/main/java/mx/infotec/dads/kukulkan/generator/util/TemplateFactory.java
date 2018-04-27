@@ -272,7 +272,6 @@ public class TemplateFactory {
     
     private static List<TemplateInfo> getMongoTemplates() {
         List<TemplateInfo> templates = new ArrayList<>();
-        templates.add(new TemplateInfo(ANGULAR_SPRING_MONGO_TEMPLATE,"src/main/resources/banner.txt"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_MONGO_TEMPLATE,"src/main/resources/mails/creationEmail.html"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_MONGO_TEMPLATE,"src/main/resources/mails/activationEmail.html"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_MONGO_TEMPLATE,"src/main/resources/mails/passwordResetEmail.html"));
@@ -409,7 +408,6 @@ public class TemplateFactory {
     
     private static List<TemplateInfo> getJpaTemplates() {
         List<TemplateInfo> templates = new ArrayList<>();
-        templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"src/main/resources/banner.txt"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"src/main/resources/mails/creationEmail.html"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"src/main/resources/mails/activationEmail.html"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"src/main/resources/mails/passwordResetEmail.html"));

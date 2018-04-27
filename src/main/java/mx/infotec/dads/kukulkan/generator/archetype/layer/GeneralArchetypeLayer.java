@@ -23,7 +23,11 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
+import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateAngularJs;
+import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateJpaResources;
+import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateMongo;
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
+import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.writeBanner;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -86,12 +90,11 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        for (TemplateInfo templateInfo : getTemplatesToProcess(pConf)) {
-            Path toSave = createToSavePath(context, templateInfo, pConf.getOutputDir());
-            processTemplate(context, propertiesMap, templateInfo, toSave);
-        }
-        writer.copy("archetypes/angularjs-spring-jpa/mvnw", pConf.getOutputDir(), "${project.id}/mvnw", propertiesMap)
-                .ifPresent(file -> file.setExecutable(true));
+        // for (TemplateInfo templateInfo : getTemplatesToProcess(pConf)) {
+        // Path toSave = createToSavePath(context, templateInfo, pConf.getOutputDir());
+        // processTemplate(context, propertiesMap, templateInfo, toSave);
+        // }
+        writeResources(pConf, propertiesMap);
     }
 
     private List<TemplateInfo> getTemplatesToProcess(ProjectConfiguration pConf) {
@@ -103,6 +106,16 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
         templateList.addAll(TemplateFactory.ANGULAR_JS_TEMPLATE_LIST);
         return templateList;
+    }
+
+    private void writeResources(ProjectConfiguration pConf, Map<String, Object> propertiesMap) {
+        if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
+            generateMongo(writer, pConf, propertiesMap);
+        } else {
+            generateJpaResources(writer, pConf, propertiesMap);
+        }
+        generateAngularJs(writer, pConf, propertiesMap);
+        writeBanner(writer, bannerService, pConf);
     }
 
     /**
