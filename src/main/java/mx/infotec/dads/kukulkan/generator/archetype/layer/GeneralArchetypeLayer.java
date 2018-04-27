@@ -25,7 +25,6 @@ package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -38,15 +37,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
+import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
-import mx.infotec.dads.kukulkan.metamodel.template.TemplateInfo;
-import mx.infotec.dads.kukulkan.metamodel.template.TemplateType;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.template.TemplateInfo;
 
 /**
  * Service Layer Task.
@@ -64,6 +63,9 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Autowired
     private BannerService bannerService;
 
+    @Autowired
+    private WriterService writer;
+
     /*
      * (non-Javadoc)
      * 
@@ -78,8 +80,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
      * (non-Javadoc)
      * 
      * @see mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer#
-     * processLayer(mx.infotec.dads.kukulkan.metamodel.foundation.
-     * GeneratorContext, java.util.Map)
+     * processLayer(mx.infotec.dads.kukulkan.metamodel.foundation. GeneratorContext,
+     * java.util.Map)
      */
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
@@ -88,6 +90,8 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
             Path toSave = createToSavePath(context, templateInfo, pConf.getOutputDir());
             processTemplate(context, propertiesMap, templateInfo, toSave);
         }
+        writer.copy("archetypes/angularjs-spring-jpa/mvnw", pConf.getOutputDir(), "${project.id}/mvnw", propertiesMap)
+                .ifPresent(file -> file.setExecutable(true));
     }
 
     private List<TemplateInfo> getTemplatesToProcess(ProjectConfiguration pConf) {

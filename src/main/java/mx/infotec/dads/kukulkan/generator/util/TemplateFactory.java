@@ -536,7 +536,6 @@ public class TemplateFactory {
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"src/test/java/package/config/WebConfigurerTest.java.ftl"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"src/test/java/package/config/WebConfigurerTestController.java.ftl"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"mvnw.cmd"));
-        templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"mvnw"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,"pom.xml.ftl"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,".mvn/wrapper/maven-wrapper.properties"));
         templates.add(new TemplateInfo(ANGULAR_SPRING_JPA_TEMPLATE,".mvn/wrapper/maven-wrapper.jar"));
