@@ -25,14 +25,12 @@
 package mx.infotec.dads.kukulkan.generator.archetype.layer;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.function.Function;
 
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
-import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 
 public class WriteResources {
@@ -540,11 +538,11 @@ public class WriteResources {
     public static void writeBanner(WriterService writer, BannerService bannerService, ProjectConfiguration pConf) {
         String bannerPath = "src/main/resources/banner.txt";
         Optional<String> generateBanner = bannerService.generateBanner(pConf.getId());
-        
+
         if (generateBanner.isPresent()) {
             Path toSave = pConf.getOutputDir().resolve(pConf.getId()).resolve(bannerPath);
-            FileUtil.saveToFile(toSave, generateBanner.get());
-            
+            writer.save(toSave, generateBanner.get());
+
         } else {
             writer.copy("banner.txt", pConf.getOutputDir().resolve(pConf.getId()), bannerPath);
         }

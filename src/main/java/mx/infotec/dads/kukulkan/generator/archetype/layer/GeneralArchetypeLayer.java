@@ -67,6 +67,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Autowired
     private BannerService bannerService;
 
+    /** The writer service. */
     @Autowired
     private WriterService writer;
 
