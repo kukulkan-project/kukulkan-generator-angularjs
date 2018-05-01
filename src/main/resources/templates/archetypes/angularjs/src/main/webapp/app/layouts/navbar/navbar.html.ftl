@@ -129,6 +129,7 @@
                                 <span data-translate="global.menu.admin.apidocs">API</span>
                             </a>
                         </li>
+                        <#if project.database.databaseType == "SQL_MYSQL">
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                         <li ng-hide="vm.inProduction">
                             <a href='/h2-console' target="_tab" ng-click="vm.collapseNavbar()">
@@ -136,6 +137,7 @@
                                 <span data-translate="global.menu.admin.database">Database</span>
                             </a>
                         </li>
+                        </#if>
                     </ul>
                 </li>
                 <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
