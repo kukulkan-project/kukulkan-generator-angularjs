@@ -23,11 +23,11 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +40,7 @@ import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.service.InflectorService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
+import mx.infotec.dads.kukulkan.engine.util.EntityFactory;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
@@ -72,6 +73,7 @@ public class CrudGenerationServiceTest {
     }
 
     @Test
+    @Ignore
     public void generationService() {
         // Create ProjectConfiguration
         ProjectConfiguration pConf = new ProjectConfiguration();
@@ -87,7 +89,35 @@ public class CrudGenerationServiceTest {
         // Create DataModel
         DomainModel domainModel = new JavaDomainModel();
         // Mapping DataContext into DataModel
-        List<DomainModelGroup> dmgList = GrammarMapping
+        List<DomainModelGroup> dmgList = EntityFactory
+                .createSingleTestDataModelGroupList(new GrammarSemanticAnalyzer(pConf, inflectorService));
+        domainModel.setDomainModelGroup(dmgList);
+        // Create GeneratorContext
+        GeneratorContext genCtx = new GeneratorContext();
+        genCtx.put(ProjectConfiguration.class, pConf);
+        genCtx.put(DomainModel.class, domainModel);
+        // Process Activities
+        generationService.process(genCtx);
+        FileUtil.saveToFile(genCtx);
+    }
+
+    @Test
+    public void generationServiceNoSql() {
+        // Create ProjectConfiguration
+        ProjectConfiguration pConf = new ProjectConfiguration();
+        pConf.setId("kukulkan");
+        pConf.setVersion("1.0.0");
+        pConf.setPackaging("mx.infotec.dads.archetype");
+        pConf.setYear("2017");
+        pConf.setAuthor("KUKULKAN");
+        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
+        pConf.setDatabase(new Database(DatabaseType.NO_SQL_MONGODB, PKGenerationStrategy.IDENTITY));
+        pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
+        pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");
+        // Create DataModel
+        DomainModel domainModel = new JavaDomainModel();
+        // Mapping DataContext into DataModel
+        List<DomainModelGroup> dmgList = EntityFactory
                 .createSingleTestDataModelGroupList(new GrammarSemanticAnalyzer(pConf, inflectorService));
         domainModel.setDomainModelGroup(dmgList);
         // Create GeneratorContext

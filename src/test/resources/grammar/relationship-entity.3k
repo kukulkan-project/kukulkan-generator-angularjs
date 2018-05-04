@@ -1,0 +1,11 @@
+entity Persona (usuarios){
+    nombre : String required min(3) max(50) pattern("persona"),
+    edad : Integer required,
+    numero : Long
+    OneToOne direcciones : Direccion
+}
+
+entity Direccion (direcciones){
+    nombre : String required min(3) max(50),
+    edad : Integer required min(12) max(23),
+}
