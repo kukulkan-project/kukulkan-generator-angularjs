@@ -23,14 +23,19 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
+import static mx.infotec.dads.kukulkan.util.GeneratorEntityFactory.createProjectConfiguration;
+
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -38,9 +43,10 @@ import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.EngineGenerator;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.service.InflectorService;
-import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarMapping;
+import mx.infotec.dads.kukulkan.engine.translator.Source;
+import mx.infotec.dads.kukulkan.engine.translator.TranslatorService;
+import mx.infotec.dads.kukulkan.engine.translator.dsl.FileSource;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
-import mx.infotec.dads.kukulkan.engine.util.EntityFactory;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
@@ -49,6 +55,7 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
 import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
+import mx.infotec.dads.kukulkan.util.GeneratorEntityFactory;
 import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
@@ -65,37 +72,20 @@ public class CrudGenerationServiceTest {
     private EngineGenerator generationService;
 
     @Autowired
-    private InflectorService inflectorService;
+    @Qualifier("grammarTranslatorService")
+    private TranslatorService translatorService;
 
     @BeforeClass
     public static void runOnceBeforeClass() {
 
     }
 
-    @Test
-    @Ignore
     public void generationService() {
-        // Create ProjectConfiguration
-        ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("kukulkan");
-        pConf.setVersion("1.0.0");
-        pConf.setPackaging("mx.infotec.dads.archetype");
-        pConf.setYear("2017");
-        pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
-        pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
-        pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
-        pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "liquibase", "domain-core");
-        // Create DataModel
-        DomainModel domainModel = new JavaDomainModel();
-        // Mapping DataContext into DataModel
-        List<DomainModelGroup> dmgList = EntityFactory
-                .createSingleTestDataModelGroupList(new GrammarSemanticAnalyzer(pConf, inflectorService));
-        domainModel.setDomainModelGroup(dmgList);
-        // Create GeneratorContext
+        ProjectConfiguration pConf = createProjectConfiguration(DatabaseType.SQL_MYSQL);
         GeneratorContext genCtx = new GeneratorContext();
+        Source source = new FileSource("src/test/resources/grammar/single-entity." + "3k");
         genCtx.put(ProjectConfiguration.class, pConf);
-        genCtx.put(DomainModel.class, domainModel);
+        genCtx.put(DomainModel.class, translatorService.translate(pConf, source));
         // Process Activities
         generationService.process(genCtx);
         FileUtil.saveToFile(genCtx);
@@ -103,28 +93,12 @@ public class CrudGenerationServiceTest {
 
     @Test
     public void generationServiceNoSql() {
-        // Create ProjectConfiguration
-        ProjectConfiguration pConf = new ProjectConfiguration();
-        pConf.setId("kukulkan");
-        pConf.setVersion("1.0.0");
-        pConf.setPackaging("mx.infotec.dads.archetype");
-        pConf.setYear("2017");
-        pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
-        pConf.setDatabase(new Database(DatabaseType.NO_SQL_MONGODB, PKGenerationStrategy.IDENTITY));
-        pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
-        pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");
-        // Create DataModel
-        DomainModel domainModel = new JavaDomainModel();
-        // Mapping DataContext into DataModel
-        List<DomainModelGroup> dmgList = EntityFactory
-                .createSingleTestDataModelGroupList(new GrammarSemanticAnalyzer(pConf, inflectorService));
-        domainModel.setDomainModelGroup(dmgList);
+        ProjectConfiguration pConf = createProjectConfiguration(DatabaseType.NO_SQL_MONGODB);
         // Create GeneratorContext
         GeneratorContext genCtx = new GeneratorContext();
+        Source source = new FileSource("src/test/resources/grammar/relationship-entity." + "3k");
         genCtx.put(ProjectConfiguration.class, pConf);
-        genCtx.put(DomainModel.class, domainModel);
-        // Process Activities
+        genCtx.put(DomainModel.class, translatorService.translate(pConf, source));
         generationService.process(genCtx);
         FileUtil.saveToFile(genCtx);
     }
