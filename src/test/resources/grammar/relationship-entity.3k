@@ -7,5 +7,5 @@ entity Persona (usuarios){
 
 entity Direccion (direcciones){
     nombre : String required min(3) max(50),
-    edad : Integer required min(12) max(23),
+    edad : Integer required min(12) max(23)
 }
