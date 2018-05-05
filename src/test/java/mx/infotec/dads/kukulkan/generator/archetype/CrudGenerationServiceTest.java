@@ -85,6 +85,25 @@ public class CrudGenerationServiceTest {
         Source source = new FileSource("src/test/resources/grammar/relationship-entity." + "3k");
         genCtx.put(ProjectConfiguration.class, pConf);
         genCtx.put(DomainModel.class, translatorService.translate(pConf, source));
+        genCtx.get(DomainModel.class).ifPresent(dm -> {
+            dm.getDomainModelGroup().forEach(group -> {
+                group.getEntities().forEach(entity -> {
+                    System.out.println("**************");
+                    System.out.println(entity.getName());
+                    System.out.println("ower Association");
+                    entity.getOwnerAssociations().forEach(association -> {
+                        System.out.println(association);
+                    });
+                    System.out.println("Not ower Association");
+                    entity.getNotOwnerAssociations().forEach(association -> {
+                        System.out.println(association);
+                    });
+                    System.out.println("**************");
+                });
+            });
+
+        });
+        ;
         generationService.process(genCtx);
         FileUtil.saveToFile(genCtx);
     }
