@@ -2,7 +2,7 @@ entity Persona {
     nombre : String,
     edad : Integer,
     numero : Long,
-    OneToOne sexo : Sexo,
+    OneToOne(persona) sexo : Sexo,
     OneToMany direcciones : Direccion
 }
 

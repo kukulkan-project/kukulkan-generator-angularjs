@@ -25,13 +25,7 @@ package mx.infotec.dads.kukulkan.generator.archetype;
 
 import static mx.infotec.dads.kukulkan.util.GeneratorEntityFactory.createProjectConfiguration;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,21 +36,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.EngineGenerator;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
-import mx.infotec.dads.kukulkan.engine.service.InflectorService;
 import mx.infotec.dads.kukulkan.engine.translator.Source;
 import mx.infotec.dads.kukulkan.engine.translator.TranslatorService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.FileSource;
-import mx.infotec.dads.kukulkan.engine.translator.dsl.GrammarSemanticAnalyzer;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
-import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
-import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
-import mx.infotec.dads.kukulkan.metamodel.foundation.JavaDomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
-import mx.infotec.dads.kukulkan.util.GeneratorEntityFactory;
-import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
  * Test for GeneratorService
