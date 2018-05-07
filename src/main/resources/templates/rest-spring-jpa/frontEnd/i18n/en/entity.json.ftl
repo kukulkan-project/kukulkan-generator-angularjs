@@ -4,7 +4,8 @@
             "home": {
                 "title": "${entityCamelCasePlural}",
                 "createLabel": "Create a new ${entity}",
-                "createOrEditLabel": "Create or edit a ${entity}"
+                "createOrEditLabel": "Create or edit a ${entity}",
+                "search": "Search ${entity}"
             },
             "created": "A new ${entity} is created with identifier {{ param }}",
             "updated": "A ${entity} is updated with identifier {{ param }}",
