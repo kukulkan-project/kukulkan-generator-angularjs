@@ -23,7 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
