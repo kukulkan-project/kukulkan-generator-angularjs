@@ -1,20 +1,24 @@
-entity Persona {
-    nombre : String,
-    edad : Integer,
-    numero : Long,
-    OneToOne(persona) sexo : Sexo,
-    OneToMany direcciones : Direccion
+entity Departamento {
+	name : String,
+	OneToMany empleado : Empleado
 }
 
-entity Sexo {
-    nombre : String
+entity Empleado {
+	name : String,
+	OneToOne direccion : Direccion,
+	OneToMany trabajo : Trabajo,
+	ManyToOne manager : Empleado
 }
 
 entity Direccion {
-    nombre : String,
-    OneToOne calle : Calle
+	name : String
 }
 
-entity Calle {
-    nombre : String
+entity Trabajo {
+	name : String,
+	ManyToMany(trabajo) tarea : Tarea
+}
+
+entity Tarea {
+	name : String
 }

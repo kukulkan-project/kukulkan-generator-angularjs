@@ -1,5 +1,6 @@
 package mx.infotec.dads.kukulkan.util;
 
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class GeneratorEntityFactory {
         dataModelGroupList.add(GrammarMapping.createDefaultDataModelGroup(tree, visitor));
         return dataModelGroupList;
     }
-    
+
     public static ProjectConfiguration createProjectConfiguration(DatabaseType type) {
         ProjectConfiguration pConf = new ProjectConfiguration();
         pConf.setId("kukulkan");
@@ -46,7 +47,8 @@ public class GeneratorEntityFactory {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2018");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
+        // pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());}
+        pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");

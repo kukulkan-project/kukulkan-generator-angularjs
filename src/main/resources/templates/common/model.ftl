@@ -69,6 +69,24 @@ public class ${entity} implements Serializable {
     @Column(name = "${primaryKey.name}", unique = true, nullable = false)
     </#if>
     private ${primaryKey.type} ${primaryKey.name};
+    
+	<#list ownerAssociations as association>
+    <#if association.type.name() == "ONE_TO_ONE">
+    @OneToOne
+    @JoinColumn(unique = true)
+    <#elseif association.type.name() == "ONE_TO_MANY">
+    @OneToMany
+    @OneToMany(mappedBy = "${association.targetPropertyName}")
+    @JsonIgnore
+    <#elseif association.type.name() == "MANY_TO_ONE">
+    @ManyToOne
+    <#elseif association.type.name() == "MANY_TO_MANY">
+    @ManyToMany
+    </#if>
+    private ${association.target.name} ${association.sourcePropertyName};
+	<#if association.targetPropertyName??>${association.targetPropertyName}</#if>
+	</#list>
+	
 	<#list properties as property>
 	
     /**
