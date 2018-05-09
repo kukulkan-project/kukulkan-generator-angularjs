@@ -24,6 +24,7 @@
 package mx.infotec.dads.kukulkan.generator.archetype;
 
 import static mx.infotec.dads.kukulkan.util.GeneratorEntityFactory.createProjectConfiguration;
+import static mx.infotec.dads.kukulkan.util.GeneratorEntityFactory.createProjectConfigurationJustModel;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -79,7 +80,7 @@ public class CrudGenerationServiceTest {
     
     @Test
     public void generationRelationshipService() {
-        ProjectConfiguration pConf = createProjectConfiguration(DatabaseType.SQL_MYSQL);
+        ProjectConfiguration pConf = createProjectConfigurationJustModel(DatabaseType.SQL_MYSQL);
         // Create GeneratorContext
         GeneratorContext genCtx = new GeneratorContext();
         Source source = new FileSource("src/test/resources/grammar/relationship-entity." + "3k");

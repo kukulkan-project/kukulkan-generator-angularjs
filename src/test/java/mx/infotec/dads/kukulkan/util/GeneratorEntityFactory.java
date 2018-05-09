@@ -57,4 +57,22 @@ public class GeneratorEntityFactory {
         }
         return pConf;
     }
+
+    public static ProjectConfiguration createProjectConfigurationJustModel(DatabaseType type) {
+        ProjectConfiguration pConf = new ProjectConfiguration();
+        pConf.setId("kukulkan");
+        pConf.setVersion("1.0.0");
+        pConf.setPackaging("mx.infotec.dads.archetype");
+        pConf.setYear("2018");
+        pConf.setAuthor("KUKULKAN");
+        // pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());}
+        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
+        pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
+        pConf.addLayers("domain-core");
+        if (DatabaseType.SQL_MYSQL == type) {
+            pConf.addLayer("liquibase");
+        }
+        return pConf;
+    }
 }
