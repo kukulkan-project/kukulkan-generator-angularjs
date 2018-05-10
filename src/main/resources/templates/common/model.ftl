@@ -69,8 +69,6 @@ public class ${entity} implements Serializable {
     @Column(name = "${primaryKey.name}", unique = true, nullable = false)
     </#if>
     private ${primaryKey.type} ${primaryKey.name};
-    <#include "/common/owner-associations.ftl">
-    <#include "/common/not-owner-associations.ftl">
 	<#list properties as property>
 	
     /**
@@ -110,7 +108,10 @@ public class ${entity} implements Serializable {
     @Column(name = "${property.columnName}"<#if property.literal==true && property.constraint.max??>, length=${property.constraint.max}</#if><#if property.bigDecimal==true>, precision=10, scale=2</#if><#if property.constraint.indexed==true>, unique=true</#if><#if property.constraint.nullable==false>, nullable = false</#if>)
     private ${property.type} ${property.name};
 	</#list>
-	
+
+	<#include "/common/owner-associations.ftl">
+    <#include "/common/not-owner-associations.ftl">	
+    
     /**
      * Este constructor fue generado automáticamente por ${author}
      * 

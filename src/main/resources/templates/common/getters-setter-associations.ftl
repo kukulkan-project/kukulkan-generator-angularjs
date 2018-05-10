@@ -53,7 +53,7 @@
         return ${association.targetPropertyNamePlural};
     }
 
-    public void set${association.targetPropertyName?cap_first}(Set<${association.source.name}> ${association.targetPropertyNamePlural}) {
+    public void set${association.targetPropertyNamePlural?cap_first}(Set<${association.source.name}> ${association.targetPropertyNamePlural}) {
         this.${association.targetPropertyNamePlural} = ${association.targetPropertyNamePlural};
     }
     	</#if>
