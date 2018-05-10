@@ -7,7 +7,7 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
 <#list dataModelGroup as dmg>
 	<#list dmg.entities as entity>
-    <include file="config/liquibase/changelog/${timestamp}_added_entity_${entity.name}.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/${timestamp}_added_entity_${entity.name}.xml" relativeToChangelogFile="false"/>
 	</#list>    
 </#list>
 </databaseChangeLog>
