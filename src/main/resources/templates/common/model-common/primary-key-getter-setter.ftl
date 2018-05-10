@@ -1,25 +1,23 @@
     /**
-     * Este campo fue generado automaticamente por ${author} 
-     * Este campo corresponde a la llave primaria ${primaryKey.name}
+     * Este método fue generado automaticamente por ${author} 
+     * Este método GETTER fue generado para la llave primaria ${tableName}.${primaryKey.name}
+     *
+     * @return el valor de ${primaryKey.name}
      *
      * @kukulkanGenerated ${aDateTime?iso_utc}
      */
-    <#if primaryKey.composed == true>
-    @EmbeddedId
-    <#else>
-    @Id
-    	<#if primaryKey.generationType.name() == "SEQUENCE">
-    @SequenceGenerator(name = "SEQ_${tableName}", sequenceName = "SEQ_${tableName}", allocationSize=100)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_${tableName}")
-    	<#elseif primaryKey.generationType.name() == "IDENTITY">
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    	<#elseif primaryKey.generationType.name() == "TABLE">
-    @TableGenerator(name = "${tableName}_GEN", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_${tableName}",
-    valueColumnName = "${tableName}_COUNT", pkColumnValue = "SEQ_${tableName}")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
-    	<#elseif primaryKey.generationType.name() == "AUTO">
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    	</#if>
-    @Column(name = "${primaryKey.name}", unique = true, nullable = false)
-    </#if>
-    private ${primaryKey.type} ${primaryKey.name};
+    public ${primaryKey.type} get${primaryKey.name?cap_first}() {
+        return ${primaryKey.name};
+    }
+
+    /**
+     * Este método fue generado automaticamente por ${author} 
+     * Este método SETTER fue generado para la llave primaria. ${tableName}.${primaryKey.name}
+     *
+     * @return el valor de area_conocimiento.id
+     *
+     * @kukulkanGenerated ${aDateTime?iso_utc}
+     */
+    public void set${primaryKey.name?cap_first}(${primaryKey.type} ${primaryKey.name}) {
+        this.${primaryKey.name} = ${primaryKey.name};
+    }

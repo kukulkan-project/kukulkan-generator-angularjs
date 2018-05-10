@@ -4,10 +4,6 @@
         return ${association.sourcePropertyNamePlural};
     }
 
-    public void set${association.sourcePropertyNamePlural?cap_first}(Set<${association.target.name}> ${association.sourcePropertyNamePlural}) {
-        this.${association.sourcePropertyNamePlural} = ${association.sourcePropertyNamePlural};
-    }
-
     public ${association.source.name} add${association.sourcePropertyName?cap_first}(${association.target.name} ${association.sourcePropertyName}) {
         this.${association.sourcePropertyNamePlural}.add(${association.sourcePropertyName});
         <#if association.type.name() == "ONE_TO_MANY">
@@ -27,6 +23,11 @@
         </#if>
         return this;
     }
+
+    public void set${association.sourcePropertyNamePlural?cap_first}(Set<${association.target.name}> ${association.sourcePropertyNamePlural}) {
+        this.${association.sourcePropertyNamePlural} = ${association.sourcePropertyNamePlural};
+    }
+
     <#elseif association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
     public ${association.target.name} get${association.sourcePropertyName?cap_first}() {
         return ${association.sourcePropertyName};
