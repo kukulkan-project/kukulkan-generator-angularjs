@@ -31,10 +31,6 @@ import javax.persistence.*;
 <#if hasConstraints == true>
 import javax.validation.constraints.*;
 </#if>
-<#if hasOneToMany == true || hasManyToMany == true >
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
-</#if>
 import java.io.Serializable;
 
 /**
@@ -73,40 +69,8 @@ public class ${entity} implements Serializable {
     @Column(name = "${primaryKey.name}", unique = true, nullable = false)
     </#if>
     private ${primaryKey.type} ${primaryKey.name};
-    
-	<#list ownerAssociations as association>
-    <#if association.type.name() == "ONE_TO_ONE">
-    @OneToOne
-    @JoinColumn(unique = true)
-    private ${association.target.name} ${association.sourcePropertyName};
-    <#elseif association.type.name() == "ONE_TO_MANY">
-    @OneToMany(mappedBy = "${association.targetPropertyName}")
-    @JsonIgnore
-    private List<${association.target.name}> ${association.sourcePropertyName};
-    <#elseif association.type.name() == "MANY_TO_ONE">
-    @ManyToOne
-    private ${association.target.name} ${association.sourcePropertyName};
-    <#elseif association.type.name() == "MANY_TO_MANY">
-    @ManyToMany
-    @JoinTable(name = "${association.source.tableName}_${association.target.tableName}",
-               joinColumns = @JoinColumn(name="${association.source.tableName}_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="${association.target.tableName}_id", referencedColumnName="id"))
-    private List<${association.target.name}> ${association.sourcePropertyName};
-    </#if>
-    </#list>
-
-    <#list notOwnerAssociations as association>
-    ${association.type}
-    <#if association.type.name() == "ONE_TO_MANY">
-    @ManyToOne
-    private ${association.source.name} ${association.sourcePropertyName};
-    <#elseif association.type.name() == "MANY_TO_MANY">
-    @ManyToMany(mappedBy = "${association.source.sourcePropertyName}")
-    @JsonIgnore
-    private List<${association.target.name}> ${association.sourcePropertyName};
-    </#if>    
-
-	</#list>
+    <#include "/common/owner-associations.ftl">
+    <#include "/common/not-owner-associations.ftl">
 	<#list properties as property>
 	
     /**
@@ -190,48 +154,7 @@ public class ${entity} implements Serializable {
     public void set${primaryKey.name?cap_first}(${primaryKey.type} ${primaryKey.name}) {
         this.${primaryKey.name} = ${primaryKey.name};
     }
-
-	<#list ownerAssociations as association>
-	<#if association.type.name() == "ONE_TO_MANY" || association.type.name() == "MANY_TO_MANY">
-    public List<${association.target.name}> get${association.sourcePropertyName?cap_first}() {
-        return ${association.sourcePropertyName};
-    }
-
-    public void set${association.sourcePropertyName?cap_first}(List<${association.target.name}> ${association.sourcePropertyName}) {
-        this.${association.sourcePropertyName} = ${association.sourcePropertyName};
-    }
-    <#elseif association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
-    public ${association.target.name} get${association.sourcePropertyName?cap_first}() {
-        return ${association.sourcePropertyName};
-    }
-
-    public void set${association.sourcePropertyName?cap_first}(${association.target.name} ${association.sourcePropertyName}) {
-        this.${association.sourcePropertyName} = ${association.sourcePropertyName};
-    }    
-    </#if>
-    </#list>
-    
-    <#list notOwnerAssociations as association>
-	<#if association.type.name() == "ONE_TO_MANY" >
-    public ${association.source.name}> get${association.targetPropertyName?cap_first}() {
-        return ${association.targetPropertyName};
-    }
-
-    public void set${association.targetPropertyName?cap_first}(${association.source.name} ${association.targetPropertyName}) {
-        this.${association.targetPropertyName} = ${association.targetPropertyName};
-    }
-    <#elseif association.type.name() == "MANY_TO_MANY">
-    public List<${association.source.name}> get${association.targetPropertyName?cap_first}() {
-        return ${association.targetPropertyName};
-    }
-
-    public void set${association.targetPropertyName?cap_first}(List<${association.source.name}> ${association.targetPropertyName}) {
-        this.${association.targetPropertyName} = ${association.targetPropertyName};
-    }
-    
-    </#if>
-    </#list>
-
+    <#include "/common/getters-setter-associations.ftl">
 	<#list properties as property>
     /**
      * Este método fue generado automaticamente por ${author} 
