@@ -43,8 +43,35 @@
 		    	</#if>
         	</#if>
 		</#list>
-
+        <#list entity.ownerAssociations as association>
+        	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
+            <column name="${association.sourcePropertyName}_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        	</#if>
+		</#list>
+        <#list entity.notOwnerAssociations as association>
+        	<#if association.type.name() == "ONE_TO_MANY">
+            <column name="${association.targetPropertyName}_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        	</#if>
+		</#list>
         </createTable>
+        <#list entity.ownerAssociations as association>
+        	<#if association.type.name() == "MANY_TO_MANY">
+        <createTable tableName="${association.source.tableName}_${association.target.tableName}">
+            <column name="${association.source.tableName}_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="${association.target.tableName}_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="${association.source.tableName}_id, ${association.target.tableName}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
+        	</#if>
+		</#list>
         <#list properties as property>
         	<#if property.zoneDateTime == true || property.instant == true>
         <dropDefaultValue tableName="${entity.tableName}" columnName="${property.columnName}" columnDataType="datetime"/>
