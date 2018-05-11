@@ -14,13 +14,11 @@
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
-<#list dataModelGroup as dmg>
-	<#list dmg.entities as entity>
     <!--
-        Added the entity ${entity.name}.
+        Added the entity ${tableName}.
     -->
-    <changeSet id="${timestamp}-${entity?index+1}" author="${author}">
-        <createTable tableName="${entity.tableName}">
+    <changeSet id="${timestamp}-1" author="${author}">
+        <createTable tableName="${tableName}">
             <column name="id" type="bigint" autoIncrement="${r"${autoIncrement}"}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -43,22 +41,23 @@
 		    	</#if>
         	</#if>
 		</#list>
-        <#list entity.ownerAssociations as association>
+		
+		<#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
-            <column name="${association.sourcePropertyName}_id" type="bigint">
+        	<column name="${association.sourcePropertyName}_id" type="bigint">
                 <constraints nullable="true" />
             </column>
         	</#if>
 		</#list>
-        <#list entity.notOwnerAssociations as association>
+		<#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
             <column name="${association.targetPropertyName}_id" type="bigint">
                 <constraints nullable="true" />
             </column>
         	</#if>
 		</#list>
-        </createTable>
-        <#list entity.ownerAssociations as association>
+		</createTable>
+		<#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
         <createTable tableName="${association.source.tableName}_${association.target.tableName}">
             <column name="${association.source.tableName}_id" type="bigint">
@@ -72,13 +71,11 @@
         <addPrimaryKey columnNames="${association.source.tableName}_id, ${association.target.tableName}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
         	</#if>
 		</#list>
-        <#list properties as property>
+		<#list properties as property>
         	<#if property.zoneDateTime == true || property.instant == true>
         <dropDefaultValue tableName="${entity.tableName}" columnName="${property.columnName}" columnDataType="datetime"/>
         	</#if>
 		</#list>
 
     </changeSet>
-	</#list>    
-</#list>
 </databaseChangeLog>
