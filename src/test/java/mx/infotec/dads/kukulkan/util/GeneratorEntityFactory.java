@@ -69,9 +69,9 @@ public class GeneratorEntityFactory {
         pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 05, 07, 20, 45, 32));
-        pConf.addLayers("angular-js");
+        pConf.addLayers("domain-core");
         if (DatabaseType.SQL_MYSQL == type) {
-//            pConf.addLayer("liquibase");
+            pConf.addLayer("liquibase");
         }
         return pConf;
     }

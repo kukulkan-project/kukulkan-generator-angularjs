@@ -44,14 +44,14 @@
 		
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
-        	<column name="${association.sourcePropertyName}_id" type="bigint">
+        	<column name="${association.toTargetPropertyName}_id" type="bigint">
                 <constraints <#if association.type.name() == "ONE_TO_ONE">unique="true" </#if>nullable="true" />
             </column>
         	</#if>
 		</#list>
 		<#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-            <column name="${association.targetPropertyName}_id" type="bigint">
+            <column name="${association.toSourcePropertyName}_id" type="bigint">
                 <constraints nullable="true" />
             </column>
         	</#if>
