@@ -5,15 +5,17 @@
         .module('${projectName}App')
         .controller('${entity.name}DetailController', ${entity.name}DetailController);
 
-    ${entity.name}DetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', '${entity.name}'];
+    ${entity.name}DetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity', '${entity.name}'<#list entity.referenceTypes as type>, '${type}'</#list>];
 
-    function ${entity.name}DetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, ${entity.name}) {
+    function ${entity.name}DetailController($scope, $rootScope, $stateParams, previousState,<#if hasBlobProperties == true> DataUtils,</#if> entity, ${entity.name}<#list entity.referenceTypes as type>, ${type}</#list>) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
         vm.previousState = previousState.name;
-        vm.byteSize = DataUtils.byteSize;
+        <#if hasBlobProperties == true>
         vm.openFile = DataUtils.openFile;
+        vm.byteSize = DataUtils.byteSize;
+        </#if>
 
         var unsubscribe = $rootScope.$on('${projectName}App:${entityCamelCase}Update', function(event, result) {
             vm.${entityCamelCase} = result;
