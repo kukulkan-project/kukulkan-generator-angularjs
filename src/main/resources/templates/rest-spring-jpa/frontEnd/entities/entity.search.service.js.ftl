@@ -3,11 +3,11 @@
 
     angular
         .module('${projectName}App')
-        .factory('${entity}Search', ${entity}Search);
+        .factory('${entity.name}Search', ${entity.name}Search);
 
-    ${entity}Search.$inject = ['$resource'];
+    ${entity.name}Search.$inject = ['$resource'];
 
-    function ${entity}Search($resource) {
+    function ${entity.name}Search($resource) {
         var resourceUrl =  'api/_search/${entityCamelCasePlural}/:id';
 
         return $resource(resourceUrl, {}, {

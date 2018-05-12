@@ -15,9 +15,9 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity ${tableName}.
+        Added the entity ${entity.name}.
     -->
-    <changeSet id="${timestamp}-1" author="${author}">
+    <changeSet id="${entity.timestampString}-1" author="${author}">
         <createTable tableName="${tableName}">
             <column name="id" type="bigint" autoIncrement="${r"${autoIncrement}"}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -45,7 +45,7 @@
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
         	<column name="${association.sourcePropertyName}_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints <#if association.type.name() == "ONE_TO_ONE">unique="true" </#if>nullable="true" />
             </column>
         	</#if>
 		</#list>
@@ -56,7 +56,7 @@
             </column>
         	</#if>
 		</#list>
-		</createTable>
+        </createTable>
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
         <createTable tableName="${association.source.tableName}_${association.target.tableName}">

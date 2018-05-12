@@ -35,15 +35,15 @@ ${importPrimaryKey}
 </#if>
 
 /**
- * ${entity}Repository
+ * ${entity.name}Repository
  * 
  * @author ${author}
  * @kukulkanGenerated ${timestamp}
  */
 <#if isMongoDB == true>
-public interface ${entity}Repository extends MongoRepository<${entity}, String> {
+public interface ${entity.name}Repository extends MongoRepository<${entity.name}, String> {
 <#else>
-public interface ${entity}Repository extends JpaRepository<${entity}, ${id}> {
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${id}> {
 </#if>
 
 }

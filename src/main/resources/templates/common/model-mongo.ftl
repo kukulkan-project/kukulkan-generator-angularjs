@@ -39,13 +39,13 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 /**
- * The ${entity}
+ * The ${entity.name}
  * 
  * @author ${author}
  *
  */
 @Document(collection = "${tableName}")
-public class ${entity} implements Serializable {
+public class ${entity.name} implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -102,7 +102,7 @@ public class ${entity} implements Serializable {
      * Este constructor fue generado automáticamente por ${author}
      * 
      */
-    public ${entity}() {
+    public ${entity.name}() {
 
     }
 	<#if mandatoryProperties?has_content>
@@ -110,7 +110,7 @@ public class ${entity} implements Serializable {
      * Este constructor fue generado automáticamente por ${author}
      * 
      */
-    public ${entity}(<#list mandatoryProperties as property>${property.type} ${property.name}<#sep>, </#sep></#list>) {
+    public ${entity.name}(<#list mandatoryProperties as property>${property.type} ${property.name}<#sep>, </#sep></#list>) {
     <#list mandatoryProperties as property>
         this.${property.name} = ${property.name};
     </#list>
@@ -176,7 +176,7 @@ public class ${entity} implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ${entity} entity = (${entity}) o;
+        ${entity.name} entity = (${entity.name}) o;
         if (entity.getId() == null || getId() == null) {
             return false;
         }
@@ -191,7 +191,7 @@ public class ${entity} implements Serializable {
     /**
      * Este método fue generado automaticamente por ${author}
      *
-     * @return el valor de representado por la entidad ${entity}
+     * @return el valor de representado por la entidad ${entity.name}
      *
      * @kukulkanGenerated ${aDateTime?iso_utc}
      */

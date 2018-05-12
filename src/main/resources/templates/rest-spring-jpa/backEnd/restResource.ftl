@@ -66,14 +66,14 @@ ${importService}
 
 @RestController
 @RequestMapping("/api")
-public class ${entity}Resource {
+public class ${entity.name}Resource {
 
-    private static final Logger log = LoggerFactory.getLogger(${entity}Resource.class);
+    private static final Logger log = LoggerFactory.getLogger(${entity.name}Resource.class);
     
     private static final String ENTITY_NAME = "${entityCamelCase}";
 
     @Autowired
-    private ${entity}Service service;
+    private ${entity.name}Service service;
     
     /**
      * GET  /${entityCamelCasePlural} : recupera todos los ${entityCamelCasePlural}.
@@ -83,24 +83,24 @@ public class ${entity}Resource {
      */
     @GetMapping("/${entityCamelCasePlural}")
     @Timed
-    public ResponseEntity<List<${entity}>> getAll${entity}(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of ${entity}");
-        Page<${entity}> page = service.findAll(pageable);
+    public ResponseEntity<List<${entity.name}>> getAll${entity.name}(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of ${entity.name}");
+        Page<${entity.name}> page = service.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/${entityCamelCasePlural}");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
-     * GET  /${entityCamelCasePlural}/:id : recupera por "id" de ${entity}.
+     * GET  /${entityCamelCasePlural}/:id : recupera por "id" de ${entity.name}.
      *
-     * @param id el id del ${entity} que se desea recuperar
-     * @return El objeto ResponseEntity con el estado de 200 (OK) y dentro del cuerpo del mensaje el ${entity}, o con estado de 404 (Not Found)
+     * @param id el id del ${entity.name} que se desea recuperar
+     * @return El objeto ResponseEntity con el estado de 200 (OK) y dentro del cuerpo del mensaje el ${entity.name}, o con estado de 404 (Not Found)
      */
     @GetMapping("/${entityCamelCasePlural}/{id}")
     @Timed
-    public ResponseEntity<${entity}> get${entity}(@PathVariable ${id} id) {
-        log.debug("REST request to get ${entity} : {}", id);
-        ${entity} ${entityCamelCase} = service.findById(id);
+    public ResponseEntity<${entity.name}> get${entity.name}(@PathVariable ${id} id) {
+        log.debug("REST request to get ${entity.name} : {}", id);
+        ${entity.name} ${entityCamelCase} = service.findById(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(${entityCamelCase}));
     }
 
@@ -113,34 +113,34 @@ public class ${entity}Resource {
      */
     @PostMapping("/${entityCamelCasePlural}")
     @Timed
-    public ResponseEntity<${entity}> create${entity}(@Valid @RequestBody ${entity} ${entityCamelCase}) throws URISyntaxException {
-        log.debug("REST request to save ${entity} : {}", ${entityCamelCase});
+    public ResponseEntity<${entity.name}> create${entity.name}(@Valid @RequestBody ${entity.name} ${entityCamelCase}) throws URISyntaxException {
+        log.debug("REST request to save ${entity.name} : {}", ${entityCamelCase});
         if (${entityCamelCase}.get${primaryKey.name?cap_first}() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new ${entityCamelCase} cannot already have an ID")).body(null);
         }
-        ${entity} result = service.save(${entityCamelCase});
+        ${entity.name} result = service.save(${entityCamelCase});
         return ResponseEntity.created(new URI("/api/${entityCamelCasePlural}/" + result.get${primaryKey.name?cap_first}()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.get${primaryKey.name?cap_first}().toString()))
             .body(result);
     }
     
     /**
-     * PUT  /${entityCamelCasePlural} : Actualiza un ${entity} existente.
+     * PUT  /${entityCamelCasePlural} : Actualiza un ${entity.name} existente.
      *
      * @param ${entityCamelCase} el ${entityCamelCase} que se desea actualizar
-     * @return el objeto ResponseEntity con estado de 200 (OK) y en el cuerpo de la respuesta el ${entity} actualizado,
+     * @return el objeto ResponseEntity con estado de 200 (OK) y en el cuerpo de la respuesta el ${entity.name} actualizado,
      * o con estatus de 400 (Bad Request) si el ${entityCamelCase} no es valido,
      * o con estatus de 500 (Internal Server Error) si el ${entityCamelCase} no se puede actualizar
      * @throws URISyntaxException si la sintaxis de la URI no es correcta
      */
     @PutMapping("/${entityCamelCasePlural}")
     @Timed
-    public ResponseEntity<${entity}> update${entity}(@Valid @RequestBody ${entity} ${entityCamelCase}) throws URISyntaxException {
-        log.debug("REST request to update ${entity} : {}", ${entityCamelCase});
+    public ResponseEntity<${entity.name}> update${entity.name}(@Valid @RequestBody ${entity.name} ${entityCamelCase}) throws URISyntaxException {
+        log.debug("REST request to update ${entity.name} : {}", ${entityCamelCase});
         if (${entityCamelCase}.get${primaryKey.name?cap_first}() == null) {
-            return create${entity}(${entityCamelCase});
+            return create${entity.name}(${entityCamelCase});
         }
-        ${entity} result = service.save(${entityCamelCase});
+        ${entity.name} result = service.save(${entityCamelCase});
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ${entityCamelCase}.get${primaryKey.name?cap_first}().toString()))
             .body(result);
@@ -148,15 +148,15 @@ public class ${entity}Resource {
 
 
     /**
-     * DELETE  /${entityCamelCasePlural}/:id : borrar el ${entity} con "id".
+     * DELETE  /${entityCamelCasePlural}/:id : borrar el ${entity.name} con "id".
      *
-     * @param id el id del ${entity} que se desea borrar
+     * @param id el id del ${entity.name} que se desea borrar
      * @return el objeto ResponseEntity con estatus 200 (OK)
      */
     @DeleteMapping("/${entityCamelCasePlural}/{id}")
     @Timed
-    public ResponseEntity<Void> delete${entity}(@PathVariable ${id} id) {
-        log.debug("REST request to delete ${entity} : {}", id);
+    public ResponseEntity<Void> delete${entity.name}(@PathVariable ${id} id) {
+        log.debug("REST request to delete ${entity.name} : {}", id);
         service.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
@@ -171,9 +171,9 @@ public class ${entity}Resource {
      */
     @GetMapping("/_search/${entityCamelCasePlural}")
     @Timed
-    public ResponseEntity<List<${entity}>> search${entity}(@RequestParam String query, @ApiParam Pageable pageable) {
-        log.debug("REST request to search for a page of ${entity} for query {}", query);
-        Page<${entity}> page = service.search(query, pageable);
+    public ResponseEntity<List<${entity.name}>> search${entity.name}(@RequestParam String query, @ApiParam Pageable pageable) {
+        log.debug("REST request to search for a page of ${entity.name} for query {}", query);
+        Page<${entity.name}> page = service.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/${entityCamelCasePlural}");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

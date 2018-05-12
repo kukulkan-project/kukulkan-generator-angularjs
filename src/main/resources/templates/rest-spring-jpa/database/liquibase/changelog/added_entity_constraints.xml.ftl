@@ -1,58 +1,46 @@
-<%#
- Copyright 2013-2017 the original author or authors from the JHipster project.
-
- This file is part of the JHipster project, see https://jhipster.github.io/
- for more information.
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
--%>
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <!--
-        Added the constraints for entity #{entity}.
+        Added the constraints for entity ${entity.name}.
     -->
-    <changeSet id="<%= changelogDate %>-2" author="kukulkan">
-        <% for (idx in relationships) {
-            const relationshipType = relationships[idx].relationshipType,
-            relationshipName = relationships[idx].relationshipName,
-            ownerSide = relationships[idx].ownerSide,
-            otherEntityTableName = relationships[idx].otherEntityTableName;
-            if (relationshipType == 'many-to-one' || (relationshipType == 'one-to-one' && ownerSide)) {
-                const constraintName = getConstraintName(name, relationshipName, prodDatabaseType);%>
-        <addForeignKeyConstraint baseColumnNames="<%= getColumnName(relationshipName) %>_id"
-                                 baseTableName="<%= entityTableName %>"
-                                 constraintName="<%= constraintName %>"
+    <changeSet id="${entity.timestampString}-2" author="${author}">
+       <#list ownerAssociations as association>
+        	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
+        <addForeignKeyConstraint baseColumnNames="${association.sourcePropertyName}_id"
+                                 baseTableName="${entity.tableName}"
+                                 constraintName="fk_${association.source.tableName}_${association.sourcePropertyName}_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="<%= otherEntityTableName %>"/>
-        <%_ } else if (relationshipType == 'many-to-many' && ownerSide) {
-                const joinTableName = getJoinTableName(name, relationshipName, prodDatabaseType);
-                const constraintName = getConstraintName(joinTableName, getPluralColumnName(name), prodDatabaseType, true);
-                const otherEntityConstraintName = getConstraintName(joinTableName, getPluralColumnName(relationshipName), prodDatabaseType, true);
-          _%>
+                                 referencedTableName="${association.target.tableName}"/>
+        	</#if>
+		</#list>
+        <#list notOwnerAssociations as association>
+        	<#if association.type.name() == "ONE_TO_MANY">
+        <addForeignKeyConstraint baseColumnNames="${association.targetPropertyName}_id"
+                                 baseTableName="${entity.tableName}"
+                                 constraintName="fk_${association.target.tableName}_${association.targetPropertyName}_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="${association.source.tableName}"/>
+        	</#if>
+		</#list>
 
-        <addForeignKeyConstraint baseColumnNames="<%= getPluralColumnName(name) %>_id"
-                                 baseTableName="<%= joinTableName %>"
-                                 constraintName="<%= constraintName %>"
+       <#list ownerAssociations as association>
+        	<#if association.type.name() == "MANY_TO_MANY">
+        <addForeignKeyConstraint baseColumnNames="${association.source.tableName}_id"
+                                 baseTableName="${association.source.tableName}_${association.target.tableName}"
+                                 constraintName="fk_${association.source.tableName}_${association.target.tableName}_${association.source.tableName}_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="<%= entityTableName %>"/>
-        <addForeignKeyConstraint baseColumnNames="<%= getPluralColumnName(relationshipName) %>_id"
-                                 baseTableName="<%= joinTableName %>"
-                                 constraintName="<%= otherEntityConstraintName %>"
+                                 referencedTableName="${association.source.tableName}"/>
+        <addForeignKeyConstraint baseColumnNames="${association.target.tableName}_id"
+                                 baseTableName="${association.source.tableName}_${association.target.tableName}"
+                                 constraintName="fk_${association.source.tableName}_${association.target.tableName}_${association.target.tableName}_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="<%= otherEntityTableName %>"/>
-        <%  } %><% } %>
+                                 referencedTableName="${association.target.tableName}"/>
+
+        	</#if>
+		</#list>
+
     </changeSet>
 </databaseChangeLog>

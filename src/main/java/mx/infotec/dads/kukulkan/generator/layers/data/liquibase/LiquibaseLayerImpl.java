@@ -91,11 +91,23 @@ public class LiquibaseLayerImpl extends LiquibaseLayer {
         Path relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.toString());
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
-                FileUtil.formatToDateTimeJournal(pConf.getTimestamp()) + "_added_entity_" + dmElement.getName()
+                FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_" + dmElement.getName()
                         + ".xml");
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.XML);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
+        if (dmElement.isHasEntitiesReferences()) {
+            templateFilePath = TemplateEnum.BACK_END_DATABASE_LIQUIBASE_LOCATION.getLocation("changelog",
+                    "added_entity_constraints.xml.ftl");
+            relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.toString());
+            realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
+                    BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
+                    FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_constraints_" + dmElement.getName()
+                            + ".xml");
+            modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
+                    templateFilePath, LanguageType.XML);
+            templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
+        }
     }
 
     /*

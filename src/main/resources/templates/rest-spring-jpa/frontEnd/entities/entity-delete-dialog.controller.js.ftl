@@ -3,11 +3,11 @@
 
     angular
         .module('${projectName}App')
-        .controller('${entity}DeleteController',${entity}DeleteController);
+        .controller('${entity.name}DeleteController',${entity.name}DeleteController);
 
-    ${entity}DeleteController.$inject = ['$uibModalInstance', 'entity', '${entity}'];
+    ${entity.name}DeleteController.$inject = ['$uibModalInstance', 'entity', '${entity.name}'];
 
-    function ${entity}DeleteController($uibModalInstance, entity, ${entity}) {
+    function ${entity.name}DeleteController($uibModalInstance, entity, ${entity.name}) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
@@ -19,7 +19,7 @@
         }
 
         function confirmDelete (id) {
-            ${entity}.delete({id: id},
+            ${entity.name}.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });

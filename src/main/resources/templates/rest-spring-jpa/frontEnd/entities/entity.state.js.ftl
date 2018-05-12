@@ -19,7 +19,7 @@
             views: {
                 'content@': {
                     templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotationPlural}.html',
-                    controller: '${entity}Controller',
+                    controller: '${entity.name}Controller',
                     controllerAs: 'vm'
                 }
             },
@@ -61,7 +61,7 @@
             views: {
                 'content@': {
                     templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotation}-detail.html',
-                    controller: '${entity}DetailController',
+                    controller: '${entity.name}DetailController',
                     controllerAs: 'vm'
                 }
             },
@@ -70,8 +70,8 @@
                     $translatePartialLoader.addPart('${entityCamelCase}');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', '${entity}', function($stateParams, ${entity}) {
-                    return ${entity}.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', '${entity.name}', function($stateParams, ${entity.name}) {
+                    return ${entity.name}.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
@@ -92,13 +92,13 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotation}-dialog.html',
-                    controller: '${entity}DialogController',
+                    controller: '${entity.name}DialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['${entity}', function(${entity}) {
-                            return ${entity}.get({id : $stateParams.id}).$promise;
+                        entity: ['${entity.name}', function(${entity.name}) {
+                            return ${entity.name}.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -117,7 +117,7 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotation}-dialog.html',
-                    controller: '${entity}DialogController',
+                    controller: '${entity.name}DialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -147,13 +147,13 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotation}-dialog.html',
-                    controller: '${entity}DialogController',
+                    controller: '${entity.name}DialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['${entity}', function(${entity}) {
-                            return ${entity}.get({id : $stateParams.id}).$promise;
+                        entity: ['${entity.name}', function(${entity.name}) {
+                            return ${entity.name}.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -172,12 +172,12 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotation}-delete-dialog.html',
-                    controller: '${entity}DeleteController',
+                    controller: '${entity.name}DeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['${entity}', function(${entity}) {
-                            return ${entity}.get({id : $stateParams.id}).$promise;
+                        entity: ['${entity.name}', function(${entity.name}) {
+                            return ${entity.name}.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {

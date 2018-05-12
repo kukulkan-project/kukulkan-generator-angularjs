@@ -14,14 +14,14 @@ import java.util.Objects;
 import java.io.Serializable;
 
 /**
- * The ${entity}
+ * The ${entity.name}
  * 
  * @author ${author}
  *
  */
 @Entity
 @Table(name = "${tableNameLowerCase}")
-public class ${entity} implements Serializable {
+public class ${entity.name} implements Serializable {
     private static final long serialVersionUID = 1L;
     
     <#include "/common/model-common/primary-key-property.ftl">

@@ -32,38 +32,38 @@ ${importPrimaryKey}
 </#if>
 
 /**
- * ${entity}Service
+ * ${entity.name}Service
  * 
  * @author ${author}
  * @kukulkanGenerated ${timestamp}
  */
-public interface ${entity}Service {
+public interface ${entity.name}Service {
 
     /**
-     * regresa una lista con todos los elementos ${entity}
+     * regresa una lista con todos los elementos ${entity.name}
      * 
-     * @return Page<${entity}>
+     * @return Page<${entity.name}>
      */
-    Page<${entity}> findAll(Pageable pageable);
+    Page<${entity.name}> findAll(Pageable pageable);
 
     /**
-     * Consulta un ${entity} por su llave primaria
+     * Consulta un ${entity.name} por su llave primaria
      * 
      * @param id
-     * @return ${entity}
+     * @return ${entity.name}
      */
-    ${entity} findById(${id} id);
+    ${entity.name} findById(${id} id);
 
     /**
-     * Guarda o actualiza un ${entity}
+     * Guarda o actualiza un ${entity.name}
      * 
      * @param ${entityCamelCase}
      * @return boolean
      */
-    ${entity} save(${entity} ${entityCamelCase});
+    ${entity.name} save(${entity.name} ${entityCamelCase});
 
     /**
-     * Regresa true o false si existe un ${entity} almacenado
+     * Regresa true o false si existe un ${entity.name} almacenado
      * 
      * @param id
      * @return boolean
@@ -71,26 +71,26 @@ public interface ${entity}Service {
     boolean exists(${id} id);
 
     /**
-     * Borrar un ${entity} por su llave primaria
+     * Borrar un ${entity.name} por su llave primaria
      * 
      * @param id
      */
     void delete(${id} id);
 
     /**
-     * Borrar todos los elementos ${entity} almacenados
+     * Borrar todos los elementos ${entity.name} almacenados
      * 
      * @param id
      */
     void deleteAll();
     
     /**
-     * Buscar ${entity} con el correspondiente al query.
+     * Buscar ${entity.name} con el correspondiente al query.
      *
      *  @param query El query de la busqueda
      *  
      *  @param pageable la información de paginación
      *  @return Page de todas las entidades
      */
-    Page<${entity}> search(String query, Pageable pageable);
+    Page<${entity.name}> search(String query, Pageable pageable);
 }

@@ -39,36 +39,36 @@ ${importRepository}
 ${importService}
 
 /**
- * ${entity}ServiceImpl
+ * ${entity.name}ServiceImpl
  * 
  * @author ${author}
  * @kukulkanGenerated ${timestamp}
  */
 @Service
 @Transactional
-public class ${entity}ServiceImpl implements ${entity}Service {
+public class ${entity.name}ServiceImpl implements ${entity.name}Service {
 
-    private final Logger log = LoggerFactory.getLogger(${entity}ServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(${entity.name}ServiceImpl.class);
 
     @Autowired
-    private ${entity}Repository repository;
+    private ${entity.name}Repository repository;
 
     @Override
     @Transactional(readOnly = true)
-    public Page<${entity}> findAll(Pageable pageable) {
-        log.debug("Request to get all ${entity}");
+    public Page<${entity.name}> findAll(Pageable pageable) {
+        log.debug("Request to get all ${entity.name}");
         return repository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ${entity} findById(${id} id) {
-        log.debug("Request to get ${entity} : {}", id);
+    public ${entity.name} findById(${id} id) {
+        log.debug("Request to get ${entity.name} : {}", id);
         return repository.findOne(id);
     }
 
     @Override
-    public ${entity} save(${entity} ${entityCamelCase}) {
+    public ${entity.name} save(${entity.name} ${entityCamelCase}) {
         return repository.save(${entityCamelCase});
     }
 
@@ -79,20 +79,20 @@ public class ${entity}ServiceImpl implements ${entity}Service {
 
     @Override
     public void delete(${id} id) {
-        log.debug("Request to delete ${entity} : {}", id);
+        log.debug("Request to delete ${entity.name} : {}", id);
         repository.delete(id);
     }
 
     @Override
     public void deleteAll() {
-        log.debug("Request to delete All ${entity}");
+        log.debug("Request to delete All ${entity.name}");
         repository.deleteAll();
     }
     
     @Override
     @Transactional(readOnly = true)
-    public Page<${entity}> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of ${entity} ");
+    public Page<${entity.name}> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of ${entity.name} ");
         return repository.findAll(pageable);
     }
 }

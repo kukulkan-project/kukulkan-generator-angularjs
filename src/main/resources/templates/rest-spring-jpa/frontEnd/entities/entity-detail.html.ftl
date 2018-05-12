@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span data-translate="${projectName}App.${entityCamelCase}.detail.title">${entity}</span> {{vm.${entityCamelCase}.id}}</h2>
+    <h2><span data-translate="${projectName}App.${entityCamelCase}.detail.title">${entity.name}</span> {{vm.${entityCamelCase}.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">

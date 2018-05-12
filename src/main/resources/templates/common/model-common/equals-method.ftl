@@ -7,9 +7,9 @@
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ${entity} ${entity?uncap_first} = (${entity}) o;
-        if (${entity?uncap_first}.getId() == null || getId() == null) {
+        ${entity.name} ${entity.name?uncap_first} = (${entity.name}) o;
+        if (${entity.name?uncap_first}.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), ${entity?uncap_first}.getId());
+        return Objects.equals(getId(), ${entity.name?uncap_first}.getId());
     }

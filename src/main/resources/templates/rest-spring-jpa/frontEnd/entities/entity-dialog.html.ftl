@@ -3,7 +3,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="my${entity}Label" data-translate="${projectName}App.${entityCamelCase}.home.createOrEditLabel">Create or edit a ${entity}</h4>
+        <h4 class="modal-title" id="my${entity.name}Label" data-translate="${projectName}App.${entityCamelCase}.home.createOrEditLabel">Create or edit a ${entity.name}</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>

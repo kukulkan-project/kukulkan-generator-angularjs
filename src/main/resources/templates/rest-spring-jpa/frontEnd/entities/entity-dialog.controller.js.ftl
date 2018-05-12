@@ -3,11 +3,11 @@
 
     angular
         .module('${projectName}App')
-        .controller('${entity}DialogController', ${entity}DialogController);
+        .controller('${entity.name}DialogController', ${entity.name}DialogController);
 
-    ${entity}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', '${entity}'];
+    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', '${entity.name}'];
 
-    function ${entity}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, ${entity}) {
+    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, ${entity.name}) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
@@ -41,9 +41,9 @@
         function save () {
             vm.isSaving = true;
             if (vm.${entityCamelCase}.id !== null) {
-                ${entity}.update(vm.${entityCamelCase}, onSaveSuccess, onSaveError);
+                ${entity.name}.update(vm.${entityCamelCase}, onSaveSuccess, onSaveError);
             } else {
-                ${entity}.save(vm.${entityCamelCase}, onSaveSuccess, onSaveError);
+                ${entity.name}.save(vm.${entityCamelCase}, onSaveSuccess, onSaveError);
             }
         }
 

@@ -3,11 +3,11 @@
 
     angular
         .module('${projectName}App')
-        .controller('${entity}DetailController', ${entity}DetailController);
+        .controller('${entity.name}DetailController', ${entity.name}DetailController);
 
-    ${entity}DetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', '${entity}'];
+    ${entity.name}DetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', '${entity.name}'];
 
-    function ${entity}DetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, ${entity}) {
+    function ${entity.name}DetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, ${entity.name}) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;

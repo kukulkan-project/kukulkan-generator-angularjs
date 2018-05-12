@@ -8,7 +8,7 @@
                 <button class="btn btn-primary" ui-sref="${entityCamelCase}.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down" data-translate="${translateKey}.home.createLabel">
-                        Create new ${entity}
+                        Create new ${entity.name}
                     </span>
                 </button>
             </div>

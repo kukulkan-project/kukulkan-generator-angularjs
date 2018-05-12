@@ -30,11 +30,11 @@ ${importPrimaryKey}
 </#if>
 
 /**
- * ${entity}Repository
+ * ${entity.name}Repository
  * 
  * @author ${author}
  * @kukulkanGenerated ${timestamp}
  */
-public interface ${entity}Repository extends JpaRepository<${entity}, ${id}> {
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${id}> {
 
 }
