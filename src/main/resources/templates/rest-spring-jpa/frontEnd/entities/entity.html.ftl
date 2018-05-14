@@ -39,33 +39,35 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <#list properties as property>
                     	<#if property.name?ends_with("ContentType") == false>
-                    <th jh-sort-by="${property.name}"><span data-translate="${translateKey}.${property.name}">${property.name}</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="${property.name}"><span data-translate="${translateKey}.${property.name}">${property.name?cap_first}</span> <span class="glyphicon glyphicon-sort"></span></th>
                     	</#if>
                     </#list>
+                    <#include "/rest-spring-jpa/read/associations/header.ftl">
                     <th></th>
                 </tr>
             </thead>
-            <tbody ng-repeat="${entityCamelCase} in vm.${entityCamelCasePlural} track by ${entityCamelCase}.id">
+            <tbody>
+                <tr ng-repeat="${entityCamelCase} in vm.${entityCamelCasePlural} track by ${entityCamelCase}.id">
                     <td><a ui-sref="${entityCamelCase}-detail({id:${entityCamelCase}.id})">{{${entityCamelCase}.id}}</a></td>
 				   <#list properties as property>
                     	<#if property.name?ends_with("ContentType") == false >
 							<#if property.time == true>
                     			<#if property.zoneDateTime == true || property.instant == true>
-					<td>{{${entityCamelCase}.${property.name} | date:'medium'}}</td>
+                    <td>{{${entityCamelCase}.${property.name} | date:'medium'}}</td>
 								<#elseif property.localDate == true>
-					<td>{{${entityCamelCase}.${property.name} | date:'mediumDate'}}</td>
+                    <td>{{${entityCamelCase}.${property.name} | date:'mediumDate'}}</td>
 							</#if>
 					        <#elseif property.blob == true>
 					        	<#if property.clob == true>
-					<td>{{${entityCamelCase}.${property.name}}}</td>        
+                    <td>{{${entityCamelCase}.${property.name}}}</td>        
 					        	<#else>
-					<td>
-						<a ng-if="${entityCamelCase}.${property.name}" ng-click="vm.openFile(${entityCamelCase}.${property.name}ContentType, ${entityCamelCase}.${property.name})" data-translate="entity.action.open">open</a>
+                    <td>
+                        <a ng-if="${entityCamelCase}.${property.name}" ng-click="vm.openFile(${entityCamelCase}.${property.name}ContentType, ${entityCamelCase}.${property.name})" data-translate="entity.action.open">open</a>
                         <span ng-if="${entityCamelCase}.${property.name}">{{${entityCamelCase}.${property.name}ContentType}}, {{vm.byteSize(${entityCamelCase}.${property.name})}}</span> 
-					</td>     
+                    </td>     
 					        	</#if>
                     		<#else>
-					<td>{{${entityCamelCase}.${property.name}}}</td>
+                    <td>{{${entityCamelCase}.${property.name}}}</td>
 							</#if>
                     	</#if>
                     </#list>

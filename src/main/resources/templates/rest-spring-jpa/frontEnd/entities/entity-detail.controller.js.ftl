@@ -5,9 +5,9 @@
         .module('${projectName}App')
         .controller('${entity.name}DetailController', ${entity.name}DetailController);
 
-    ${entity.name}DetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity', '${entity.name}'<#list entity.referenceTypes as type>, '${type}'</#list>];
+    ${entity.name}DetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity'<#list entity.referenceTypes as type>, '${type}'</#list>];
 
-    function ${entity.name}DetailController($scope, $rootScope, $stateParams, previousState,<#if hasBlobProperties == true> DataUtils,</#if> entity, ${entity.name}<#list entity.referenceTypes as type>, ${type}</#list>) {
+    function ${entity.name}DetailController($scope, $rootScope, $stateParams, previousState,<#if hasBlobProperties == true> DataUtils,</#if> entity<#list entity.referenceTypes as type>, ${type}</#list>) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;

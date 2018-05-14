@@ -5,9 +5,9 @@
         .module('${projectName}App')
         .controller('${entity.name}DialogController', ${entity.name}DialogController);
 
-    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', '${entity.name}'];
+    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', '${entity.name}'<#list entity.referenceTypes as types>, '${types}'</#list>];
 
-    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, ${entity.name}) {
+    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, ${entity.name}<#list entity.referenceTypes as types>, ${types}</#list>) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
