@@ -5,9 +5,9 @@
         .module('${projectName}App')
         .controller('${entity.name}DialogController', ${entity.name}DialogController);
 
-    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', '${entity.name}'<#list entity.referenceTypes as types>, '${types}'</#list>];
+    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity'<#list entity.referenceTypes as types>, '${types}'</#list>];
 
-    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, ${entity.name}<#list entity.referenceTypes as types>, ${types}</#list>) {
+    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance,<#if hasBlobProperties == true> 'DataUtils',</#if> entity<#list entity.referenceTypes as types>, ${types}</#list>) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
@@ -21,7 +21,6 @@
         vm.openFile = DataUtils.openFile;
         </#if>
         vm.save = save;
-          
         <#if hasTimeProperties == true>
         	<#list properties as property>
         	<#if property.time == true> 
@@ -29,7 +28,9 @@
             </#if>
         	</#list>
         </#if>
-
+		<#list entity.referenceTypes as reference>
+        vm.${reference?uncap_first} = ${reference}.query();
+		</#list>
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -56,7 +57,7 @@
         function onSaveError () {
             vm.isSaving = false;
         }
-        
+
         <#if hasBlobProperties == true>
         	<#list properties as property>
         	<#if property.blob == true> 

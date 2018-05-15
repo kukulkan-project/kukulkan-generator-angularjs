@@ -25,7 +25,7 @@
 		    	</#if>
         	</#if>
 		</#list>
-
+		<#include "/rest-spring-jpa/frontEnd/entities/read/associations/read-association-properties.ftl">
     </dl>
 
     <button type="submit"
