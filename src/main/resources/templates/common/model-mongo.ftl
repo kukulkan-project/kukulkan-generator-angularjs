@@ -35,6 +35,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
