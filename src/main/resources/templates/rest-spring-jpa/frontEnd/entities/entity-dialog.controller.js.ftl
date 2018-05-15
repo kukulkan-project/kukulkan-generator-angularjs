@@ -5,9 +5,9 @@
         .module('${projectName}App')
         .controller('${entity.name}DialogController', ${entity.name}DialogController);
 
-    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity'<#list entity.referenceTypes as types>, '${types}'</#list>];
+    ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity'<#list entity.referenceTypes as types>, '${types.target.name}'</#list>];
 
-    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance,<#if hasBlobProperties == true> 'DataUtils',</#if> entity<#list entity.referenceTypes as types>, ${types}</#list>) {
+    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q,<#if hasBlobProperties == true> 'DataUtils',</#if> entity<#list entity.referenceTypes as types>, ${types.target.name}</#list>) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
@@ -29,7 +29,23 @@
         	</#list>
         </#if>
 		<#list entity.referenceTypes as reference>
-        vm.${reference?uncap_first} = ${reference}.query();
+		<#if reference.autoReference == false>
+		<#if reference.associationType.name() == "ONE_TO_ONE">
+        vm.${reference.toTargetPropertyNamePlural} = ${reference.target.name}.query({filter: '${entity.camelCaseFormat}-is-null'});
+        $q.all([vm.${entity.camelCaseFormat}.$promise, vm.${reference.toTargetPropertyNamePlural}.$promise]).then(function() {
+            if (!vm.${entity.camelCaseFormat}.${reference.toTargetPropertyName} || !vm.${entity.camelCaseFormat}.${reference.toTargetPropertyName}.id) {
+                return $q.reject();
+            }
+            return ${reference.target.name}.get({id : vm.${entity.camelCaseFormat}.${reference.toTargetPropertyName}.id}).$promise;
+        }).then(function(${reference.toTargetPropertyName}) {
+            vm.${reference.toTargetPropertyNamePlural}.push(${reference.toTargetPropertyName});
+        });
+        <#elseif reference.associationType.name() == "MANY_TO_ONE">
+        vm.${reference.target.camelCasePluralFormat} = ${reference.target.name}.query();
+        <#else>
+        vm.${reference.toTargetPropertyNamePlural} = ${reference.target.name}.query();
+		</#if>
+		</#if>
 		</#list>
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

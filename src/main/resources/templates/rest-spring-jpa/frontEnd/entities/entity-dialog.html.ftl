@@ -34,11 +34,12 @@
 			    		<#include "/rest-spring-jpa/frontEnd/entities/edit/text.ftl">
 			    <#elseif property.number == true>
 					<#include "/rest-spring-jpa/frontEnd/entities/edit/number.ftl">
-		        <#else> 
+		        <#else>
 		        	<#include "/rest-spring-jpa/frontEnd/entities/edit/text.ftl">
 		    	</#if>
         	</#if>
 		</#list>
+        <#include "/rest-spring-jpa/frontEnd/entities/edit/associations/edit-properties.ftl">
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
