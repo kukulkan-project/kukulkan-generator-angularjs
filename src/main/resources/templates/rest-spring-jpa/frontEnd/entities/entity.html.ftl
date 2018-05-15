@@ -1,6 +1,6 @@
 <#assign translateKey>${projectName}App.${entityCamelCase}</#assign>
 <div>
-    <h2 data-translate="${translateKey}.home.title">${entityCamelCasePlural}</h2>
+    <h2 data-translate="${translateKey}.home.title">${entityCamelCasePlural?cap_first}</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -42,7 +42,7 @@
                     <th jh-sort-by="${property.name}"><span data-translate="${translateKey}.${property.name}">${property.name?cap_first}</span> <span class="glyphicon glyphicon-sort"></span></th>
                     	</#if>
                     </#list>
-                    <#include "/rest-spring-jpa/read/associations/header.ftl">
+                    <#include "/rest-spring-jpa/frontEnd/entities/read/associations/header.ftl">
                     <th></th>
                 </tr>
             </thead>
@@ -71,6 +71,7 @@
 							</#if>
                     	</#if>
                     </#list>
+                    <#include "/rest-spring-jpa/frontEnd/entities/read/associations/association-properties.ftl">
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
