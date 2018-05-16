@@ -6,8 +6,8 @@
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="global.field.id">${primaryKey.name}</span></dt>
         <dd>
-			<span>{{vm.${entityCamelCase}.${primaryKey.name}}}</span>
-		<dd>
+            <span>{{vm.${entityCamelCase}.${primaryKey.name}}}</span>
+        <dd>
 		<#list properties as property>
         	<#if property.name?ends_with("ContentType") == false>
 	        	<#if  property.blob == true>

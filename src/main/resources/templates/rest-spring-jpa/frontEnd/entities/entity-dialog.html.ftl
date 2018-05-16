@@ -8,7 +8,7 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" ng-show="vm.${entityCamelCase}.${primaryKey.name}">
-            <label for="id" data-translate="global.field.id">${primaryKey.name}</label>
+            <label for="id" data-translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="${primaryKey.name}"
                     ng-model="vm.${entityCamelCase}.${primaryKey.name}" readonly />
         </div>

@@ -2,7 +2,7 @@
     "${projectName}App": {
         "${entityCamelCase}" : {
             "home": {
-                "title": "${entityCamelCasePlural}",
+                "title": "${entityCamelCasePlural?cap_first}",
                 "createLabel": "Create a new ${entity.name}",
                 "createOrEditLabel": "Create or edit a ${entity.name}"
                 "search": "Search ${entity.name}"
@@ -17,8 +17,13 @@
                 "title": "${entity.name}"
             },
            <#list properties as property>
-            "${property.name}": "${property.name?cap_first}"<#sep>, </#sep>
+            "${property.name}": "${property.name?cap_first}"<#sep>, </#sep><#if property?is_last><#if entity.connectedAdjacentReferences?size != 0>,</#if></#if>
            </#list>
+           <#list entity.connectedAdjacentReferences as reference>
+		        <#if reference.autoReference == false>
+            "${reference.toTargetPropertyName}": "${reference.toTargetPropertyName?cap_first}"<#sep>,</#sep>
+		        </#if>
+            </#list>
         }
     }
 }

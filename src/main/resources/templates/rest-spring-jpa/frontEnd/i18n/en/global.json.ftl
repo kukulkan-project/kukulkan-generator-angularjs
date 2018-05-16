@@ -9,7 +9,7 @@
                 "main": "Entities",
                 <#list dataModelGroup as dmg>
 					<#list dmg.entities as entity>
-					"${entity.camelCaseFormat}": "${entity.name}",
+                "${entity.camelCaseFormat}": "${entity.name}",
 					</#list>    
 				</#list>
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
