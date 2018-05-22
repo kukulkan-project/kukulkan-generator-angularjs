@@ -31,8 +31,8 @@
 		<#list entity.referenceTypes as reference>
 		<#if reference.autoReference == false>
 		<#if reference.associationType.name() == "ONE_TO_ONE">
-        vm.${reference.toTargetPropertyNamePlural} = ${reference.target.name}.query({filter: '${entity.camelCaseFormat}-is-null'});
-        $q.all([vm.${entity.camelCaseFormat}.$promise, vm.${reference.toTargetPropertyNamePlural}.$promise]).then(function() {
+        vm.${reference.target.camelCasePluralFormat} = ${reference.target.name}.query({filter: '${entity.camelCaseFormat}-is-null'});
+        $q.all([vm.${entity.camelCaseFormat}.$promise, vm.${reference.target.camelCasePluralFormat}.$promise]).then(function() {
             if (!vm.${entity.camelCaseFormat}.${reference.toTargetPropertyName} || !vm.${entity.camelCaseFormat}.${reference.toTargetPropertyName}.id) {
                 return $q.reject();
             }
@@ -43,7 +43,7 @@
         <#elseif reference.associationType.name() == "MANY_TO_ONE">
         vm.${reference.target.camelCasePluralFormat} = ${reference.target.name}.query();
         <#else>
-        vm.${reference.toTargetPropertyNamePlural} = ${reference.target.name}.query();
+        vm.${reference.target.camelCasePluralFormat} = ${reference.target.name}.query();
 		</#if>
 		</#if>
 		</#list>
