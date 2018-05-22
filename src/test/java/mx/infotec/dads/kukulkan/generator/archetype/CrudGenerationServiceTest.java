@@ -83,7 +83,7 @@ public class CrudGenerationServiceTest {
         ProjectConfiguration pConf = createProjectConfigurationJustModel(DatabaseType.SQL_MYSQL);
         // Create GeneratorContext
         GeneratorContext genCtx = new GeneratorContext();
-        Source source = new FileSource("src/test/resources/grammar/relationship-entity." + "3k");
+        Source source = new FileSource("src/test/resources/grammar/simple-relationship." + "3k");
         genCtx.put(ProjectConfiguration.class, pConf);
         genCtx.put(DomainModel.class, translatorService.translate(pConf, source));
         generationService.process(genCtx);

@@ -1,0 +1,24 @@
+entity Empleado {
+	name : String,
+	otro : String,
+	OneToOne address : Direccion,
+	OneToMany job : Trabajo,
+	ManyToOne apartment : Departamento,
+	ManyToMany task : Tarea
+}
+
+entity Direccion {
+	name : String
+}
+
+entity Trabajo {
+	name : String
+}
+
+entity Tarea {
+	name : String
+}
+
+entity Departamento {
+	name : String
+}
