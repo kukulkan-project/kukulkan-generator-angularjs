@@ -70,8 +70,9 @@ public class GeneratorEntityFactory {
         pConf.setDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 05, 07, 20, 45, 32));
         pConf.addLayers("angular-js");
+        pConf.getLayersToProcess().add("angular-js");
         if (DatabaseType.SQL_MYSQL == type) {
-//            pConf.addLayer("liquibase");
+            // pConf.addLayer("liquibase");
         }
         return pConf;
     }
