@@ -65,14 +65,19 @@ public class GeneratorEntityFactory {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2018");
         pConf.setAuthor("KUKULKAN");
-        // pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());}
-        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
+//        pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 05, 07, 20, 45, 32));
-        pConf.addLayers("angular-js");
+        pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");
         pConf.getLayersToProcess().add("angular-js");
+        pConf.getLayersToProcess().add("spring-rest");
+        pConf.getLayersToProcess().add("spring-service");
+        pConf.getLayersToProcess().add("spring-repository");
+        pConf.getLayersToProcess().add("domain-core");
         if (DatabaseType.SQL_MYSQL == type) {
-            // pConf.addLayer("liquibase");
+             pConf.addLayer("liquibase");
+             pConf.getLayersToProcess().add("liquibase");
         }
         return pConf;
     }
