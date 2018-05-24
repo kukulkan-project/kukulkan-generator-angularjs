@@ -65,8 +65,8 @@ public class GeneratorEntityFactory {
         pConf.setPackaging("mx.infotec.dads.archetype");
         pConf.setYear("2018");
         pConf.setAuthor("KUKULKAN");
-        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
-//        pConf.setOutputDir(Paths.get("/home/daniel/git"));
+//        pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
+        pConf.setOutputDir(Paths.get("/home/daniel/git"));
         pConf.setDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
         pConf.setTimestamp(LocalDateTime.of(2018, 05, 07, 20, 45, 32));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");

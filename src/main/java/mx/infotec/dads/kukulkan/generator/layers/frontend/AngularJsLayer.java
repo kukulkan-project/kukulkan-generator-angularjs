@@ -37,7 +37,6 @@ import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_STAT
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.IDIOMA_JS;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVASCRIPT;
-import static mx.infotec.dads.kukulkan.metamodel.util.NameConventionFormatter.camelCaseToHyphens;
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
 import java.nio.file.Path;
@@ -103,8 +102,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
+     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
@@ -216,8 +214,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS,
                 false);
@@ -266,8 +263,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityStateJs {}", ENTITY_STATE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS, false);
     }
@@ -282,8 +278,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
                 false);
@@ -299,8 +294,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntitySearchServiceJs {}", ENTITY_SEARCH_SERVICE_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_SEARCH_SERVICE_JS, false);
@@ -332,8 +326,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
@@ -350,8 +343,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DIALOG_CONTROLLER_JS, false);
@@ -367,8 +359,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDetailControllerJs {}", ENTITY_DETAIL_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DETAIL_CONTROLLER_JS, false);
@@ -384,8 +375,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDetailHtml {}", LayerConstants.ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DETAIL_HTML), ENTITY_DETAIL_HTML, false,
@@ -402,8 +392,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDeleteDialogHtml {}", ENTITY_DELETE_DIALOG_HTML);
         saveFrontEndTemplate(pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DELETE_DIALOG_HTML),
@@ -443,8 +432,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param isPlural
      *            the is plural
      */
-    private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement, TemplateEnum templateLocation, String templateName, boolean isPlural) {
+    private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement,
+            TemplateEnum templateLocation, String templateName, boolean isPlural) {
         saveFrontEndTemplate(pConf, model, dmElement, templateLocation.getLocation(templateName), templateName,
                 isPlural, JAVASCRIPT);
     }
@@ -467,13 +456,12 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param languageType
      *            the language type
      */
-    private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement, Path templateFilePath, String templateName, boolean isPlural,
-            LanguageType languageType) {
-        String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
+    private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement,
+            Path templateFilePath, String templateName, boolean isPlural, LanguageType languageType) {
+        String fileNamingConvention = dmElement.getHyphensFormat();
         String entityName = fileNamingConvention;
         if (isPlural) {
-            entityName = camelCaseToHyphens(dmElement.getCamelCasePluralFormat());
+            entityName = dmElement.getHyphensPluralFormat();
         }
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
@@ -502,7 +490,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      */
     private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement, TemplateEnum templateLocation, String templateName, String idiomaKey) {
-        String fileNamingConvention = camelCaseToHyphens(dmElement.getCamelCaseFormat());
+        String fileNamingConvention = dmElement.getHyphensFormat();
         Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
