@@ -45,7 +45,7 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('${entityCamelCase}');
+                    $translatePartialLoader.addPart('${entityHyphenNotation}');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -67,7 +67,7 @@
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('${entityCamelCase}');
+                    $translatePartialLoader.addPart('${entityHyphenNotation}');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', '${entity.name}', function($stateParams, ${entity.name}) {
