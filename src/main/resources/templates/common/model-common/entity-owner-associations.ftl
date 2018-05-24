@@ -2,7 +2,7 @@
     <#if association.type.name() == "ONE_TO_ONE">
     
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(name = "${association.target.name?upper_case}_ID", unique = true)
     private ${association.target.name} ${association.toTargetPropertyName};
     <#elseif association.type.name() == "ONE_TO_MANY">
     

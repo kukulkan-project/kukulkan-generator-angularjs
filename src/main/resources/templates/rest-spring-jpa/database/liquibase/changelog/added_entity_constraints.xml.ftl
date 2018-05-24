@@ -9,7 +9,7 @@
     <changeSet id="${entity.timestampString}-2" author="${author}">
        <#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
-        <addForeignKeyConstraint baseColumnNames="${association.target.tableName}_id"
+        <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="${entity.tableName}"
                                  constraintName="fk_${association.source.tableName}_${association.target.tableName}_id"
                                  referencedColumnNames="id"
@@ -18,7 +18,7 @@
 		</#list>
         <#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-        <addForeignKeyConstraint baseColumnNames="${association.target.tableName}_id"
+        <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="${entity.tableName}"
                                  constraintName="fk_${association.target.tableName}_${association.target.tableName}_id"
                                  referencedColumnNames="id"
@@ -28,7 +28,7 @@
 
        <#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
-        <addForeignKeyConstraint baseColumnNames="${association.source.tableName}_id"
+        <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="${association.associationName}"
                                  constraintName="fk_${association.associationName}_${association.source.tableName}_id"
                                  referencedColumnNames="id"

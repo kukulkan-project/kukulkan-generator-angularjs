@@ -43,11 +43,16 @@
 		</#list>
 		
 		<#list ownerAssociations as association>
-        	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
-        	<column name="${association.target.tableName}_id" type="bigint">
+        	<#if association.type.name() == "ONE_TO_ONE">
+        	<column name="${association.target.name}_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+            <#elseif association.type.name() == "MANY_TO_ONE">
+            <column name="${association.target.tableName}_id" type="bigint">
                 <constraints <#if association.type.name() == "ONE_TO_ONE">unique="true" </#if>nullable="true" />
             </column>
-        	</#if>
+        	</#if>        	
+        	
 		</#list>
 		<#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
