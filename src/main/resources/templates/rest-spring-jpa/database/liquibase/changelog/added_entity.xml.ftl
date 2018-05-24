@@ -44,7 +44,7 @@
 		
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
-        	<column name="${association.toTargetPropertyName}_id" type="bigint">
+        	<column name="${association.target.tableName}_id" type="bigint">
                 <constraints <#if association.type.name() == "ONE_TO_ONE">unique="true" </#if>nullable="true" />
             </column>
         	</#if>
