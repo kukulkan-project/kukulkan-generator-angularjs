@@ -44,11 +44,11 @@
 		
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE">
-        	<column name="${association.target.name}_id" type="bigint">
+        	<column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
             <#elseif association.type.name() == "MANY_TO_ONE">
-            <column name="${association.target.tableName}_id" type="bigint">
+            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
                 <constraints <#if association.type.name() == "ONE_TO_ONE">unique="true" </#if>nullable="true" />
             </column>
         	</#if>        	
@@ -56,7 +56,7 @@
 		</#list>
 		<#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-            <column name="${association.toSourcePropertyName}_id" type="bigint">
+            <column name="${association.toSourcePropertyNameUnderscore}_id" type="bigint">
                 <constraints nullable="true" />
             </column>
         	</#if>
@@ -65,10 +65,10 @@
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
         <createTable tableName="${association.source.tableName}_${association.target.tableName}">
-            <column name="${association.source.tableName}_id" type="bigint">
+            <column name="${association.toSourcePropertyNameUnderscore}_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="${association.target.tableName}_id" type="bigint">
+            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>

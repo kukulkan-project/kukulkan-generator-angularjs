@@ -20,7 +20,7 @@
         	<#if association.type.name() == "ONE_TO_MANY">
         <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="${entity.tableName}"
-                                 constraintName="fk_${association.target.tableName}_${association.target.tableName}_id"
+                                 constraintName="fk_${association.source.tableName}_${association.target.tableName}_id"
                                  referencedColumnNames="id"
                                  referencedTableName="${association.source.tableName}"/>
         	</#if>
