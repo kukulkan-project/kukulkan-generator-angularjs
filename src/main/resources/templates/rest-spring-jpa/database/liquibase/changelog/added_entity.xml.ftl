@@ -73,7 +73,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="${association.source.tableName}_id, ${association.target.tableName}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
+        <addPrimaryKey columnNames="${association.toSourcePropertyNameUnderscore}_id, ${association.toTargetPropertyNameUnderscore}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
         	</#if>
 		</#list>
 		<#list properties as property>
