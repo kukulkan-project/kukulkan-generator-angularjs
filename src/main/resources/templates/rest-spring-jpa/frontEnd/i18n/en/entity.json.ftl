@@ -4,7 +4,7 @@
             "home": {
                 "title": "${entityCamelCasePlural?cap_first}",
                 "createLabel": "Create a new ${entity.name}",
-                "createOrEditLabel": "Create or edit a ${entity.name}"
+                "createOrEditLabel": "Create or edit a ${entity.name}",
                 "search": "Search ${entity.name}"
             },
             "created": "A new ${entity.name} is created with identifier {{ param }}",
