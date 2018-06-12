@@ -7,7 +7,7 @@
 
     ${entityCamelCase?cap_first}Controller.$inject = ['$state',<#if hasBlobProperties == true> 'DataUtils',</#if> '${entityCamelCase?cap_first}', '${entityCamelCase?cap_first}Search', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function ${entityCamelCase?cap_first}Controller($state,<#if hasBlobProperties == true> 'DataUtils',</#if> ${entityCamelCase?cap_first}, ${entityCamelCase?cap_first}Search, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ${entityCamelCase?cap_first}Controller($state,<#if hasBlobProperties == true> DataUtils,</#if> ${entityCamelCase?cap_first}, ${entityCamelCase?cap_first}Search, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
         

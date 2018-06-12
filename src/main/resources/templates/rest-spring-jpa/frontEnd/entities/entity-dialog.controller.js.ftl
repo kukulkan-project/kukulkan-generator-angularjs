@@ -7,7 +7,7 @@
 
     ${entity.name}DialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q',<#if hasBlobProperties == true> 'DataUtils',</#if> 'entity'<#list entity.referenceTypes as types>, '${types.target.name}'</#list>];
 
-    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q,<#if hasBlobProperties == true> 'DataUtils',</#if> entity<#list entity.referenceTypes as types>, ${types.target.name}</#list>) {
+    function ${entity.name}DialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q,<#if hasBlobProperties == true> DataUtils,</#if> entity<#list entity.referenceTypes as types>, ${types.target.name}</#list>) {
         var vm = this;
 
         vm.${entityCamelCase} = entity;
