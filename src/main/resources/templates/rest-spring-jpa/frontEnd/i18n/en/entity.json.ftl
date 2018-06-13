@@ -15,7 +15,7 @@
             },
             "detail": {
                 "title": "${entity.name}"
-            },
+            }<#if properties?size != 0 ||entity.connectedAdjacentReferences?size != 0>,</#if>
            <#list properties as property>
             "${property.name}": "${property.name?cap_first}"<#sep>, </#sep><#if property?is_last><#if entity.connectedAdjacentReferences?size != 0>,</#if></#if>
            </#list>
