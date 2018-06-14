@@ -18,8 +18,8 @@
     
     @ManyToMany
     @JoinTable(name = "${association.associationName}",
-               joinColumns = @JoinColumn(name="${association.source.name?lower_case}_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="${association.target.name?lower_case}_id", referencedColumnName="id"))
+               joinColumns = @JoinColumn(name="${association.source.underscoreName}_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="${association.target.underscoreName}_id", referencedColumnName="id"))
     private Set<${association.target.name}> ${association.toTargetPropertyNamePlural} = new HashSet<>();
     </#if>
 </#list>
