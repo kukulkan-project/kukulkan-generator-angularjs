@@ -1,0 +1,40 @@
+
+entity A { 
+        OneToOne propertyB : B,
+        OneToMany propertiesC : C,
+        ManyToOne propertyD : D,
+        ManyToMany propertiesE : E,
+        OneToOne childA : A
+}
+
+entity B { 
+}
+
+entity C { 
+}
+
+entity D { 
+}
+
+entity E { 
+}
+
+entity F { 
+        OneToOne (propertyF) propertyG : G,
+        OneToMany (propertyF) propertiesH : H,
+        ManyToOne (propertyF) propertyI : I,
+        ManyToMany (propertyF) propertiesJ : J,
+        OneToOne (parentF) childF : F
+}
+
+entity G { 
+}
+
+entity H { 
+}
+
+entity I { 
+}
+
+entity J { 
+}

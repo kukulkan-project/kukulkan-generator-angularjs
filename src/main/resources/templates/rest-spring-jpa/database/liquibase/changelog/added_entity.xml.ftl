@@ -65,15 +65,15 @@
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
         <createTable tableName="${association.source.tableName}_${association.target.tableName}">
-            <column name="${association.toSourcePropertyNameUnderscore}_id" type="bigint">
+            <column name="${association.source.name?lower_case}_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
+            <column name="${association.target.name?lower_case}_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="${association.toSourcePropertyNameUnderscore}_id, ${association.toTargetPropertyNameUnderscore}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
+        <addPrimaryKey columnNames="${association.source.name?lower_case}_id, ${association.target.name?lower_case}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
         	</#if>
 		</#list>
 		<#list properties as property>

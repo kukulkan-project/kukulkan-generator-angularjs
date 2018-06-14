@@ -1,7 +1,8 @@
 <#list notOwnerAssociations as association>
     <#if association.bidirectional == true>
 	    <#if association.type.name() == "ONE_TO_ONE">
-    NOT YET SUPPORTED
+    @OneToOne(mappedBy = "${association.toTargetPropertyName}")
+    private ${association.source.name} ${association.toSourcePropertyName};
     	<#elseif association.type.name() == "ONE_TO_MANY">
     	
     @ManyToOne

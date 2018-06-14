@@ -6,19 +6,20 @@
     private ${association.target.name} ${association.toTargetPropertyName};
     <#elseif association.type.name() == "ONE_TO_MANY">
     
-    @OneToMany(mappedBy = "${association.toSourcePropertyNameUnderscore}")
+    @OneToMany(mappedBy = "${association.toSourcePropertyName}")
     @JsonIgnore
     private Set<${association.target.name}> ${association.toTargetPropertyNamePlural} = new HashSet<>();
     <#elseif association.type.name() == "MANY_TO_ONE">
     
     @ManyToOne
+    @JoinColumn(name = "${association.toTargetPropertyNameUnderscore}_id")
     private ${association.target.name} ${association.toTargetPropertyName};
     <#elseif association.type.name() == "MANY_TO_MANY">
     
     @ManyToMany
     @JoinTable(name = "${association.associationName}",
-               joinColumns = @JoinColumn(name="${association.toSourcePropertyNameUnderscore}_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="${association.toTargetPropertyNameUnderscore}_id", referencedColumnName="id"))
+               joinColumns = @JoinColumn(name="${association.source.name?lower_case}_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="${association.target.name?lower_case}_id", referencedColumnName="id"))
     private Set<${association.target.name}> ${association.toTargetPropertyNamePlural} = new HashSet<>();
     </#if>
 </#list>
