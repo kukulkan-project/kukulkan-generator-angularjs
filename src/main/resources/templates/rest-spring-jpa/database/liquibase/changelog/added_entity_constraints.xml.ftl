@@ -18,7 +18,7 @@
 		</#list>
         <#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-        	<#if association.isBidirectional>
+        	<#if association.bidirectional>
         	<addForeignKeyConstraint baseColumnNames="${association.toSourcePropertyNameUnderscore}_id"
         	<#else>
         	<addForeignKeyConstraint baseColumnNames="${association.source.name?lower_case}_id"
