@@ -6,6 +6,7 @@
     	<#elseif association.type.name() == "ONE_TO_MANY">
     	
     @ManyToOne
+    @JoinColumn(name = "${association.toSourcePropertyNameUnderscore}_id")
     private ${association.source.name} ${association.toSourcePropertyName};
     	</#if>
     	<#if association.type.name() == "MANY_TO_ONE">

@@ -18,7 +18,11 @@
 		</#list>
         <#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-        <addForeignKeyConstraint baseColumnNames="${association.source.name?lower_case}_id"
+        	<#if association.isBidirectional>
+        	<addForeignKeyConstraint baseColumnNames="${association.toSourcePropertyNameUnderscore}_id"
+        	<#else>
+        	<addForeignKeyConstraint baseColumnNames="${association.source.name?lower_case}_id"
+        	</#if>
                                  baseTableName="${entity.tableName}"
                                  constraintName="fk_${association.source.tableName}_${association.target.tableName}_id"
                                  referencedColumnNames="id"
