@@ -24,6 +24,7 @@ spring:
     devtools:
         restart:
             enabled: true
+            exclude: .h2.server.properties,static/**,templates/**
         livereload:
             enabled: false # we use gulp + BrowserSync for livereload
     jackson:
