@@ -5,19 +5,21 @@ entity LeftUnidirectional {
         ManyToOne manyToOneUnidirectional : RightManyToOneUnidirectional,
         ManyToMany manyToManyUnidirectional : RightManyToManyUnidirectional,
         OneToOne recursiveChildOneToOneUnidirectional : LeftUnidirectional,
-        OneToMany recursiveChildrenOneToManyUnidirectional : LeftUnidirectional
+        OneToMany recursiveChildrenOneToManyUnidirectional : LeftUnidirectional,
+        ManyToOne recursiveChildManyToOneUnidirectional : LeftUnidirectional,
+        ManyToMany recursiveChildrenManyToManyUnidirectional : LeftUnidirectional
 }
 
-entity RightOneToOneUnidirectional {
+entity RightOneToOneUnidirectional { 
 }
 
-entity RightOneToManyUnidirectional {
+entity RightOneToManyUnidirectional { 
 }
 
-entity RightManyToOneUnidirectional {
+entity RightManyToOneUnidirectional { 
 }
 
-entity RightManyToManyUnidirectional {
+entity RightManyToManyUnidirectional { 
 }
 
 entity LeftBidirectional { 
@@ -25,17 +27,20 @@ entity LeftBidirectional {
         OneToMany (leftOneToManyBidirectional) rightOneToManyBidirectional : RightOneToManyBidirectional,
         ManyToOne (leftManyToOneBidirectional) rightManyToOneBidirectional : RightManyToOneBidirectional,
         ManyToMany (leftManyToManyBidirectional) rightManyToManyBidirectional : RightManyToManyBidirectional,
-        OneToOne (recursiveParentBidirectional) recursiveChildOneToOneBidirectional : LeftBidirectional
+        OneToOne (recursiveParentOneToOneBidirectional) recursiveChildOneToOneBidirectional : LeftBidirectional,
+        OneToMany (recursiveParentOneToManyBidirectional) recursiveChildrenOneToManyBidirectional : LeftBidirectional,
+        ManyToOne (recursiveParentManyToOneBidirectional) recursiveChildManyToOneBidirectional : LeftBidirectional,
+        ManyToMany (recursiveParentManyToManyBidirectional) recursiveChildrenManyToManyBidirectional : LeftBidirectional
 }
 
-entity RightOneToOneBidirectional {
+entity RightOneToOneBidirectional { 
 }
 
-entity RightOneToManyBidirectional {
+entity RightOneToManyBidirectional { 
 }
 
-entity RightManyToOneBidirectional {
+entity RightManyToOneBidirectional { 
 }
 
-entity RightManyToManyBidirectional {
+entity RightManyToManyBidirectional { 
 }

@@ -11,7 +11,7 @@
         	<#if association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
         <addForeignKeyConstraint baseColumnNames="${association.toTargetPropertyNameUnderscore}_id"
                                  baseTableName="${entity.tableName}"
-                                 constraintName="fk_${association.source.tableName}_${association.target.tableName}_id"
+                                 constraintName="fk_${association.source.tableName}.${association.toTargetPropertyNameUnderscore}_id_${association.target.tableName}.id"
                                  referencedColumnNames="id"
                                  referencedTableName="${association.target.tableName}"/>
         	</#if>
@@ -20,11 +20,13 @@
         	<#if association.type.name() == "ONE_TO_MANY">
         	<#if association.bidirectional>
         	<addForeignKeyConstraint baseColumnNames="${association.toSourcePropertyNameUnderscore}_id"
+        						baseTableName="${entity.tableName}"
+                                constraintName="fk_${association.source.tableName}.${association.toSourcePropertyNameUnderscore}_id_${association.target.tableName}.id"
         	<#else>
         	<addForeignKeyConstraint baseColumnNames="${association.source.underscoreName}_id"
+        						baseTableName="${entity.tableName}"
+                                constraintName="fk_${association.source.tableName}.${association.source.underscoreName}_id_${association.target.tableName}_id"		
         	</#if>
-                                 baseTableName="${entity.tableName}"
-                                 constraintName="fk_${association.source.tableName}_${association.target.tableName}_id"
                                  referencedColumnNames="id"
                                  referencedTableName="${association.source.tableName}"/>
         	</#if>
@@ -32,16 +34,30 @@
 
        <#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
-        <addForeignKeyConstraint baseColumnNames="${association.source.underscoreName}_id"
-                                 baseTableName="${association.associationName}"
-                                 constraintName="fk_${association.associationName}_${association.source.tableName}_id"
+        	<#if association.bidirectional>
+        	<addForeignKeyConstraint baseColumnNames="${association.toSourcePropertyNameUnderscore}_id"
+                                 baseTableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"
+                                 constraintName="fk_${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}.${association.toSourcePropertyNameUnderscore}_id_${association.source.tableName}.id"
                                  referencedColumnNames="id"
                                  referencedTableName="${association.source.tableName}"/>
-        <addForeignKeyConstraint baseColumnNames="${association.target.underscoreName}_id"
-                                 baseTableName="${association.associationName}"
-                                 constraintName="fk_${association.associationName}_${association.target.tableName}_id"
+        	<addForeignKeyConstraint baseColumnNames="${association.toTargetPropertyNameUnderscore}_id"
+                                 baseTableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"
+                                 constraintName="fk_${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}.${association.toTargetPropertyNameUnderscore}_id_${association.target.tableName}.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="${association.target.tableName}"/>        	
+        	<#else>
+        	<addForeignKeyConstraint baseColumnNames="${association.source.underscoreName}_id"
+                                 baseTableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"
+                                 constraintName="fk_${association.source.tableName}_${association.toTargetPropertyNameUnderscore}.${association.source.underscoreName}_id_${association.source.tableName}.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="${association.source.tableName}"/>
+        	<addForeignKeyConstraint baseColumnNames="${association.toTargetPropertyNameUnderscore}_id"
+                                 baseTableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"
+                                 constraintName="fk_${association.source.tableName}_${association.toTargetPropertyNameUnderscore}.${association.toTargetPropertyNameUnderscore}_id_${association.target.tableName}.id"
                                  referencedColumnNames="id"
                                  referencedTableName="${association.target.tableName}"/>
+        	</#if>
+        
 
         	</#if>
 		</#list>

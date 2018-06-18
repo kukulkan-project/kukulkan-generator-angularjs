@@ -15,11 +15,19 @@
     @JoinColumn(name = "${association.toTargetPropertyNameUnderscore}_id")
     private ${association.target.name} ${association.toTargetPropertyName};
     <#elseif association.type.name() == "MANY_TO_MANY">
+    <#if association.bidirectional>
+    @ManyToMany
+    @JoinTable(name = "${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}",
+               joinColumns = @JoinColumn(name="${association.toSourcePropertyNameUnderscore}_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="${association.toTargetPropertyNameUnderscore}_id", referencedColumnName="id"))
+    private Set<${association.target.name}> ${association.toTargetPropertyNamePlural} = new HashSet<>();
+    <#else>
     
     @ManyToMany
-    @JoinTable(name = "${association.associationName}",
+    @JoinTable(name = "${association.source.tableName}_${association.toTargetPropertyNameUnderscore}",
                joinColumns = @JoinColumn(name="${association.source.underscoreName}_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="${association.target.underscoreName}_id", referencedColumnName="id"))
+               inverseJoinColumns = @JoinColumn(name="${association.toTargetPropertyNameUnderscore}_id", referencedColumnName="id"))
     private Set<${association.target.name}> ${association.toTargetPropertyNamePlural} = new HashSet<>();
+    </#if>
     </#if>
 </#list>

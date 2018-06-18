@@ -64,16 +64,27 @@
         </createTable>
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "MANY_TO_MANY">
-        <createTable tableName="${association.source.tableName}_${association.target.tableName}">
-            <column name="${association.source.underscoreName}_id" type="bigint">
+        	<#if association.bidirectional>
+        <createTable tableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}">
+        	<column name="${association.toSourcePropertyNameUnderscore}_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="${association.target.underscoreName}_id" type="bigint">
+            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <addPrimaryKey columnNames="${association.source.underscoreName}_id, ${association.target.underscoreName}_id" tableName="${association.source.tableName}_${association.target.tableName}"/>
+        <addPrimaryKey columnNames="${association.toSourcePropertyNameUnderscore}_id, ${association.toTargetPropertyNameUnderscore}_id" tableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"/>
+        		<#else>
+        <createTable tableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}">
+        	<column name="${association.source.underscoreName}_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="${association.source.underscoreName}_id, ${association.toTargetPropertyNameUnderscore}_id" tableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"/>
+        	</#if>
         	</#if>
 		</#list>
 		<#list properties as property>
