@@ -28,12 +28,15 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Function;
 
-import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 
 public class WriteResources {
+    
+    private WriteResources() {
+        
+    }
 
     public static final String ANGULAR_JS = "archetypes/angularjs/";
     public static final String ANGULAR_SPRING_JPA_TEMPLATE = "archetypes/angularjs-spring-jpa/";

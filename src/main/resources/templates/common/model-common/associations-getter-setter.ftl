@@ -42,7 +42,7 @@
         this.${association.toTargetPropertyNamePlural}.add(${association.toTargetPropertyName});
         <#if association.type.name() == "ONE_TO_MANY">
         ${association.toTargetPropertyName}.set${association.toSourcePropertyName?cap_first}(this);
-        <#elseif association.type.name() == "MANY_TO_MANY">
+        <#elseif association.type.name() == "MANY_TO_MANY" && association.bidirectional>
         ${association.toTargetPropertyName}.get${association.toSourcePropertyNamePlural?cap_first}().add(this);
         </#if>
         return this;

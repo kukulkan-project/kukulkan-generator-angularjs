@@ -16,6 +16,7 @@
     private ${association.target.name} ${association.toTargetPropertyName};
     <#elseif association.type.name() == "MANY_TO_MANY">
     <#if association.bidirectional>
+    
     @ManyToMany
     @JoinTable(name = "${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}",
                joinColumns = @JoinColumn(name="${association.toSourcePropertyNameUnderscore}_id", referencedColumnName="id"),

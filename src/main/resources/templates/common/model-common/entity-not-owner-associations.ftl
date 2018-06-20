@@ -1,5 +1,5 @@
 <#list notOwnerAssociations as association>
-    <#if association.bidirectional == true>
+    <#if association.bidirectional>
 	    <#if association.type.name() == "ONE_TO_ONE">
     @OneToOne(mappedBy = "${association.toTargetPropertyName}")
     private ${association.source.name} ${association.toSourcePropertyName};
