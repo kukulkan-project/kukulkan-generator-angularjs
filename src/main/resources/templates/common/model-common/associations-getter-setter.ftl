@@ -1,5 +1,5 @@
 <#list notOwnerAssociations as association>
-	<#if association.bidirectional == true>
+	<#if association.bidirectional || association.type.name() == "ONE_TO_MANY">
 		<#if association.type.name() == "ONE_TO_MANY" || association.type.name() == "ONE_TO_ONE" >
     public ${association.source.name} get${association.toSourcePropertyName?cap_first}() {
         return ${association.toSourcePropertyName};
@@ -52,7 +52,7 @@
         this.${association.toTargetPropertyNamePlural}.remove(${association.toTargetPropertyName});
         <#if association.type.name() == "ONE_TO_MANY">
         ${association.toTargetPropertyName}.set${association.toSourcePropertyName?cap_first}(null);
-        <#elseif association.type.name() == "MANY_TO_MANY">
+        <#elseif association.type.name() == "MANY_TO_MANY" && association.bidirectional>
         ${association.toTargetPropertyName}.get${association.toSourcePropertyNamePlural?cap_first}().remove(this);
         </#if>
         return this;
