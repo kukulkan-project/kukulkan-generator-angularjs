@@ -12,19 +12,26 @@
     public Set<${association.source.name}> get${association.toSourcePropertyNamePlural?cap_first}() {
         return ${association.toSourcePropertyNamePlural};
     }
-		<#if association.type.name() == "MANY_TO_MANY">
+    
     public ${association.target.name} add${association.toSourcePropertyName?cap_first}(${association.source.name} ${association.toSourcePropertyName}) {
         this.${association.toSourcePropertyNamePlural}.add(${association.toSourcePropertyName});
+        <#if association.type.name() == "MANY_TO_ONE">
+        ${association.toSourcePropertyName}.set${association.toTargetPropertyNamePlural?cap_first}(this);
+        <#elseif association.type.name() == "MANY_TO_MANY">
         ${association.toSourcePropertyName}.get${association.toTargetPropertyNamePlural?cap_first}().add(this);
+        </#if>
         return this;
     }
 
     public ${association.target.name} remove${association.toSourcePropertyName?cap_first}(${association.source.name} ${association.toSourcePropertyName}) {
         this.${association.toSourcePropertyNamePlural}.remove(${association.toSourcePropertyName});
+        <#if association.type.name() == "MANY_TO_ONE">
+        ${association.toSourcePropertyName}.set${association.toTargetPropertyNamePlural?cap_first}(null);
+        <#elseif association.type.name() == "MANY_TO_MANY">
         ${association.toSourcePropertyName}.get${association.toTargetPropertyNamePlural?cap_first}().remove(this);
+        </#if> 
         return this;
     }
-		</#if>
 
     public void set${association.toSourcePropertyNamePlural?cap_first}(Set<${association.source.name}> ${association.toSourcePropertyNamePlural}) {
         this.${association.toSourcePropertyNamePlural} = ${association.toSourcePropertyNamePlural};
