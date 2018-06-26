@@ -1,5 +1,5 @@
-<#assign aDateTime = .now>
 <#include "/common/licences/mit.ftl">
+
 ${package}
 
 <#list imports as import>
@@ -22,6 +22,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "${tableNameLowerCase}")
 public class ${entity.name} implements Serializable {
+
     private static final long serialVersionUID = 1L;
     
     <#include "/common/model-common/primary-key-property.ftl">
@@ -35,4 +36,5 @@ public class ${entity.name} implements Serializable {
     <#include "/common/model-common/equals-method.ftl">
     <#include "/common/model-common/hashcode-method.ftl">
     <#include "/common/model-common/tostring-method.ftl">
+
 }

@@ -1,3 +1,4 @@
+
 <#list notOwnerAssociations as association>
     <#if association.bidirectional || association.type.name() == "ONE_TO_MANY">
 	    <#if association.type.name() == "ONE_TO_ONE">
@@ -18,6 +19,7 @@
     @ManyToMany(mappedBy = "${association.toTargetPropertyNamePlural}")
     @JsonIgnore
     private Set<${association.source.name}> ${association.toSourcePropertyNamePlural} = new HashSet<>();
+    
     	</#if>    
     </#if>
 </#list>

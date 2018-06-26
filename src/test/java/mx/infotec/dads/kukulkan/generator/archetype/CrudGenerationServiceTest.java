@@ -50,8 +50,6 @@ import javax.xml.bind.DatatypeConverter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -92,15 +90,13 @@ public class CrudGenerationServiceTest {
     @Qualifier("grammarTranslatorService")
     private TranslatorService translatorService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CrudGenerationServiceTest.class);
-
     private static Path outputDir = null;
     private static final String idProject = "testcase";
 
     @BeforeClass
     public static void runOnceBeforeClass() {
-        outputDir = TemporalDirectoryUtil.getTemporalPath();
-        // outputDir = Paths.get("/home/roberto/Escritorio/generated");
+        // outputDir = TemporalDirectoryUtil.getTemporalPath();
+        outputDir = Paths.get("/home/roberto/Escritorio/generated");
     }
 
     public void generationService() {
@@ -148,7 +144,7 @@ public class CrudGenerationServiceTest {
         pConf.setAuthor("kukulkan");
         pConf.setOutputDir(outputDir);
         pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
-        pConf.setTimestamp(LocalDateTime.of(2018, 06, 25, 15, 00, 03));
+        pConf.setTimestamp(LocalDateTime.of(2018, 01, 01, 00, 00, 00));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core", "liquibase");
         pConf.getLayersToProcess().add("angular-js");
         pConf.getLayersToProcess().add("spring-rest");
@@ -204,18 +200,15 @@ public class CrudGenerationServiceTest {
         }
 
         if (!failedFiles.isEmpty()) {
-            LOGGER.error("These files were not generated as expected", failedFiles.toString());
-            fail("Unequal checksums: Files were not generated as expected");
+            fail("Unequal checksums: " + failedFiles);
         }
 
         if (keySetBase.size() > keySetGenerated.size()) {
             keySetBase.removeAll(keySetGenerated);
-            LOGGER.error("These files are missing", keySetBase.toString());
-            fail("Some files are missing");
+            fail("Some files are missing: " + keySetBase);
         } else if (keySetBase.size() < keySetGenerated.size()) {
             keySetGenerated.removeAll(keySetBase);
-            LOGGER.error("These files are not in base project", keySetGenerated.toString());
-            fail("Extra files were generated");
+            fail("Extra files were generated: " + keySetGenerated);
         }
 
     }
@@ -236,13 +229,11 @@ public class CrudGenerationServiceTest {
         Map<String, String> hashesMap = new HashMap<>();
         MessageDigest md = MessageDigest.getInstance("MD5");
 
-        Files.walk(path).filter(filePath -> !filePath.toFile().isDirectory() && !filePath.toString().contains(".git"))
-                .forEach(filePath -> {
+        Files.walk(path).filter(filePath -> !filePath.toFile().isDirectory() && !filePath.toString().contains(".git")
+                && !filePath.toString().contains(".kukulkan.json")).forEach(filePath -> {
                     try {
-                        // if (!filePath.toFile().isDirectory()) {
                         String hash = getFileChecksum(md, filePath.toFile());
                         hashesMap.put(filePath.toString().replaceFirst(path.toString(), ""), hash);
-                        // }
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

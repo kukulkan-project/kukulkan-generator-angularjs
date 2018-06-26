@@ -23,3 +23,4 @@
     @Column(name = "${primaryKey.name}", unique = true, nullable = false)
     </#if>
     private ${primaryKey.type} ${primaryKey.name};
+    

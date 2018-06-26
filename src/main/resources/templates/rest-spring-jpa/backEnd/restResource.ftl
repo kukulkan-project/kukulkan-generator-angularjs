@@ -58,12 +58,12 @@ ${importModel}
 ${importPrimaryKey}
 </#if>
 ${importService}
+
 /**
  * 
  * @author ${author}
  * @kukulkanGenerated ${timestamp}
  */
-
 @RestController
 @RequestMapping("/api")
 public class ${entity.name}Resource {

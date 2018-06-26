@@ -9,7 +9,7 @@
             </button>
             <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
                 <img class="logo-img" src="content/images/logo-app.png" alt="logo"/>
-                <span data-translate="global.title">${projectName}</span> <span class="navbar-version">v{{VERSION}}</span>
+                <span data-translate="global.title">${projectName?cap_first}</span> <span class="navbar-version">v{{VERSION}}</span>
             </a>
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">

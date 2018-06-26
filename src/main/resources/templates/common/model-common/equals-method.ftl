@@ -1,4 +1,3 @@
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -13,3 +12,4 @@
         }
         return Objects.equals(getId(), ${entity.name?uncap_first}.getId());
     }
+    

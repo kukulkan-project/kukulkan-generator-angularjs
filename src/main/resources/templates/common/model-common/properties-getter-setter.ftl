@@ -1,4 +1,5 @@
 	<#list properties as property>
+    
     /**
      * Este método fue generado automaticamente por ${author} 
      * Este método GETTER fue generado para la propiedad ${tableName}.${property.columnName}
@@ -22,4 +23,5 @@
     public void set${property.name?cap_first}(${property.type} ${property.name}) {
         this.${property.name} = ${property.name};
     }
+    
     </#list>

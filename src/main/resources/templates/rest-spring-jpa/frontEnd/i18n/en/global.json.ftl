@@ -1,10 +1,10 @@
 {
     "global": {
-        "title": "${projectName}",
+        "title": "${projectName?cap_first}",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
-            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "jhipster-needle-menu-add-element": "Generator will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
                 <#list dataModelGroup as dmg>
@@ -12,7 +12,7 @@
                 "${entity.camelCaseFormat}": "${entity.name}",
 					</#list>    
 				</#list>
-                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+                "jhipster-needle-menu-add-entry": "Generator will add additional entities here (do not translate!)"
             },
             "account": {
                 "main": "Account",
@@ -34,7 +34,7 @@
                 "audits": "Audits",
                 "apidocs": "API",
                 "database": "Database",
-                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+                "jhipster-needle-menu-add-admin-element": "Generator will add additional menu entries here (do not translate!)"
             },
             "language": "Language"
         },

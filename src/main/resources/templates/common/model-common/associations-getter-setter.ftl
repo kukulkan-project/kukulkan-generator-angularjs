@@ -8,6 +8,7 @@
     public void set${association.toSourcePropertyName?cap_first}(${association.source.name} ${association.toSourcePropertyName}) {
         this.${association.toSourcePropertyName} = ${association.toSourcePropertyName};
     }
+    
     	<#elseif association.type.name() == "MANY_TO_MANY" || association.type.name() == "MANY_TO_ONE">
     public Set<${association.source.name}> get${association.toSourcePropertyNamePlural?cap_first}() {
         return ${association.toSourcePropertyNamePlural};
@@ -36,11 +37,13 @@
     public void set${association.toSourcePropertyNamePlural?cap_first}(Set<${association.source.name}> ${association.toSourcePropertyNamePlural}) {
         this.${association.toSourcePropertyNamePlural} = ${association.toSourcePropertyNamePlural};
     }
+    
     	</#if>
     </#if>
 </#list>
 <#list ownerAssociations as association>
 	<#if association.type.name() == "ONE_TO_MANY" || association.type.name() == "MANY_TO_MANY">
+    
     public Set<${association.target.name}> get${association.toTargetPropertyNamePlural?cap_first}() {
         return ${association.toTargetPropertyNamePlural};
     }
@@ -68,6 +71,7 @@
     public void set${association.toTargetPropertyNamePlural?cap_first}(Set<${association.target.name}> ${association.toTargetPropertyNamePlural}) {
         this.${association.toTargetPropertyNamePlural} = ${association.toTargetPropertyNamePlural};
     }
+    
     <#elseif association.type.name() == "ONE_TO_ONE" || association.type.name() == "MANY_TO_ONE">
     public ${association.target.name} get${association.toTargetPropertyName?cap_first}() {
         return ${association.toTargetPropertyName};
@@ -76,5 +80,6 @@
     public void set${association.toTargetPropertyName?cap_first}(${association.target.name} ${association.toTargetPropertyName}) {
         this.${association.toTargetPropertyName} = ${association.toTargetPropertyName};
     }
+    
     </#if>
 </#list>
