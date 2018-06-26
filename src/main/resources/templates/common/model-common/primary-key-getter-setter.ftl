@@ -4,7 +4,7 @@
      *
      * @return el valor de ${primaryKey.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public ${primaryKey.type} get${primaryKey.name?cap_first}() {
         return ${primaryKey.name};
@@ -16,7 +16,7 @@
      *
      * @return el valor de area_conocimiento.id
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public void set${primaryKey.name?cap_first}(${primaryKey.type} ${primaryKey.name}) {
         this.${primaryKey.name} = ${primaryKey.name};

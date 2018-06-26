@@ -1,4 +1,3 @@
-<#assign aDateTime = .now>
 /*
  *  
  * The MIT License (MIT)
@@ -44,7 +43,7 @@ public class ${primaryKey.type} implements Serializable {
      * Este campo fue generado automaticamente por ${author} 
      * Este campo corresponde a la tabla ${tableName}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     @Column(name="${property.columnName}")
     private ${property.type} ${property.name};
@@ -57,7 +56,7 @@ public class ${primaryKey.type} implements Serializable {
      *
      * @return el valor de ${property.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public ${property.type} get${property.name?cap_first}() {
         return ${property.name};
@@ -69,7 +68,7 @@ public class ${primaryKey.type} implements Serializable {
      *
      * @return el valor de ${property.name?cap_first}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public void set${property.name?cap_first}(${property.type} ${property.name}) {
         this.${property.name} = ${property.name};

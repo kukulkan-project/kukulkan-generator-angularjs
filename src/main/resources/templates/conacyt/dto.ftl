@@ -1,4 +1,3 @@
-<#assign aDateTime = .now>
 /*
  *  
  * The MIT License (MIT)
@@ -43,7 +42,7 @@ public class ${className} implements Serializable {
      * Este campo fue generado automaticamente por ${author} 
      * Este campo corresponde a la tabla ${tableName}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */ 
     private ${property.propertyType} ${property.propertyName};
 	</#list>
@@ -74,7 +73,7 @@ public class ${className} implements Serializable {
      *
      * @return el valor de ${property.propertyName}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public ${property.propertyType} get${property.propertyName?cap_first}() {
         return ${property.propertyName};
@@ -86,7 +85,7 @@ public class ${className} implements Serializable {
      *
      * @return el valor de ${property.propertyName?cap_first}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public void set${property.propertyName?cap_first}(${property.propertyType} ${property.propertyName}) {
         this.${property.propertyName} = ${property.propertyName};
@@ -98,7 +97,7 @@ public class ${className} implements Serializable {
      *
      * @return el valor de representado por la entidad ${className}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     @Override
     public String toString() {

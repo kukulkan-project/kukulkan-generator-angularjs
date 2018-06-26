@@ -1,4 +1,3 @@
-<#assign aDateTime = .now>
 /*
  *  
  * The MIT License (MIT)
@@ -53,7 +52,7 @@ public class ${entity.name} implements Serializable {
      * Este campo fue generado automaticamente por ${author} 
      * Este campo corresponde a la llave primaria ${primaryKey.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     @Id
     private ${primaryKey.type} ${primaryKey.name};
@@ -63,7 +62,7 @@ public class ${entity.name} implements Serializable {
      * Este campo fue generado automaticamente por ${author} 
      * Este campo corresponde a la tabla ${tableName}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     <#if property.constraint.nullable==false>
     @NotNull
@@ -125,7 +124,7 @@ public class ${entity.name} implements Serializable {
      *
      * @return el valor de ${primaryKey.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public ${primaryKey.type} get${primaryKey.name?cap_first}() {
         return ${primaryKey.name};
@@ -137,7 +136,7 @@ public class ${entity.name} implements Serializable {
      *
      * @return el valor de area_conocimiento.id
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public void set${primaryKey.name?cap_first}(${primaryKey.type} ${primaryKey.name}) {
         this.${primaryKey.name} = ${primaryKey.name};
@@ -150,7 +149,7 @@ public class ${entity.name} implements Serializable {
      *
      * @return el valor de ${property.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public ${property.type} get${property.name?cap_first}() {
         return ${property.name};
@@ -162,7 +161,7 @@ public class ${entity.name} implements Serializable {
      *
      * @return el valor de ${property.name?cap_first}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public void set${property.name?cap_first}(${property.type} ${property.name}) {
         this.${property.name} = ${property.name};
@@ -194,7 +193,7 @@ public class ${entity.name} implements Serializable {
      *
      * @return el valor de representado por la entidad ${entity.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     @Override
     public String toString() {

@@ -5,7 +5,7 @@
      *
      * @return el valor de ${property.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public ${property.type} get${property.name?cap_first}() {
         return ${property.name};
@@ -17,7 +17,7 @@
      *
      * @return el valor de ${property.name?cap_first}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     public void set${property.name?cap_first}(${property.type} ${property.name}) {
         this.${property.name} = ${property.name};

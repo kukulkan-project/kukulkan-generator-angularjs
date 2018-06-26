@@ -2,7 +2,7 @@
      * Este campo fue generado automaticamente por ${author} 
      * Este campo corresponde a la llave primaria ${primaryKey.name}
      *
-     * @kukulkanGenerated ${aDateTime?iso_utc}
+     * @kukulkanGenerated ${timestamp}
      */
     <#if primaryKey.composed == true>
     @EmbeddedId
