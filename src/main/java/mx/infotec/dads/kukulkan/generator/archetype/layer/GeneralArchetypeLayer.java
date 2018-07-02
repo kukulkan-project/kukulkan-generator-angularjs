@@ -26,30 +26,20 @@ package mx.infotec.dads.kukulkan.generator.archetype.layer;
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateAngularJs;
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateJpaResources;
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateMongo;
-import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.writeBanner;
+import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.service.WriterService;
-import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
-import mx.infotec.dads.kukulkan.generator.util.TemplateFactory;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
-import mx.infotec.dads.kukulkan.metamodel.template.TemplateInfo;
 
 /**
  * Service Layer Task.
@@ -58,10 +48,6 @@ import mx.infotec.dads.kukulkan.metamodel.template.TemplateInfo;
  */
 @Component(LayerNameConstants.Archetype.AngularJs.LAYER_NAME)
 public class GeneralArchetypeLayer extends ArchetypeLayer {
-
-    /** The template service. */
-    @Autowired
-    private TemplateService templateService;
 
     /** The banner service. */
     @Autowired
@@ -91,22 +77,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        // for (TemplateInfo templateInfo : getTemplatesToProcess(pConf)) {
-        // Path toSave = createToSavePath(context, templateInfo, pConf.getOutputDir());
-        // processTemplate(context, propertiesMap, templateInfo, toSave);
-        // }
         writeResources(pConf, propertiesMap);
-    }
-
-    private List<TemplateInfo> getTemplatesToProcess(ProjectConfiguration pConf) {
-        List<TemplateInfo> templateList = new ArrayList<>();
-        if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
-            templateList.addAll(TemplateFactory.MONGO_TEMPLATE_LIST);
-        } else {
-            templateList.addAll(TemplateFactory.JPA_TEMPLATE_LIST);
-        }
-        templateList.addAll(TemplateFactory.ANGULAR_JS_TEMPLATE_LIST);
-        return templateList;
     }
 
     private void writeResources(ProjectConfiguration pConf, Map<String, Object> propertiesMap) {
@@ -117,138 +88,5 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         }
         generateAngularJs(writer, pConf, propertiesMap);
         writeBanner(writer, bannerService, pConf);
-    }
-
-    /**
-     * Creates the to save path.
-     *
-     * @param context
-     *            the context
-     * @param template
-     *            the template
-     * @param outputPath
-     *            the output path
-     * @return the path
-     */
-    private Path createToSavePath(GeneratorContext context, TemplateInfo template, Path outputPath) {
-        ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        return createPath(template, pConf.getPackaging(), pConf.getId(), outputPath);
-    }
-
-    /**
-     * Process template.
-     *
-     * @param context
-     *            the context
-     * @param propertiesMap
-     *            the properties map
-     * @param template
-     *            the template
-     * @param toSave
-     *            the to save
-     */
-    private void processTemplate(GeneratorContext context, Map<String, Object> propertiesMap, TemplateInfo template,
-            Path toSave) {
-        if (isFtlFile(template.getFilePath())) {
-            String content = templateService.fillTemplate(template.getTemplatePath(), propertiesMap);
-            FileUtil.saveToFile(toSave, content);
-        } else if (template.getFilePath().contains("banner.txt")) {
-            createBanner(context, template, toSave);
-        } else {
-            FileUtil.copyFromJar("templates/" + template.getTemplatePath(), toSave);
-        }
-    }
-
-    /**
-     * Creates the banner.
-     *
-     * @param context
-     *            the context
-     * @param template
-     *            the template
-     * @param toSave
-     *            the to save
-     */
-    private void createBanner(GeneratorContext context, TemplateInfo template, Path toSave) {
-        ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
-        Optional<String> generateBanner = bannerService.generateBanner(pConf.getId());
-        if (generateBanner.isPresent()) {
-            FileUtil.saveToFile(toSave, generateBanner.get());
-        } else {
-            FileUtil.copyFromJar("templates/" + template.getBaseFolder() + template.getFilePath(), toSave);
-        }
-    }
-
-    /**
-     * Creates the path.
-     *
-     * @param template
-     *            the template
-     * @param packaging
-     *            the packaging
-     * @param projectid
-     *            the projectid
-     * @param outputPath
-     *            the output path
-     * @param isMongodb
-     * @return the path
-     */
-    private Path createPath(TemplateInfo template, String packaging, String projectid, Path outputPath) {
-        String newPackaging = packaging.replaceAll("\\.", "/");
-        Path temp = Paths.get(template.getFilePath());
-        Path parent = Optional.ofNullable(temp.getParent()).orElse(Paths.get(""));
-        String newTemplate = createTemplatePath(newPackaging, parent);
-        Path targetPath = Paths.get(outputPath.toString(), projectid, newTemplate,
-                temp.getFileName().toString().replaceAll(".ftl", ""));
-        return createOutputPath(projectid, targetPath);
-    }
-
-    /**
-     * Creates the output path.
-     *
-     * @param projectid
-     *            the projectid
-     * @param targetPath
-     *            the target path
-     * @return the path
-     */
-    private Path createOutputPath(String projectid, Path targetPath) {
-        Objects.requireNonNull(projectid, "project id cannot be null");
-        Objects.requireNonNull(targetPath, "targetPath cannot be null");
-        if (targetPath.getFileName().toString().contains("Kukulkan")) {
-            String output = projectid.substring(0, 1).toUpperCase() + projectid.substring(1);
-            return Paths.get(targetPath.getParent().toString(), output + "App.java");
-        } else {
-            return targetPath;
-        }
-    }
-
-    /**
-     * Creates the template path.
-     *
-     * @param projectid
-     *            the projectid
-     * @param newPackaging
-     *            the new packaging
-     * @param parent
-     *            the parent
-     * @param outputPath
-     *            the output path
-     * @param isMongodb
-     * @return the string
-     */
-    private String createTemplatePath(String newPackaging, Path parent) {
-        return parent.toString().replaceAll("package", newPackaging);
-    }
-
-    /**
-     * Checks if is ftl file.
-     *
-     * @param template
-     *            the template
-     * @return true, if is ftl file
-     */
-    private boolean isFtlFile(String template) {
-        return template.contains(".ftl");
     }
 }
