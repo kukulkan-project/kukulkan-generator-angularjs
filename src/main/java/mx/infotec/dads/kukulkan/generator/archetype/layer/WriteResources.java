@@ -132,6 +132,7 @@ public class WriteResources {
         writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/util/jhi-item-count.directive.js.ftl", path, pathBuilderAngularJs, model);
         writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/util/data-util.service.js.ftl", path, pathBuilderAngularJs, model);
         writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/language/language.controller.js.ftl", path, pathBuilderAngularJs, model);
+        writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/util/modal-draggable.directive.js.ftl", path, pathBuilderAngularJs, model);
         writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/language/language.service.js.ftl", path, pathBuilderAngularJs, model);
         writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/language/language.filter.js.ftl", path, pathBuilderAngularJs, model);
         writer.copySmart(ANGULAR_JS + "src/main/webapp/app/components/language/language.constants.js.ftl", path, pathBuilderAngularJs, model);

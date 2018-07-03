@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-header" modal-draggable>
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
             ng-click="vm.cancel()">&times;</button>
     <h4 class="modal-title" data-translate="login.title">Sign in</h4>
