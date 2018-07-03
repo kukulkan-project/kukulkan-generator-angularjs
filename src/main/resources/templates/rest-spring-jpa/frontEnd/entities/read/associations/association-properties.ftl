@@ -1,7 +1,7 @@
 <#list entity.entityReferences as reference>
 <#if reference.type.name() != "MANY_TO_MANY">
                     <td>
-                        <a ui-sref="${reference.target.camelCaseFormat}-detail({id:${entityCamelCase}.${reference.propertyName}.id})">{{${entityCamelCase}.${reference.propertyName}.id}}</a>
+                        <a ui-sref="${reference.target.camelCaseFormat}-detail({id:${entityCamelCase}.${reference.propertyName}.id})">{{${entityCamelCase}.${reference.propertyName}.${reference.displayField.name}}}</a>
                     </td>
 </#if>
 </#list>
