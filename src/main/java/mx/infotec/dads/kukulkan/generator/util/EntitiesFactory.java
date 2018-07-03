@@ -29,6 +29,8 @@ import java.nio.file.Path;
 import java.util.Map;
 
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
+import mx.infotec.dads.kukulkan.engine.translator.database.DataStore;
+import mx.infotec.dads.kukulkan.engine.translator.database.DataStoreType;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.TableTypes;
 import mx.infotec.dads.kukulkan.metamodel.util.DataStoreConstants;
@@ -40,7 +42,7 @@ import mx.infotec.dads.kukulkan.metamodel.util.NameConventions;
  * @author Daniel Cortes Pichardo
  */
 public class EntitiesFactory {
-    
+
     private static final String NOY_APPLY = "NO APLICA";
 
     /**
@@ -48,23 +50,6 @@ public class EntitiesFactory {
      */
     private EntitiesFactory() {
 
-    }
-
-    /**
-     * Creates a new Entities object.
-     *
-     * @return the data store
-     */
-    public static DataStore createDataStore() {
-        DataStore ds = new DataStore();
-        ds.setDataStoreType(new DataStoreType());
-        ds.setDriverClass("");
-        ds.setName("");
-        ds.setSchema("");
-        ds.setPassword("");
-        ds.setTableTypes(TableTypes.TABLE_VIEW);
-        ds.setUsername("");
-        return ds;
     }
 
     /**
@@ -150,30 +135,6 @@ public class EntitiesFactory {
     /**
      * Creates a new Entities object.
      *
-     * @return the data store type
-     */
-    public static DataStoreType createDefaultDataStoreType() {
-        DataStoreType dst = new DataStoreType();
-        dst.setDescription("Data Store for JDBC connector");
-        dst.setName("jdbc");
-        return dst;
-    }
-
-    /**
-     * Creates a new Entities object.
-     *
-     * @return the data store type
-     */
-    public static DataStoreType createGrammarDataStoreType() {
-        DataStoreType dst = new DataStoreType();
-        dst.setDescription("Kukulan DataStore Type");
-        dst.setName(DataStoreConstants.DATA_STORE_TYPE_GRAMMAR);
-        return dst;
-    }
-
-    /**
-     * Creates a new Entities object.
-     *
      * @return the rule type
      */
     public static RuleType createDefaultSingularRuleType() {
@@ -237,11 +198,10 @@ public class EntitiesFactory {
 
     }
 
-
     public static String createRestResourceName(String name) {
         return name + NameConventions.REST_CONTROLLER + NameConventions.JAVA_EXTENSION;
     }
-    
+
     public static String createServiceName(String name) {
         return name + NameConventions.SERVICE + NameConventions.JAVA_EXTENSION;
     }
@@ -249,7 +209,7 @@ public class EntitiesFactory {
     public static String createRepositoryName(String name) {
         return name + NameConventions.DAO + NameConventions.JAVA_EXTENSION;
     }
-    
+
     public static String createPrimaryKeyName(String name) {
         return name + NameConventions.DAO + NameConventions.JAVA_EXTENSION;
     }
