@@ -3,13 +3,13 @@
         <dt><span data-translate="${projectName}App.${entityCamelCase}.${reference.propertyName}">${reference.propertyName?cap_first}</span></dt>
         <dd>
             <span ng-repeat="${reference.propertyName} in vm.${entityCamelCase}.${reference.propertyNamePlural}">
-                <a ui-sref="${reference.target.camelCaseFormat}-detail({id: ${reference.propertyName}.id})">{{${reference.propertyName}.id}}</a>{{$last ? '' : ', '}}
+                <a ui-sref="${reference.target.camelCaseFormat}-detail({id: ${reference.propertyName}.id})">{{${reference.propertyName}.${reference.displayField.name}}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
 <#else>
         <dt><span data-translate="${projectName}App.${entityCamelCase}.${reference.propertyName}">${reference.propertyName?cap_first}</span></dt>
         <dd>
-            <a ui-sref="${reference.target.camelCaseFormat}-detail({id:vm.${entityCamelCase}.${reference.propertyName}.id})">{{vm.${entityCamelCase}.${reference.propertyName}.id}}</a>
+            <a ui-sref="${reference.target.camelCaseFormat}-detail({id:vm.${entityCamelCase}.${reference.propertyName}.id})">{{vm.${entityCamelCase}.${reference.propertyName}.${reference.displayField.name}}}</a>
         </dd>
 </#if>
 </#list>
