@@ -135,7 +135,7 @@ public class CrudGenerationServiceTest {
     @Test
     public void generateProjectAndCrudFromRelationshipsTestCase()
             throws IOException, NoSuchAlgorithmException, ClassNotFoundException {
-        String domainModel3k = "src/test/resources/Model.3k";
+        String domainModel3k = "src/test/resources/relationships/Model.3k";
         ProjectConfiguration pConf = new ProjectConfiguration();
         pConf.setId(idProject);
         pConf.setPackaging("mx.infotec.dads.archetype");
@@ -180,7 +180,7 @@ public class CrudGenerationServiceTest {
     public void compareGeneratedAgainstBaseProject()
             throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
 
-        FileInputStream fis = new FileInputStream("src/test/resources/hashesBase");
+        FileInputStream fis = new FileInputStream("src/test/resources/relationships/hashesBase");
         ObjectInputStream ois = new ObjectInputStream(fis);
         Map<String, String> hashesBase = (Map<String, String>) ois.readObject();
         Map<String, String> hashesGenerated = computeHashesMap(outputDir.resolve(idProject).toString());
