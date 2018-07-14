@@ -1,5 +1,5 @@
 <!-- Modal used to display the threads dump -->
-<div class="modal-header" modal-draggable>
+<div class="modal-header">
     <button type="button" class="close" ng-click="vm.cancel()">&times;</button>
     <h4 class="modal-title" data-translate="metrics.jvm.threads.dump.title">Threads dump</h4>
 </div>

@@ -3,52 +3,28 @@
 
     angular
         .module('${project.id}App')
-        .directive('modalDraggable', modalDraggable);
+        .directive('modalDialog', function () {
+            return {
+                restrict: 'AC',
+                link: function ($scope, element) {
+                    var draggableStr = "draggableModal";
+                    var header = angular.element('.modal-header', element);
 
-    modalDraggable.$inject = ['$document'];
+                    header.on('mousedown', (mouseDownEvent) => {
+                        var modalDialog = element;
+                        var offset = header.offset();
 
-    function modalDraggable($document) {
-        var directive = {
-            restrict: 'AC',
-            link: linkFunc
-        };
-
-        return directive;
-
-        function linkFunc(scope, element, attrs) {
-            var startX = 0,
-                startY = 0,
-                x = 0,
-                y = 0;
-
-            var dialogWrapper = element.parent();
-
-            dialogWrapper.css({
-                position: 'relative'
-            });
-
-            dialogWrapper.on('mousedown', function (event) {
-                // Prevent default dragging of selected content
-                event.preventDefault();
-                startX = event.pageX - x;
-                startY = event.pageY - y;
-                $document.on('mousemove', mousemove);
-                $document.on('mouseup', mouseup);
-            });
-
-            function mousemove(event) {
-                y = event.pageY - startY;
-                x = event.pageX - startX;
-                dialogWrapper.css({
-                    top: y + 'px',
-                    left: x + 'px'
-                });
+                        modalDialog.addClass(draggableStr).parents().on('mousemove', (mouseMoveEvent) => {
+                            angular.element("." + draggableStr, modalDialog.parents())
+                                .offset({
+                                    top: mouseMoveEvent.pageY - (mouseDownEvent.pageY - offset.top),
+                                    left: mouseMoveEvent.pageX - (mouseDownEvent.pageX - offset.left)
+                                });
+                        }).on('mouseup', () => {
+                            modalDialog.removeClass(draggableStr);
+                        });
+                    });
+                }
             }
-
-            function mouseup() {
-                $document.unbind('mousemove', mousemove);
-                $document.unbind('mouseup', mouseup);
-            }
-        }
-    }
+        });
 })();

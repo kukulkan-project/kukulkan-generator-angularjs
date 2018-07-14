@@ -1,4 +1,4 @@
-<div class="modal-header" modal-draggable>
+<div class="modal-header">
     <button aria-label="Close" data-dismiss="modal" class="close" type="button" ng-click="vm.cancel()"><span aria-hidden="true">&times;</span>
     </button>
     <h4 class="modal-title" id="showHealthLabel">
