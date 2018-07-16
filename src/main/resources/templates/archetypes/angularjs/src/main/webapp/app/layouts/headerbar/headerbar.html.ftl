@@ -1,0 +1,52 @@
+<div class="row header">
+    <div class="col-xs-12">
+        <div class="pull-right">
+            <div class="user item dropdown" uib-dropdown>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                    <img src="content/images/avatar01.svg">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" ng-switch="vm.isAuthenticated()">
+                    <div ng-switch-when="true">
+                        <li class="dropdown-header">
+                            {{vm.account.login}}
+                        </li>
+                        <li class="divider"></li>
+                    </div>
+                    <li class="link" ui-sref-active="active" ng-switch-when="true">
+                        <a ui-sref="settings" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon fa-wrench"></span>&nbsp;
+                            <span data-translate="global.menu.account.settings">Settings</span>
+                        </a>
+                    </li>
+                    <li class="link" ui-sref-active="active" ng-switch-when="true">
+                        <a ui-sref="password" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon fa-lock"></span>&nbsp;
+                            <span data-translate="global.menu.account.password">Password</span>
+                        </a>
+                    </li>
+                    <li class="link" ui-sref-active="active" ng-switch-when="true">
+                        <a href="" ng-click="vm.logout()" id="logout">
+                            <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                            <span data-translate="global.menu.account.logout">Sign out</span>
+                        </a>
+                    </li>
+                    <li class="link" ui-sref-active="active" ng-switch-when="false">
+                        <a href="" ng-click="vm.login()" id="login">
+                            <span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                            <span data-translate="global.menu.account.login">Sign in</span>
+                        </a>
+                    </li>
+                    <li class="link" ui-sref-active="active" ng-switch-when="false">
+                        <a ui-sref="register" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+                            <span data-translate="global.menu.account.register">Register</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="meta">
+            <h1 class="title-home" data-translate="global.title">${project.id?cap_first}</h1>
+        </div>
+    </div>
+</div>

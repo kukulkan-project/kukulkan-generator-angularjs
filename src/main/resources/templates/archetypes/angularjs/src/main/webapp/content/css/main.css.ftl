@@ -1,7 +1,8 @@
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+    font-family: Arial, sans-serif !important;
+    color: #273758 !important;
+    font-size: 16px;
 }
 
 /* ==========================================================================
@@ -17,17 +18,17 @@ Development Ribbon
 .ribbon {
     background-color: #a00;
     box-shadow: 0 0 10px #888;
-    left: -3.5em;
+    right: -3.5em;
     moz-box-shadow: 0 0 10px #888;
-    moz-transform: rotate(-45deg);
-    ms-transform: rotate(-45deg);
-    o-transform: rotate(-45deg);
+    moz-transform: rotate(45deg);
+    ms-transform: rotate(45deg);
+    o-transform: rotate(45deg);
     overflow: hidden;
     position: absolute;
-    top: 40px;
-    transform: rotate(-45deg);
+    top: 50px;
+    transform: rotate(45deg);
     webkit-box-shadow: 0 0 10px #888;
-    webkit-transform: rotate(-45deg);
+    webkit-transform: rotate(45deg);
     white-space: nowrap;
     width: 15em;
     z-index: 9999;
@@ -106,10 +107,11 @@ Main page styles
 
 .hipster {
     display: inline-block;
-    width: 347px;
-    height: 497px;
-    background: url("../images/app.png") no-repeat center top;
+    width: 100%;
+    height: 332px;
+    background: url("../images/bg-ok.svg") no-repeat center top;
     background-size: contain;
+    margin-top: 10px;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -121,7 +123,7 @@ only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
     .hipster {
-        background: url("../images/hipster2x.png") no-repeat center top;
+        background: url("../images/bg-ok.svg") no-repeat center top;
         background-size: contain;
     }
 }
@@ -163,7 +165,7 @@ Generic styles
 make sure browsers use the pointer cursor for anchors, even with no href
 ========================================================================== */
 a {
-    color: #1c0cf5;
+    color: #105E90;
 }
 
 a:hover, .hand, [jh-sort-by] {
@@ -336,7 +338,191 @@ ui bootstrap tweaks
     outline: none;
 }
 
+/* ==========================================================================
+NUEVOS ESTILOS
+========================================================================== */
+.row.header .user>.item img {
+    width: 64px;
+    height: 54px;
+    margin-top: 0px;
+    border-radius: 2px;
+}
+.well {
+    background-color: none!important;
+    border:none!important;
 
+}
+.logo-home {
+    width: 63%;
+    margin-top: -40px;
+    margin-left: 9px;
+}
+ul.top-menu {
+    margin-top: 85px;
+    margin-left: -40px;
+    list-style: none;
+}
+.title-home.ng-scope {
+    font-size: 22px!important;
+    color: #2D3E63;
+}
+.alert-warning {
+    color: #2D3E63;
+    background-color: #fafafa!important;
+    border-color: #fafafa!important;
+}
+.row.header {
+    min-height: 86px;
+    background: #F5F5F5!important;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
+}
+.alert-warning .alert-link {
+    color: #2D3E63!important;
+}
+ul.top-menu .sidebar-list a:hover {
+    color: #fff;
+    border-left: 3px solid #e99d1a;
+    text-indent: 22px;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #ffffff;
 
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #FDB03C!important; 
+}
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+ul.sidebar .sidebar-list a:hover {
+    color: #fff;
+    border-left: 2px solid #e99d1a;
+    text-indent: 22px;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #175F8E;
+}
+ul.sidebar .sidebar-main {
+    height: 60px;
+}
+ul.sidebar .sidebar-list a {
+    text-indent: 25px;
+    font-size: 14px;
+    color: #b2bfdc;
+    line-height: 31px;
+}
+.row.top {
+    margin-top: 14px;
+    margin-bottom: 0px;
+}
+.breadcrumb-links {
+    color: #2d3e63;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    color: #2D3E63 !important;
+    font-size:13px;
+    padding: 2px;
+
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #F4F4F4;
+}
+.btn.btn-success.btn-xs.ng-scope {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    line-height: 37px;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background: #175F8E;
+}
+.info.ng-scope.ng-binding {
+    font-size: 12px;
+    color: #2D3E63;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.fa, .fas {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 24px;
+}
+.widget .widget-header {
+    color: #fff;
+    background-color: #2D3E63;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e9e9e9;
+    line-height: 30px;
+}
+h3, .h3 {
+    font-size: 16px;
+    color:#2D3E63;
+ 
+}
+b, strong {
+    font-weight: bold;
+    color:#F0B500;
+}
+h4, .h4 {
+    font-size: 18px;
+    color:#0F5B8E;
+}
+h2, .h2 {
+    font-size: 30px;
+    color:#0F5B8E;
+}
+.widget-header.ng-binding {
+    font-size: 20px;
+}
+.logo img {
+    width: 161px;
+    margin-top: -14px;
+}
+#sidebar-wrapper {
+    margin-left: -150px;
+    left: 9px;
+    width: 201px;
+    position: fixed;
+    height: 100%;
+    z-index: 999;
+    background: #2E3F61 !important;
+}
+ul.sidebar {
+    width: 201px;
+
+}
+ul.sidebar li a {
+    width: 225px;
+}
+.menu-icon {
+    margin-right: 15px;
+}
+.dropdown-menu {
+    margin-left: -9px;
+}
+.dropdown-menu {  
+    border: none !important; 
+    border: none !important; 
+   -webkit-box-shadow: none !important; 
+    box-shadow: none !important; 
+}
+.dropdown-menu > li > a {
+    padding: 10px 16px 10px 5px;
+}
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

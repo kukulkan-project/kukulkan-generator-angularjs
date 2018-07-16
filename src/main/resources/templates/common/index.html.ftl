@@ -1,16 +1,21 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="es" dir="ltr">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>${projectName}</title>
     <meta name="description" content="">
     <meta name="google" value="notranslate">
-    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.css">
+    <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.min.css">
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/fontawesome-all.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
     <!-- endinject -->
     <!-- endbuild -->
@@ -18,23 +23,47 @@
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.webapp" />
 </head>
+
 <body ng-app="${projectName}App" ng-strict-di>
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
     <page-ribbon></page-ribbon>
-    <div ui-view="navbar" ng-cloak></div>
-    <div class="container">
-        <div class="well" ui-view="content">
-            <!-- Angular views -->
+    <div id="page-wrapper">
+        <div ui-view="navbar" ng-cloak></div>
+        <div ui-view="headerbar" ng-cloak></div>
+
+        <div id="content-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ui-view="content"></div>
+                        <!-- Angular views -->
+                        <div class="footer" ng-cloak>
+                            <p data-translate="footer">This is your footer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="footer" ng-cloak>
-            <p data-translate="footer">This is your footer</p>
-        </div>
+        <noscript>
+            <h1>You must enable javascript to view this page.</h1>
+        </noscript>
     </div>
 
+    <!-- uncomment this for adding service worker
+        <script>
+            if ('serviceWorker' in navigator) {
+                 navigator.serviceWorker
+                    .register('./sw.js')
+                    .then(function() { console.log('Service Worker Registered'); });
+            }
+        </script>
+    -->
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
     <script>
         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -90,12 +119,13 @@
     <script src="app/services/auth/account.service.js"></script>
     <script src="app/layouts/navbar/navbar.controller.js"></script>
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
+    <script src="app/layouts/headerbar/headerbar.controller.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
-	<#list dataModelGroup as dmg>
-		<#list dmg.entities as entity>
+    <#list dataModelGroup as dmg>
+        <#list dmg.entities as entity>
     <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}-dialog.controller.js"></script>
     <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}-detail.controller.js"></script>
     <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}-delete-dialog.controller.js"></script>
@@ -103,15 +133,17 @@
     <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.service.js"></script>
     <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.search.service.js"></script>
     <script src="app/entities/${entity.camelCaseFormat}/${entity.camelCaseFormat}.controller.js"></script>
-		</#list>    
-	</#list>
+        </#list>    
+    </#list>
     <script src="app/components/util/truncate-words.filter.js"></script>
     <script src="app/components/util/truncate-characters.filter.js"></script>
     <script src="app/components/util/sort-by.directive.js"></script>
     <script src="app/components/util/sort.directive.js"></script>
     <script src="app/components/util/parse-links.service.js"></script>
     <script src="app/components/util/pagination-util.service.js"></script>
+    <script src="app/components/util/modal-draggable.directive.js"></script>
     <script src="app/components/util/jhi-item-count.directive.js"></script>
+    <script src="app/components/util/error.constants.js"></script>
     <script src="app/components/util/date-util.service.js"></script>
     <script src="app/components/util/data-util.service.js"></script>
     <script src="app/components/util/capitalize.filter.js"></script>
@@ -187,4 +219,5 @@
     <!-- endbuild -->
 
 </body>
+
 </html>

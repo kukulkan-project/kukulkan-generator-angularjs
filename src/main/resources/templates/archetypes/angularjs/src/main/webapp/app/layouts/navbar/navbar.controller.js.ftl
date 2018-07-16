@@ -1,46 +1,41 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('${project.id}App')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Principal', 'ProfileService'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController($state, Principal, ProfileService) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
 
-        ProfileService.getProfileInfo().then(function(response) {
+        ProfileService.getProfileInfo().then(function (response) {
             vm.inProduction = response.inProduction;
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
-        vm.login = login;
-        vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
 
-        function login() {
-            collapseNavbar();
-            LoginService.open();
-        }
+        var pageWrapper = angular.element("#page-wrapper");
 
-        function logout() {
-            collapseNavbar();
-            Auth.logout();
-            $state.go('home');
+        function collapseNavbar() {
+            pageWrapper.removeClass('open');
+            vm.isNavbarCollapsed = true;
         }
 
         function toggleNavbar() {
-            vm.isNavbarCollapsed = !vm.isNavbarCollapsed;
-        }
-
-        function collapseNavbar() {
-            vm.isNavbarCollapsed = true;
-        }
+            if (vm.isNavbarCollapsed) {
+                pageWrapper.addClass('open');
+                vm.isNavbarCollapsed = false;
+            } else {
+                collapseNavbar();
+            }
+        };
     }
 })();

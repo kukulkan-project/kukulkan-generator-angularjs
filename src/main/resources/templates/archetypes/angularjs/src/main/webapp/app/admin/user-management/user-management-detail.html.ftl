@@ -1,4 +1,6 @@
 <div>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
     <h2>
         <span data-translate="userManagement.detail.title">User</span> [<b>{{vm.user.login}}</b>]
     </h2>
@@ -41,4 +43,6 @@
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
+    </div>
+    </div>
 </div>

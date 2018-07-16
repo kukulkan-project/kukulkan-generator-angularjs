@@ -28,7 +28,9 @@
     "modernizr": "3.3.1",
     "ng-file-upload": "12.0.4",
     "ngInfiniteScroll": "1.3.0",
-    "swagger-ui": "2.1.5"
+    "swagger-ui": "2.1.5",
+    "rdash-ui": "^1.0.1",
+    "components-font-awesome": "^5.0.6"
   },
   "devDependencies": {
     "angular-mocks": "1.5.8"
