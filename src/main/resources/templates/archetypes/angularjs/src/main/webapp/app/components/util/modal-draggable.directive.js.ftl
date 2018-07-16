@@ -10,17 +10,17 @@
                     var draggableStr = "draggableModal";
                     var header = angular.element('.modal-header', element);
 
-                    header.on('mousedown', (mouseDownEvent) => {
+                    header.on('mousedown', function (mouseDownEvent) {
                         var modalDialog = element;
                         var offset = header.offset();
 
-                        modalDialog.addClass(draggableStr).parents().on('mousemove', (mouseMoveEvent) => {
+                        modalDialog.addClass(draggableStr).parents().on('mousemove', function (mouseMoveEvent) {
                             angular.element("." + draggableStr, modalDialog.parents())
                                 .offset({
                                     top: mouseMoveEvent.pageY - (mouseDownEvent.pageY - offset.top),
                                     left: mouseMoveEvent.pageX - (mouseDownEvent.pageX - offset.left)
                                 });
-                        }).on('mouseup', () => {
+                        }).on('mouseup', function () {
                             modalDialog.removeClass(draggableStr);
                         });
                     });
