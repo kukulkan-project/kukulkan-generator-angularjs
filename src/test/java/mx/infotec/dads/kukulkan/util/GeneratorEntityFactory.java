@@ -73,8 +73,8 @@ public class GeneratorEntityFactory {
         pConf.getLayersToProcess().add("spring-repository");
         pConf.getLayersToProcess().add("domain-core");
         if (DatabaseType.SQL_MYSQL == type) {
-             pConf.addLayer("liquibase");
-             pConf.getLayersToProcess().add("liquibase");
+            pConf.addLayer("liquibase");
+            pConf.getLayersToProcess().add("liquibase");
         }
         return pConf;
     }

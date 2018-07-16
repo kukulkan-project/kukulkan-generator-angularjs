@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,15 +27,15 @@ public final class TemporalDirectoryUtil {
             LOGGER.error("Can't create temporal file, create alter directory", ex);
 
             String systemTempDir = System.getProperty("java.io.tmpdir");
-            
+
             if (systemTempDir == null) {
                 LOGGER.error("Can't retrieve system property 'java.io.tmpdir', use current directory instead");
                 systemTempDir = "";
             } else {
                 systemTempDir += File.separatorChar;
             }
-            
-            File tempDir =  new File(systemTempDir + "refactoring");
+
+            File tempDir = new File(systemTempDir + "refactoring");
             tempPath = tempDir.toPath();
         }
 
@@ -45,7 +46,7 @@ public final class TemporalDirectoryUtil {
     public static Path getTemporalPath() {
         return TEMPORAL_PATH;
     }
-    
+
     public static File getTemporalDir() {
         return TEMPORAL_PATH.toFile();
     }
@@ -62,8 +63,8 @@ public final class TemporalDirectoryUtil {
                     delete(file);
                 }
             }
-            
-            if(!dir.delete()) {
+
+            if (!dir.delete()) {
                 LOGGER.warn("Can't delete {} file", dir.getAbsoluteFile());
             }
         }

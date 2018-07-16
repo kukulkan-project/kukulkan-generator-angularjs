@@ -23,8 +23,6 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
-import java.nio.file.Path;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

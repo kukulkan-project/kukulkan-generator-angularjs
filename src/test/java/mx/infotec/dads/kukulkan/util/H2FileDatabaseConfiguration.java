@@ -25,7 +25,7 @@ public class H2FileDatabaseConfiguration {
     private static final String DB_USER = "";
     private static final String DB_PASSWORD = "";
     private static final String DB_SCHEMA = "schemageneration.sql";
-    
+
     public static boolean run() {
         try {
             // delete the H2 database named 'test' in the user home directory
