@@ -37,8 +37,12 @@ import mx.infotec.dads.kukulkan.metamodel.generator.Layer;
  */
 public abstract class ArchetypeLayer implements Layer {
 
-    /* (non-Javadoc)
-     * @see mx.infotec.dads.kukulkan.metamodel.generator.Layer#process(mx.infotec.dads.kukulkan.metamodel.foundation.GeneratorContext)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * mx.infotec.dads.kukulkan.metamodel.generator.Layer#process(mx.infotec.dads.
+     * kukulkan.metamodel.foundation.GeneratorContext)
      */
     @Override
     public void process(GeneratorContext context) {
@@ -48,8 +52,10 @@ public abstract class ArchetypeLayer implements Layer {
     /**
      * ProcessLayer method: Do generation functionalities.
      *
-     * @param context the context
-     * @param propertiesMap the properties map
+     * @param context
+     *            the context
+     * @param propertiesMap
+     *            the properties map
      */
     public abstract void processLayer(GeneratorContext context, Map<String, Object> propertiesMap);
 }
