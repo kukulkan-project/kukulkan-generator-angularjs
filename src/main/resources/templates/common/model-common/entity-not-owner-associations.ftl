@@ -2,6 +2,7 @@
 <#list notOwnerAssociations as association>
     <#if association.bidirectional || association.type.name() == "ONE_TO_MANY">
 	    <#if association.type.name() == "ONE_TO_ONE">
+	@JsonIgnore
     @OneToOne(mappedBy = "${association.toTargetPropertyName}")
     private ${association.source.name} ${association.toSourcePropertyName};
     	<#elseif association.type.name() == "ONE_TO_MANY">
