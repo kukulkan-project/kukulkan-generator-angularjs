@@ -14,19 +14,19 @@
                     </div>
                     <li class="link" ui-sref-active="active" ng-switch-when="true">
                         <a ui-sref="settings" ng-click="vm.collapseNavbar()">
-                            <span class="glyphicon fa-wrench"></span>&nbsp;
+                            <span class="fa fa-wrench"></span>&nbsp;
                             <span data-translate="global.menu.account.settings">Settings</span>
                         </a>
                     </li>
                     <li class="link" ui-sref-active="active" ng-switch-when="true">
                         <a ui-sref="password" ng-click="vm.collapseNavbar()">
-                            <span class="glyphicon fa-lock"></span>&nbsp;
+                            <span class="fa fa-lock"></span>&nbsp;
                             <span data-translate="global.menu.account.password">Password</span>
                         </a>
                     </li>
                     <li class="link" ui-sref-active="active" ng-switch-when="true">
                         <a href="" ng-click="vm.logout()" id="logout">
-                            <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                            <span class="fa fa-sign-out-alt"></span>&nbsp;
                             <span data-translate="global.menu.account.logout">Sign out</span>
                         </a>
                     </li>

@@ -16,14 +16,14 @@
         <li class="sidebar-list" ui-sref-active="active">
             <a ui-sref="home" ng-click="vm.collapseNavbar()">
                 <span class="menu-icon glyphicon glyphicon-home"></span>
-                <span class="hidden-sm" data-translate="global.menu.home">Home</span>
+                <span data-translate="global.menu.home">Home</span>
             </a>
         </li>
         <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="sidebar-list item dropdown pointer">
             <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                 <span>
                     <span ng-click="vm.toggleNavbar()" class="menu-icon glyphicon glyphicon-th-list"></span>
-                    <span class="hidden-sm" data-translate="global.menu.entities.main">
+                    <span data-translate="global.menu.entities.main">
                         Entities
                     </span>
                     <b class="caret"></b>
@@ -38,7 +38,7 @@
             <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
                 <span>
                     <span ng-click="vm.toggleNavbar()" class="menu-icon glyphicon glyphicon-tower"></span>
-                    <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
+                    <span data-translate="global.menu.admin.main">Administration</span>
                     <b class="caret"></b>
                 </span>
             </a>
@@ -97,7 +97,7 @@
                 <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
                     <span>
                         <span ng-click="vm.toggleNavbar()" class="menu-icon glyphicon glyphicon-flag"></span>
-                        <span class="hidden-sm" data-translate="global.menu.language">Language</span>
+                        <span data-translate="global.menu.language">Language</span>
                         <b class="caret"></b>
                     </span>
                 </a>
