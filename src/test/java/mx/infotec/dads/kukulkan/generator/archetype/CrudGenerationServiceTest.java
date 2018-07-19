@@ -59,14 +59,14 @@ import mx.infotec.dads.kukulkan.KukulkanEngineApp;
 import mx.infotec.dads.kukulkan.engine.service.EngineGenerator;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.service.GenerationService;
-import mx.infotec.dads.kukulkan.engine.translator.Source;
-import mx.infotec.dads.kukulkan.engine.translator.TranslatorService;
 import mx.infotec.dads.kukulkan.engine.translator.dsl.FileSource;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Database;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
+import mx.infotec.dads.kukulkan.metamodel.translator.Source;
+import mx.infotec.dads.kukulkan.metamodel.translator.TranslatorService;
 import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
 import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
@@ -169,8 +169,8 @@ public class CrudGenerationServiceTest {
 
     /**
      * Generates a project and generates a CRUD from a Kukulkan file (3k) then
-     * computes the checksum for every generated file and compares to checksum from
-     * a base project
+     * computes the checksum for every generated file and compares to checksum
+     * from a base project
      * 
      * @throws NoSuchAlgorithmException
      * @throws IOException
@@ -213,8 +213,8 @@ public class CrudGenerationServiceTest {
     }
 
     /**
-     * Computes a Map with file names as keys and checksum as values for files in
-     * given pathname and sub-directories
+     * Computes a Map with file names as keys and checksum as values for files
+     * in given pathname and sub-directories
      * 
      * @param pathname
      *            A string representation for path
