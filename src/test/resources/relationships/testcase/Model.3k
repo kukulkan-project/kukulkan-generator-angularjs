@@ -1,0 +1,46 @@
+
+entity LeftUnidirectional { 
+        OneToOne oneToOneUnidirectional : RightOneToOneUnidirectional,
+        OneToMany oneToManyUnidirectional : RightOneToManyUnidirectional,
+        ManyToOne manyToOneUnidirectional : RightManyToOneUnidirectional,
+        ManyToMany manyToManyUnidirectional : RightManyToManyUnidirectional,
+        OneToOne recursiveChildOneToOneUnidirectional : LeftUnidirectional,
+        OneToMany recursiveChildrenOneToManyUnidirectional : LeftUnidirectional,
+        ManyToOne recursiveChildManyToOneUnidirectional : LeftUnidirectional,
+        ManyToMany recursiveChildrenManyToManyUnidirectional : LeftUnidirectional
+}
+
+entity RightOneToOneUnidirectional { 
+}
+
+entity RightOneToManyUnidirectional { 
+}
+
+entity RightManyToOneUnidirectional { 
+}
+
+entity RightManyToManyUnidirectional { 
+}
+
+entity LeftBidirectional { 
+        OneToOne (leftOneToOneBidirectional) rightOneToOneBidirectional : RightOneToOneBidirectional,
+        OneToMany (leftOneToManyBidirectional) rightOneToManyBidirectional : RightOneToManyBidirectional,
+        ManyToOne (leftManyToOneBidirectional) rightManyToOneBidirectional : RightManyToOneBidirectional,
+        ManyToMany (leftManyToManyBidirectional) rightManyToManyBidirectional : RightManyToManyBidirectional,
+        OneToOne (recursiveParentOneToOneBidirectional) recursiveChildOneToOneBidirectional : LeftBidirectional,
+        OneToMany (recursiveParentOneToManyBidirectional) recursiveChildrenOneToManyBidirectional : LeftBidirectional,
+        ManyToOne (recursiveParentManyToOneBidirectional) recursiveChildManyToOneBidirectional : LeftBidirectional,
+        ManyToMany (recursiveParentManyToManyBidirectional) recursiveChildrenManyToManyBidirectional : LeftBidirectional
+}
+
+entity RightOneToOneBidirectional { 
+}
+
+entity RightOneToManyBidirectional { 
+}
+
+entity RightManyToOneBidirectional { 
+}
+
+entity RightManyToManyBidirectional { 
+}

@@ -23,29 +23,23 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
+import static mx.infotec.dads.kukulkan.util.ChecksumUtils.computeHashesMap;
 import static mx.infotec.dads.kukulkan.util.GeneratorEntityFactory.createProjectConfiguration;
 import static mx.infotec.dads.kukulkan.util.GeneratorEntityFactory.createProjectConfigurationJustModel;
 import static org.junit.Assert.fail;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.xml.bind.DatatypeConverter;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -92,6 +86,8 @@ public class CrudGenerationServiceTest {
 
     private static Path outputDir = null;
     private static final String idProject = "testcase";
+    private static final String baseProject = "src/test/resources/relationships/" + idProject;
+    private static final String csvHashesBaseProject = baseProject + "/hashes.csv";
 
     @BeforeClass
     public static void runOnceBeforeClass() {
@@ -169,8 +165,8 @@ public class CrudGenerationServiceTest {
 
     /**
      * Generates a project and generates a CRUD from a Kukulkan file (3k) then
-     * computes the checksum for every generated file and compares to checksum
-     * from a base project
+     * computes the checksum for every generated file and compares to checksum from
+     * a base project
      * 
      * @throws NoSuchAlgorithmException
      * @throws IOException
@@ -179,12 +175,9 @@ public class CrudGenerationServiceTest {
 
     public void compareGeneratedAgainstBaseProject()
             throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
-
-        FileInputStream fis = new FileInputStream("src/test/resources/relationships/hashesBase");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Map<String, String> hashesBase = (Map<String, String>) ois.readObject();
+        Map<String, String> hashesBase = computeHashesMap(baseProject);
+        writeCsvHashes(hashesBase, csvHashesBaseProject);
         Map<String, String> hashesGenerated = computeHashesMap(outputDir.resolve(idProject).toString());
-        ois.close();
 
         Set<String> keySetBase = hashesBase.keySet();
         Set<String> keySetGenerated = hashesBase.keySet();
@@ -201,7 +194,6 @@ public class CrudGenerationServiceTest {
         if (!failedFiles.isEmpty()) {
             fail("Unequal checksums: " + failedFiles);
         }
-
         if (keySetBase.size() > keySetGenerated.size()) {
             keySetBase.removeAll(keySetGenerated);
             fail("Some files are missing: " + keySetBase);
@@ -209,55 +201,16 @@ public class CrudGenerationServiceTest {
             keySetGenerated.removeAll(keySetBase);
             fail("Extra files were generated: " + keySetGenerated);
         }
-
     }
 
-    /**
-     * Computes a Map with file names as keys and checksum as values for files
-     * in given pathname and sub-directories
-     * 
-     * @param pathname
-     *            A string representation for path
-     * @return a Map
-     * @throws NoSuchAlgorithmException
-     * @throws IOException
-     */
-    public Map<String, String> computeHashesMap(String pathname) throws NoSuchAlgorithmException, IOException {
-        Path path = Paths.get(pathname);
-
-        Map<String, String> hashesMap = new HashMap<>();
-        MessageDigest md = MessageDigest.getInstance("MD5");
-
-        Files.walk(path).filter(filePath -> !filePath.toFile().isDirectory() && !filePath.toString().contains(".git")
-                && !filePath.toString().contains(".kukulkan.json")).forEach(filePath -> {
-                    try {
-                        String hash = getFileChecksum(md, filePath.toFile());
-                        hashesMap.put(filePath.toString().replaceFirst(path.toString(), ""), hash);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                });
-
-        return hashesMap;
-    }
-
-    /**
-     * Computes the checksum for file using the digest
-     * 
-     * @param digest
-     * @param file
-     * @return the checksum
-     * @throws IOException
-     */
-    public String getFileChecksum(MessageDigest digest, File file) throws IOException {
-
-        try (InputStream is = Files.newInputStream(file.toPath());
-                DigestInputStream dis = new DigestInputStream(is, digest);) {
-            while (dis.read() != -1)
-                ;
-            dis.close();
-            return DatatypeConverter.printHexBinary(digest.digest());
+    public static void writeCsvHashes(Map<String, String> hashes, String pathname) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathname));) {
+            for (String key : hashes.keySet()) {
+                writer.write(key + "," + hashes.get(key));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            fail("Exception while writing on " + pathname + ": " + e.getMessage());
         }
     }
 }

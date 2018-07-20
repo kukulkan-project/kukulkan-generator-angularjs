@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity LeftUnidirectional.
+    -->
+    <changeSet id="20180101000001-1" author="kukulkan">
+        <createTable tableName="left_unidirectional">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+		
+        	<column name="recursive_child_one_to_one_unidirectional_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+        	
+        	
+            <column name="recursive_child_many_to_one_unidirectional_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        	
+        	
+        	
+            <column name="many_to_one_unidirectional_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        	
+        	
+        	<column name="one_to_one_unidirectional_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+        	
+            <column name="left_unidirectional_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="left_unidirectional_recursive_children_many_to_many_unidirectional">
+        	<column name="left_unidirectional_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recursive_children_many_to_many_unidirectional_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="left_unidirectional_id, recursive_children_many_to_many_unidirectional_id" tableName="left_unidirectional_recursive_children_many_to_many_unidirectional"/>
+        <createTable tableName="left_unidirectional_many_to_many_unidirectional">
+        	<column name="left_unidirectional_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="many_to_many_unidirectional_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="left_unidirectional_id, many_to_many_unidirectional_id" tableName="left_unidirectional_many_to_many_unidirectional"/>
+
+    </changeSet>
+</databaseChangeLog>

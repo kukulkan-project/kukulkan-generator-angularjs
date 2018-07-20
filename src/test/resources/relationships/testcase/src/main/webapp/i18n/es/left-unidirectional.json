@@ -1,0 +1,29 @@
+{
+    "testcaseApp": {
+        "leftUnidirectional" : {
+            "home": {
+                "title": "LeftUnidirectional",
+                "createLabel": "Crear nuevo LeftUnidirectional",
+                "createOrEditLabel": "Crear o editar LeftUnidirectional",
+                "search": "Buscar LeftUnidirectional"
+            },
+            "created": "Un nuevo LeftUnidirectional ha sido creado con el identificador {{ param }}",
+            "updated": "Un LeftUnidirectional ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un LeftUnidirectional ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar LeftUnidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "LeftUnidirectional"
+            },
+            "oneToOneUnidirectional": "OneToOneUnidirectional",
+            "oneToManyUnidirectional": "OneToManyUnidirectional",
+            "manyToOneUnidirectional": "ManyToOneUnidirectional",
+            "manyToManyUnidirectional": "ManyToManyUnidirectional",
+            "recursiveChildOneToOneUnidirectional": "RecursiveChildOneToOneUnidirectional",
+            "recursiveChildrenOneToManyUnidirectional": "RecursiveChildrenOneToManyUnidirectional",
+            "recursiveChildManyToOneUnidirectional": "RecursiveChildManyToOneUnidirectional",
+            "recursiveChildrenManyToManyUnidirectional": "RecursiveChildrenManyToManyUnidirectional"
+        }
+    }
+}

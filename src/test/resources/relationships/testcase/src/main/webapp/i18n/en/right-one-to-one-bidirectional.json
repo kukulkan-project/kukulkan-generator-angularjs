@@ -1,0 +1,22 @@
+{
+    "testcaseApp": {
+        "rightOneToOneBidirectional" : {
+            "home": {
+                "title": "RightOneToOneBidirectional",
+                "createLabel": "Create a new RightOneToOneBidirectional",
+                "createOrEditLabel": "Create or edit a RightOneToOneBidirectional",
+                "search": "Search RightOneToOneBidirectional"
+            },
+            "created": "A new RightOneToOneBidirectional is created with identifier {{ param }}",
+            "updated": "A RightOneToOneBidirectional is updated with identifier {{ param }}",
+            "deleted": "A RightOneToOneBidirectional is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete RightOneToOneBidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "RightOneToOneBidirectional"
+            },
+            "leftOneToOneBidirectional": "LeftOneToOneBidirectional"
+        }
+    }
+}

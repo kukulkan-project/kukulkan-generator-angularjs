@@ -1,0 +1,21 @@
+{
+    "testcaseApp": {
+        "rightManyToManyUnidirectional" : {
+            "home": {
+                "title": "RightManyToManyUnidirectional",
+                "createLabel": "Crear nuevo RightManyToManyUnidirectional",
+                "createOrEditLabel": "Crear o editar RightManyToManyUnidirectional",
+                "search": "Buscar RightManyToManyUnidirectional"
+            },
+            "created": "Un nuevo RightManyToManyUnidirectional ha sido creado con el identificador {{ param }}",
+            "updated": "Un RightManyToManyUnidirectional ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un RightManyToManyUnidirectional ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar RightManyToManyUnidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "RightManyToManyUnidirectional"
+            }
+        }
+    }
+}

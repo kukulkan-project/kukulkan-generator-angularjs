@@ -1,0 +1,21 @@
+{
+    "testcaseApp": {
+        "rightOneToOneUnidirectional" : {
+            "home": {
+                "title": "RightOneToOneUnidirectional",
+                "createLabel": "Crear nuevo RightOneToOneUnidirectional",
+                "createOrEditLabel": "Crear o editar RightOneToOneUnidirectional",
+                "search": "Buscar RightOneToOneUnidirectional"
+            },
+            "created": "Un nuevo RightOneToOneUnidirectional ha sido creado con el identificador {{ param }}",
+            "updated": "Un RightOneToOneUnidirectional ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un RightOneToOneUnidirectional ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar RightOneToOneUnidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "RightOneToOneUnidirectional"
+            }
+        }
+    }
+}

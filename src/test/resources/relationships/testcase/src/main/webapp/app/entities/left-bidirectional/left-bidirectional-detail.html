@@ -1,0 +1,41 @@
+
+<div>
+    <h2><span data-translate="testcaseApp.leftBidirectional.detail.title">LeftBidirectional</span> {{vm.leftBidirectional.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="global.field.id">id</span></dt>
+        <dd>
+            <span>{{vm.leftBidirectional.id}}</span>
+        <dd>
+        <dt><span data-translate="testcaseApp.leftBidirectional.recursiveChildOneToOneBidirectional">RecursiveChildOneToOneBidirectional</span></dt>
+        <dd>
+            <a ui-sref="leftBidirectional-detail({id:vm.leftBidirectional.recursiveChildOneToOneBidirectional.id})">{{vm.leftBidirectional.recursiveChildOneToOneBidirectional.id}}</a>
+        </dd>
+        <dt><span data-translate="testcaseApp.leftBidirectional.rightManyToManyBidirectional">RightManyToManyBidirectional</span></dt>
+        <dd>
+            <span ng-repeat="rightManyToManyBidirectional in vm.leftBidirectional.rightManyToManyBidirectional">
+                <a ui-sref="rightManyToManyBidirectional-detail({id: rightManyToManyBidirectional.id})">{{rightManyToManyBidirectional.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="testcaseApp.leftBidirectional.rightManyToOneBidirectional">RightManyToOneBidirectional</span></dt>
+        <dd>
+            <a ui-sref="rightManyToOneBidirectional-detail({id:vm.leftBidirectional.rightManyToOneBidirectional.id})">{{vm.leftBidirectional.rightManyToOneBidirectional.id}}</a>
+        </dd>
+        <dt><span data-translate="testcaseApp.leftBidirectional.rightOneToOneBidirectional">RightOneToOneBidirectional</span></dt>
+        <dd>
+            <a ui-sref="rightOneToOneBidirectional-detail({id:vm.leftBidirectional.rightOneToOneBidirectional.id})">{{vm.leftBidirectional.rightOneToOneBidirectional.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="leftBidirectional-detail.edit({id:vm.leftBidirectional.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

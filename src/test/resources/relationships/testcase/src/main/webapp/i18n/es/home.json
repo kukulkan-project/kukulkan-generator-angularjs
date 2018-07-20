@@ -1,0 +1,19 @@
+{
+    "home": {
+        "title": "¡Bienvenido, Testcase!",
+        "subtitle": "Esta es su página de inicio",
+        "logged": {
+            "message": "Está conectado como \"{{username}}\"."
+        },
+        "question": "Si tiene preguntas sobre Testcase:",
+        "link": {
+            "homepage": "Página de inicio de Testcase",
+            "stackoverflow": "Testcase en Stack Overflow",
+            "bugtracker": "Testcase seguimiento de errores",
+            "chat": "Sala de chat pública de Testcase",
+            "follow": "contacto @java_Testcase en Twitter"
+        },
+        "like": "Si te gusta Testcase, danos una estrella en",
+        "github": "GitHub"
+    }
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity LeftUnidirectional.
+    -->
+    <changeSet id="20180101000001-2" author="kukulkan">
+        <addForeignKeyConstraint baseColumnNames="recursive_child_one_to_one_unidirectional_id"
+                                 baseTableName="left_unidirectional"
+                                 constraintName="fk_left_unidirectional.recursive_child_one_to_one_unidirectional_id_left_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_unidirectional"/>
+        <addForeignKeyConstraint baseColumnNames="recursive_child_many_to_one_unidirectional_id"
+                                 baseTableName="left_unidirectional"
+                                 constraintName="fk_left_unidirectional.recursive_child_many_to_one_unidirectional_id_left_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_unidirectional"/>
+        <addForeignKeyConstraint baseColumnNames="many_to_one_unidirectional_id"
+                                 baseTableName="left_unidirectional"
+                                 constraintName="fk_left_unidirectional.many_to_one_unidirectional_id_right_many_to_one_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="right_many_to_one_unidirectional"/>
+        <addForeignKeyConstraint baseColumnNames="one_to_one_unidirectional_id"
+                                 baseTableName="left_unidirectional"
+                                 constraintName="fk_left_unidirectional.one_to_one_unidirectional_id_right_one_to_one_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="right_one_to_one_unidirectional"/>
+        	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
+        						baseTableName="left_unidirectional"
+                                constraintName="fk_left_unidirectional.left_unidirectional_id_left_unidirectional_id"		
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_unidirectional"/>
+
+        	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
+                                 baseTableName="left_unidirectional_recursive_children_many_to_many_unidirectional"
+                                 constraintName="fk_left_unidirectional_recursive_children_many_to_many_unidirectional.left_unidirectional_id_left_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_unidirectional"/>
+        	<addForeignKeyConstraint baseColumnNames="recursive_children_many_to_many_unidirectional_id"
+                                 baseTableName="left_unidirectional_recursive_children_many_to_many_unidirectional"
+                                 constraintName="fk_left_unidirectional_recursive_children_many_to_many_unidirectional.recursive_children_many_to_many_unidirectional_id_left_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_unidirectional"/>
+        
+
+        	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
+                                 baseTableName="left_unidirectional_many_to_many_unidirectional"
+                                 constraintName="fk_left_unidirectional_many_to_many_unidirectional.left_unidirectional_id_left_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_unidirectional"/>
+        	<addForeignKeyConstraint baseColumnNames="many_to_many_unidirectional_id"
+                                 baseTableName="left_unidirectional_many_to_many_unidirectional"
+                                 constraintName="fk_left_unidirectional_many_to_many_unidirectional.many_to_many_unidirectional_id_right_many_to_many_unidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="right_many_to_many_unidirectional"/>
+        
+
+
+    </changeSet>
+</databaseChangeLog>

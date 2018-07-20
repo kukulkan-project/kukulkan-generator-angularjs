@@ -1,0 +1,29 @@
+{
+    "testcaseApp": {
+        "leftBidirectional" : {
+            "home": {
+                "title": "LeftBidirectional",
+                "createLabel": "Create a new LeftBidirectional",
+                "createOrEditLabel": "Create or edit a LeftBidirectional",
+                "search": "Search LeftBidirectional"
+            },
+            "created": "A new LeftBidirectional is created with identifier {{ param }}",
+            "updated": "A LeftBidirectional is updated with identifier {{ param }}",
+            "deleted": "A LeftBidirectional is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete LeftBidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "LeftBidirectional"
+            },
+            "rightOneToOneBidirectional": "RightOneToOneBidirectional",
+            "rightOneToManyBidirectional": "RightOneToManyBidirectional",
+            "rightManyToOneBidirectional": "RightManyToOneBidirectional",
+            "rightManyToManyBidirectional": "RightManyToManyBidirectional",
+            "recursiveChildOneToOneBidirectional": "RecursiveChildOneToOneBidirectional",
+            "recursiveChildrenOneToManyBidirectional": "RecursiveChildrenOneToManyBidirectional",
+            "recursiveChildManyToOneBidirectional": "RecursiveChildManyToOneBidirectional",
+            "recursiveChildrenManyToManyBidirectional": "RecursiveChildrenManyToManyBidirectional"
+        }
+    }
+}

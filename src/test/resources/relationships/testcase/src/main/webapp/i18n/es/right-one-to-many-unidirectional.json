@@ -1,0 +1,22 @@
+{
+    "testcaseApp": {
+        "rightOneToManyUnidirectional" : {
+            "home": {
+                "title": "RightOneToManyUnidirectional",
+                "createLabel": "Crear nuevo RightOneToManyUnidirectional",
+                "createOrEditLabel": "Crear o editar RightOneToManyUnidirectional",
+                "search": "Buscar RightOneToManyUnidirectional"
+            },
+            "created": "Un nuevo RightOneToManyUnidirectional ha sido creado con el identificador {{ param }}",
+            "updated": "Un RightOneToManyUnidirectional ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un RightOneToManyUnidirectional ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar RightOneToManyUnidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "RightOneToManyUnidirectional"
+            },
+            "leftUnidirectional": "LeftUnidirectional"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+version: '2'
+services:
+    testcase-app:
+        image: testcase
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://testcase-mysql:3306/testcase?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - APP_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    testcase-mysql:
+        extends:
+            file: mysql.yml
+            service: testcase-mysql

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity RightOneToManyBidirectional.
+    -->
+    <changeSet id="20180101000008-2" author="kukulkan">
+        	<addForeignKeyConstraint baseColumnNames="left_one_to_many_bidirectional_id"
+        						baseTableName="right_one_to_many_bidirectional"
+                                constraintName="fk_left_bidirectional.left_one_to_many_bidirectional_id_right_one_to_many_bidirectional.id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="left_bidirectional"/>
+
+
+    </changeSet>
+</databaseChangeLog>

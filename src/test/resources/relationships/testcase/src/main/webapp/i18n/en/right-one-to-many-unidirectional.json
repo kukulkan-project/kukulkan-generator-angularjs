@@ -1,0 +1,22 @@
+{
+    "testcaseApp": {
+        "rightOneToManyUnidirectional" : {
+            "home": {
+                "title": "RightOneToManyUnidirectional",
+                "createLabel": "Create a new RightOneToManyUnidirectional",
+                "createOrEditLabel": "Create or edit a RightOneToManyUnidirectional",
+                "search": "Search RightOneToManyUnidirectional"
+            },
+            "created": "A new RightOneToManyUnidirectional is created with identifier {{ param }}",
+            "updated": "A RightOneToManyUnidirectional is updated with identifier {{ param }}",
+            "deleted": "A RightOneToManyUnidirectional is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete RightOneToManyUnidirectional {{ id }}?"
+            },
+            "detail": {
+                "title": "RightOneToManyUnidirectional"
+            },
+            "leftUnidirectional": "LeftUnidirectional"
+        }
+    }
+}
