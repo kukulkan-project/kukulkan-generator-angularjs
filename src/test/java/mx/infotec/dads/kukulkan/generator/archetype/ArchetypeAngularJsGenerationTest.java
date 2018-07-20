@@ -65,7 +65,7 @@ public class ArchetypeAngularJsGenerationTest {
         pConf.setPackaging("mx.infotec.dads.jpa");
         pConf.setYear("2017");
         pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
-        pConf.setDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
+        pConf.setTargetDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.AUTO));
         GeneratorContext genCtx = new GeneratorContext();
         genCtx.put(ProjectConfiguration.class, pConf);
         generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
