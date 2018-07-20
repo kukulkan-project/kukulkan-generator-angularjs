@@ -103,7 +103,7 @@ public class DomainLayer extends AbstractNavigableLayer {
             Entity dmElement) {
         LOGGER.debug("Domain {}", dmgName);
         String template;
-        if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
+        if (pConf.getTargetDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
             template = "model-mongo.ftl";
         } else {
             template = "model.ftl";
