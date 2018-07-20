@@ -87,7 +87,7 @@ public class CrudGenerationServiceTest {
     private static Path outputDir = null;
     private static final String idProject = "testcase";
     private static final String baseProject = "src/test/resources/relationships/" + idProject;
-    private static final String csvHashesBaseProject = baseProject + "/hashes.csv";
+    private static final String csvHashesBaseProject = "src/test/resources/relationships/hashes.csv";
 
     @BeforeClass
     public static void runOnceBeforeClass() {
