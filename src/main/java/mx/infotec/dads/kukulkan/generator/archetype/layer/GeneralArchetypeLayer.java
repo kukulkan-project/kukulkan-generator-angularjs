@@ -81,7 +81,7 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
     }
 
     private void writeResources(ProjectConfiguration pConf, Map<String, Object> propertiesMap) {
-        if (pConf.getDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
+        if (pConf.getTargetDatabase().getDatabaseType().equals(DatabaseType.NO_SQL_MONGODB)) {
             generateMongo(writer, pConf, propertiesMap);
         } else {
             generateJpaResources(writer, pConf, propertiesMap);
