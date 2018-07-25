@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+   <!-- Disable defaul logger-->
+ <!-- <include resource="org/springframework/boot/logging/logback/base.xml"/> -->
 
 <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
 <!--
@@ -46,6 +48,7 @@
     <logger name="org.springframework.web" level="WARN"/>
     <logger name="org.springframework.security" level="WARN"/>
     <logger name="org.springframework.cache" level="WARN"/>
+    <logger name="org.springframework.core.env" level="WARN"/>
     <logger name="org.thymeleaf" level="WARN"/>
     <logger name="org.xnio" level="WARN"/>
     <logger name="springfox" level="WARN"/>
@@ -57,7 +60,7 @@
     </contextListener>
 
     <root level="#logback.loglevel#">
-        <appender-ref ref="CONSOLE"/>
+   <!--     <appender-ref ref="CONSOLE"/>  -->
     </root>
 
 </configuration>
