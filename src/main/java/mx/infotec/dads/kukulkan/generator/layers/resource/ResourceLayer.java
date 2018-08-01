@@ -31,7 +31,6 @@ import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replace
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.replaceSlashByDot;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 
@@ -44,6 +43,7 @@ import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
+import mx.infotec.dads.kukulkan.engine.util.PathPair;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
@@ -77,8 +77,7 @@ public class ResourceLayer extends AbstractNavigableLayer {
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
+     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
@@ -91,11 +90,10 @@ public class ResourceLayer extends AbstractNavigableLayer {
         propertiesMap.put(PACKAGE_SIMPLE_FORMAT_PROPERTY,
                 formatToPackageStatement(true, basePackage, webLayerDotFormat));
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("restResource.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
-        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, webLayerSlashFormat, createRestResourceName(dmElement.getName()));
-        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.JAVA);
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
+                pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 

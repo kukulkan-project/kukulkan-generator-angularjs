@@ -40,6 +40,7 @@ import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
+import mx.infotec.dads.kukulkan.engine.util.PathPair;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
@@ -71,8 +72,7 @@ public class DomainLayer extends AbstractNavigableLayer {
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
+     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
@@ -109,11 +109,10 @@ public class DomainLayer extends AbstractNavigableLayer {
             template = "model.ftl";
         }
         Path templateFilePath = TemplateEnum.COMMON.getLocation(template);
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
-        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, NameConventions.DOMAIN_LAYER_NAME, EntitiesFactory.createDomainName(dmElement.getName()));
-        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.JAVA);
+        ModelContext modelContext = EntitiesFactory.createModelContext(model, pathPair.getRealPath(),
+                pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
@@ -135,12 +134,11 @@ public class DomainLayer extends AbstractNavigableLayer {
             Entity dmElement) {
         if (dmElement.getPrimaryKey().isComposed()) {
             Path templateFilePath = TemplateEnum.COMMON.getLocation("primaryKey.ftl");
-            Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
-            Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(),
+            PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(),
                     BasePathEnum.SRC_MAIN_JAVA, basePackage, NameConventions.DOMAIN_LAYER_NAME,
                     EntitiesFactory.createPrimaryKeyName(dmElement.getPrimaryKey().getType()));
-            ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
-                    templateFilePath, LanguageType.JAVA);
+            ModelContext modelContext = EntitiesFactory.createModelContext(model, pathPair.getRealPath(),
+                    pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
             templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
         }
     }

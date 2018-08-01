@@ -156,7 +156,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     private void fillIdiomaGlobalEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
 
         Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_EN.getLocation("global.json.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
@@ -176,7 +176,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      */
     private void fillIdiomaGlobalEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_ES.getLocation("global.json.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
@@ -196,7 +196,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      */
     private void fillIndex(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
         Path templateFilePath = TemplateEnum.COMMON.getLocation("index.html.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_INDEX.getPath(), "index.html");
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(), BasePathEnum.WEB_INDEX.getPath(),
                 "index.html");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
@@ -218,7 +218,6 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
         saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS,
                 false);
-
     }
 
     /**
@@ -463,7 +462,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         if (isPlural) {
             entityName = dmElement.getHyphensPluralFormat();
         }
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_ENTITIES.getPath(), fileNamingConvention,
+                entityName + TemplateFormatter.formatNameTemplate(templateName));
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.WEB_APP_ENTITIES.getPath(), fileNamingConvention,
                 entityName + TemplateFormatter.formatNameTemplate(templateName));
@@ -491,7 +491,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement, TemplateEnum templateLocation, String templateName, String idiomaKey) {
         String fileNamingConvention = dmElement.getHyphensFormat();
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
+        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
+                fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
                 fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));

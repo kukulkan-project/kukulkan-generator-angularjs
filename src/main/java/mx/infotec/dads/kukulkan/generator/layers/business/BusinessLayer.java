@@ -45,6 +45,7 @@ import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
+import mx.infotec.dads.kukulkan.engine.util.PathPair;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
 import mx.infotec.dads.kukulkan.generator.util.TemplateEnum;
@@ -75,8 +76,7 @@ public class BusinessLayer extends AbstractNavigableLayer {
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
      * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String,
-     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
+     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
      * java.lang.String)
      */
     @Override
@@ -104,15 +104,14 @@ public class BusinessLayer extends AbstractNavigableLayer {
      * @param basePackage
      *            the base package
      */
-    private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap,
-            Entity dmElement, String basePackage) {
+    private void fillServiceImplModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, Entity dmElement,
+            String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("serviceImpl.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
         String serviceImplPath = Paths.get(SERVICE_LAYER_NAME, SERVICE_IMPLEMENTS_LAYER_NAME).toString();
-        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, serviceImplPath, createServiceImplName(dmElement.getName()));
-        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.JAVA);
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
+                pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
@@ -130,14 +129,13 @@ public class BusinessLayer extends AbstractNavigableLayer {
      * @param basePackage
      *            the base package
      */
-    private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap,
-            Entity dmElement, String basePackage) {
+    private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, Entity dmElement,
+            String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("service.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
-        Path realFilePath = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, NameConventions.SERVICE_LAYER_NAME, createServiceName(dmElement.getName()));
-        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.JAVA);
+        ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
+                pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
     }
 
