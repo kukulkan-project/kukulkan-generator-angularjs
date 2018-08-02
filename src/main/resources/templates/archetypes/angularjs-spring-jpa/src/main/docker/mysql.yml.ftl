@@ -3,7 +3,7 @@ services:
     ${project.id}-mysql:
         image: mysql:5.7.20
         # volumes:
-        #     - ~/volumes/jhipster/${project.id}/mysql/:/var/lib/mysql/
+        #     - ~/volumes/${project.id}/mysql/:/var/lib/mysql/
         environment:
             - MYSQL_USER=root
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
