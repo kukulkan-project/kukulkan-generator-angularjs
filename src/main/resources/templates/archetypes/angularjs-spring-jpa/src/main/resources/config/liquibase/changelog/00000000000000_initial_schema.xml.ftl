@@ -9,7 +9,6 @@
     <property name="now" value="now()" dbms="h2"/>
 <#if project.targetDatabase.databaseType.name() == "SQL_MYSQL">
     <property name="now" value="now()" dbms="mysql"/>
-    
     <property name="autoIncrement" value="true"/>
 <#elseif project.targetDatabase.databaseType.name() == "SQL_ORACLE">
     <property name="now" value="sysdate" dbms="oracle"/>

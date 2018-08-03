@@ -7,6 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>${project.id?cap_first}</name>
+
 <#if project.targetDatabase.databaseType.name() == "SQL_ORACLE">
     <!-- more information at https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc -->
     <repositories>
