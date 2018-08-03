@@ -22,6 +22,7 @@ spring:
             enabled: false
         livereload:
             enabled: false
+<#if project.targetDatabase.databaseType.name() == "SQL_MYSQL">
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/${project.id}?useUnicode=true&characterEncoding=utf8&useSSL=false
@@ -42,6 +43,22 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
+<#elseif project.targetDatabase.databaseType.name() == "SQL_ORACLE">
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:oracle:thin:@localhost:1521:xe
+        username: system
+        password: oracle
+    jpa:
+        database-platform: org.hibernate.dialect.Oracle12cDialect
+        database: ORACLE
+        show-sql: false
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+</#if>
     mail:
         host: localhost
         port: 25

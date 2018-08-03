@@ -30,6 +30,7 @@ import java.util.function.Function;
 
 import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.generator.integration.BannerService;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DatabaseType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 
 public class WriteResources {
@@ -290,7 +291,7 @@ public class WriteResources {
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/resources/logback-spring.xml.ftl", path, pathBuilderJpa, model);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/Dockerfile", path, pathBuilderJpa, model);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/.dockerignore.ftl", path, pathBuilderJpa, model);
-        writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/mysql.yml.ftl", path, pathBuilderJpa, model);
+        copyDatabase(writer, pConf, model, pathBuilderJpa, path);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/sonar.yml.ftl", path, pathBuilderJpa, model);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/app.yml.ftl", path, pathBuilderJpa, model);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/java/package/service/UserService.java.ftl", path, pathBuilderJpa, model);
@@ -403,6 +404,15 @@ public class WriteResources {
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + ".mvn/wrapper/maven-wrapper.jar", path, pathBuilderJpa, model);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "README.md.ftl", path, pathBuilderJpa, model);
         writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + ".gitignore.ftl", path, pathBuilderJpa, model);
+    }
+
+    public static void copyDatabase(WriterService writer, ProjectConfiguration pConf, Object model,
+            final Function<String, String> pathBuilderJpa, Path path) {
+        if(pConf.getTargetDatabase().getDatabaseType().equals(DatabaseType.SQL_MYSQL)){
+            writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/mysql.yml.ftl", path, pathBuilderJpa, model);            
+        }else if(pConf.getTargetDatabase().getDatabaseType().equals(DatabaseType.SQL_ORACLE)){
+            writer.copySmart(ANGULAR_SPRING_JPA_TEMPLATE + "src/main/docker/oracle.yml.ftl", path, pathBuilderJpa, model);            
+        }
     }
     
     public static void generateMongo(WriterService writer, ProjectConfiguration pConf, Object model) {

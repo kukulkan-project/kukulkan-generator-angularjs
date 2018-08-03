@@ -17,7 +17,12 @@ import java.util.Map;
 public class PersistentAuditEvent implements Serializable {
 
     @Id
+<#if project.targetDatabase.databaseType.name() == "SQL_MYSQL">
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<#elseif project.targetDatabase.databaseType.name() == "SQL_ORACLE">
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+</#if>
     @Column(name = "event_id")
     private Long id;
 

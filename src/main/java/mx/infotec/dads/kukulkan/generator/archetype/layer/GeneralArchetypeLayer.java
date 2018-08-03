@@ -89,4 +89,5 @@ public class GeneralArchetypeLayer extends ArchetypeLayer {
         generateAngularJs(writer, pConf, propertiesMap);
         writeBanner(writer, bannerService, pConf);
     }
+
 }

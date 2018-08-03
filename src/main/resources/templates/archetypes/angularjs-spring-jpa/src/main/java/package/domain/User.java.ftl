@@ -29,7 +29,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+<#if project.targetDatabase.databaseType.name() == "SQL_MYSQL">
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<#elseif project.targetDatabase.databaseType.name() == "SQL_ORACLE">
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+</#if>
     private Long id;
 
     @NotNull

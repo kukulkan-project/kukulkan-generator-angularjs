@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 ${package}
-<#if isMongoDB == true>
+<#if databaseType.name() == "NO_SQL_MONGODB">
 import org.springframework.data.mongodb.repository.MongoRepository;
-<#else>
+<#elseif databaseType.name() == "SQL_MYSQL" || databaseType.name() == "SQL_ORACLE">
 import org.springframework.data.jpa.repository.JpaRepository;
 </#if>
 
@@ -40,9 +40,9 @@ ${importPrimaryKey}
  * @author ${author}
  * @kukulkanGenerated ${timestamp}
  */
-<#if isMongoDB == true>
+<#if databaseType.name() == "NO_SQL_MONGODB">
 public interface ${entity.name}Repository extends MongoRepository<${entity.name}, String> {
-<#else>
+<#elseif databaseType.name() == "SQL_MYSQL" || databaseType.name() == "SQL_ORACLE">
 public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${id}> {
 </#if>
 

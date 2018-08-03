@@ -7,7 +7,21 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>${project.id?cap_first}</name>
-
+<#if project.targetDatabase.databaseType.name() == "SQL_ORACLE">
+    <!-- more information at https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc -->
+    <repositories>
+        <repository>
+            <id>maven.oracle.com</id>
+            <name>oracle-maven-repo</name>
+            <url>https://maven.oracle.com</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+</#if>
     <properties>
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
@@ -197,10 +211,19 @@
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
         </dependency>
+<#if project.targetDatabase.databaseType.name() == "SQL_MYSQL">
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+<#elseif project.targetDatabase.databaseType.name() == "SQL_ORACLE">
+        <!-- more information at https://blogs.oracle.com/dev2dev/entry/how_to_get_oracle_jdbc -->
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.2</version>
+        </dependency>
+</#if>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
