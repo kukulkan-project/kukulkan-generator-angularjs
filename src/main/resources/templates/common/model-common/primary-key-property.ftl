@@ -9,8 +9,8 @@
     <#else>
     @Id
     	<#if primaryKey.generationType.name() == "SEQUENCE">
-    @SequenceGenerator(name = "SEQ_${tableName}", sequenceName = "SEQ_${tableName}", allocationSize=100)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_${tableName}")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "${primaryKey.sequenceGeneratorName}")
+    @SequenceGenerator(name = "${primaryKey.sequenceGeneratorName}")
     	<#elseif primaryKey.generationType.name() == "IDENTITY">
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     	<#elseif primaryKey.generationType.name() == "TABLE">

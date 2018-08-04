@@ -138,7 +138,7 @@ public class CrudGenerationServiceTest {
         pConf.setYear("2018");
         pConf.setAuthor("kukulkan");
         pConf.setOutputDir(outputDir);
-        pConf.setTargetDatabase(new Database(DatabaseType.SQL_MYSQL, PKGenerationStrategy.IDENTITY));
+        pConf.setTargetDatabase(new Database(DatabaseType.SQL_MYSQL));
         pConf.setTimestamp(LocalDateTime.of(2018, 01, 01, 00, 00, 00));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core", "liquibase");
         pConf.getLayersToProcess().add("angular-js");

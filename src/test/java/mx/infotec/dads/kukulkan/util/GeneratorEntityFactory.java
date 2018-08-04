@@ -17,7 +17,7 @@ public class GeneratorEntityFactory {
         pConf.setYear("2018");
         pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
-        pConf.setTargetDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
+        pConf.setTargetDatabase(new Database(type));
         pConf.setTimestamp(LocalDateTime.of(2018, 03, 03, 18, 52, 22));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");
         if (DatabaseType.SQL_MYSQL == type) {
@@ -34,7 +34,7 @@ public class GeneratorEntityFactory {
         pConf.setYear("2018");
         pConf.setAuthor("KUKULKAN");
         pConf.setOutputDir(TemporalDirectoryUtil.getTemporalPath());
-        pConf.setTargetDatabase(new Database(type, PKGenerationStrategy.IDENTITY));
+        pConf.setTargetDatabase(new Database(type));
         pConf.setTimestamp(LocalDateTime.of(2018, 05, 07, 20, 45, 32));
         pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core");
         pConf.getLayersToProcess().add("angular-js");
