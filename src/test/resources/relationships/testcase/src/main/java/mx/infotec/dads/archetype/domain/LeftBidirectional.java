@@ -66,13 +66,13 @@ public class LeftBidirectional implements Serializable {
     @JoinColumn(name = "recursive_child_many_to_one_bidirectional_id")
     private LeftBidirectional recursiveChildManyToOneBidirectional;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "recursive_parent_many_to_many_bidirectional_recursive_children_many_to_many_bidirectional",
                joinColumns = @JoinColumn(name="recursive_parent_many_to_many_bidirectional_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="recursive_children_many_to_many_bidirectional_id", referencedColumnName="id"))
     private Set<LeftBidirectional> recursiveChildrenManyToManyBidirectional = new HashSet<>();
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "left_many_to_many_bidirectional_right_many_to_many_bidirectional",
                joinColumns = @JoinColumn(name="left_many_to_many_bidirectional_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="right_many_to_many_bidirectional_id", referencedColumnName="id"))

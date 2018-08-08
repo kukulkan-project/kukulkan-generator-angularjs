@@ -17,14 +17,14 @@
     <#elseif association.type.name() == "MANY_TO_MANY">
     <#if association.bidirectional>
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}",
                joinColumns = @JoinColumn(name="${association.toSourcePropertyNameUnderscore}_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="${association.toTargetPropertyNameUnderscore}_id", referencedColumnName="id"))
     private Set<${association.target.name}> ${association.toTargetPropertyNamePlural} = new HashSet<>();
     <#else>
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "${association.source.tableName}_${association.toTargetPropertyNameUnderscore}",
                joinColumns = @JoinColumn(name="${association.source.underscoreName}_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="${association.toTargetPropertyNameUnderscore}_id", referencedColumnName="id"))

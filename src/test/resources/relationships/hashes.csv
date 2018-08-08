@@ -64,7 +64,7 @@
 /src/main/java/mx/infotec/dads/archetype/config/MetricsConfiguration.java,17A0E1BBEAE314B0D62C8754F5C81B22
 /src/main/webapp/i18n/es/right-many-to-many-unidirectional.json,0FD660026EDA47E29E05D4D7DB0D2F2A
 /src/main/java/mx/infotec/dads/archetype/security/AuthoritiesConstants.java,F516B0923DF0951949DE1338172ED7E6
-/src/main/java/mx/infotec/dads/archetype/domain/LeftBidirectional.java,AAB180594A14EB91ACE8C95BF7F901E9
+/src/main/java/mx/infotec/dads/archetype/domain/LeftBidirectional.java,26CEF52FBBDFCD37EF77017B97723409
 /src/main/webapp/app/entities/right-many-to-many-bidirectional/right-many-to-many-bidirectional-dialog.html,8D1B81F570C6028AA56820FFDAA27966
 /src/main/webapp/app/entities/right-many-to-one-unidirectional/right-many-to-one-unidirectional.controller.js,DFCCAB894593BB2D1328432418029D11
 /src/main/webapp/i18n/en/home.json,975B03D68545DEDDA9D2CC5902990A5E
@@ -79,7 +79,7 @@
 /src/main/webapp/app/components/util/modal-draggable.directive.js,1197ADC72D2000C20A3C54F655A1E9E1
 /src/main/webapp/app/admin/audits/audits.service.js,51E6D217B8990F5B1BE4AC45D3EF4E7E
 /src/main/java/mx/infotec/dads/archetype/domain/RightOneToManyUnidirectional.java,B3A0335A0A4E9A479F1391063CB77490
-/src/main/docker/mysql.yml,422D93788C9F8BAA7B3C51CD1B572DC4
+/src/main/docker/mysql.yml,90ED35329161500BB29A18DFA7756236
 /src/main/webapp/app/entities/right-many-to-many-unidirectional/right-many-to-many-unidirectional.controller.js,829A2C51038284DD6C713369077D3733
 /src/main/webapp/app/blocks/config/uib-pager.config.js,1112061F39CA410B75CFA5C579D518AA
 /src/main/java/mx/infotec/dads/archetype/service/RightManyToOneUnidirectionalService.java,E4EF10344D771D880F9D52CF00926B49
@@ -510,7 +510,7 @@
 /src/main/webapp/app/components/form/maxbytes.directive.js,409295EBC8C146B54ECDACE901D8E33E
 /src/main/java/mx/infotec/dads/archetype/repository/RightOneToManyUnidirectionalRepository.java,00AC34245430094777E9DE22B00956AA
 /src/main/webapp/content/images/logo.svg,5756BC4D73EDD88A73A98579700EB86F
-/src/main/java/mx/infotec/dads/archetype/domain/LeftUnidirectional.java,A800B0B6F2A94547F42EC0796D72F652
+/src/main/java/mx/infotec/dads/archetype/domain/LeftUnidirectional.java,4F48192A1AE4D8A77D71C3D763C45CED
 /src/main/webapp/app/blocks/interceptor/notification.interceptor.js,EDAB4C5426DD3098539C44734A76454F
 /src/main/webapp/app/entities/right-many-to-one-unidirectional/right-many-to-one-unidirectional-dialog.html,7D0EE25FCA5BF126809ECD691155BE65
 /src/main/resources/config/application-prod.yml,9801A42CD4E7D46ECC5F95F5AC850FCA
