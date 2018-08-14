@@ -12,7 +12,7 @@
         <addForeignKeyConstraint baseColumnNames="${association.toTargetPropertyNameUnderscore}_id"
                                  baseTableName="${entity.tableName}"
                                  constraintName="fk_${association.source.tableName}.${association.toTargetPropertyNameUnderscore}_id_${association.target.tableName}.id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="${association.target.primaryKey.physicalName.lowerCamelCase}"
                                  referencedTableName="${association.target.tableName}"/>
         	</#if>
 		</#list>
@@ -27,7 +27,7 @@
         						baseTableName="${entity.tableName}"
                                 constraintName="fk_${association.source.tableName}.${association.source.underscoreName}_id_${association.target.tableName}_id"		
         	</#if>
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="${association.source.primaryKey.physicalName.lowerCamelCase}"
                                  referencedTableName="${association.source.tableName}"/>
         	</#if>
 		</#list>
@@ -38,23 +38,23 @@
         	<addForeignKeyConstraint baseColumnNames="${association.toSourcePropertyNameUnderscore}_id"
                                  baseTableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"
                                  constraintName="fk_${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}.${association.toSourcePropertyNameUnderscore}_id_${association.source.tableName}.id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="${association.source.primaryKey.physicalName.lowerCamelCase}"
                                  referencedTableName="${association.source.tableName}"/>
         	<addForeignKeyConstraint baseColumnNames="${association.toTargetPropertyNameUnderscore}_id"
                                  baseTableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"
                                  constraintName="fk_${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}.${association.toTargetPropertyNameUnderscore}_id_${association.target.tableName}.id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="${association.target.primaryKey.physicalName.lowerCamelCase}"
                                  referencedTableName="${association.target.tableName}"/>        	
         	<#else>
         	<addForeignKeyConstraint baseColumnNames="${association.source.underscoreName}_id"
                                  baseTableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"
                                  constraintName="fk_${association.source.tableName}_${association.toTargetPropertyNameUnderscore}.${association.source.underscoreName}_id_${association.source.tableName}.id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="${association.source.primaryKey.physicalName.lowerCamelCase}"
                                  referencedTableName="${association.source.tableName}"/>
         	<addForeignKeyConstraint baseColumnNames="${association.toTargetPropertyNameUnderscore}_id"
                                  baseTableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"
                                  constraintName="fk_${association.source.tableName}_${association.toTargetPropertyNameUnderscore}.${association.toTargetPropertyNameUnderscore}_id_${association.target.tableName}.id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="${association.target.primaryKey.physicalName.lowerCamelCase}"
                                  referencedTableName="${association.target.tableName}"/>
         	</#if>
         

@@ -19,7 +19,7 @@
     -->
     <changeSet id="${entity.timestampString}-1" author="${author}">
         <createTable tableName="${tableName}">
-            <column name="id" type="bigint" autoIncrement="${r"${autoIncrement}"}">
+            <column name="${entity.primaryKey.physicalName.lowerCamelCase}" type="bigint" autoIncrement="${r"${autoIncrement}"}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         <#list properties as property>
