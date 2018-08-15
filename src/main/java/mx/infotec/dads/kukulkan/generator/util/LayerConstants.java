@@ -38,49 +38,59 @@ public class LayerConstants {
 
     /** The Constant REST_SPRING_JPA_BACK_END_URL. */
     public static final String REST_SPRING_JPA_BACK_END_URL = "rest-spring-jpa/backEnd";
-    
+
     /** The Constant FRONT_END_ENTITIES_LOCATION. */
     public static final String FRONT_END_ENTITIES_LOCATION = "rest-spring-jpa/frontEnd/entities/";
-    
+
     /** The Constant FRONT_END_I18N_LOCATION_ES. */
     public static final String FRONT_END_I18N_LOCATION_ES = "rest-spring-jpa/frontEnd/i18n/es/";
-    
+
     /** The Constant FRONT_END_I18N_LOCATION_EN. */
     public static final String FRONT_END_I18N_LOCATION_EN = "rest-spring-jpa/frontEnd/i18n/en/";
-    
+
     /** The Constant ENTITY_CONTROLLER_JS. */
     public static final String ENTITY_CONTROLLER_JS = "entity.controller.js.ftl";
-    
+
+    /** The Constant ENTITY_HANDSONTABLE_CONTROLLER_JS. */
+    public static final String ENTITY_HANDSONTABLE_CONTROLLER_JS = "entity-handsontable.controller.js.ftl";
+
     /** The Constant ENTITY_DELETE_DIALOG_CONTROLLER_JS. */
     public static final String ENTITY_DELETE_DIALOG_CONTROLLER_JS = "entity-delete-dialog.controller.js.ftl";
-    
+
     /** The Constant ENTITY_DELETE_DIALOG_HTML. */
     public static final String ENTITY_DELETE_DIALOG_HTML = "entity-delete-dialog.html.ftl";
-    
+
     /** The Constant ENTITY_DETAIL_CONTROLLER_JS. */
     public static final String ENTITY_DETAIL_CONTROLLER_JS = "entity-detail.controller.js.ftl";
-    
+
     /** The Constant ENTITY_DIALOG_CONTROLLER_JS. */
     public static final String ENTITY_DIALOG_CONTROLLER_JS = "entity-dialog.controller.js.ftl";
-    
+
     /** The Constant ENTITY_DIALOG_HTML. */
     public static final String ENTITY_DIALOG_HTML = "entity-dialog.html.ftl";
-    
+
     /** The Constant ENTITY_HTML. */
     public static final String ENTITY_HTML = "entity.html.ftl";
-    
+
+    /** The Constant ENTITY__HANDSONTABLE_HTML. */
+    public static final String ENTITY_HANDSONTABLE_HTML = "entity-handsontable.html.ftl";
+
     /** The Constant ENTITY_SEARCH_SERVICE_JS. */
     public static final String ENTITY_SEARCH_SERVICE_JS = "entity.search.service.js.ftl";
-    
+
     /** The Constant ENTITY_SERVICE_JS. */
     public static final String ENTITY_SERVICE_JS = "entity.service.js.ftl";
-    
+
+    /** The Constant ENTITY_HANDSONTABLE_SERVICE_JS. */
+    public static final String ENTITY_HANDSONTABLE_SERVICE_JS = "entity-handsontable.service.js.ftl";
+
     /** The Constant ENTITY_STATE_JS. */
     public static final String ENTITY_STATE_JS = "entity.state.js.ftl";
-    
+
     /** The Constant IDIOMA_JS. */
     public static final String IDIOMA_JS = "entity.json.ftl";
-    
+
     /** The Constant ENTITY_DETAIL_HTML. */
     public static final String ENTITY_DETAIL_HTML = "entity-detail.html.ftl";
+
 }

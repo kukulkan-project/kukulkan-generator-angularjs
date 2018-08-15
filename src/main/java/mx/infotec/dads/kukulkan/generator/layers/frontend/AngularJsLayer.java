@@ -30,6 +30,9 @@ import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETA
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETAIL_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_SERVICE_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SERVICE_JS;
@@ -101,9 +104,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
-     * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
-     * java.lang.String)
+     * ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity, java.lang.String)
      */
     @Override
     public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
@@ -215,9 +217,15 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *            the dm element
      */
     private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_CONTROLLER_JS,
-                false);
+        if (dmElement.getFeatures().isSheetable()) {
+            LOGGER.debug("fillEntityHandsontableControllerJs {}", ENTITY_HANDSONTABLE_CONTROLLER_JS);
+            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                    ENTITY_HANDSONTABLE_CONTROLLER_JS, false);
+        } else {
+            LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
+            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                    ENTITY_CONTROLLER_JS, false);
+        }
     }
 
     /**
@@ -278,9 +286,15 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *            the dm element
      */
     private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
-                false);
+        if (dmElement.getFeatures().isSheetable()) {
+            LOGGER.debug("fillEntityHandsontableServiceJs {}", ENTITY_HANDSONTABLE_SERVICE_JS);
+            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                    ENTITY_HANDSONTABLE_SERVICE_JS, false);
+        } else {
+            LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
+            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
+                    false);
+        }
     }
 
     /**
@@ -310,9 +324,16 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *            the dm element
      */
     private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML),
-                ENTITY_HTML, true, HTML);
+        if (dmElement.getFeatures().isSheetable()) {
+            LOGGER.debug("fillEntityHandsontableHtml {}", ENTITY_HANDSONTABLE_HTML);
+            saveFrontEndTemplate(pConf, model, dmElement,
+                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML), ENTITY_HTML, true,
+                    HTML);
+        } else {
+            LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
+            saveFrontEndTemplate(pConf, model, dmElement,
+                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
+        }
     }
 
     /**

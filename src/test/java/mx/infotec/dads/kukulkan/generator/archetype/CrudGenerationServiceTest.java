@@ -61,7 +61,6 @@ import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.translator.Source;
 import mx.infotec.dads.kukulkan.metamodel.translator.TranslatorService;
-import mx.infotec.dads.kukulkan.metamodel.util.PKGenerationStrategy;
 import mx.infotec.dads.kukulkan.util.TemporalDirectoryUtil;
 
 /**
@@ -91,7 +90,8 @@ public class CrudGenerationServiceTest {
 
     @BeforeClass
     public static void runOnceBeforeClass() {
-        outputDir = TemporalDirectoryUtil.getTemporalPath();
+//        outputDir = TemporalDirectoryUtil.getTemporalPath();
+        outputDir = Paths.get("/home/roberto/Escritorio");
     }
 
     public void generationService() {

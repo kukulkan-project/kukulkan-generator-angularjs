@@ -28,6 +28,10 @@ import java.util.Optional;
 
 import com.codahale.metrics.annotation.Timed;
 import io.swagger.annotations.ApiParam;
+<#if entity.features.sheetable>
+import mx.infotec.dads.kukulkan.tables.handsontable.Handsontable;
+import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;
+</#if>
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -178,6 +182,7 @@ public class ${entity.name}Resource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+    <#if entity.features.sheetable>
     /**
      * GET /${entityCamelCasePlural}/handsontable : recupera una Handsontable de ${entityCamelCasePlural}.
      *
@@ -193,5 +198,6 @@ public class ${entity.name}Resource {
         HttpHeaders headers = PaginationUtil.generateSliceHttpHeaders(table);
         return new ResponseEntity<>(table, headers, HttpStatus.OK);
     }
+    </#if>
     
 }

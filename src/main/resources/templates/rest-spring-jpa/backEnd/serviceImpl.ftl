@@ -29,6 +29,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+<#if entity.features.sheetable>
+import mx.infotec.dads.kukulkan.tables.handsontable.Handsontable;
+import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableFactory;
+import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;
+</#if>
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 ${importModel}
@@ -96,6 +102,7 @@ public class ${entity.name}ServiceImpl implements ${entity.name}Service {
         return repository.findAll(pageable);
     }
     
+    <#if entity.features.sheetable>
     @Override
     public HandsontableSlice<${entity.name}> getHandsontable(Pageable pageable) {
         Handsontable<${entity.name}> table = HandsontableFactory.createHandsontable(${entity.name}.class);
@@ -103,4 +110,5 @@ public class ${entity.name}ServiceImpl implements ${entity.name}Service {
         Slice<${entity.name}> slice = new SliceImpl<>(page.getContent(), pageable, page.hasNext());
         return new HandsontableSlice<>(table, slice);
     }
+    </#if>
 }

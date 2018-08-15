@@ -25,7 +25,7 @@ ${package}
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+<#if entity.features.sheetable>import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;</#if>
 ${importModel}
 <#if importPrimaryKey??>
 ${importPrimaryKey}
