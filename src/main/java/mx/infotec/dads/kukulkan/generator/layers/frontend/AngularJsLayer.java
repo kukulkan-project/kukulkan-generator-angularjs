@@ -300,11 +300,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
             LOGGER.debug("fillEntityHandsontableServiceJs {}", ENTITY_HANDSONTABLE_SERVICE_JS);
             saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                     ENTITY_HANDSONTABLE_SERVICE_JS, false);
-        } else {
-            LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
-            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
-                    false);
         }
+        LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
+        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
+                false);
     }
 
     /**
@@ -337,8 +336,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         if (dmElement.getFeatures().isSheetable()) {
             LOGGER.debug("fillEntityHandsontableHtml {}", ENTITY_HANDSONTABLE_HTML);
             saveFrontEndTemplate(pConf, model, dmElement,
-                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML), ENTITY_HANDSONTABLE_HTML, true,
-                    HTML);
+                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML),
+                    ENTITY_HANDSONTABLE_HTML, true, HTML);
         } else {
             LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
             saveFrontEndTemplate(pConf, model, dmElement,
