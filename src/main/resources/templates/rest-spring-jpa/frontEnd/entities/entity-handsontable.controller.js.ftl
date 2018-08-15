@@ -3,11 +3,11 @@
 
     angular
         .module('${projectName}App')
-        .controller('${entityCamelCase?cap_first}Controller', ${entityCamelCase?cap_first}Controller);
+        .controller('${entityCamelCase?cap_first}SheetController', ${entityCamelCase?cap_first}SheetController);
 
-    ${entityCamelCase?cap_first}Controller.$inject = ['$scope', 'hotRegisterer', '${entityCamelCase?cap_first}Handsontable', 'AlertService', 'paginationConstants'];
+    ${entityCamelCase?cap_first}SheetController.$inject = ['$scope', 'hotRegisterer', '${entityCamelCase?cap_first}Sheet', 'AlertService', 'paginationConstants'];
 
-    function ${entityCamelCase?cap_first}Controller($scope, hotRegisterer, ${entityCamelCase?cap_first}Handsontable, AlertService, paginationConstants) {
+    function ${entityCamelCase?cap_first}SheetController($scope, hotRegisterer, ${entityCamelCase?cap_first}Sheet, AlertService, paginationConstants) {
         
         var vm = this;
         
@@ -48,7 +48,7 @@
 
         function loadAll() {
             vm.loading = true;
-            ${entityCamelCase?cap_first}Handsontable.query({
+            ${entityCamelCase?cap_first}Sheet.query({
                 page: vm.page,
                 size: vm.itemsPerPage
             }, onSuccess, onError);

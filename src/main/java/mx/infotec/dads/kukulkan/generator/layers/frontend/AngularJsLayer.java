@@ -33,6 +33,7 @@ import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIAL
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_SERVICE_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_STATE_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SERVICE_JS;
@@ -111,18 +112,20 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         fillEntityControllerJs(pConf, propertiesMap, dmElement);
-        fillEntityDeleteDialogControllerJs(pConf, propertiesMap, dmElement);
-        fillEntityDeleteDialogHtml(pConf, propertiesMap, dmElement);
-        fillEntityDetailControllerJs(pConf, propertiesMap, dmElement);
-        fillEntityDetailHtml(pConf, propertiesMap, dmElement);
-        fillEntityDialogControllerJs(pConf, propertiesMap, dmElement);
-        fillEntityDialogHtml(pConf, propertiesMap, dmElement);
         fillEntityHtml(pConf, propertiesMap, dmElement);
         fillEntitySearchServiceJs(pConf, propertiesMap, dmElement);
         fillEntityServiceJs(pConf, propertiesMap, dmElement);
         fillEntityStateJs(pConf, propertiesMap, dmElement);
         fillIdiomaEsJs(pConf, propertiesMap, dmElement);
         fillIdiomaEnJs(pConf, propertiesMap, dmElement);
+        if (!dmElement.getFeatures().isSheetable()) {
+            fillEntityDeleteDialogControllerJs(pConf, propertiesMap, dmElement);
+            fillEntityDeleteDialogHtml(pConf, propertiesMap, dmElement);
+            fillEntityDetailControllerJs(pConf, propertiesMap, dmElement);
+            fillEntityDetailHtml(pConf, propertiesMap, dmElement);
+            fillEntityDialogControllerJs(pConf, propertiesMap, dmElement);
+            fillEntityDialogHtml(pConf, propertiesMap, dmElement);
+        }
     }
 
     /**
@@ -271,8 +274,15 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *            the dm element
      */
     private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        LOGGER.debug("fillEntityStateJs {}", ENTITY_STATE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS, false);
+        if (dmElement.getFeatures().isSheetable()) {
+            LOGGER.debug("fillEntityHandsontableStateJs {}", ENTITY_HANDSONTABLE_STATE_JS);
+            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                    ENTITY_HANDSONTABLE_STATE_JS, false);
+        } else {
+            LOGGER.debug("fillEntityStateJs {}", ENTITY_STATE_JS);
+            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS,
+                    false);
+        }
     }
 
     /**
@@ -327,7 +337,7 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         if (dmElement.getFeatures().isSheetable()) {
             LOGGER.debug("fillEntityHandsontableHtml {}", ENTITY_HANDSONTABLE_HTML);
             saveFrontEndTemplate(pConf, model, dmElement,
-                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML), ENTITY_HTML, true,
+                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML), ENTITY_HANDSONTABLE_HTML, true,
                     HTML);
         } else {
             LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);

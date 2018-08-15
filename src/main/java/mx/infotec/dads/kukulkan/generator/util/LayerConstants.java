@@ -86,6 +86,9 @@ public class LayerConstants {
 
     /** The Constant ENTITY_STATE_JS. */
     public static final String ENTITY_STATE_JS = "entity.state.js.ftl";
+    
+    /** The Constant ENTITY_HANDSONTABLE_STATE_JS. */
+    public static final String ENTITY_HANDSONTABLE_STATE_JS = "entity-handsontable.state.js.ftl";
 
     /** The Constant IDIOMA_JS. */
     public static final String IDIOMA_JS = "entity.json.ftl";

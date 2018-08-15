@@ -18,8 +18,8 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotationPlural}<#if entity.features.sheetable>-handsontable</#if>.html',
-                    controller: '${entity.name}<#if entity.features.sheetable>-Handsontable</#if>Controller',
+                    templateUrl: 'app/entities/${entityHyphenNotation}/${entityHyphenNotationPlural}.html',
+                    controller: '${entity.name}Controller',
                     controllerAs: 'vm'
                 }
             },

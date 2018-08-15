@@ -190,7 +190,7 @@ public class ${entity.name}Resource {
      * @return El objeto ResponseEntity con estado de 200 (OK) y la Handsontable de
      *         ${entityCamelCasePlural} en el cuerpo del mensaje
      */
-    @GetMapping("/${entityCamelCasePlural}/handsontable")
+    @GetMapping("/${entityCamelCasePlural}/sheet")
     @Timed
     public ResponseEntity<Handsontable<${entity.name}>> get${entity.name}Handsontable(@ApiParam Pageable pageable) {
         log.debug("REST request to get a Handsontable of ${entityCamelCasePlural}");

@@ -26,10 +26,13 @@ ${packageImpl}
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 <#if entity.features.sheetable>
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import mx.infotec.dads.kukulkan.tables.handsontable.Handsontable;
 import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableFactory;
 import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;
