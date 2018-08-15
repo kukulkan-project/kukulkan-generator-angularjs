@@ -1,6 +1,7 @@
 package ${project.packaging}.web.rest.util;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.util.UriComponentsBuilder;
 
