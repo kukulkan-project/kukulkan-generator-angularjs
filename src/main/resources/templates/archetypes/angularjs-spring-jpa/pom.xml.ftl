@@ -30,6 +30,7 @@
         <scala.version>2.12.1</scala.version>
         <node.version>v8.9.3</node.version>
         <yarn.version>v1.3.2</yarn.version>
+        <kukulkan-tables.version>0.0.1-RELEASE</kukulkan-tables.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.testresult.directory>${r"${project.build.directory}"}/test-results</project.testresult.directory>
@@ -347,6 +348,11 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-spring</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mx.infotec.dads.kukulkan</groupId>
+            <artifactId>kukulkan-tables</artifactId>
+            <version>${r"${kukulkan-tables.version}"}</version>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>

@@ -64,6 +64,12 @@ public final class PaginationUtil {
         headers.add(HttpHeaders.LINK, link);
         return headers;
     }
+    
+    public static HttpHeaders generateSliceHttpHeaders(Slice<?> slice) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Has-Next-Page", "" + slice.hasNext());
+        return headers;
+    }
 
     private static String generateUri(String baseUrl, int page, int size) {
         return UriComponentsBuilder.fromUriString(baseUrl).queryParam("page", page).queryParam("size", size).toUriString();

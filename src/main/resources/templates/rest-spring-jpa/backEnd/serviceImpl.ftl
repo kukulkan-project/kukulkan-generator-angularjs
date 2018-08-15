@@ -95,4 +95,12 @@ public class ${entity.name}ServiceImpl implements ${entity.name}Service {
         log.debug("Request to search for a page of ${entity.name} ");
         return repository.findAll(pageable);
     }
+    
+    @Override
+    public HandsontableSlice<${entity.name}> getHandsontable(Pageable pageable) {
+        Handsontable<${entity.name}> table = HandsontableFactory.createHandsontable(${entity.name}.class);
+        Page<${entity.name}> page = repository.findAll(pageable);
+        Slice<${entity.name}> slice = new SliceImpl<>(page.getContent(), pageable, page.hasNext());
+        return new HandsontableSlice<>(table, slice);
+    }
 }

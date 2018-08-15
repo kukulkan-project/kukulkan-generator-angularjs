@@ -178,4 +178,20 @@ public class ${entity.name}Resource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+    /**
+     * GET /${entityCamelCasePlural}/handsontable : recupera una Handsontable de ${entityCamelCasePlural}.
+     *
+     * @param pageable información de paginación
+     * @return El objeto ResponseEntity con estado de 200 (OK) y la Handsontable de
+     *         ${entityCamelCasePlural} en el cuerpo del mensaje
+     */
+    @GetMapping("/${entityCamelCasePlural}/handsontable")
+    @Timed
+    public ResponseEntity<Handsontable<${entity.name}>> get${entity.name}Handsontable(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a Handsontable of ${entityCamelCasePlural}");
+        HandsontableSlice<${entity.name}> table = service.getHandsontable(pageable);
+        HttpHeaders headers = PaginationUtil.generateSliceHttpHeaders(table);
+        return new ResponseEntity<>(table, headers, HttpStatus.OK);
+    }
+    
 }

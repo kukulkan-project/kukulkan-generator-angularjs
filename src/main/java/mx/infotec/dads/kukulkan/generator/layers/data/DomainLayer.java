@@ -27,7 +27,6 @@ import static mx.infotec.dads.kukulkan.engine.util.LayerUtils.PACKAGE_PROPERTY;
 import static mx.infotec.dads.kukulkan.metamodel.util.JavaFileNameParser.formatToPackageStatement;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 

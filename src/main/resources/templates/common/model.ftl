@@ -19,6 +19,9 @@ import java.io.Serializable;
  * @author ${author}
  *
  */
+ <#if entity.features.sheetable>
+ @Sheet
+ </#if>
 @Entity
 @Table(name = "${tableNameLowerCase}")
 public class ${entity.name} implements Serializable {
