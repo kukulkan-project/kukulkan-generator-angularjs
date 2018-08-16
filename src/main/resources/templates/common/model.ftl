@@ -8,13 +8,10 @@ import ${import};
 import javax.persistence.*;
 <#if hasConstraints == true>
 import javax.validation.constraints.*;
-</#if>
-
-<#if entity.features.sheetable>
+</#if><#if entity.features.sheetable>
 import mx.infotec.dads.kukulkan.tables.handsontable.annotations.Sheet;
 import mx.infotec.dads.kukulkan.tables.handsontable.annotations.SheetColumn;
 </#if>
-
 import java.util.Objects;
 import java.io.Serializable;
 

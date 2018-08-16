@@ -90,4 +90,5 @@ public interface LeftBidirectionalService {
      *  @return Page de todas las entidades
      */
     Page<LeftBidirectional> search(String query, Pageable pageable);
+    
 }

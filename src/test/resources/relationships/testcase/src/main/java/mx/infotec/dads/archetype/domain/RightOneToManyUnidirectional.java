@@ -24,7 +24,6 @@
 package mx.infotec.dads.archetype.domain;
 
 import javax.persistence.*;
-
 import java.util.Objects;
 import java.io.Serializable;
 

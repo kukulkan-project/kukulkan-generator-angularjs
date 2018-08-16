@@ -90,8 +90,7 @@ public class CrudGenerationServiceTest {
 
     @BeforeClass
     public static void runOnceBeforeClass() {
-//        outputDir = TemporalDirectoryUtil.getTemporalPath();
-        outputDir = Paths.get("/home/roberto/Escritorio");
+        outputDir = TemporalDirectoryUtil.getTemporalPath();
     }
 
     public void generationService() {

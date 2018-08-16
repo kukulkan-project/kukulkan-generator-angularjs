@@ -175,4 +175,5 @@ public class RightOneToOneBidirectionalResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+    
 }

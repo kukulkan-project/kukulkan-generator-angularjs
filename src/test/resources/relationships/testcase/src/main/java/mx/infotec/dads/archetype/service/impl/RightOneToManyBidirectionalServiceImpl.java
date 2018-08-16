@@ -26,9 +26,9 @@ package mx.infotec.dads.archetype.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import mx.infotec.dads.archetype.domain.RightOneToManyBidirectional;
@@ -92,4 +92,5 @@ public class RightOneToManyBidirectionalServiceImpl implements RightOneToManyBid
         log.debug("Request to search for a page of RightOneToManyBidirectional ");
         return repository.findAll(pageable);
     }
+
 }

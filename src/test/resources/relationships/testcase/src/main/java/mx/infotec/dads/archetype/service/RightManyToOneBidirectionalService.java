@@ -90,4 +90,5 @@ public interface RightManyToOneBidirectionalService {
      *  @return Page de todas las entidades
      */
     Page<RightManyToOneBidirectional> search(String query, Pageable pageable);
+    
 }

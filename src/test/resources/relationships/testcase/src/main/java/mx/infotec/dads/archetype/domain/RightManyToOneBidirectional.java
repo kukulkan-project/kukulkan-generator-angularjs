@@ -26,7 +26,6 @@ package mx.infotec.dads.archetype.domain;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-
 import java.util.Objects;
 import java.io.Serializable;
 
