@@ -41,8 +41,8 @@ import javax.xml.bind.DatatypeConverter;
 public class ChecksumUtils {
 
     /**
-     * Computes a Map with file names as keys and checksum as values for files in
-     * given pathname and sub-directories
+     * Computes a Map with file names as keys and checksum as values for files
+     * in given pathname and sub-directories
      * 
      * @param pathname
      *            A string representation for path
@@ -50,9 +50,7 @@ public class ChecksumUtils {
      * @throws NoSuchAlgorithmException
      * @throws IOException
      */
-    public static Map<String, String> computeHashesMap(String pathname) throws NoSuchAlgorithmException, IOException {
-        Path path = Paths.get(pathname);
-
+    public static Map<String, String> computeHashesMap(Path path) throws NoSuchAlgorithmException, IOException {
         Map<String, String> hashesMap = new HashMap<>();
         MessageDigest md = MessageDigest.getInstance("MD5");
 
@@ -60,7 +58,10 @@ public class ChecksumUtils {
                 && !filePath.toString().contains(".kukulkan.json")).forEach(filePath -> {
                     try {
                         String hash = getFileChecksum(md, filePath.toFile());
-                        hashesMap.put(filePath.toString().replaceFirst(path.toString(), ""), hash);
+                        // hashesMap.put(filePath.toString().replaceFirst(path.toString(),
+                        // ""), hash);
+                        Path relativeFilePath = path.relativize(filePath);
+                        hashesMap.put(relativeFilePath.toString(), hash);
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

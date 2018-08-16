@@ -174,9 +174,9 @@ public class CrudGenerationServiceTest {
 
     public void compareGeneratedAgainstBaseProject()
             throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
-        Map<String, String> hashesBase = computeHashesMap(baseProject);
-        writeCsvHashes(hashesBase, csvHashesBaseProject);
-        Map<String, String> hashesGenerated = computeHashesMap(outputDir.resolve(idProject).toString());
+        Map<String, String> hashesBase = computeHashesMap(Paths.get(baseProject));
+        //writeCsvHashes(hashesBase, csvHashesBaseProject);
+        Map<String, String> hashesGenerated = computeHashesMap(outputDir.resolve(idProject));
 
         Set<String> keySetBase = hashesBase.keySet();
         Set<String> keySetGenerated = hashesBase.keySet();
