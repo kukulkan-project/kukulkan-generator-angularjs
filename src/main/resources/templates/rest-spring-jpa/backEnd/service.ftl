@@ -25,7 +25,7 @@ ${package}
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+<#if entity.features.sheetable>import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;</#if>
 ${importModel}
 <#if importPrimaryKey??>
 ${importPrimaryKey}
@@ -93,4 +93,13 @@ public interface ${entity.name}Service {
      *  @return Page de todas las entidades
      */
     Page<${entity.name}> search(String query, Pageable pageable);
+    
+    <#if entity.features.sheetable>
+ 	/**
+     * Regresa una HandsontableSlice de ${entity.name}
+     * @param pageable la información de paginación
+     * @return HandsontableSlice de todas las entidades
+     */
+    HandsontableSlice<${entity.name}> getHandsontable(Pageable pageable);
+ 	</#if>
 }

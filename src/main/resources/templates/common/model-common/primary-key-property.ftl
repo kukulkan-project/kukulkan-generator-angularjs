@@ -4,6 +4,9 @@
      *
      * @kukulkanGenerated ${timestamp}
      */
+    <#if entity.features.sheetable>
+ 	@SheetColumn
+ 	</#if>
     <#if primaryKey.composed == true>
     @EmbeddedId
     <#else>

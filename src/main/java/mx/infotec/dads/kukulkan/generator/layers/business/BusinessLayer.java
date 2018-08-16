@@ -75,9 +75,8 @@ public class BusinessLayer extends AbstractNavigableLayer {
      * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
-     * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
-     * java.lang.String)
+     * ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity, java.lang.String)
      */
     @Override
     public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,

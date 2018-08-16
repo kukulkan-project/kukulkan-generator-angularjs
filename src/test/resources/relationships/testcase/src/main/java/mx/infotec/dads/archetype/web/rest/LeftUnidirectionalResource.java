@@ -175,4 +175,5 @@ public class LeftUnidirectionalResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
+    
 }

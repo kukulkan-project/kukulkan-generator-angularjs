@@ -8,8 +8,10 @@ import ${import};
 import javax.persistence.*;
 <#if hasConstraints == true>
 import javax.validation.constraints.*;
+</#if><#if entity.features.sheetable>
+import mx.infotec.dads.kukulkan.tables.handsontable.annotations.Sheet;
+import mx.infotec.dads.kukulkan.tables.handsontable.annotations.SheetColumn;
 </#if>
-
 import java.util.Objects;
 import java.io.Serializable;
 
@@ -19,6 +21,9 @@ import java.io.Serializable;
  * @author ${author}
  *
  */
+<#if entity.features.sheetable>
+@Sheet
+</#if>
 @Entity
 @Table(name = "${tableNameLowerCase}")
 public class ${entity.name} implements Serializable {

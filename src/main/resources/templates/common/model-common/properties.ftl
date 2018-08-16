@@ -6,6 +6,9 @@
      *
      * @kukulkanGenerated ${timestamp}
      */
+    <#if entity.features.sheetable>
+ 	@SheetColumn
+ 	</#if>
     <#if property.constraint.nullable==false>
     @NotNull
     </#if> 

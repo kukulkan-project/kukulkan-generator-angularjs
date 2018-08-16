@@ -28,6 +28,10 @@ import java.util.Optional;
 
 import com.codahale.metrics.annotation.Timed;
 import io.swagger.annotations.ApiParam;
+<#if entity.features.sheetable>
+import mx.infotec.dads.kukulkan.tables.handsontable.Handsontable;
+import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;
+</#if>
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,5 +181,23 @@ public class ${entity.name}Resource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/${entityCamelCasePlural}");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    <#if entity.features.sheetable>
+    /**
+     * GET /${entityCamelCasePlural}/handsontable : recupera una Handsontable de ${entityCamelCasePlural}.
+     *
+     * @param pageable información de paginación
+     * @return El objeto ResponseEntity con estado de 200 (OK) y la Handsontable de
+     *         ${entityCamelCasePlural} en el cuerpo del mensaje
+     */
+    @GetMapping("/${entityCamelCasePlural}/sheet")
+    @Timed
+    public ResponseEntity<Handsontable<${entity.name}>> get${entity.name}Handsontable(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a Handsontable of ${entityCamelCasePlural}");
+        HandsontableSlice<${entity.name}> table = service.getHandsontable(pageable);
+        HttpHeaders headers = PaginationUtil.generateSliceHttpHeaders(table);
+        return new ResponseEntity<>(table, headers, HttpStatus.OK);
+    }
+    </#if>
     
 }
