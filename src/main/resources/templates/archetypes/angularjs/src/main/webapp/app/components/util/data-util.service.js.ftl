@@ -59,7 +59,9 @@
         }
 
         function openFile (type, data) {
-            $window.open('data:' + type + ';base64,' + data, '_blank', 'height=300,width=400');
+            var win = $window.open("", "", "resizable=yes,width=800,height=800");
+            var base64Url = "data:" + type + ";base64," + data;
+            win.document.write('<iframe src="' + base64Url + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:700; height:700;" allowfullscreen></iframe>');
         }
 
         function toBase64 (file, cb) {
