@@ -38,6 +38,7 @@ import org.springframework.stereotype.Component;
 import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
 import mx.infotec.dads.kukulkan.engine.service.FileUtil;
+import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.engine.util.PathPair;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
@@ -62,6 +63,9 @@ public class DomainLayer extends AbstractNavigableLayer {
     @Autowired
     private TemplateService templateService;
 
+    @Autowired
+    private WriterService writerService;
+
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DomainLayer.class);
 
@@ -70,9 +74,8 @@ public class DomainLayer extends AbstractNavigableLayer {
      * 
      * @see mx.infotec.dads.kukulkan.metamodel.generator.NavigableLayer#
      * visitDomainModelElement(mx.infotec.dads.kukulkan.metamodel.foundation.
-     * ProjectConfiguration, java.util.Collection, java.util.Map,
-     * java.lang.String, mx.infotec.dads.kukulkan.metamodel.foundation.Entity,
-     * java.lang.String)
+     * ProjectConfiguration, java.util.Collection, java.util.Map, java.lang.String,
+     * mx.infotec.dads.kukulkan.metamodel.foundation.Entity, java.lang.String)
      */
     @Override
     public void visitEntity(ProjectConfiguration confg, Collection<Entity> dmElementCollection,
@@ -82,6 +85,9 @@ public class DomainLayer extends AbstractNavigableLayer {
                 formatToPackageStatement(false, basePackage, NameConventions.DOMAIN_LAYER_NAME));
         fillModel(confg, propertiesMap, dmgName, basePackage, dmElement);
         fillPrimaryKey(confg, propertiesMap, basePackage, dmElement);
+        if (dmElement.getFeatures().isSheetable()) {
+            addKukulkanTablesMavenDependency(confg);
+        }
     }
 
     /**
@@ -140,6 +146,12 @@ public class DomainLayer extends AbstractNavigableLayer {
                     pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
             templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
         }
+    }
+
+    private void addKukulkanTablesMavenDependency(ProjectConfiguration pConf) {
+        Path projectDir = pConf.getOutputDir().resolve(pConf.getId());
+        writerService.addMavenDependency("rest-spring-jpa/backEnd/extra-dependencies/kukulkan-tables-maven-dep.ftl",
+                projectDir);
     }
 
     /*
