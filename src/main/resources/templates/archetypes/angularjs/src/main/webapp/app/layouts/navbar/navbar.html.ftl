@@ -45,50 +45,50 @@
             <ul class="dropdown-menu">
                 <li ui-sref-active="active">
                     <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-users"></span>&nbsp;
+                        <span class="fa fa-users"></span>&nbsp;
                         <span data-translate="global.menu.admin.userManagement">User management</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-chart-area"></span>&nbsp;
+                        <span class="fa fa-chart-area"></span>&nbsp;
                         <span data-translate="global.menu.admin.metrics">Metrics</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-heartbeat"></span>&nbsp;
+                        <span class="fa fa-heartbeat"></span>&nbsp;
                         <span data-translate="global.menu.admin.health">Health</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-cog"></span>&nbsp;
+                        <span class="fa fa-cog"></span>&nbsp;
                         <span data-translate="global.menu.admin.configuration">Configuration</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="audits" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-edit"></span>&nbsp;
+                        <span class="fa fa-edit"></span>&nbsp;
                         <span data-translate="global.menu.admin.audits">Audits</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="logs" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-server"></span>&nbsp;
+                        <span class="fa fa-server"></span>&nbsp;
                         <span data-translate="global.menu.admin.logs">Logs</span>
                     </a>
                 </li>
                 <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
                     <a ui-sref="docs" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-book"></span>&nbsp;
+                        <span class="fa fa-book"></span>&nbsp;
                         <span data-translate="global.menu.admin.apidocs">API</span>
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here-->
                 <li ng-hide="vm.inProduction">
                     <a href='/h2-console' target="_tab" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon fa-database"></span>&nbsp;
+                        <span class="fa fa-database"></span>&nbsp;
                         <span data-translate="global.menu.admin.database">Database</span>
                     </a>
                 </li>

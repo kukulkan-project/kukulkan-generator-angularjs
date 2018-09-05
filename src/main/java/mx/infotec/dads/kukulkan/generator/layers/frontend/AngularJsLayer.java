@@ -55,6 +55,7 @@ import org.springframework.stereotype.Component;
 
 import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
+import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
 import mx.infotec.dads.kukulkan.generator.util.LayerConstants;
@@ -64,6 +65,7 @@ import mx.infotec.dads.kukulkan.generator.util.TemplateFormatter;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
 import mx.infotec.dads.kukulkan.metamodel.editor.LanguageType;
 import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModel;
+import mx.infotec.dads.kukulkan.metamodel.foundation.DomainModelGroup;
 import mx.infotec.dads.kukulkan.metamodel.foundation.Entity;
 import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.util.BasePathEnum;
@@ -79,6 +81,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     /** The template service. */
     @Autowired
     private TemplateService templateService;
+
+    @Autowired
+    private WriterService writerService;
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AngularJsLayer.class);
@@ -139,13 +144,12 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *            the domain model
      */
     private void fillNavBar(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        Path templateFilePath = TemplateEnum.FRONT_END.getLocation("navbar.html.ftl");
-        Path relativeFilePath = Paths.get(BasePathEnum.SRC_MAIN_JAVA.toString());
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.WEB_APP_NAV_BAR.getPath(), "navbar.html");
-        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.HTML);
-        templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
+        for (DomainModelGroup domainModelGroup : domainModel.getDomainModelGroup()) {
+            for (Entity entity : domainModelGroup.getEntities()) {
+                writerService.addEntityMenuEntry("common/menu-entry.ftl", pConf.getOutputDir().resolve(pConf.getId()),
+                        entity);
+            }
+        }
     }
 
     /**
