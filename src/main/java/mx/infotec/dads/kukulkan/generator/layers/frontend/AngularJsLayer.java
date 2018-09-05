@@ -102,7 +102,6 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         fillNavBar(pConf, model, domainModel);
         fillIdiomaGlobalEsJs(pConf, model, domainModel);
         fillIdiomaGlobalEnJs(pConf, model, domainModel);
-        fillIndex(pConf, model, domainModel);
     }
 
     /*
@@ -188,26 +187,6 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
                 BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
-        ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
-                templateFilePath, LanguageType.HTML);
-        templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
-    }
-
-    /**
-     * Fill index.
-     *
-     * @param pConf
-     *            the conf
-     * @param model
-     *            the model
-     * @param domainModel
-     *            the domain model
-     */
-    private void fillIndex(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
-        Path templateFilePath = TemplateEnum.COMMON.getLocation("index.html.ftl");
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_INDEX.getPath(), "index.html");
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(), BasePathEnum.WEB_INDEX.getPath(),
-                "index.html");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.HTML);
         templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
