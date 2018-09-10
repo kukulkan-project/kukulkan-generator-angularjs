@@ -9,50 +9,50 @@
     <changeSet id="20180101000006-2" author="kukulkan">
         <addForeignKeyConstraint baseColumnNames="recursive_child_one_to_one_bidirectional_id"
                                  baseTableName="left_bidirectional"
-                                 constraintName="fk_left_bidirectional.recursive_child_one_to_one_bidirectional_id_left_bidirectional.id"
+                                 constraintName="fk_le.recursive_child_one_to_one_bidirectional_left_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
         <addForeignKeyConstraint baseColumnNames="recursive_child_many_to_one_bidirectional_id"
                                  baseTableName="left_bidirectional"
-                                 constraintName="fk_left_bidirectional.recursive_child_many_to_one_bidirectional_id_left_bidirectional.id"
+                                 constraintName="fk_le.recursive_child_many_to_one_bidirectional_left_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
         <addForeignKeyConstraint baseColumnNames="right_many_to_one_bidirectional_id"
                                  baseTableName="left_bidirectional"
-                                 constraintName="fk_left_bidirectional.right_many_to_one_bidirectional_id_right_many_to_one_bidirectional.id"
+                                 constraintName="fk_le.right_many_to_one_bidirectional_right_many_to_one_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="right_many_to_one_bidirectional"/>
         <addForeignKeyConstraint baseColumnNames="right_one_to_one_bidirectional_id"
                                  baseTableName="left_bidirectional"
-                                 constraintName="fk_left_bidirectional.right_one_to_one_bidirectional_id_right_one_to_one_bidirectional.id"
+                                 constraintName="fk_le.right_one_to_one_bidirectional_right_one_to_one_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="right_one_to_one_bidirectional"/>
         	<addForeignKeyConstraint baseColumnNames="recursive_parent_one_to_many_bidirectional_id"
         						baseTableName="left_bidirectional"
-                                constraintName="fk_left_bidirectional.recursive_parent_one_to_many_bidirectional_id_left_bidirectional.id"
+                                constraintName="fk_le.recursive_parent_one_to_many_bidirectional_left_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
 
         	<addForeignKeyConstraint baseColumnNames="recursive_parent_many_to_many_bidirectional_id"
                                  baseTableName="recursive_parent_many_to_many_bidirectional_recursive_children_many_to_many_bidirectional"
-                                 constraintName="fk_recursive_parent_many_to_many_bidirectional_recursive_children_many_to_many_bidirectional.recursive_parent_many_to_many_bidirectional_id_left_bidirectional.id"
+                                 constraintName="fk_rere.recursive_children_many_to_many_bidirectional_left_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
         	<addForeignKeyConstraint baseColumnNames="recursive_children_many_to_many_bidirectional_id"
                                  baseTableName="recursive_parent_many_to_many_bidirectional_recursive_children_many_to_many_bidirectional"
-                                 constraintName="fk_recursive_parent_many_to_many_bidirectional_recursive_children_many_to_many_bidirectional.recursive_children_many_to_many_bidirectional_id_left_bidirectional.id"
+                                 constraintName="fk_rere.recursive_children_many_to_many_bidirectional_left_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>        	
         
 
         	<addForeignKeyConstraint baseColumnNames="left_many_to_many_bidirectional_id"
                                  baseTableName="left_many_to_many_bidirectional_right_many_to_many_bidirectional"
-                                 constraintName="fk_left_many_to_many_bidirectional_right_many_to_many_bidirectional.left_many_to_many_bidirectional_id_left_bidirectional.id"
+                                 constraintName="fk_leri.right_many_to_many_bidirectional_left_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
         	<addForeignKeyConstraint baseColumnNames="right_many_to_many_bidirectional_id"
                                  baseTableName="left_many_to_many_bidirectional_right_many_to_many_bidirectional"
-                                 constraintName="fk_left_many_to_many_bidirectional_right_many_to_many_bidirectional.right_many_to_many_bidirectional_id_right_many_to_many_bidirectional.id"
+                                 constraintName="fk_leri.right_many_to_many_bidirectional_right_many_to_many_bidirectional"
                                  referencedColumnNames="id"
                                  referencedTableName="right_many_to_many_bidirectional"/>        	
         

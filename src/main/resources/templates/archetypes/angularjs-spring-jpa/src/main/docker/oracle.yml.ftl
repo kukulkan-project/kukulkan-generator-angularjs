@@ -8,5 +8,5 @@ services:
             - DBCA_TOTAL_MEMORY=1024
             - WEB_CONSOLE=true
         ports:
-            - 1580:8080	
+            - 1580:8080
             - 1521:1521

@@ -164,8 +164,8 @@ public class CrudGenerationServiceTest {
 
     /**
      * Generates a project and generates a CRUD from a Kukulkan file (3k) then
-     * computes the checksum for every generated file and compares to checksum from
-     * a base project
+     * computes the checksum for every generated file and compares to checksum
+     * from a base project
      * 
      * @throws NoSuchAlgorithmException
      * @throws IOException

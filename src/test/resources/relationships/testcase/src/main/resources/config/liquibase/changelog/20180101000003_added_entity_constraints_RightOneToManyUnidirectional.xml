@@ -9,7 +9,7 @@
     <changeSet id="20180101000003-2" author="kukulkan">
         	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
         						baseTableName="right_one_to_many_unidirectional"
-                                constraintName="fk_left_unidirectional.left_unidirectional_id_right_one_to_many_unidirectional_id"		
+                                constraintName="fk_le.left_unidirectional_right_one_to_many_unidirectional"		
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
 
