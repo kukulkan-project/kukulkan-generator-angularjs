@@ -91,6 +91,7 @@ public class CrudGenerationServiceTest {
     @BeforeClass
     public static void runOnceBeforeClass() {
         outputDir = TemporalDirectoryUtil.getTemporalPath();
+        outputDir = Paths.get("/home/roberto/Escritorio");
     }
 
     public void generationService() {
@@ -139,13 +140,15 @@ public class CrudGenerationServiceTest {
         pConf.setOutputDir(outputDir);
         pConf.setTargetDatabase(new Database(DatabaseType.SQL_MYSQL));
         pConf.setTimestamp(LocalDateTime.of(2018, 01, 01, 00, 00, 00));
-        pConf.addLayers("angular-js", "spring-rest", "spring-service", "spring-repository", "domain-core", "liquibase");
+        pConf.addLayers("angular-js", "angular-js-archetype-layer", "spring-rest", "spring-service",
+                "spring-repository", "domain-core", "liquibase");
         pConf.getLayersToProcess().add("angular-js");
         pConf.getLayersToProcess().add("spring-rest");
         pConf.getLayersToProcess().add("spring-service");
         pConf.getLayersToProcess().add("spring-repository");
         pConf.getLayersToProcess().add("domain-core");
         pConf.getLayersToProcess().add("liquibase");
+        pConf.getLayersToProcess().add("angular-js-archetype-layer");
 
         // Create GeneratorContext
         GeneratorContext genCtx = new GeneratorContext();
@@ -156,7 +159,7 @@ public class CrudGenerationServiceTest {
             generationService.process(genCtx, generator);
         });
         engineGenerator.process(genCtx);
-        Files.copy(Paths.get(domainModel3k), outputDir.resolve(idProject + "/Model.3k"),
+        Files.copy(Paths.get(domainModel3k), outputDir.resolve(idProject).resolve("Model.3k"),
                 StandardCopyOption.REPLACE_EXISTING);
         FileUtil.saveToFile(genCtx);
         compareGeneratedAgainstBaseProject();

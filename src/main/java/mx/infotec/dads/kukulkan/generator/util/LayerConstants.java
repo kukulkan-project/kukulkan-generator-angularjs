@@ -86,7 +86,7 @@ public class LayerConstants {
 
     /** The Constant ENTITY_STATE_JS. */
     public static final String ENTITY_STATE_JS = "entity.state.js.ftl";
-    
+
     /** The Constant ENTITY_HANDSONTABLE_STATE_JS. */
     public static final String ENTITY_HANDSONTABLE_STATE_JS = "entity-handsontable.state.js.ftl";
 
@@ -95,5 +95,11 @@ public class LayerConstants {
 
     /** The Constant ENTITY_DETAIL_HTML. */
     public static final String ENTITY_DETAIL_HTML = "entity-detail.html.ftl";
+
+    /**
+     * GOB.MX CONSTANTS
+     */
+
+    public static final String GOB_MX_FRONT_END_ENTITIES_LOCATION = "rest-spring-jpa/gobmxFrontEnd/entities/";
 
 }
