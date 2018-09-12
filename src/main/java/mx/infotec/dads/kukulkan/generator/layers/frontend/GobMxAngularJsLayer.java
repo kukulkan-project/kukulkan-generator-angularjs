@@ -27,6 +27,9 @@ package mx.infotec.dads.kukulkan.generator.layers.frontend;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.*;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETAIL_HTML;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HTML;
 
@@ -110,8 +113,43 @@ public class GobMxAngularJsLayer extends AbstractNavigableLayer {
         } else {
             LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
             saveFrontEndTemplate(templateService, pConf, model, dmElement,
-                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
+                    TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
         }
+    }
+    
+    /**
+     * Fill entity dialog html.
+     *
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
+     */
+    private void fillEntityDialogHtml(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
+        LOGGER.debug("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
+        saveFrontEndTemplate(templateService, pConf, model, dmElement,
+                TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
+                HTML);
+    }
+    
+    /**
+     * Fill entity dialog controller js.
+     *
+     * @param pConf
+     *            the conf
+     * @param model
+     *            the model
+     * @param dmElement
+     *            the dm element
+     */
+    private void fillEntityDialogControllerJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
+        LOGGER.debug("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION,
+                ENTITY_DIALOG_CONTROLLER_JS, false);
     }
 
     @Override

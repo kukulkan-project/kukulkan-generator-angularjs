@@ -53,7 +53,7 @@
                     <td>{{user.langKey}}</td>
                     <td>
                         <div ng-repeat="authority in user.authorities">
-                            <span class="label label-info">{{ authority }}</span>
+                            <span class="badge">{{ authority }}</span>
                         </div>
                     </td>
                     <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>

@@ -72,6 +72,7 @@ public class GobMxArchetypeLayer extends ArchetypeLayer {
         }
         generateGobMxAngularJs(writer, pConf, propertiesMap);
         writeBanner(writer, bannerService, pConf);
+        pConf.getLayers().remove(LayerNameConstants.Archetype.AngularJs.GOBMX);
     }
 
 }
