@@ -12,32 +12,23 @@
 
         vm.${entityCamelCase} = entity;
         vm.clear = clear;
-        <#if hasTimeProperties == true>
-        vm.onChangeDate = onChangeDate;
-        vm.onChangeDate();
-        </#if>
         <#if hasBlobProperties == true>
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         </#if>
         vm.save = save;
         <#if hasTimeProperties == true>
-        	<#list properties as property>
+        vm.onChangeDate = onChangeDate;
+        <#list properties as property>
         	<#if property.time == true> 
-        vm.${entityCamelCase}.${property.name} = new Date(new Date).toISOString().split("T")[0];
+        vm.${entityCamelCase}.${property.name} = new Date().toISOString().split("T")[0];
             </#if>
         	</#list>
-        </#if>
-        <#if hasTimeProperties == true>
-        function onChangeDate () {
-        	<#list properties as property>
-        	<#if property.time == true> 
-        	$('#${property.name}').datepicker({
+        function onChangeDate (elementId) {
+        	angular.element('#' + elementId).datepicker({
                  dateFormat: "yy-mm-dd",
                  changeYear: true
              }).datepicker("show");
-            </#if>
-        	</#list>
         }
         </#if>
 		<#list entity.referenceTypes as reference>

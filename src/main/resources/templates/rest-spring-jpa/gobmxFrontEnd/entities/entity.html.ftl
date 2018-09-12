@@ -1,6 +1,7 @@
 <#assign translateKey>${projectName}App.${entityCamelCase}</#assign>
 <div>
     <h2 data-translate="${translateKey}.home.title">${entityCamelCasePlural?cap_first}</h2>
+    <hr class="black"/>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">

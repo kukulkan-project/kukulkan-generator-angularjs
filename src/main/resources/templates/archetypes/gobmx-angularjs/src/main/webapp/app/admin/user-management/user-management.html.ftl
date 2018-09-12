@@ -1,6 +1,7 @@
 <div class="page">
     <div class="container-fluid">
         <h2 data-translate="userManagement.home.title">Users</h2>
+        <hr class="black"/>
         <jhi-alert></jhi-alert>
         <div class="row">
             <div class="col-md-12">

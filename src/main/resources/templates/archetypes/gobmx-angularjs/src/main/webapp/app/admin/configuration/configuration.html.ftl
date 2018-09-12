@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <h2 data-translate="configuration.title">Configuration</h2>
+    <hr class="black"/>
 
     <span data-translate="configuration.filter">Filter (by prefix)</span> <input type="text" ng-model="filter"
                                                                                  class="form-control">

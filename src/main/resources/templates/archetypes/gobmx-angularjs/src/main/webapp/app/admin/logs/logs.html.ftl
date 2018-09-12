@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="table-responsive">
         <h2 data-translate="logs.title">Logs</h2>
+        <hr class="black"/>
 
         <p data-translate="logs.nbloggers" translate-values="{total: '{{ vm.loggers.length }}'}">There are {{
             vm.loggers.length}} loggers.</p>
