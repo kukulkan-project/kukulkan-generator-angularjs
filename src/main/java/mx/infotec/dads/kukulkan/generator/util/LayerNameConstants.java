@@ -55,6 +55,8 @@ public class LayerNameConstants {
 
             /** The Constant SERVICE_NAME. */
             public static final String SERVICE_NAME = "angular-js";
+            
+            public static final String GOBMX_ANGULARJS = "gob-mx-angular-js";
 
             /**
              * Instantiates a new angular js.
@@ -233,6 +235,9 @@ public class LayerNameConstants {
 
             /** The Constant LAYER_NAME. */
             public static final String LAYER_NAME = "angular-js-archetype-layer";
+            
+            /** The Constant LAYER_NAME. */
+            public static final String GOBMX = "gob-mx-angular-js-archetype-layer";
 
             /**
              * Instantiates a new angular js.

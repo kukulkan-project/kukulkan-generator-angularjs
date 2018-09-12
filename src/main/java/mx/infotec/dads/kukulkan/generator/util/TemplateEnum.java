@@ -18,7 +18,8 @@ public enum TemplateEnum {
     COMMON("common"),
     FRONT_END_I18N_LOCATION_EN("rest-spring-jpa/frontEnd/i18n/en"),
     FRONT_END_I18N_LOCATION_ES("rest-spring-jpa/frontEnd/i18n/es"),
-    BACK_END_DATABASE_LIQUIBASE_LOCATION("rest-spring-jpa/database/liquibase");
+    BACK_END_DATABASE_LIQUIBASE_LOCATION("rest-spring-jpa/database/liquibase"),
+    GOB_MX_FRONT_END_ENTITIES_LOCATION("rest-spring-jpa/gobmxFrontEnd/entities/");
 
     private String location;
 
@@ -30,7 +31,7 @@ public enum TemplateEnum {
         return location;
     }
 
-    public Path getLocation(String ...fileName ) {
+    public Path getLocation(String... fileName) {
         return Paths.get(location, fileName);
     }
 }

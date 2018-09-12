@@ -23,7 +23,10 @@
  */
 package mx.infotec.dads.kukulkan.generator.archetype;
 
+import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +34,7 @@ import mx.infotec.dads.kukulkan.generator.archetype.layer.ArchetypeLayer;
 import mx.infotec.dads.kukulkan.generator.util.LayerNameConstants;
 import mx.infotec.dads.kukulkan.metamodel.annotation.GeneratorComponent;
 import mx.infotec.dads.kukulkan.metamodel.context.GeneratorContext;
+import mx.infotec.dads.kukulkan.metamodel.foundation.ProjectConfiguration;
 import mx.infotec.dads.kukulkan.metamodel.generator.Generator;
 
 /**
@@ -60,7 +64,10 @@ public class AngularJsArchetypeGenerator implements Generator {
 
     @Override
     public void process(GeneratorContext context) {
-        layers.forEach(layer -> layer.process(context));
+        ProjectConfiguration configuration = requiredNotEmpty(context.get(ProjectConfiguration.class));
+        layers.stream().filter(layer -> {
+            return configuration.getLayers().contains(layer.getName());
+        }).collect(Collectors.toList()).forEach(layer -> layer.process(context));
     }
 
 }

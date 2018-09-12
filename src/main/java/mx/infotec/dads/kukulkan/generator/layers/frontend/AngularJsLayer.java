@@ -99,9 +99,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     public void doBeforeProcessDataModelGroup(GeneratorContext context, Map<String, Object> model) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
         DomainModel domainModel = requiredNotEmpty(context.get(DomainModel.class));
-        fillNavBar(pConf, model, domainModel);
-        fillIdiomaGlobalEsJs(pConf, model, domainModel);
-        fillIdiomaGlobalEnJs(pConf, model, domainModel);
+        fillNavBar(pConf, domainModel);
+        fillIdiomaGlobalEsJs(templateService, pConf, model, domainModel);
+        fillIdiomaGlobalEnJs(templateService, pConf, model, domainModel);
     }
 
     /*
@@ -115,20 +115,20 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     @Override
     public void visitEntity(ProjectConfiguration pConf, Collection<Entity> dmElementCollection,
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
-        fillEntityControllerJs(pConf, propertiesMap, dmElement);
+        fillEntityControllerJs(templateService, pConf, propertiesMap, dmElement);
         fillEntityHtml(pConf, propertiesMap, dmElement);
-        fillEntitySearchServiceJs(pConf, propertiesMap, dmElement);
-        fillEntityServiceJs(pConf, propertiesMap, dmElement);
-        fillEntityStateJs(pConf, propertiesMap, dmElement);
-        fillIdiomaEsJs(pConf, propertiesMap, dmElement);
-        fillIdiomaEnJs(pConf, propertiesMap, dmElement);
+        fillEntitySearchServiceJs(templateService, pConf, propertiesMap, dmElement);
+        fillEntityServiceJs(templateService, pConf, propertiesMap, dmElement);
+        fillEntityStateJs(templateService, pConf, propertiesMap, dmElement);
+        fillIdiomaEsJs(templateService, pConf, propertiesMap, dmElement);
+        fillIdiomaEnJs(templateService, pConf, propertiesMap, dmElement);
         if (!dmElement.getFeatures().isSheetable()) {
-            fillEntityDeleteDialogControllerJs(pConf, propertiesMap, dmElement);
-            fillEntityDeleteDialogHtml(pConf, propertiesMap, dmElement);
-            fillEntityDetailControllerJs(pConf, propertiesMap, dmElement);
-            fillEntityDetailHtml(pConf, propertiesMap, dmElement);
-            fillEntityDialogControllerJs(pConf, propertiesMap, dmElement);
-            fillEntityDialogHtml(pConf, propertiesMap, dmElement);
+            fillEntityDeleteDialogControllerJs(templateService, pConf, propertiesMap, dmElement);
+            fillEntityDeleteDialogHtml(templateService, pConf, propertiesMap, dmElement);
+            fillEntityDetailControllerJs(templateService, pConf, propertiesMap, dmElement);
+            fillEntityDetailHtml(templateService, pConf, propertiesMap, dmElement);
+            fillEntityDialogControllerJs(templateService, pConf, propertiesMap, dmElement);
+            fillEntityDialogHtml(templateService, pConf, propertiesMap, dmElement);
         }
     }
 
@@ -137,16 +137,14 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *
      * @param pConf
      *            the conf
-     * @param model
-     *            the model
      * @param domainModel
      *            the domain model
      */
-    private void fillNavBar(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
+    private void fillNavBar(ProjectConfiguration pConf, DomainModel domainModel) {
         for (DomainModelGroup domainModelGroup : domainModel.getDomainModelGroup()) {
             for (Entity entity : domainModelGroup.getEntities()) {
-                writerService.addEntityMenuEntry("common/menu-entry.ftl", pConf.getOutputDir().resolve(pConf.getId()),
-                        entity);
+                writerService.addEntityMenuEntry("rest-spring-jpa/frontEnd/menu-entry.html.ftl",
+                        pConf.getOutputDir().resolve(pConf.getId()), entity);
             }
         }
     }
@@ -161,7 +159,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param domainModel
      *            the domain model
      */
-    private void fillIdiomaGlobalEnJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
+    static void fillIdiomaGlobalEnJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, DomainModel domainModel) {
 
         Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_EN.getLocation("global.json.ftl");
         Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
@@ -182,7 +181,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param domainModel
      *            the domain model
      */
-    private void fillIdiomaGlobalEsJs(ProjectConfiguration pConf, Map<String, Object> model, DomainModel domainModel) {
+    static void fillIdiomaGlobalEsJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, DomainModel domainModel) {
         Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_ES.getLocation("global.json.ftl");
         Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
         Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
@@ -202,14 +202,15 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityControllerJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         if (dmElement.getFeatures().isSheetable()) {
             LOGGER.debug("fillEntityHandsontableControllerJs {}", ENTITY_HANDSONTABLE_CONTROLLER_JS);
-            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                     ENTITY_HANDSONTABLE_CONTROLLER_JS, false);
         } else {
             LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
-            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                     ENTITY_CONTROLLER_JS, false);
         }
     }
@@ -224,10 +225,11 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillIdiomaEsJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillIdiomaEsJs(TemplateService templateService, ProjectConfiguration pConf, Map<String, Object> model,
+            Entity dmElement) {
         LOGGER.debug("fillIdiomaEsJs {}", IDIOMA_JS);
-        saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_ES, IDIOMA_JS,
-                "es");
+        saveInternationalizationTemplate(templateService, pConf, model, dmElement,
+                TemplateEnum.FRONT_END_I18N_LOCATION_ES, IDIOMA_JS, "es");
     }
 
     /**
@@ -240,10 +242,11 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillIdiomaEnJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillIdiomaEnJs(TemplateService templateService, ProjectConfiguration pConf, Map<String, Object> model,
+            Entity dmElement) {
         LOGGER.debug("fillIdiomaEnJs {}", IDIOMA_JS);
-        saveInternationalizationTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_I18N_LOCATION_EN, IDIOMA_JS,
-                "en");
+        saveInternationalizationTemplate(templateService, pConf, model, dmElement,
+                TemplateEnum.FRONT_END_I18N_LOCATION_EN, IDIOMA_JS, "en");
     }
 
     /**
@@ -256,15 +259,16 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityStateJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityStateJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         if (dmElement.getFeatures().isSheetable()) {
             LOGGER.debug("fillEntityHandsontableStateJs {}", ENTITY_HANDSONTABLE_STATE_JS);
-            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                     ENTITY_HANDSONTABLE_STATE_JS, false);
         } else {
             LOGGER.debug("fillEntityStateJs {}", ENTITY_STATE_JS);
-            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_STATE_JS,
-                    false);
+            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                    ENTITY_STATE_JS, false);
         }
     }
 
@@ -278,15 +282,16 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityServiceJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityServiceJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         if (dmElement.getFeatures().isSheetable()) {
             LOGGER.debug("fillEntityHandsontableServiceJs {}", ENTITY_HANDSONTABLE_SERVICE_JS);
-            saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                     ENTITY_HANDSONTABLE_SERVICE_JS, false);
         }
         LOGGER.debug("fillEntityServiceJs {}", ENTITY_SERVICE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION, ENTITY_SERVICE_JS,
-                false);
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                ENTITY_SERVICE_JS, false);
     }
 
     /**
@@ -299,9 +304,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntitySearchServiceJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntitySearchServiceJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntitySearchServiceJs {}", ENTITY_SEARCH_SERVICE_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_SEARCH_SERVICE_JS, false);
     }
 
@@ -318,12 +324,12 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
         if (dmElement.getFeatures().isSheetable()) {
             LOGGER.debug("fillEntityHandsontableHtml {}", ENTITY_HANDSONTABLE_HTML);
-            saveFrontEndTemplate(pConf, model, dmElement,
+            saveFrontEndTemplate(templateService, pConf, model, dmElement,
                     TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML),
                     ENTITY_HANDSONTABLE_HTML, true, HTML);
         } else {
             LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
-            saveFrontEndTemplate(pConf, model, dmElement,
+            saveFrontEndTemplate(templateService, pConf, model, dmElement,
                     TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
         }
     }
@@ -338,9 +344,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDialogHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityDialogHtml(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
                 HTML);
     }
@@ -355,9 +362,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityDialogControllerJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDialogControllerJs {}", ENTITY_DIALOG_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DIALOG_CONTROLLER_JS, false);
     }
 
@@ -371,9 +379,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDetailControllerJs(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityDetailControllerJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDetailControllerJs {}", ENTITY_DETAIL_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DETAIL_CONTROLLER_JS, false);
     }
 
@@ -387,9 +396,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDetailHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityDetailHtml(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDetailHtml {}", LayerConstants.ENTITY_DETAIL_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DETAIL_HTML), ENTITY_DETAIL_HTML, false,
                 HTML);
     }
@@ -404,9 +414,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDeleteDialogHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
+    static void fillEntityDeleteDialogHtml(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDeleteDialogHtml {}", ENTITY_DELETE_DIALOG_HTML);
-        saveFrontEndTemplate(pConf, model, dmElement,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement,
                 TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DELETE_DIALOG_HTML),
                 ENTITY_DELETE_DIALOG_HTML, false, HTML);
     }
@@ -421,10 +432,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param dmElement
      *            the dm element
      */
-    private void fillEntityDeleteDialogControllerJs(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement) {
+    static void fillEntityDeleteDialogControllerJs(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDeleteDialogControllerJs {}", ENTITY_DELETE_DIALOG_CONTROLLER_JS);
-        saveFrontEndTemplate(pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
                 ENTITY_DELETE_DIALOG_CONTROLLER_JS, false);
     }
 
@@ -444,10 +455,11 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param isPlural
      *            the is plural
      */
-    private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement,
-            TemplateEnum templateLocation, String templateName, boolean isPlural) {
-        saveFrontEndTemplate(pConf, model, dmElement, templateLocation.getLocation(templateName), templateName,
-                isPlural, JAVASCRIPT);
+    static void saveFrontEndTemplate(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement, TemplateEnum templateLocation, String templateName,
+            boolean isPlural) {
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, templateLocation.getLocation(templateName),
+                templateName, isPlural, JAVASCRIPT);
     }
 
     /**
@@ -468,8 +480,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param languageType
      *            the language type
      */
-    private void saveFrontEndTemplate(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement,
-            Path templateFilePath, String templateName, boolean isPlural, LanguageType languageType) {
+    static void saveFrontEndTemplate(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement, Path templateFilePath, String templateName, boolean isPlural,
+            LanguageType languageType) {
         String fileNamingConvention = dmElement.getHyphensFormat();
         String entityName = fileNamingConvention;
         if (isPlural) {
@@ -501,8 +514,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      * @param idiomaKey
      *            the idioma key
      */
-    private void saveInternationalizationTemplate(ProjectConfiguration pConf, Map<String, Object> model,
-            Entity dmElement, TemplateEnum templateLocation, String templateName, String idiomaKey) {
+    static void saveInternationalizationTemplate(TemplateService templateService, ProjectConfiguration pConf,
+            Map<String, Object> model, Entity dmElement, TemplateEnum templateLocation, String templateName,
+            String idiomaKey) {
         String fileNamingConvention = dmElement.getHyphensFormat();
         Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
                 fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
