@@ -9,54 +9,50 @@
     <changeSet id="20180101000001-2" author="kukulkan">
         <addForeignKeyConstraint baseColumnNames="recursive_child_one_to_one_unidirectional_id"
                                  baseTableName="left_unidirectional"
-                                 constraintName="fk_le.recursive_child_one_to_one_unidirectional_left_unidirectional"
+                                 constraintName="left_unidirectional_F1"
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
         <addForeignKeyConstraint baseColumnNames="recursive_child_many_to_one_unidirectional_id"
                                  baseTableName="left_unidirectional"
-                                 constraintName="fk_le.recursive_child_many_to_one_unidirectional_left_unidirectional"
+                                 constraintName="left_unidirectional_F2"
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
         <addForeignKeyConstraint baseColumnNames="many_to_one_unidirectional_id"
                                  baseTableName="left_unidirectional"
-                                 constraintName="fk_le.many_to_one_unidirectional_right_many_to_one_unidirectional"
+                                 constraintName="left_unidirectional_F3"
                                  referencedColumnNames="id"
                                  referencedTableName="right_many_to_one_unidirectional"/>
         <addForeignKeyConstraint baseColumnNames="one_to_one_unidirectional_id"
                                  baseTableName="left_unidirectional"
-                                 constraintName="fk_le.one_to_one_unidirectional_right_one_to_one_unidirectional"
+                                 constraintName="left_unidirectional_F4"
                                  referencedColumnNames="id"
                                  referencedTableName="right_one_to_one_unidirectional"/>
-        	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
-        						baseTableName="left_unidirectional"
-                                constraintName="fk_le.left_unidirectional_left_unidirectional"		
+        <addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
+        						 baseTableName="left_unidirectional"
+                                 constraintName="left_unidirectional_F5"		
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
 
-        	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
+        <addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
                                  baseTableName="left_unidirectional_recursive_children_many_to_many_unidirectional"
-                                 constraintName="fk_lere.recursive_children_many_to_many_unidirectional_left_unidirectional"
+                                 constraintName="left_unidirectional_F6"
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
-        	<addForeignKeyConstraint baseColumnNames="recursive_children_many_to_many_unidirectional_id"
+        <addForeignKeyConstraint baseColumnNames="recursive_children_many_to_many_unidirectional_id"
                                  baseTableName="left_unidirectional_recursive_children_many_to_many_unidirectional"
-                                 constraintName="fk_lere.recursive_children_many_to_many_unidirectional_left_unidirectional"
+                                 constraintName="left_unidirectional_F7"
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
-        
-
-        	<addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
+        <addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
                                  baseTableName="left_unidirectional_many_to_many_unidirectional"
-                                 constraintName="fk_lema.many_to_many_unidirectional_left_unidirectional"
+                                 constraintName="left_unidirectional_F8"
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
-        	<addForeignKeyConstraint baseColumnNames="many_to_many_unidirectional_id"
+        <addForeignKeyConstraint baseColumnNames="many_to_many_unidirectional_id"
                                  baseTableName="left_unidirectional_many_to_many_unidirectional"
-                                 constraintName="fk_lema.many_to_many_unidirectional_right_many_to_many_unidirectional"
+                                 constraintName="left_unidirectional_F9"
                                  referencedColumnNames="id"
                                  referencedTableName="right_many_to_many_unidirectional"/>
-        
-
 
     </changeSet>
 </databaseChangeLog>

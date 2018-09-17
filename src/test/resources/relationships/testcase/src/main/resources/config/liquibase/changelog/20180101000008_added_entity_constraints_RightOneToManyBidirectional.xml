@@ -7,9 +7,9 @@
         Added the constraints for entity RightOneToManyBidirectional.
     -->
     <changeSet id="20180101000008-2" author="kukulkan">
-        	<addForeignKeyConstraint baseColumnNames="left_one_to_many_bidirectional_id"
-        						baseTableName="right_one_to_many_bidirectional"
-                                constraintName="fk_le.left_one_to_many_bidirectional_right_one_to_many_bidirectional"
+        <addForeignKeyConstraint baseColumnNames="left_one_to_many_bidirectional_id"
+        						 baseTableName="right_one_to_many_bidirectional"
+                                 constraintName="fright_one_to_many_bidirectional_F1"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
 
