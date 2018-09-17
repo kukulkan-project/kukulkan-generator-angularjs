@@ -23,7 +23,7 @@
         		<#if association.bidirectional>
         <addForeignKeyConstraint baseColumnNames="${association.toSourcePropertyNameUnderscore}_id"
         						 baseTableName="${entity.tableName}"
-                                 constraintName="f${entity.tableName}_F${counter}"
+                                 constraintName="${entity.tableName}_F${counter}"
         		<#else>
         <addForeignKeyConstraint baseColumnNames="${association.source.underscoreName}_id"
         						 baseTableName="${entity.tableName}"

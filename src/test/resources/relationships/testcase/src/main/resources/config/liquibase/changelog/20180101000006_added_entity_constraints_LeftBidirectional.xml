@@ -29,7 +29,7 @@
                                  referencedTableName="right_one_to_one_bidirectional"/>
         <addForeignKeyConstraint baseColumnNames="recursive_parent_one_to_many_bidirectional_id"
         						 baseTableName="left_bidirectional"
-                                 constraintName="fleft_bidirectional_F5"
+                                 constraintName="left_bidirectional_F5"
                                  referencedColumnNames="id"
                                  referencedTableName="left_bidirectional"/>
 
