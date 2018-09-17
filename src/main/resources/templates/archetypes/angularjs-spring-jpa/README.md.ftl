@@ -8,6 +8,10 @@ Before you can build this project, you must install and configure the following 
    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
 2. [Yarn][]: We use Yarn to manage Node dependencies.
    Depending on your system, you can install Yarn either from source or as a pre-packaged bundle.
+<#if project.targetDatabase.databaseType.name() == "SQL_ORACLE">
+3. [Oracle JDBC](https://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html): The connector to database. 
+   Download it from the link and install it with `mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle.jdbc -DartifactId=ojdbc7 -Dversion=12.1.0.2 -Dpackaging=jar`
+</#if>
 
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json).
