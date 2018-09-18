@@ -19,7 +19,7 @@
     -->
     <changeSet id="${entity.timestampString}-1" author="${author}">
         <createTable tableName="${tableName}">
-            <column name="${entity.primaryKey.physicalName.lowerCamelCase}" type="bigint" autoIncrement="${r"${autoIncrement}"}">
+            <column name="${entity.primaryKey.physicalName.snakeCasePlural}" type="bigint" autoIncrement="${r"${autoIncrement}"}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         <#list properties as property>
@@ -44,11 +44,11 @@
 		
 		<#list ownerAssociations as association>
         	<#if association.type.name() == "ONE_TO_ONE">
-        	<column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
+        	<column name="${association.toTargetReferencePhysicalName}" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
             <#elseif association.type.name() == "MANY_TO_ONE">
-            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
+            <column name="${association.toTargetReferencePhysicalName}" type="bigint">
                 <constraints <#if association.type.name() == "ONE_TO_ONE">unique="true" </#if>nullable="true" />
             </column>
         	</#if>        	
@@ -56,7 +56,7 @@
 		</#list>
 		<#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-            <column name="${association.toSourcePropertyNameUnderscore}_id" type="bigint">
+            <column name="${association.toSourceReferencePhysicalName}" type="bigint">
                 <constraints nullable="true" />
             </column>
         	</#if>
@@ -66,24 +66,24 @@
         	<#if association.type.name() == "MANY_TO_MANY">
         	<#if association.bidirectional>
         <createTable tableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}">
-        	<column name="${association.toSourcePropertyNameUnderscore}_id" type="bigint">
+        	<column name="${association.toSourceReferencePhysicalName}" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
+            <column name="${association.toTargetReferencePhysicalName}" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey columnNames="${association.toSourcePropertyNameUnderscore}_id, ${association.toTargetPropertyNameUnderscore}_id" tableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"/>
+        <addPrimaryKey columnNames="${association.toSourceReferencePhysicalName}, ${association.toTargetReferencePhysicalName}" tableName="${association.toSourcePropertyNameUnderscore}_${association.toTargetPropertyNameUnderscore}"/>
         		<#else>
         <createTable tableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}">
-        	<column name="${association.source.underscoreName}_id" type="bigint">
+        	<column name="${association.source.referencePhysicalName}" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="${association.toTargetPropertyNameUnderscore}_id" type="bigint">
+            <column name="${association.toTargetReferencePhysicalName}" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey columnNames="${association.source.underscoreName}_id, ${association.toTargetPropertyNameUnderscore}_id" tableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"/>
+        <addPrimaryKey columnNames="${association.source.referencePhysicalName}, ${association.toTargetReferencePhysicalName}" tableName="${association.source.tableName}_${association.toTargetPropertyNameUnderscore}"/>
         	</#if>
         	</#if>
 		</#list>

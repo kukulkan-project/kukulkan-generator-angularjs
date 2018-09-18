@@ -23,7 +23,7 @@
     	<#elseif primaryKey.generationType.name() == "AUTO">
     @GeneratedValue(strategy = GenerationType.AUTO)
     	</#if>
-    @Column(name = "${entity.primaryKey.physicalName.lowerCamelCase}", unique = true, nullable = false)
+    @Column(name = "${entity.primaryKey.physicalName.snakeCasePlural}", unique = true, nullable = false)
     </#if>
     private ${primaryKey.type} ${primaryKey.name};
     
