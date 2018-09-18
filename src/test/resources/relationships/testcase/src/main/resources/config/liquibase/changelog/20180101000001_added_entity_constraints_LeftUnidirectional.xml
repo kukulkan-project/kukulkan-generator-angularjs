@@ -29,7 +29,7 @@
                                  referencedTableName="right_one_to_one_unidirectional"/>
         <addForeignKeyConstraint baseColumnNames="left_unidirectional_id"
         						 baseTableName="left_unidirectional"
-                                 constraintName="left_unidirectional_F5"		
+                                 constraintName="left_unidirectional_F5"
                                  referencedColumnNames="id"
                                  referencedTableName="left_unidirectional"/>
 

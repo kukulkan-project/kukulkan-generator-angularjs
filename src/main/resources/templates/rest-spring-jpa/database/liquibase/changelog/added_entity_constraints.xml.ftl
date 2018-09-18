@@ -20,15 +20,9 @@
 		</#list>
         <#list notOwnerAssociations as association>
         	<#if association.type.name() == "ONE_TO_MANY">
-        		<#if association.bidirectional>
         <addForeignKeyConstraint baseColumnNames="${association.toSourceReferencePhysicalName}"
         						 baseTableName="${entity.tableName}"
                                  constraintName="${entity.tableName}_F${counter}"
-        		<#else>
-        <addForeignKeyConstraint baseColumnNames="${association.source.referencePhysicalName}"
-        						 baseTableName="${entity.tableName}"
-                                 constraintName="${entity.tableName}_F${counter}"		
-        		</#if>
                                  referencedColumnNames="${association.source.primaryKey.physicalName.snakeCasePlural}"
                                  referencedTableName="${association.source.tableName}"/>
             	<#assign counter++>
