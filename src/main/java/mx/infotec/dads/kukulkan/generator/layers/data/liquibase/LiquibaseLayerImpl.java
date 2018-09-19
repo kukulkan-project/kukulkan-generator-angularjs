@@ -75,9 +75,9 @@ public class LiquibaseLayerImpl extends LiquibaseLayer {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
         DomainModel domainModel = requiredNotEmpty(context.get(DomainModel.class));
         Path templateFilePath = TemplateEnum.BACK_END_DATABASE_LIQUIBASE_LOCATION.getLocation("master.xml.ftl");
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.LIQUIBASE_INDEX.getPath(), "master.xml");
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.LIQUIBASE_INDEX.getPath(), "master.xml");
+        Path relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.getPath(), "master.xml");
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), BasePathEnum.LIQUIBASE_INDEX.getPath(),
+                "master.xml");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.XML);
         templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
@@ -88,26 +88,24 @@ public class LiquibaseLayerImpl extends LiquibaseLayer {
             Map<String, Object> propertiesMap, String dmgName, Entity dmElement, String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END_DATABASE_LIQUIBASE_LOCATION.getLocation("changelog",
                 "added_entity.xml.ftl");
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
+        Path relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
                 FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_" + dmElement.getName()
                         + ".xml");
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
-                FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_" + dmElement.getName()
-                        + ".xml");
+        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), BasePathEnum.LIQUIBASE_INDEX.getPath(),
+                "changelog", FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_"
+                        + dmElement.getName() + ".xml");
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.XML);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
         if (dmElement.isHasEntitiesReferences()) {
             templateFilePath = TemplateEnum.BACK_END_DATABASE_LIQUIBASE_LOCATION.getLocation("changelog",
                     "added_entity_constraints.xml.ftl");
-            relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
+            relativeFilePath = Paths.get(BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
                     FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_constraints_"
                             + dmElement.getName() + ".xml");
-            realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                    BasePathEnum.LIQUIBASE_INDEX.getPath(), "changelog",
-                    FileUtil.formatToDateTimeJournal(dmElement.getTimestamp()) + "_added_entity_constraints_"
-                            + dmElement.getName() + ".xml");
+            realFilePath = Paths.get(pConf.getOutputDir().toString(), BasePathEnum.LIQUIBASE_INDEX.getPath(),
+                    "changelog", FileUtil.formatToDateTimeJournal(dmElement.getTimestamp())
+                            + "_added_entity_constraints_" + dmElement.getName() + ".xml");
             modelContext = EntitiesFactory.createModelContext(propertiesMap, realFilePath, relativeFilePath,
                     templateFilePath, LanguageType.XML);
             templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);

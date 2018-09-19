@@ -89,7 +89,7 @@ public class ResourceLayer extends AbstractNavigableLayer {
         propertiesMap.put(PACKAGE_SIMPLE_FORMAT_PROPERTY,
                 formatToPackageStatement(true, basePackage, webLayerDotFormat));
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("restResource.ftl");
-        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, webLayerSlashFormat, createRestResourceName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
                 pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);

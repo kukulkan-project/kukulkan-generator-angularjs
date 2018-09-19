@@ -143,8 +143,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     private void fillNavBar(ProjectConfiguration pConf, DomainModel domainModel) {
         for (DomainModelGroup domainModelGroup : domainModel.getDomainModelGroup()) {
             for (Entity entity : domainModelGroup.getEntities()) {
-                writerService.addEntityMenuEntry("rest-spring-jpa/frontEnd/menu-entry.html.ftl",
-                        pConf.getOutputDir().resolve(pConf.getId()), entity);
+                writerService.addEntityMenuEntry("rest-spring-jpa/frontEnd/menu-entry.html.ftl", pConf.getOutputDir(),
+                        entity);
             }
         }
     }
@@ -163,9 +163,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
             Map<String, Object> model, DomainModel domainModel) {
 
         Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_EN.getLocation("global.json.ftl");
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
+        Path relativeFilePath = Paths.get(BasePathEnum.WEB_APP_I18N.getPath(), "en/global.json");
+        Path realFilePath = pConf.getOutputDir().resolve(BasePathEnum.WEB_APP_I18N.getPath()).resolve("en/global.json");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.JSON);
         templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
@@ -184,9 +183,8 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     static void fillIdiomaGlobalEsJs(TemplateService templateService, ProjectConfiguration pConf,
             Map<String, Object> model, DomainModel domainModel) {
         Path templateFilePath = TemplateEnum.FRONT_END_I18N_LOCATION_ES.getLocation("global.json.ftl");
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
+        Path relativeFilePath = Paths.get(BasePathEnum.WEB_APP_I18N.getPath(), "es/global.json");
+        Path realFilePath = pConf.getOutputDir().resolve(BasePathEnum.WEB_APP_I18N.getPath()).resolve("es/global.json");
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
                 templateFilePath, LanguageType.HTML);
         templateService.createGeneratedElement(modelContext).ifPresent(domainModel::addGeneratedElement);
@@ -488,11 +486,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         if (isPlural) {
             entityName = dmElement.getHyphensPluralFormat();
         }
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_ENTITIES.getPath(), fileNamingConvention,
+        Path relativeFilePath = Paths.get(BasePathEnum.WEB_APP_ENTITIES.getPath(), fileNamingConvention,
                 entityName + TemplateFormatter.formatNameTemplate(templateName));
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.WEB_APP_ENTITIES.getPath(), fileNamingConvention,
-                entityName + TemplateFormatter.formatNameTemplate(templateName));
+        Path realFilePath = pConf.getOutputDir().resolve(BasePathEnum.WEB_APP_ENTITIES.getPath())
+                .resolve(fileNamingConvention).resolve(entityName + TemplateFormatter.formatNameTemplate(templateName));
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
                 templateFilePath, languageType);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);
@@ -518,11 +515,10 @@ public class AngularJsLayer extends AbstractNavigableLayer {
             Map<String, Object> model, Entity dmElement, TemplateEnum templateLocation, String templateName,
             String idiomaKey) {
         String fileNamingConvention = dmElement.getHyphensFormat();
-        Path relativeFilePath = Paths.get(pConf.getId(), BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
-                fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
-        Path realFilePath = Paths.get(pConf.getOutputDir().toString(), pConf.getId(),
-                BasePathEnum.WEB_APP_I18N.getPath(), idiomaKey,
-                fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
+        Path relativeFilePath = Paths.get(BasePathEnum.WEB_APP_I18N.getPath()).resolve(idiomaKey)
+                .resolve(fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
+        Path realFilePath = pConf.getOutputDir().resolve(BasePathEnum.WEB_APP_I18N.getPath()).resolve(idiomaKey)
+                .resolve(fileNamingConvention + TemplateFormatter.formatNameTemplate(templateName));
         ModelContext modelContext = EntitiesFactory.createModelContext(model, realFilePath, relativeFilePath,
                 templateLocation.getLocation(templateName), LanguageType.JSON);
         templateService.createGeneratedElement(modelContext).ifPresent(dmElement::addGeneratedElement);

@@ -107,7 +107,7 @@ public class BusinessLayer extends AbstractNavigableLayer {
             String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("serviceImpl.ftl");
         String serviceImplPath = Paths.get(SERVICE_LAYER_NAME, SERVICE_IMPLEMENTS_LAYER_NAME).toString();
-        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, serviceImplPath, createServiceImplName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
                 pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
@@ -131,7 +131,7 @@ public class BusinessLayer extends AbstractNavigableLayer {
     private void fillServiceModel(ProjectConfiguration pConf, Map<String, Object> propertiesMap, Entity dmElement,
             String basePackage) {
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("service.ftl");
-        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, NameConventions.SERVICE_LAYER_NAME, createServiceName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
                 pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);

@@ -114,7 +114,7 @@ public class DomainLayer extends AbstractNavigableLayer {
             template = "model.ftl";
         }
         Path templateFilePath = TemplateEnum.COMMON.getLocation(template);
-        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, NameConventions.DOMAIN_LAYER_NAME, EntitiesFactory.createDomainName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(model, pathPair.getRealPath(),
                 pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);
@@ -139,7 +139,7 @@ public class DomainLayer extends AbstractNavigableLayer {
             Entity dmElement) {
         if (dmElement.getPrimaryKey().isComposed()) {
             Path templateFilePath = TemplateEnum.COMMON.getLocation("primaryKey.ftl");
-            PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(),
+            PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(),
                     BasePathEnum.SRC_MAIN_JAVA, basePackage, NameConventions.DOMAIN_LAYER_NAME,
                     EntitiesFactory.createPrimaryKeyName(dmElement.getPrimaryKey().getType()));
             ModelContext modelContext = EntitiesFactory.createModelContext(model, pathPair.getRealPath(),
@@ -149,7 +149,7 @@ public class DomainLayer extends AbstractNavigableLayer {
     }
 
     private void addKukulkanTablesMavenDependency(ProjectConfiguration pConf) {
-        Path projectDir = pConf.getOutputDir().resolve(pConf.getId());
+        Path projectDir = pConf.getOutputDir();
         writerService.addMavenDependency("rest-spring-jpa/backEnd/extra-dependencies/kukulkan-tables-maven-dep.ftl",
                 projectDir);
     }

@@ -84,7 +84,7 @@ public class DataAccessLayer extends AbstractNavigableLayer {
         LOGGER.debug("repositoryLayerTask for domain {}", dmgName);
         propertiesMap.put(PACKAGE_PROPERTY, formatToPackageStatement(basePackage, NameConventions.DAO_LAYER_NAME));
         Path templateFilePath = TemplateEnum.BACK_END.getLocation("repository.ftl");
-        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), pConf.getId(), BasePathEnum.SRC_MAIN_JAVA,
+        PathPair pathPair = FileUtil.buildRealFilePath(pConf.getOutputDir(), BasePathEnum.SRC_MAIN_JAVA,
                 basePackage, NameConventions.DAO_LAYER_NAME, EntitiesFactory.createRepositoryName(dmElement.getName()));
         ModelContext modelContext = EntitiesFactory.createModelContext(propertiesMap, pathPair.getRealPath(),
                 pathPair.getRelativePath(), templateFilePath, LanguageType.JAVA);

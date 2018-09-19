@@ -91,6 +91,7 @@ public class CrudGenerationServiceTest {
     @BeforeClass
     public static void runOnceBeforeClass() {
         outputDir = TemporalDirectoryUtil.getTemporalPath();
+        outputDir = Paths.get("/home/roberto/Escritorio").resolve(idProject);
     }
 
     public void generationService() {
@@ -158,7 +159,7 @@ public class CrudGenerationServiceTest {
             generationService.process(genCtx, generator);
         });
         engineGenerator.process(genCtx);
-        Files.copy(Paths.get(domainModel3k), outputDir.resolve(idProject).resolve("Model.3k"),
+        Files.copy(Paths.get(domainModel3k), outputDir.resolve("Model.3k"),
                 StandardCopyOption.REPLACE_EXISTING);
         FileUtil.saveToFile(genCtx);
         compareGeneratedAgainstBaseProject();
@@ -178,7 +179,7 @@ public class CrudGenerationServiceTest {
             throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         Map<String, String> hashesBase = computeHashesMap(Paths.get(baseProject));
         // writeCsvHashes(hashesBase, csvHashesBaseProject);
-        Map<String, String> hashesGenerated = computeHashesMap(outputDir.resolve(idProject));
+        Map<String, String> hashesGenerated = computeHashesMap(outputDir);
 
         Set<String> keySetBase = hashesBase.keySet();
         Set<String> keySetGenerated = hashesBase.keySet();

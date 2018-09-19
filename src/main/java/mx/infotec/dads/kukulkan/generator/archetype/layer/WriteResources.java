@@ -47,7 +47,7 @@ public class WriteResources {
     public static void generateGobMxAngularJs(WriterService writer, ProjectConfiguration pConf, Object model) {
         final Function<String, String> pathBuilder = 
                 template -> template
-                .replace(GOBMX_ANGULAR_JS_TEMPLATE, "${project.id}/")
+                .replace(GOBMX_ANGULAR_JS_TEMPLATE, "")
                 .replace(".ftl", "");
                 
         Path path = pConf.getOutputDir();
@@ -270,7 +270,7 @@ public class WriteResources {
     public static void generateAngularJs(WriterService writer, ProjectConfiguration pConf, Object model) {
         final Function<String, String> pathBuilderAngularJs = 
                 template -> template
-                .replace(ANGULAR_JS_TEMPLATE, "${project.id}/")
+                .replace(ANGULAR_JS_TEMPLATE, "")
                 .replace(".ftl", "");
                 
         Path path = pConf.getOutputDir();
@@ -490,7 +490,7 @@ public class WriteResources {
     public static void generateJpaResources(WriterService writer, ProjectConfiguration pConf, Object model) {
         final Function<String, String> pathBuilderJpa = 
                 template -> template
-                .replace(ANGULAR_SPRING_JPA_TEMPLATE, "${project.id}/")
+                .replace(ANGULAR_SPRING_JPA_TEMPLATE, "")
                 .replace(".ftl", "")
                 .replace("/package/", "/" + pConf.getPackaging().replaceAll("\\.", "/") + "/")
                 .replace("Kukulkan", "${project.id?cap_first}");
@@ -642,7 +642,7 @@ public class WriteResources {
     public static void generateMongo(WriterService writer, ProjectConfiguration pConf, Object model) {
         final Function<String, String> pathBuilderMongo = 
                 template -> template
-                .replace(ANGULAR_SPRING_MONGO_TEMPLATE, "${project.id}/")
+                .replace(ANGULAR_SPRING_MONGO_TEMPLATE, "")
                 .replace(".ftl", "")
                 .replace("/package/", "/" + pConf.getPackaging().replaceAll("\\.", "/") + "/")
                 .replace("Kukulkan", "${project.id?cap_first}");
@@ -786,11 +786,11 @@ public class WriteResources {
         Optional<String> generateBanner = bannerService.generateBanner(pConf.getId());
 
         if (generateBanner.isPresent()) {
-            Path toSave = pConf.getOutputDir().resolve(pConf.getId()).resolve(bannerPath);
+            Path toSave = pConf.getOutputDir().resolve(bannerPath);
             writer.save(toSave, generateBanner.get());
 
         } else {
-            writer.copy("banner.txt", pConf.getOutputDir().resolve(pConf.getId()), bannerPath);
+            writer.copy("banner.txt", pConf.getOutputDir(), bannerPath);
         }
     }
 }

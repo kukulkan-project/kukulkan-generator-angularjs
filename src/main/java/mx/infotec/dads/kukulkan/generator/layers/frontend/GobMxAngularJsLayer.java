@@ -78,7 +78,7 @@ public class GobMxAngularJsLayer extends AbstractNavigableLayer {
         for (DomainModelGroup domainModelGroup : domainModel.getDomainModelGroup()) {
             for (Entity entity : domainModelGroup.getEntities()) {
                 writerService.addEntityMenuEntry("rest-spring-jpa/gobmxFrontEnd/menu-entry.html.ftl",
-                        pConf.getOutputDir().resolve(pConf.getId()), entity);
+                        pConf.getOutputDir(), entity);
             }
         }
     }
