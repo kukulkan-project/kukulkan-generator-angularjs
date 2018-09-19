@@ -90,8 +90,7 @@ public class CrudGenerationServiceTest {
 
     @BeforeClass
     public static void runOnceBeforeClass() {
-        outputDir = TemporalDirectoryUtil.getTemporalPath();
-        outputDir = Paths.get("/home/roberto/Escritorio").resolve(idProject);
+        outputDir = TemporalDirectoryUtil.getTemporalPath().resolve(idProject);
     }
 
     public void generationService() {
@@ -159,8 +158,7 @@ public class CrudGenerationServiceTest {
             generationService.process(genCtx, generator);
         });
         engineGenerator.process(genCtx);
-        Files.copy(Paths.get(domainModel3k), outputDir.resolve("Model.3k"),
-                StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get(domainModel3k), outputDir.resolve("Model.3k"), StandardCopyOption.REPLACE_EXISTING);
         FileUtil.saveToFile(genCtx);
         compareGeneratedAgainstBaseProject();
     }
