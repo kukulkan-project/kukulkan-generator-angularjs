@@ -51,8 +51,8 @@ public class LayerConstants {
     /** The Constant ENTITY_CONTROLLER_JS. */
     public static final String ENTITY_CONTROLLER_JS = "entity.controller.js.ftl";
 
-    /** The Constant ENTITY_HANDSONTABLE_CONTROLLER_JS. */
-    public static final String ENTITY_HANDSONTABLE_CONTROLLER_JS = "entity-handsontable.controller.js.ftl";
+    /** The Constant ENTITY_SHEET_CONTROLLER_JS. */
+    public static final String ENTITY_SHEET_CONTROLLER_JS = "entity-sheet.controller.js.ftl";
 
     /** The Constant ENTITY_DELETE_DIALOG_CONTROLLER_JS. */
     public static final String ENTITY_DELETE_DIALOG_CONTROLLER_JS = "entity-delete-dialog.controller.js.ftl";
@@ -72,8 +72,8 @@ public class LayerConstants {
     /** The Constant ENTITY_HTML. */
     public static final String ENTITY_HTML = "entity.html.ftl";
 
-    /** The Constant ENTITY__HANDSONTABLE_HTML. */
-    public static final String ENTITY_HANDSONTABLE_HTML = "entity-handsontable.html.ftl";
+    /** The Constant ENTITY_SHEET_HTML. */
+    public static final String ENTITY_SHEET_HTML = "entity-sheet.html.ftl";
 
     /** The Constant ENTITY_SEARCH_SERVICE_JS. */
     public static final String ENTITY_SEARCH_SERVICE_JS = "entity.search.service.js.ftl";
@@ -81,14 +81,8 @@ public class LayerConstants {
     /** The Constant ENTITY_SERVICE_JS. */
     public static final String ENTITY_SERVICE_JS = "entity.service.js.ftl";
 
-    /** The Constant ENTITY_HANDSONTABLE_SERVICE_JS. */
-    public static final String ENTITY_HANDSONTABLE_SERVICE_JS = "entity-handsontable.service.js.ftl";
-
     /** The Constant ENTITY_STATE_JS. */
     public static final String ENTITY_STATE_JS = "entity.state.js.ftl";
-
-    /** The Constant ENTITY_HANDSONTABLE_STATE_JS. */
-    public static final String ENTITY_HANDSONTABLE_STATE_JS = "entity-handsontable.state.js.ftl";
 
     /** The Constant IDIOMA_JS. */
     public static final String IDIOMA_JS = "entity.json.ftl";

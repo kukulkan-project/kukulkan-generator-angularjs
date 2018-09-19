@@ -31,7 +31,7 @@
     "swagger-ui": "2.1.5",
     "rdash-ui": "^1.0.1",
     "components-font-awesome": "^5.0.6",
-    "ngHandsontable": "^0.13.0"
+    "ngHandsontable": "git://github.com/robertovillarejo/ngHandsontable.git#develop"
   },
   "devDependencies": {
     "angular-mocks": "1.5.8"

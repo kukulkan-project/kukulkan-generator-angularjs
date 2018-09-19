@@ -67,6 +67,20 @@
             <#else>
             'update': { method:'PUT' }
             </#if>
+            <#if entity.features.sheetable>
+            'download': {
+                method: 'GET',
+                url: 'api/${entityCamelCasePlural}/workbook',
+                responseType: 'blob',
+                transformResponse: function (data) {
+                    return {
+                        blob: new Blob([data], {
+                            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        })
+                    }
+                }
+            }
+            </#if>
         });
     }
 })();
