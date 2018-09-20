@@ -24,14 +24,25 @@
 
 package mx.infotec.dads.kukulkan.generator.layers.frontend;
 
-import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
-import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
-import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.*;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityControllerJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityDeleteDialogControllerJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityDeleteDialogHtml;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityDetailControllerJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityDetailHtml;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntitySearchServiceJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityServiceJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillEntityStateJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillIdiomaEnJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillIdiomaEsJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillIdiomaGlobalEnJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.fillIdiomaGlobalEsJs;
+import static mx.infotec.dads.kukulkan.generator.layers.frontend.AngularJsLayer.saveFrontEndTemplate;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETAIL_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_HTML;
-import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HANDSONTABLE_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HTML;
+import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
+import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
 import java.util.Collection;
 import java.util.Map;
@@ -105,18 +116,11 @@ public class GobMxAngularJsLayer extends AbstractNavigableLayer {
 
     private void fillEntityHtml(TemplateService templateService, ProjectConfiguration pConf, Map<String, Object> model,
             Entity dmElement) {
-        if (dmElement.getFeatures().isSheetable()) {
-            LOGGER.debug("fillEntityHandsontableHtml {}", ENTITY_HANDSONTABLE_HTML);
-            saveFrontEndTemplate(templateService, pConf, model, dmElement,
-                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HANDSONTABLE_HTML),
-                    ENTITY_HANDSONTABLE_HTML, true, HTML);
-        } else {
-            LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
-            saveFrontEndTemplate(templateService, pConf, model, dmElement,
-                    TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
-        }
+        LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
+        saveFrontEndTemplate(templateService, pConf, model, dmElement,
+                TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
     }
-    
+
     /**
      * Fill entity dialog html.
      *
@@ -131,10 +135,10 @@ public class GobMxAngularJsLayer extends AbstractNavigableLayer {
             Map<String, Object> model, Entity dmElement) {
         LOGGER.debug("fillEntityDialogHtml {}", ENTITY_DETAIL_HTML);
         saveFrontEndTemplate(templateService, pConf, model, dmElement,
-                TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML, false,
-                HTML);
+                TemplateEnum.GOB_MX_FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_DIALOG_HTML), ENTITY_DIALOG_HTML,
+                false, HTML);
     }
-    
+
     /**
      * Fill entity dialog controller js.
      *

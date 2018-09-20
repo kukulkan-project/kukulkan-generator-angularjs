@@ -31,6 +31,9 @@ import io.swagger.annotations.ApiParam;
 <#if entity.features.sheetable>
 import mx.infotec.dads.kukulkan.tables.handsontable.Handsontable;
 import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.springframework.data.domain.Sort;
 </#if>
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -184,19 +187,21 @@ public class ${entity.name}Resource {
     
     <#if entity.features.sheetable>
     /**
-     * GET /${entityCamelCasePlural}/handsontable : recupera una Handsontable de ${entityCamelCasePlural}.
-     *
-     * @param pageable información de paginación
-     * @return El objeto ResponseEntity con estado de 200 (OK) y la Handsontable de
-     *         ${entityCamelCasePlural} en el cuerpo del mensaje
+     * GET /${entityCamelCasePlural}/workbook : recupera un workbook de ${entityCamelCasePlural}.
+     * 
+     * @return Un archivo workbook con extensión xlsx de ${entityCamelCasePlural}.
+     * @throws MalformedURLException
      */
-    @GetMapping("/${entityCamelCasePlural}/sheet")
+    @GetMapping(produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", path = "/${entityCamelCasePlural}/workbook")
     @Timed
-    public ResponseEntity<Handsontable<${entity.name}>> get${entity.name}Handsontable(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a Handsontable of ${entityCamelCasePlural}");
-        HandsontableSlice<${entity.name}> table = service.getHandsontable(pageable);
-        HttpHeaders headers = PaginationUtil.generateSliceHttpHeaders(table);
-        return new ResponseEntity<>(table, headers, HttpStatus.OK);
+    public ResponseEntity<StreamingResponseBody> get${entityCamelCase}Workbook(@ApiParam Sort sort) {
+        log.debug("REST request to get ${entityCamelCase} Workbook");
+        SXSSFWorkbook wb = service.getWorkbook(sort);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "${entityCamelCasePlural}.xlsx" + "\"")
+                .body((os) -> {
+                    wb.write(os);
+                });
     }
     </#if>
     

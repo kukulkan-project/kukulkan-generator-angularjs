@@ -89,8 +89,7 @@ public class RightOneToOneUnidirectionalServiceImpl implements RightOneToOneUnid
     @Override
     @Transactional(readOnly = true)
     public Page<RightOneToOneUnidirectional> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of RightOneToOneUnidirectional ");
+        log.debug("Request to search for a page of RightOneToOneUnidirectional");
         return repository.findAll(pageable);
     }
-
 }

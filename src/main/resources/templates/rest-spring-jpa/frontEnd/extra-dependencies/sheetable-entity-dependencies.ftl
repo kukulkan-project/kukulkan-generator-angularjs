@@ -1,0 +1,2 @@
+            'ngHandsontable',
+            'ngFileSaver'

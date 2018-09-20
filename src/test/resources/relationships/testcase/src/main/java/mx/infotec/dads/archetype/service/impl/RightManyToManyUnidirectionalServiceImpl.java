@@ -89,8 +89,7 @@ public class RightManyToManyUnidirectionalServiceImpl implements RightManyToMany
     @Override
     @Transactional(readOnly = true)
     public Page<RightManyToManyUnidirectional> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of RightManyToManyUnidirectional ");
+        log.debug("Request to search for a page of RightManyToManyUnidirectional");
         return repository.findAll(pageable);
     }
-
 }

@@ -89,8 +89,7 @@ public class LeftUnidirectionalServiceImpl implements LeftUnidirectionalService 
     @Override
     @Transactional(readOnly = true)
     public Page<LeftUnidirectional> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of LeftUnidirectional ");
+        log.debug("Request to search for a page of LeftUnidirectional");
         return repository.findAll(pageable);
     }
-
 }

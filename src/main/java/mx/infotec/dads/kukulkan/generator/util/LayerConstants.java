@@ -51,9 +51,6 @@ public class LayerConstants {
     /** The Constant ENTITY_CONTROLLER_JS. */
     public static final String ENTITY_CONTROLLER_JS = "entity.controller.js.ftl";
 
-    /** The Constant ENTITY_SHEET_CONTROLLER_JS. */
-    public static final String ENTITY_SHEET_CONTROLLER_JS = "entity-sheet.controller.js.ftl";
-
     /** The Constant ENTITY_DELETE_DIALOG_CONTROLLER_JS. */
     public static final String ENTITY_DELETE_DIALOG_CONTROLLER_JS = "entity-delete-dialog.controller.js.ftl";
 
@@ -71,9 +68,6 @@ public class LayerConstants {
 
     /** The Constant ENTITY_HTML. */
     public static final String ENTITY_HTML = "entity.html.ftl";
-
-    /** The Constant ENTITY_SHEET_HTML. */
-    public static final String ENTITY_SHEET_HTML = "entity-sheet.html.ftl";
 
     /** The Constant ENTITY_SEARCH_SERVICE_JS. */
     public static final String ENTITY_SEARCH_SERVICE_JS = "entity.search.service.js.ftl";

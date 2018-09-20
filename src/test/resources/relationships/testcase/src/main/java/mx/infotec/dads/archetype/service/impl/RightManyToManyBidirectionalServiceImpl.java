@@ -89,8 +89,7 @@ public class RightManyToManyBidirectionalServiceImpl implements RightManyToManyB
     @Override
     @Transactional(readOnly = true)
     public Page<RightManyToManyBidirectional> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of RightManyToManyBidirectional ");
+        log.debug("Request to search for a page of RightManyToManyBidirectional");
         return repository.findAll(pageable);
     }
-
 }

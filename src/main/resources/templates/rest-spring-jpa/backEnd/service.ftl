@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 ${package}
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-<#if entity.features.sheetable>import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;</#if>
+<#if entity.features.sheetable>
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.springframework.data.domain.Sort;
+</#if>
 ${importModel}
 <#if importPrimaryKey??>
 ${importPrimaryKey}
@@ -96,10 +98,10 @@ public interface ${entity.name}Service {
     
     <#if entity.features.sheetable>
  	/**
-     * Regresa una HandsontableSlice de ${entity.name}
-     * @param pageable la información de paginación
-     * @return HandsontableSlice de todas las entidades
+     * Regresa un Workbook que contienen todos los registros de ${entity.name}
+     * 
+     * @return SXSSFWorkbook
      */
-    HandsontableSlice<${entity.name}> getHandsontable(Pageable pageable);
+    SXSSFWorkbook getWorkbook(Sort sort);
  	</#if>
 }

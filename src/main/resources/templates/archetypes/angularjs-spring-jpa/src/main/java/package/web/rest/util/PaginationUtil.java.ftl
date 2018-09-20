@@ -20,6 +20,7 @@ public final class PaginationUtil {
     public static HttpHeaders generatePaginationHttpHeaders(Page page, String baseUrl) {
 
         HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Has-Next-Page", "" + page.hasNext());
         headers.add("X-Total-Count", Long.toString(page.getTotalElements()));
         String link = "";
         if ((page.getNumber() + 1) < page.getTotalPages()) {

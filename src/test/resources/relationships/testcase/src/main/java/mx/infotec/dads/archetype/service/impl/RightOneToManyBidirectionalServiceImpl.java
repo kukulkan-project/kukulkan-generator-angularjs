@@ -89,8 +89,7 @@ public class RightOneToManyBidirectionalServiceImpl implements RightOneToManyBid
     @Override
     @Transactional(readOnly = true)
     public Page<RightOneToManyBidirectional> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of RightOneToManyBidirectional ");
+        log.debug("Request to search for a page of RightOneToManyBidirectional");
         return repository.findAll(pageable);
     }
-
 }

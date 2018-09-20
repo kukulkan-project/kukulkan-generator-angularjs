@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 package mx.infotec.dads.archetype.service;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import mx.infotec.dads.archetype.domain.LeftBidirectional;
 
 /**

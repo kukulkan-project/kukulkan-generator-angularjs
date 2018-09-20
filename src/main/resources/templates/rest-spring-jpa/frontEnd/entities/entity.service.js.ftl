@@ -65,9 +65,7 @@
                 }
             }
             <#else>
-            'update': { method:'PUT' }
-            </#if>
-            <#if entity.features.sheetable>
+            'update': { method:'PUT' }</#if><#if entity.features.sheetable>,
             'download': {
                 method: 'GET',
                 url: 'api/${entityCamelCasePlural}/workbook',

@@ -89,8 +89,7 @@ public class LeftBidirectionalServiceImpl implements LeftBidirectionalService {
     @Override
     @Transactional(readOnly = true)
     public Page<LeftBidirectional> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of LeftBidirectional ");
+        log.debug("Request to search for a page of LeftBidirectional");
         return repository.findAll(pageable);
     }
-
 }

@@ -28,11 +28,11 @@
                     value: '1',
                     squash: true
                 },
+                search: null,
                 sort: {
                     value: 'id,asc',
                     squash: true
-                },
-                search: null
+                }
             },
             resolve: {
                 pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {

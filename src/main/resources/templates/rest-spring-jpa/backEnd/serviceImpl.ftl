@@ -30,11 +30,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 <#if entity.features.sheetable>
-import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.SliceImpl;
-import mx.infotec.dads.kukulkan.tables.handsontable.Handsontable;
-import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableFactory;
-import mx.infotec.dads.kukulkan.tables.handsontable.HandsontableSlice;
+import org.springframework.data.domain.Sort;
+import mx.infotec.dads.kukulkan.tables.apachepoi.SheetDataSupplier;
+import mx.infotec.dads.kukulkan.tables.apachepoi.WorkbookWriter;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 </#if>
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,15 +98,19 @@ public class ${entity.name}ServiceImpl implements ${entity.name}Service {
     @Override
     @Transactional(readOnly = true)
     public Page<${entity.name}> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of ${entity.name} ");
+        log.debug("Request to search for a page of ${entity.name}");
         return repository.findAll(pageable);
     }
     <#if entity.features.sheetable>
     @Override
-    public HandsontableSlice<${entity.name}> getHandsontable(Pageable pageable) {
-        Handsontable<${entity.name}> table = HandsontableFactory.createHandsontable(${entity.name}.class);
-        Page<${entity.name}> page = repository.findAll(pageable);
-        Slice<${entity.name}> slice = new SliceImpl<>(page.getContent(), pageable, page.hasNext());
-        return new HandsontableSlice<>(table, slice);
-    }</#if>
+    public SXSSFWorkbook getWorkbook(Sort sort) {
+        log.debug("Request to get a Workbook of ${entity.name} ");
+        SheetDataSupplier<${entity.name}> dataSupplier = new SheetDataSupplier<>(sort, (Pageable pageable) -> {
+            return repository.findAll(pageable);
+        });
+        WorkbookWriter<${entity.name}> converter = new WorkbookWriter<>(${entity.name}.class);
+        converter.addData(dataSupplier);
+        return converter.getWorkbook();
+    }
+    </#if>
 }

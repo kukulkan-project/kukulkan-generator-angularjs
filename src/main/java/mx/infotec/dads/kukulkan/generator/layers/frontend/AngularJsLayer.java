@@ -30,8 +30,6 @@ import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETA
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DETAIL_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_CONTROLLER_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_DIALOG_HTML;
-import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SHEET_CONTROLLER_JS;
-import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SHEET_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_HTML;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SEARCH_SERVICE_JS;
 import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.ENTITY_SERVICE_JS;
@@ -41,6 +39,8 @@ import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.HTML;
 import static mx.infotec.dads.kukulkan.metamodel.editor.LanguageType.JAVASCRIPT;
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
@@ -51,8 +51,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import mx.infotec.dads.kukulkan.engine.model.AbstractNavigableLayer;
 import mx.infotec.dads.kukulkan.engine.model.ModelContext;
+import mx.infotec.dads.kukulkan.engine.service.GeneratorPrintProvider;
 import mx.infotec.dads.kukulkan.engine.service.WriterService;
 import mx.infotec.dads.kukulkan.engine.templating.service.TemplateService;
 import mx.infotec.dads.kukulkan.generator.util.EntitiesFactory;
@@ -83,6 +89,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
     @Autowired
     private WriterService writerService;
 
+    @Autowired
+    private GeneratorPrintProvider generatorPrintProvider;
+
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AngularJsLayer.class);
 
@@ -100,18 +109,66 @@ public class AngularJsLayer extends AbstractNavigableLayer {
         fillNavBar(pConf, domainModel);
         fillIdiomaGlobalEsJs(templateService, pConf, model, domainModel);
         fillIdiomaGlobalEnJs(templateService, pConf, model, domainModel);
-        addRequiredDependencies(writerService, pConf, model, domainModel);
+        addRequiredDependencies(pConf, model, domainModel);
     }
 
-    static void addRequiredDependencies(WriterService writerService2, ProjectConfiguration pConf,
-            Map<String, Object> model, DomainModel domainModel) {
+    private void addRequiredDependencies(ProjectConfiguration pConf, Map<String, Object> model,
+            DomainModel domainModel) {
         /*
-         * If domainModel has at least one sheetable entity // Then add ngHandsontable
-         * dependency in bower.json and kukulkan-tables in // pom.xml
-         * for(DomainModelGroup dmg :domainModel.getDomainModelGroup()) {
-         * 
-         * }
+         * If domainModel has at least one sheetable entity then add ngHandsontable
+         * dependency in bower.json and kukulkan-tables in pom.xml
          */
+        if (hasSheetableEntities(domainModel)) {
+            // Add Maven dependency
+            writerService.addMavenDependency("rest-spring-jpa/backEnd/extra-dependencies/kukulkan-tables-maven-dep.ftl",
+                    pConf.getOutputDir());
+            // Add bower dependencies
+            addBowerDependency("ngHandsontable", "git://github.com/robertovillarejo/ngHandsontable.git#develop",
+                    pConf.getOutputDir());
+            addBowerDependency("angular-file-saver", "^1.1.3", pConf.getOutputDir());
+            writerService.rewriteFile("rest-spring-jpa/frontEnd/extra-dependencies/sheetable-entity-dependencies.ftl",
+                    pConf.getOutputDir().resolve("src/main/webapp/app/app.module.js"), domainModel,
+                    "jhipster-needle-angularjs-add-module");
+            ObjectMapper mapper = new ObjectMapper();
+            File bowerJsonFile = pConf.getOutputDir().resolve("bower.json").toFile();
+            JsonNode bowerJson;
+            String handsontableOverrides = "{\"main\": [\"dist/handsontable.full.js\",\"dist/handsontable.css\"]}";
+            try {
+                bowerJson = mapper.readTree(bowerJsonFile);
+                JsonNode overrides = bowerJson.at("/overrides");
+                ObjectNode hotOverrides = (ObjectNode) mapper.readTree(handsontableOverrides);
+                ((ObjectNode) overrides).set("handsontable", hotOverrides);
+                mapper.writerWithDefaultPrettyPrinter().writeValue(bowerJsonFile, bowerJson);
+                generatorPrintProvider.info("Added handsontable overrides to bower.json");
+            } catch (Exception e) {
+                generatorPrintProvider.error("Failed to add required bower overrides " + handsontableOverrides);
+            }
+        }
+    }
+
+    private void addBowerDependency(String depName, String depVersion, Path projectDir) {
+        try {
+            ObjectMapper objMapper = new ObjectMapper();
+            File bowerJsonFile = projectDir.resolve("bower.json").toFile();
+            JsonNode bowerJson = objMapper.readTree(bowerJsonFile);
+            JsonNode dependencies = bowerJson.at("/dependencies");
+            ((ObjectNode) dependencies).put(depName, depVersion);
+            objMapper.writerWithDefaultPrettyPrinter().writeValue(bowerJsonFile, bowerJson);
+            generatorPrintProvider.info("Added " + depName + " dependency to bower.json");
+        } catch (Exception e) {
+            generatorPrintProvider.error("Failed to add required bower dependency " + depName);
+        }
+    }
+
+    static boolean hasSheetableEntities(DomainModel domainModel) {
+        for (DomainModelGroup dmg : domainModel.getDomainModelGroup()) {
+            for (Entity entity : dmg.getEntities()) {
+                if (entity.getFeatures().isSheetable()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /*
@@ -212,15 +269,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      */
     static void fillEntityControllerJs(TemplateService templateService, ProjectConfiguration pConf,
             Map<String, Object> model, Entity dmElement) {
-        if (dmElement.getFeatures().isSheetable()) {
-            LOGGER.debug("fillEntityHandsontableControllerJs {}", ENTITY_SHEET_CONTROLLER_JS);
-            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
-                    ENTITY_SHEET_CONTROLLER_JS, false);
-        } else {
-            LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
-            saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
-                    ENTITY_CONTROLLER_JS, false);
-        }
+        LOGGER.debug("fillEntityControllerJs {}", ENTITY_CONTROLLER_JS);
+        saveFrontEndTemplate(templateService, pConf, model, dmElement, TemplateEnum.FRONT_END_ENTITIES_LOCATION,
+                ENTITY_CONTROLLER_JS, false);
     }
 
     /**
@@ -319,16 +370,9 @@ public class AngularJsLayer extends AbstractNavigableLayer {
      *            the dm element
      */
     private void fillEntityHtml(ProjectConfiguration pConf, Map<String, Object> model, Entity dmElement) {
-        if (dmElement.getFeatures().isSheetable()) {
-            LOGGER.debug("fillEntitySheetHtml {}", ENTITY_SHEET_HTML);
-            saveFrontEndTemplate(templateService, pConf, model, dmElement,
-                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_SHEET_HTML), ENTITY_SHEET_HTML, true,
-                    HTML);
-        } else {
-            LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
-            saveFrontEndTemplate(templateService, pConf, model, dmElement,
-                    TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
-        }
+        LOGGER.debug("fillEntityHtml {}", ENTITY_HTML);
+        saveFrontEndTemplate(templateService, pConf, model, dmElement,
+                TemplateEnum.FRONT_END_ENTITIES_LOCATION.getLocation(ENTITY_HTML), ENTITY_HTML, true, HTML);
     }
 
     /**
