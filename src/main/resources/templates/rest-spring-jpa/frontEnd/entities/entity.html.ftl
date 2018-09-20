@@ -152,6 +152,13 @@
                 />
                 </#if>
             </#list>
+            <#list entity.entityReferences as reference>
+            	<#if reference.type.name() != "MANY_TO_MANY">
+            	<hot-column title="'${reference.propertyName?cap_first}'" data ="${reference.propertyName}.${reference.displayField.name}"
+                	type="'text'" 
+                	read-only/>
+            	</#if>
+            </#list>
         </hot-table>
     </div>
 </div>
