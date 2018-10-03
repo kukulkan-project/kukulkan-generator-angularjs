@@ -48,23 +48,23 @@
             </column>
         </createTable>
         <createTable tableName="left_unidirectional_recursive_children_many_to_many_unidirectional">
-        	<column name="left_unidirectional_id" type="bigint">
+        	<column name="id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="recursive_children_many_to_many_unidirectional_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey columnNames="left_unidirectional_id, recursive_children_many_to_many_unidirectional_id" tableName="left_unidirectional_recursive_children_many_to_many_unidirectional"/>
+        <addPrimaryKey columnNames="id, recursive_children_many_to_many_unidirectional_id" tableName="left_unidirectional_recursive_children_many_to_many_unidirectional"/>
         <createTable tableName="left_unidirectional_many_to_many_unidirectional">
-        	<column name="left_unidirectional_id" type="bigint">
+        	<column name="id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="many_to_many_unidirectional_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey columnNames="left_unidirectional_id, many_to_many_unidirectional_id" tableName="left_unidirectional_many_to_many_unidirectional"/>
+        <addPrimaryKey columnNames="id, many_to_many_unidirectional_id" tableName="left_unidirectional_many_to_many_unidirectional"/>
 
     </changeSet>
 </databaseChangeLog>

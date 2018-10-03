@@ -67,13 +67,13 @@ public class LeftUnidirectional implements Serializable {
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "left_unidirectional_recursive_children_many_to_many_unidirectional",
-               joinColumns = @JoinColumn(name="left_unidirectional_id", referencedColumnName="id"),
+               joinColumns = @JoinColumn(name="id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="recursive_children_many_to_many_unidirectional_id", referencedColumnName="id"))
     private Set<LeftUnidirectional> recursiveChildrenManyToManyUnidirectional = new HashSet<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "left_unidirectional_many_to_many_unidirectional",
-               joinColumns = @JoinColumn(name="left_unidirectional_id", referencedColumnName="id"),
+               joinColumns = @JoinColumn(name="id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="many_to_many_unidirectional_id", referencedColumnName="id"))
     private Set<RightManyToManyUnidirectional> manyToManyUnidirectional = new HashSet<>();
     
