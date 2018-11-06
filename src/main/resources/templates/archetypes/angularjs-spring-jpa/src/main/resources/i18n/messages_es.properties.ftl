@@ -12,7 +12,7 @@ email.activation.text2=Saludos,
 email.signature=Equipo de ${project.id}.
 
 # Creation email
-email.creation.text1=Your ${project.id} account has been created, please click on the URL below to access it:
+email.creation.text1=Su cuenta de ${project.id} ha sido creada, por favor, haga clic en el enlace de abajo para acceder:
 
 # Reset email
 email.reset.title=Reinicio de contraseña de ${project.id}
