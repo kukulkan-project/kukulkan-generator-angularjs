@@ -551,7 +551,7 @@
                     <defaultSchemaName></defaultSchemaName>
                     <username>${project.id}</username>
                     <password></password>
-                    <referenceUrl>hibernate:spring:${project.packaging}.domain?dialect=&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                    <referenceUrl>hibernate:spring:${project.packaging}.domain?dialect=org.hibernate.dialect.H2Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                 </configuration>
