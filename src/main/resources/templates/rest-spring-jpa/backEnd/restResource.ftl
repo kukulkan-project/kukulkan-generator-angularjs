@@ -192,7 +192,7 @@ public class ${entity.name}Resource {
      * @return Un archivo workbook con extensión xlsx de ${entityCamelCasePlural}.
      * @throws MalformedURLException
      */
-    @GetMapping(produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", path = "/${entityCamelCasePlural}/workbook")
+    @GetMapping(produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml", path = "/${entityCamelCasePlural}/workbook")
     @Timed
     public ResponseEntity<StreamingResponseBody> get${entityCamelCase}Workbook(@ApiParam Sort sort) {
         log.debug("REST request to get ${entityCamelCase} Workbook");
