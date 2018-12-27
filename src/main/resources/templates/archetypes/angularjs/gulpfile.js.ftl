@@ -37,7 +37,10 @@ gulp.task('copy:i18n', copy.i18n);
 
 gulp.task('copy:languages', copy.languages);
 
-gulp.task('copy:fonts', copy.fonts);
+gulp.task('copy:fonts', ['copy:webfonts'], copy.fonts);
+
+//Copy webfonts from components-font-awesome
++gulp.task('copy:webfonts', copy.webfonts);
 
 gulp.task('copy:common', copy.common);
 
