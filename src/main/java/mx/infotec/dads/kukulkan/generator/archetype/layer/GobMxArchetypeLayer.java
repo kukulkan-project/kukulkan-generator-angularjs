@@ -28,9 +28,13 @@ import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateJpaResources;
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.generateMongo;
 import static mx.infotec.dads.kukulkan.generator.archetype.layer.WriteResources.writeBanner;
+import static mx.infotec.dads.kukulkan.generator.util.GeneratorUtils.getBase64Secret;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.BASE_64_SECRET_KEY;
+import static mx.infotec.dads.kukulkan.generator.util.LayerConstants.BASE_64_SECRET_LENGTH;
 import static mx.infotec.dads.kukulkan.metamodel.util.Validator.requiredNotEmpty;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,6 +65,12 @@ public class GobMxArchetypeLayer extends ArchetypeLayer {
     @Override
     public void processLayer(GeneratorContext context, Map<String, Object> propertiesMap) {
         ProjectConfiguration pConf = requiredNotEmpty(context.get(ProjectConfiguration.class));
+        Optional<Object> maybeSecretKey = context.get(BASE_64_SECRET_KEY);
+        if (maybeSecretKey.isPresent()) {
+            propertiesMap.put(BASE_64_SECRET_KEY, maybeSecretKey.get().toString());
+        } else {
+            propertiesMap.put(BASE_64_SECRET_KEY, getBase64Secret(BASE_64_SECRET_LENGTH));
+        }
         writeResources(pConf, propertiesMap);
     }
 
