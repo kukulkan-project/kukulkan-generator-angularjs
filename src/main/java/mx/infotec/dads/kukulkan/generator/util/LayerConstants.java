@@ -90,4 +90,11 @@ public class LayerConstants {
 
     public static final String GOB_MX_FRONT_END_ENTITIES_LOCATION = "rest-spring-jpa/gobmxFrontEnd/entities/";
 
+    /**
+     * COMMON CONSTANTS
+     */
+    public static final String BASE_64_SECRET_KEY = "base64Secret";
+
+    public static final int BASE_64_SECRET_LENGTH = 50;
+
 }

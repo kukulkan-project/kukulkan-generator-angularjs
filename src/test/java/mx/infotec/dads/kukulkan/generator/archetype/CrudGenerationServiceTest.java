@@ -154,6 +154,7 @@ public class CrudGenerationServiceTest {
         Source source = new FileSource(domainModel3k);
         genCtx.put(ProjectConfiguration.class, pConf);
         genCtx.put(DomainModel.class, translatorService.translate(pConf, source));
+        genCtx.put("base64Secret", "b811449f6c0926263c7d47deef1df9edc3f734f8");
         generationService.findGeneratorByName("angular-js-archetype-generator").ifPresent(generator -> {
             generationService.process(genCtx, generator);
         });
@@ -164,8 +165,7 @@ public class CrudGenerationServiceTest {
     }
 
     /**
-     * Generates a project and generates a CRUD from a Kukulkan file (3k) then
-     * computes the checksum for every generated file and compares to checksum from
+     * Computes the checksum for every generated file and compares to checksum from
      * a base project
      * 
      * @throws NoSuchAlgorithmException
