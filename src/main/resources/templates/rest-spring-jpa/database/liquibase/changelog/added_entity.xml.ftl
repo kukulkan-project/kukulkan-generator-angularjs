@@ -48,9 +48,6 @@
             <column name="created_date" type="timestamp" defaultValueDate="${r"${now}"}">
                 <constraints nullable="false"/>
             </column>
-            <column name="reset_date" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
             <column name="last_modified_by" type="varchar(50)"/>
             <column name="last_modified_date" type="timestamp"/>
 		</#if>
