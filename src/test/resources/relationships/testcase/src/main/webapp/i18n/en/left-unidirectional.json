@@ -17,13 +17,13 @@
                 "title": "LeftUnidirectional"
             },
             "oneToOneUnidirectional": "OneToOneUnidirectional",
-            "oneToManyUnidirectional": "OneToManyUnidirectional",
-            "manyToOneUnidirectional": "ManyToOneUnidirectional",
-            "manyToManyUnidirectional": "ManyToManyUnidirectional",
-            "recursiveChildOneToOneUnidirectional": "RecursiveChildOneToOneUnidirectional",
-            "recursiveChildrenOneToManyUnidirectional": "RecursiveChildrenOneToManyUnidirectional",
-            "recursiveChildManyToOneUnidirectional": "RecursiveChildManyToOneUnidirectional",
-            "recursiveChildrenManyToManyUnidirectional": "RecursiveChildrenManyToManyUnidirectional"
-        }
+                        "oneToManyUnidirectional": "OneToManyUnidirectional",
+                        "manyToOneUnidirectional": "ManyToOneUnidirectional",
+                        "manyToManyUnidirectional": "ManyToManyUnidirectional",
+                        "recursiveChildOneToOneUnidirectional": "RecursiveChildOneToOneUnidirectional",
+                        "recursiveChildrenOneToManyUnidirectional": "RecursiveChildrenOneToManyUnidirectional",
+                        "recursiveChildManyToOneUnidirectional": "RecursiveChildManyToOneUnidirectional",
+                        "recursiveChildrenManyToManyUnidirectional": "RecursiveChildrenManyToManyUnidirectional"
+                    }
     }
 }

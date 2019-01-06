@@ -12,7 +12,7 @@
 
 	<groupId>mx.infotec.dads.kukulkan</groupId>
 	<artifactId>kukulkan-generator-angularjs</artifactId>
-	<version>0.4.0-SNAPSHOT</version>
+	<version>0.4.0-RELEASE</version>
 
 	<name>kukulkan-generator-angularjs</name>
 

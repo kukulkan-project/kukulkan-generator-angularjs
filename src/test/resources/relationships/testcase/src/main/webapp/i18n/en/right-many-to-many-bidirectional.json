@@ -17,6 +17,6 @@
                 "title": "RightManyToManyBidirectional"
             },
             "leftManyToManyBidirectional": "LeftManyToManyBidirectional"
-        }
+                    }
     }
 }

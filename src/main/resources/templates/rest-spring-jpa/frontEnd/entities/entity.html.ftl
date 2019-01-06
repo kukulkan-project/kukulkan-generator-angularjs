@@ -47,6 +47,7 @@
                     </#if>
                 </#list>
                 <#include "/rest-spring-jpa/frontEnd/entities/read/associations/header.ftl">
+                <#if entity.features.auditable>
                 <th jh-sort-by="createdDate">
                     <span data-translate="${translateKey}.createdDate">Created Date</span>
                     <span class="glyphicon fa-sort"></span>
@@ -59,6 +60,7 @@
                     <span data-translate="${translateKey}.lastModifiedDate">Last Modified Date</span>
                     <span class="glyphicon fa-sort"></span>
                 </th>
+                </#if>
                 <th></th>
             </tr>
         </thead>
@@ -88,9 +90,11 @@
                     </#if>
                 </#list>
                 <#include "/rest-spring-jpa/frontEnd/entities/read/associations/association-properties.ftl">
+                <#if entity.features.auditable>
                 <td>{{${entityCamelCase}.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                 <td>{{${entityCamelCase}.lastModifiedBy}}</td>
                 <td>{{${entityCamelCase}.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                </#if>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

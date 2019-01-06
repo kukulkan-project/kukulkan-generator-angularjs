@@ -41,7 +41,6 @@
 		    	</#if>
         	</#if>
 		</#list>
-		
 		<#if entity.features.auditable>
 			<column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

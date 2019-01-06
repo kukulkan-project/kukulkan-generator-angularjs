@@ -17,6 +17,6 @@
                 "title": "RightOneToManyUnidirectional"
             },
             "leftUnidirectional": "LeftUnidirectional"
-        }
+                    }
     }
 }
