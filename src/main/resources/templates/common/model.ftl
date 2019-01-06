@@ -26,7 +26,11 @@ import java.io.Serializable;
 </#if>
 @Entity
 @Table(name = "${tableNameLowerCase}")
+<#if entity.features.auditable>
+public class ${entity.name} extends AbstractAuditingEntity implements Serializable {
+<#else>
 public class ${entity.name} implements Serializable {
+</#if>
 
     private static final long serialVersionUID = 1L;
     

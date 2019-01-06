@@ -23,7 +23,12 @@
 		        <#if reference.autoReference == false>
             "${reference.toTargetPropertyName}": "${reference.toTargetPropertyName?cap_first}"<#sep>,</#sep>
 		        </#if>
-            </#list>
+            </#list><#if entity.features.auditable>,
+            "createdBy": "Created by",
+            "createdDate": "Created date",
+            "lastModifiedBy": "Modified by",
+            "lastModifiedDate": "Modified date"
+            </#if>
         }
     }
 }

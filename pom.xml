@@ -77,7 +77,7 @@
 		<dependency>
 			<groupId>mx.infotec.dads.kukulkan</groupId>
 			<artifactId>kukulkan-engine</artifactId>
-			<version>0.2.0-RELEASE</version>
+			<version>0.3.0-RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
