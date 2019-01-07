@@ -190,7 +190,6 @@ public class ${entity.name}Resource {
      * GET /${entityCamelCasePlural}/workbook : recupera un workbook de ${entityCamelCasePlural}.
      * 
      * @return Un archivo workbook con extensión xlsx de ${entityCamelCasePlural}.
-     * @throws MalformedURLException
      */
     @GetMapping(produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml", path = "/${entityCamelCasePlural}/workbook")
     @Timed
